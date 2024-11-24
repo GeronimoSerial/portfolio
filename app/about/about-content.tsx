@@ -31,11 +31,18 @@ export default function AboutContent() {
         <Navigation/>
       <div className="container flex w-full justify-center min-h-screen "> 
         <Card>
-        <h1 className="text-4xl font-bold mt-4 mb-2 px-4">Geronimo Serial</h1>
-        <p className="text-lg mb-6 px-4">Desarrollador Web Full Stack</p>
+          <div className="flex justify-center mt-4 ">
+            <img
+              src="/geroserial.png" 
+              alt="Geronimo Serial"
+              className="w-32 h-32 rounded-full shadow-md"
+            />
+          </div>
+        <h1 className="text-5xl font-bold mt-6 mb-3 px-3 ">Geronimo Serial</h1>
+        <p className="text-lg mb-8 px-4">Desarrollador Web Full Stack</p>
 
         <Section icon={User} title="Perfil">
-          <p>
+          <p className="text-gray-300">
             Desarrollador web apasionado con 5 años de experiencia en la creación de aplicaciones web
             escalables y eficientes. Especializado en React, Node.js y bases de datos SQL/NoSQL.
           </p>
@@ -65,9 +72,9 @@ export default function AboutContent() {
         </Section>
 
         <Section icon={Code} title="Habilidades">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-4">
             {['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'SQL', 'Git', 'AWS'].map((skill) => (
-                <span key={skill} className="bg-blue-600 text-white text-sm font-medium px-2.5 py-0.5 rounded">
+                <span key={skill} className="bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded shadow">
                 {skill}
               </span>
             ))}
@@ -76,8 +83,8 @@ export default function AboutContent() {
 
         <Section icon={Award} title="Certificaciones">
           <ul className="list-disc list-inside">
-            <li>AWS Certified Developer - Associate</li>
-            <li>MongoDB Certified Developer</li>
+            <li className="text-gray-300">AWS Certified Developer - Associate</li>
+            <li className="text-gray-300">MongoDB Certified Developer</li>
           </ul>
         </Section>
     </Card>        
