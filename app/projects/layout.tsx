@@ -8,10 +8,11 @@ export default function AboutPage() {
 			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
 				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0">
 					<Card>
-						<h1 className="text-4xl font-bold text-white">About Us</h1>
+						{/* <h1 className="text-4xl font-bold text-white">About Us</h1>
 						<p className="mt-4 text-zinc-400">
 							Welcome to our about page! Here you can find more information about our projects and team.
-						</p>
+						</p> */}
+						
 					</Card>
 				</div>
 			</div>
