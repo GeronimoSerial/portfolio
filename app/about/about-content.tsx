@@ -1,8 +1,15 @@
-'use client'
+"use client";
 
-import { User, Briefcase, GraduationCap, Code, Award, MapPin } from 'lucide-react'
-import React from 'react'
-import { TypeIcon as type, LucideIcon } from 'lucide-react'
+import {
+  User,
+  Briefcase,
+  GraduationCap,
+  Code,
+  Award,
+  MapPin,
+} from "lucide-react";
+import React from "react";
+import { TypeIcon as type, LucideIcon } from "lucide-react";
 
 interface SectionProps {
   icon: LucideIcon;
@@ -29,12 +36,14 @@ export default function AboutContent() {
       <div className="w-full max-w-4xl bg-white/5 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col items-center p-8 space-y-6">
           <img
-            src="/geroserial.png" 
+            src="/logo_geroserial.jpg"
             alt="Geronimo Serial"
             className="w-32 h-32 rounded-full shadow-md mb-6"
           />
           <h1 className="text-4xl font-bold mb-2">Geronimo Serial</h1>
-          <p className="text-xl mb-8">Especialista en TI y Desarrollo de Software</p>
+          <p className="text-xl mb-8">
+            Especialista en TI y Desarrollo de Software
+          </p>
           <div className="flex items-center text-white mb-8">
             <MapPin className="w-5 h-5 mr-2 text-indigo-300" />
             <span>Corrientes, Argentina</span>
@@ -42,9 +51,10 @@ export default function AboutContent() {
 
           <Section icon={User} title="Perfil">
             <p className="text-gray-100">
-            Apasionado por la tecnología y la programación, con experiencia en desarrollo web,
-            administración de sistemas, y reprogramación de hardware. Especializado en
-            frontend y backend, así como en la gestión de bases de datos y redes.
+              Profesional en tecnología y sistemas, con amplia experiencia en
+              diseñar, implementar y administrar soluciones TI. Especializado en
+              integrar tecnologías, desarrollar software y aplicaciones web como
+              parte de las soluciones que implemento.
             </p>
           </Section>
 
@@ -73,8 +83,20 @@ export default function AboutContent() {
 
           <Section icon={Code} title="Habilidades">
             <div className="flex flex-wrap gap-2 justify-center">
-              {['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'SQL', 'Git', 'AWS'].map((skill) => (
-                <span key={skill} className="bg-indigo-600 text-white text-sm font-medium px-3 py-1 rounded shadow">
+              {[
+                "JavaScript",
+                "React",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "SQL",
+                "Git",
+                "AWS",
+              ].map((skill) => (
+                <span
+                  key={skill}
+                  className="bg-indigo-600 text-white text-sm font-medium px-3 py-1 rounded shadow"
+                >
                   {skill}
                 </span>
               ))}
@@ -83,14 +105,16 @@ export default function AboutContent() {
 
           <Section icon={Award} title="Certificaciones">
             <ul className="list-disc list-inside">
-              <li className="text-gray-100">AWS Certified Developer - Associate</li>
+              <li className="text-gray-100">
+                AWS Certified Developer - Associate
+              </li>
               <li className="text-gray-100">MongoDB Certified Developer</li>
             </ul>
           </Section>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Section({ icon: Icon, title, children }: SectionProps) {
@@ -102,25 +126,28 @@ function Section({ icon: Icon, title, children }: SectionProps) {
       </h2>
       <div className="ml-8">{children}</div>
     </div>
-  )
+  );
 }
 
 function JobItem({ title, company, period, description }: JobItemProps) {
   return (
     <div className="mb-4">
       <h3 className="font-medium text-gray-100">{title}</h3>
-      <p className="text-sm text-gray-200">{company} | {period}</p>
+      <p className="text-sm text-gray-200">
+        {company} | {period}
+      </p>
       <p className="text-gray-100 mt-1">{description}</p>
     </div>
-  )
+  );
 }
 
 function EducationItem({ degree, institution, year }: EducationItemProps) {
   return (
     <div className="mb-4">
       <h3 className="font-medium text-gray-100">{degree}</h3>
-      <p className="text-sm text-gray-200">{institution} | {year}</p>
+      <p className="text-sm text-gray-200">
+        {institution} | {year}
+      </p>
     </div>
-  )
+  );
 }
-
