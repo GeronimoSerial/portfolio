@@ -2,8 +2,7 @@
 
 import { User, Briefcase, GraduationCap, Code, Award } from 'lucide-react'
 import React from 'react'
-import { TypeIcon as type, type LucideIcon } from 'lucide-react'
-import { Card } from '../components/card';
+import { TypeIcon as type, LucideIcon } from 'lucide-react'
 
 interface SectionProps {
   icon: LucideIcon;
@@ -27,7 +26,7 @@ interface EducationItemProps {
 export default function AboutContent() {
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
-      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
+      <div className="w-full max-w-4xl bg-white/5 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col items-center p-8 space-y-6">
           <img
             src="/geroserial.png" 
@@ -93,7 +92,7 @@ function Section({ icon: Icon, title, children }: SectionProps) {
   return (
     <div className="w-full mb-8">
       <h2 className="text-2xl font-semibold text-gray-100 flex items-center gap-2 mb-3">
-        <Icon className="h-6 w-6 text-blue-400" />
+        <Icon className="h-6 w-6 text-indigo-300" />
         {title}
       </h2>
       <div className="ml-8">{children}</div>
