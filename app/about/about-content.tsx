@@ -2,7 +2,7 @@
 
 import { User, Briefcase, GraduationCap, Code, Award } from 'lucide-react'
 import React from 'react'
-import { TypeIcon as type, LucideIcon } from 'lucide-react'
+import { TypeIcon as type, type LucideIcon } from 'lucide-react'
 import { Card } from '../components/card';
 
 interface SectionProps {
@@ -70,7 +70,7 @@ export default function AboutContent() {
           <Section icon={Code} title="Habilidades">
             <div className="flex flex-wrap gap-2 justify-center">
               {['JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'SQL', 'Git', 'AWS'].map((skill) => (
-                <span key={skill} className="bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded shadow">
+                <span key={skill} className="bg-indigo-600 text-white text-sm font-medium px-3 py-1 rounded shadow">
                   {skill}
                 </span>
               ))}
