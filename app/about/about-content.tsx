@@ -27,8 +27,8 @@ interface EducationItemProps {
 
 export default function AboutContent() {
   return (
-      <div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 text-white mt-10 shadow-lg rounded-lg overflow-hidden">
-        <Navigation/>
+      <div className="bg-gradient-to-tl from-indigo-900 via-indigo-400/10 text-white mt-10 shadow-lg rounded-lg overflow-hidden">
+        {/* <Navigation/> */}
       <div className="container flex w-full justify-center min-h-screen "> 
         <Card>
           <div className="flex justify-center mt-4 ">

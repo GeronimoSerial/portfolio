@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import AboutContent from './about-content'
 import Particles from "../components/particles";
-import { Navigation } from "../components/nav";
+import { Navigation } from '../components/nav';
+import { Card } from '../components/card';
 
 
 export const metadata: Metadata = {
@@ -11,13 +12,17 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="container flex items-center justify-center min-h-screen px-4 mx-auto mt-16">
-    
+    <div className="mt-16">
+    <div className="bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
+      <Navigation/>
+      <div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
       <AboutContent />
       <Particles
 				className="absolute inset-0 -z-10 animate-fade-in"
 				quantity={100}
-			/>
-    </main>
+        />
+        </div>
+        </div>
+    </div>
   )
 }
