@@ -36,7 +36,7 @@ export default function AboutContent() {
       <div className="w-full max-w-4xl bg-white/5 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col items-center p-8 space-y-6">
           <img
-            src="/logo_geroserial.jpg"
+            src="/logo_geroserial.webp"
             alt="Geronimo Serial"
             className="w-32 h-32 rounded-full shadow-md mb-6"
           />

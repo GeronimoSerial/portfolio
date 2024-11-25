@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/logo_geroserial.jpg",
+    shortcut: "/logo_geroserial.webp",
   },
 };
 const inter = Inter({
