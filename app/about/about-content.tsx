@@ -1,6 +1,6 @@
 'use client'
 
-import { User, Briefcase, GraduationCap, Code, Award } from 'lucide-react'
+import { User, Briefcase, GraduationCap, Code, Award, MapPin } from 'lucide-react'
 import React from 'react'
 import { TypeIcon as type, LucideIcon } from 'lucide-react'
 
@@ -34,12 +34,17 @@ export default function AboutContent() {
             className="w-32 h-32 rounded-full shadow-md mb-6"
           />
           <h1 className="text-4xl font-bold mb-2">Geronimo Serial</h1>
-          <p className="text-xl mb-8">Desarrollador Web Full Stack</p>
+          <p className="text-xl mb-8">Especialista en TI y Desarrollo de Software</p>
+          <div className="flex items-center text-white mb-8">
+            <MapPin className="w-5 h-5 mr-2 text-indigo-300" />
+            <span>Corrientes, Argentina</span>
+          </div>
 
           <Section icon={User} title="Perfil">
             <p className="text-gray-100">
-              Desarrollador web apasionado con 5 años de experiencia en la creación de aplicaciones web
-              escalables y eficientes. Especializado en React, Node.js y bases de datos SQL/NoSQL.
+            Apasionado por la tecnología y la programación, con experiencia en desarrollo web,
+            administración de sistemas, y reprogramación de hardware. Especializado en
+            frontend y backend, así como en la gestión de bases de datos y redes.
             </p>
           </Section>
 
