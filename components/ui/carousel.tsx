@@ -54,8 +54,6 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
-      draggable = true,
-      dragFree = false,
       ...props
     },
     ref
