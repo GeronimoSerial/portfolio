@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { SocialCard } from "@/app/components/SocialCard"
 import { Navigation } from '../components/nav';
+import Particles from '../components/particles';
 
 const socials = [
 	{
@@ -45,25 +46,26 @@ const socials = [
 
 export default function Contact() {
 	return (
-	  <div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
+		<div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
 		<Navigation/>
+		<Particles className='absolute inset-0 -z-10'/>
 		<div className="fixed inset-0 flex items-center justify-center">
 		  <div className="relative w-full max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto">
 			<Carousel
 			  opts={{
-				align: "center",
-				loop: true,
-				dragFree: false,
-				containScroll: "trimSnaps",
-			  }}
-			  className="w-full px-4 sm:px-6 md:px-8"
-			>
+				  align: "center",
+				  loop: true,
+				  dragFree: false,
+				  containScroll: "trimSnaps",
+				}}
+				className="w-full px-4 sm:px-6 md:px-8"
+				>
 			  <CarouselContent className="-ml-4 md:-ml-6">
 				{socials.map((social, index) => (
-				  <CarouselItem 
+					<CarouselItem 
 					key={index} 
 					className="pl-4 md:pl-6 basis-full xs:basis-2/3 sm:basis-1/2 md:basis-1/3"
-				  >
+					>
 					<div className="flex justify-center items-center h-full">
 					  <SocialCard {...social} />
 					</div>
