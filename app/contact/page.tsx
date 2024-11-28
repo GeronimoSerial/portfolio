@@ -53,7 +53,7 @@ export default function Contact() {
 			  opts={{
 				align: "center",
 				loop: true,
-				dragFree: true,
+				dragFree: false,
 				containScroll: "trimSnaps",
 			  }}
 			  className="w-full px-4 sm:px-6 md:px-8"
