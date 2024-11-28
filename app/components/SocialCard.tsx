@@ -46,7 +46,7 @@ export function SocialCard({ href, icon, handle, label, className }: SocialCardP
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "p-4 relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16 h-80 w-80 md:h-96 md:w-96 lg:h-[400px] lg:w-[450px]",
+          "mt-10 p-4 mx-auto relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16 h-80 w-80 md:h-96 md:w-96 lg:h-[400px] lg:w-[450px]",
           className
         )}
       >
