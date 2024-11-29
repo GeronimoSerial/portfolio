@@ -36,3 +36,26 @@ yarn-error.log*
 next-env.d.ts
 
 .contentlayer
+project-bolt-sb1-2zdvq2/project/.gitignore
+project-bolt-sb1-2zdvq2/project/eslint.config.js
+project-bolt-sb1-2zdvq2/project/index.html
+project-bolt-sb1-2zdvq2/project/package-lock.json
+project-bolt-sb1-2zdvq2/project/package.json
+project-bolt-sb1-2zdvq2/project/postcss.config.js
+project-bolt-sb1-2zdvq2/project/tailwind.config.js
+project-bolt-sb1-2zdvq2/project/tsconfig.app.json
+project-bolt-sb1-2zdvq2/project/tsconfig.json
+project-bolt-sb1-2zdvq2/project/tsconfig.node.json
+project-bolt-sb1-2zdvq2/project/vite.config.ts
+project-bolt-sb1-2zdvq2/project/.bolt/config.json
+project-bolt-sb1-2zdvq2/project/.bolt/prompt
+project-bolt-sb1-2zdvq2/project/src/App.tsx
+project-bolt-sb1-2zdvq2/project/src/index.css
+project-bolt-sb1-2zdvq2/project/src/main.tsx
+project-bolt-sb1-2zdvq2/project/src/vite-env.d.ts
+project-bolt-sb1-2zdvq2/project/src/components/SocialCard.tsx
+project-bolt-sb1-2zdvq2/project/src/components/ui/button.tsx
+project-bolt-sb1-2zdvq2/project/src/components/ui/carousel.tsx
+project-bolt-sb1-2zdvq2/project/src/hooks/useDraggable.ts
+project-bolt-sb1-2zdvq2/project/src/lib/utils.ts
+project-bolt-sb1-2zdvq2.zip
