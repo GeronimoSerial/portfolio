@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: "geroserial.com",
     template: "%s | geroserial.com",
   },
-  description: "",
+  description: "Creando soluciones tecnológicas que simplifican y potencian proyectos.",
   openGraph: {
     title: "geroserial.com",
     description:

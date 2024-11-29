@@ -43,7 +43,7 @@ export default function Home() {
 					>
 						geroserial.com
 					</Link>{" "}
-					para acercar soluciones tecnológicas innovadoras que mejoren y simplifiquen tus proyectos.
+					para acercar soluciones tecnológicas que mejoren y simplifiquen tus proyectos.
 				</h2>
 			</div>
 		</div>
