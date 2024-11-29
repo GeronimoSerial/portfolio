@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Mail, Twitter, X, Instagram } from 'lucide-react';
+import { Github, Mail, X, Instagram, MessageCircleIcon } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -31,16 +31,16 @@ const socials = [
 		handle: "geronimoserial",
 	},
   {
-    icon: <Twitter size={20} />,
-    href: "https://twitter.com/example2",
-    label: "Twitter",
-    handle: "@example2",
+    icon: <Instagram size={20} />,
+    href: "https://instagram.com/geroserial",
+    label: "Instagram",
+    handle: "@geroserial",
   },
   {
-    icon: <Mail size={20} />,
-    href: "mailto:example2@example.com",
-    label: "Email",
-    handle: "example2@example.com",
+    icon: <MessageCircleIcon size={20} />,
+    href: "https://wa.me/543794376025",
+    label: "WhatsApp",
+    handle: "Enviame un mensaje",
   }
 ];
 

@@ -3,8 +3,8 @@ import React from "react";
 import Particles from "./components/particles";
 
 const navigation = [
-	{ name: "About", href: "/about" },
-	{ name: "Contact", href: "/contact" },
+	{ name: "Perfil", href: "/about" },
+	{ name: "Contacto", href: "/contact" },
 ];
 
 export default function Home() {
@@ -35,7 +35,7 @@ export default function Home() {
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 			<div className="my-16 text-center animate-fade-in">
 				<h2 className="text-sm text-zinc-500 ">
-					I'm building{" "}
+					Desarrollando{" "}
 					<Link
 						target="_blank"
 						href="https://geroserial.vercel.app/"
@@ -43,8 +43,7 @@ export default function Home() {
 					>
 						geroserial.com
 					</Link>{" "}
-					to deliver innovative IT solutions that simplify and enhance
-					technological needs.
+					para acercar soluciones tecnológicas innovadoras que mejoren y simplifiquen tus proyectos.
 				</h2>
 			</div>
 		</div>

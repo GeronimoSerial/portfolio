@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     default: "geroserial.com",
     template: "%s | geroserial.com",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description: "",
   openGraph: {
     title: "geroserial.com",
     description:
-      "Co-founder of unkey.dev and founder of planetfall.io",
+      "Creando soluciones tecnológicas que simplifican y potencian proyectos.",
     url: "https://geroserial.com",
     siteName: "geroserial.com",
     images: [
