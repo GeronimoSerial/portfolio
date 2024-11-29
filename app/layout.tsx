@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     default: "geroserial.com",
     template: "%s | geroserial.com",
   },
-  description: "Creando soluciones tecnológicas que simplifican y potencian proyectos.",
+  description: "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
   openGraph: {
     title: "geroserial.com",
     description:
-      "Creando soluciones tecnológicas que simplifican y potencian proyectos.",
+      "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
     url: "https://geroserial.com",
     siteName: "geroserial.com",
     images: [
