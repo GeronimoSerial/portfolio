@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Github, Mail, X, Instagram, MessageCircleIcon } from 'lucide-react';
 import {
@@ -10,6 +11,14 @@ import {
 import { SocialCard } from "@/app/components/SocialCard"
 import { Navigation } from '../components/nav';
 import Particles from '../components/particles';
+import { Metadata } from 'next';
+import { type CarouselApi } from '@/components/ui/carousel';
+
+// export const metadata: Metadata = {
+// 	title: 'Contacto',
+// 	description: 'Página de información personal y profesional de Geronimo Serial',
+//   }
+  
 
 const socials = [
 	{
@@ -45,13 +54,28 @@ const socials = [
 ];
 
 export default function Contact() {
+	const [api, setApi] = React.useState<CarouselApi>()
+	const [current, setCurrent] = React.useState(0)
+	const [count, setCount] = React.useState(0)
+	React.useEffect(() => {
+		if (!api) {
+		  return
+		}
+	 
+		setCount(api.scrollSnapList().length)
+		setCurrent(api.selectedScrollSnap() + 1)
+	 
+		api.on("select", () => {
+		  setCurrent(api.selectedScrollSnap() + 1)
+		})
+	  }, [api])
 	return (
 		<div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
 		<Navigation/>
 		<Particles className='absolute inset-0 -z-10'/>
 		<div className="fixed inset-0 flex items-center justify-center p-4">
 		  <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] xl:max-w-[80vw] mx-auto">
-			<Carousel
+			<Carousel setApi={setApi}
 			  opts={{
 				  align: "center",
 				  loop: true,
@@ -76,6 +100,9 @@ export default function Contact() {
 				<CarouselNext className="absolute -right-4 md:-right-8 lg:-right-12 transform -translate-y-1/2 top-1/2" />
 			  </div>
 			</Carousel>
+			<div className="py-2 text-white text-center text-sm text-muted-foreground">
+        	{current} de {count}
+		  </div>
 		  </div>
 		</div>
 	  </div>

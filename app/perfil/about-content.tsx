@@ -9,7 +9,7 @@ import {
   MapPin,
 } from "lucide-react";
 import React from "react";
-import { TypeIcon as type, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface SectionProps {
   icon: LucideIcon;
@@ -36,14 +36,12 @@ export default function AboutContent() {
       <div className="w-full max-w-4xl bg-white/5 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
         <div className="flex flex-col items-center p-8 space-y-6">
           <img
-            src="/logo_geroserial.webp"
+            src="/profile_photo.webp"
             alt="Geronimo Serial"
-            className="w-32 h-32 rounded-full shadow-md mb-6"
+            className="w-36 h-36 rounded-3xl shadow-md mb-3 justify-center"
           />
           <h1 className="text-4xl font-bold mb-2">Geronimo Serial</h1>
-          <p className="text-xl mb-8">
-            Especialista en TI y Desarrollo de Software
-          </p>
+          <p className="text-xl mb-8">Especialista en TI y Desarrollo de Software</p>
           <div className="flex items-center text-white mb-8">
             <MapPin className="w-5 h-5 mr-2 text-indigo-300" />
             <span>Corrientes, Argentina</span>
@@ -51,10 +49,7 @@ export default function AboutContent() {
 
           <Section icon={User} title="Perfil">
             <p className="text-gray-100">
-              Profesional en tecnología y sistemas, con amplia experiencia en
-              diseñar, implementar y administrar soluciones TI. Especializado en
-              integrar tecnologías, desarrollar software y aplicaciones web como
-              parte de las soluciones que implemento.
+              Soy desarrollador web y técnico en sistemas con un enfoque integral en tecnologías frontend y backend, programación, hardware, redes y soluciones en la nube. Me destaco por mis habilidades técnicas avanzadas, diagnóstico preciso y mi capacidad para trabajar en entornos bilingües.
             </p>
           </Section>
 
@@ -105,10 +100,28 @@ export default function AboutContent() {
 
           <Section icon={Award} title="Certificaciones">
             <ul className="list-disc list-inside">
-              <li className="text-gray-100">
-                AWS Certified Developer - Associate
-              </li>
+              <li className="text-gray-100">AWS Certified Developer - Associate</li>
               <li className="text-gray-100">MongoDB Certified Developer</li>
+            </ul>
+          </Section>
+
+          <Section icon={Award} title="Idiomas">
+            <p className="text-gray-100">Inglés: Nivel intermedio-alto, con capacidad para comprender y redactar documentación técnica, interactuar en entornos bilingües y participar en comunicaciones internacionales.</p>
+          </Section>
+
+          <Section icon={Award} title="Conocimientos Técnicos Adicionales">
+            <ul className="list-disc list-inside">
+              <li className="text-gray-100">Frontend: HTML5, CSS3, Bootstrap 5, Tailwind CSS, Angular</li>
+              <li className="text-gray-100">Backend: C#, ASP.NET 8, PHP, MySQL, API Rest</li>
+              <li className="text-gray-100">ORM: Entity Framework (C#)</li>
+              <li className="text-gray-100">Lenguajes de Programación: C, C#, JAVA, JavaScript, TypeScript, Common Lisp, Assembler</li>
+              <li className="text-gray-100">Bases de Datos: MySQL, Microsoft SQL Server, Redis, Upstash</li>
+              <li className="text-gray-100">Sistemas Operativos: Windows, Linux, MacOS, VirtualBox</li>
+              <li className="text-gray-100">Herramientas de Oficina: Microsoft Office, Google Workspace</li>
+              <li className="text-gray-100">Redes y Seguridad: TCP/IP, HTTP/HTTPS, FTP/SFTP, DNS, configuración de routers y switches, firewalls, LAN/WAN, VPNs, Wi-Fi</li>
+              <li className="text-gray-100">Servicios en la Nube: AWS, Azure, Google Cloud</li>
+              <li className="text-gray-100">Virtualización: Hyper-V, servidores Windows/Linux</li>
+              <li className="text-gray-100">Marketing Digital: Redes sociales, creación y edición de contenido visual</li>
             </ul>
           </Section>
         </div>

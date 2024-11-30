@@ -5,7 +5,7 @@ import { Navigation } from '../components/nav';
 
 export const metadata: Metadata = {
   title: 'Sobre Mí | Mi Currículum',
-  description: 'Página de información personal y profesional de Juan Pérez',
+  description: 'Página de información personal y profesional de Geronimo Serial',
 }
 
 export default function AboutPage() {
