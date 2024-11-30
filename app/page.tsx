@@ -1,10 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
+import ProyectosDrawer  from "./components/proyectosDrawer";
 
 const navigation = [
-	{ name: "Perfil", href: "/about" },
-	{ name: "Contacto", href: "/contact" },
+	{ name: "Perfil", href: "/perfil" },
+	{ name: "Contacto", href: "/contacto" },
 ];
 
 export default function Home() {
@@ -13,14 +14,18 @@ export default function Home() {
 			<nav className="my-16 animate-fade-in">
 				<ul className="flex items-center justify-center gap-4">
 					{navigation.map((item) => (
-						<Link
-							key={item.href}
-							href={item.href}
-							className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
+            <Link
+            key={item.href}
+            href={item.href}
+            className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
 						>
 							{item.name}
 						</Link>
 					))}
+          
+          <ProyectosDrawer />
+        
+            
 				</ul>
 			</nav>
 			<div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
@@ -38,7 +43,7 @@ export default function Home() {
 					Desarrollando{" "}
 					<Link
 						target="_blank"
-						href="https://geroserial.vercel.app/"
+						href="https://www.geroserial.com/"
 						className="underline duration-500 hover:text-zinc-300"
 					>
 						geroserial.com
