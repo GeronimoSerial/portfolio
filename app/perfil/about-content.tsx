@@ -7,6 +7,7 @@ import {
   Code,
   Award,
   MapPin,
+  Globe
 } from "lucide-react";
 import React from "react";
 import { LucideIcon } from "lucide-react";
@@ -32,25 +33,22 @@ interface EducationItemProps {
 
 export default function AboutContent() {
   return (
-    <div className="flex justify-center items-center min-h-[calc(100vh-4rem)]">
-      <div className="w-full max-w-4xl bg-white/5 backdrop-blur-sm text-white shadow-xl rounded-lg overflow-hidden">
-        <div className="flex flex-col items-center p-8 space-y-6">
-          {/* <img
-            src="/profile_photo.webp"
-            alt="Geronimo Serial"
-            className="w-36 h-36 rounded-3xl shadow-md mb-3 justify-center"
-          /> */}
-          <h1 className="text-4xl font-bold mb-2">Geronimo Serial</h1>
-          <p className="text-xl mb-8">
-            Especialista en TI y Desarrollo de Software
-          </p>
-          <div className="flex items-center text-white mb-8">
-            <MapPin className="w-5 h-5 mr-2 text-indigo-300" />
-            <span>Corrientes, Argentina</span>
+    <div className="min-h-screen bg-transparent py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
+        <div className="p-8 sm:p-12">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Geronimo Serial</h1>
+            <p className="text-xl text-indigo-200 mb-4">
+              Especialista en TI y Desarrollo de Software
+            </p>
+            <div className="flex items-center justify-center text-indigo-200">
+              <MapPin className="w-5 h-5 mr-2" />
+              <span>Corrientes, Argentina</span>
+            </div>
           </div>
 
           <Section icon={User} title="Perfil">
-            <p className="text-gray-100">
+            <p className="text-gray-200 leading-relaxed">
               Soy desarrollador web y técnico en sistemas con un enfoque
               integral en tecnologías frontend y backend, programación,
               hardware, redes y soluciones en la nube. Me destaco por mis
@@ -66,12 +64,6 @@ export default function AboutContent() {
               period="2022 - Presente"
               description="Lideré el equipo de Help Desk, brindando soporte tecnológico y gestionando proyectos audiovisuales en RRSS."
             />
-            {/* <JobItem
-              title="Desarrollador Full Stack"
-              company="WebSolutions"
-              period="2018 - 2020"
-              description="Trabajé en proyectos full stack utilizando MERN stack."
-            /> */}
           </Section>
 
           <Section icon={GraduationCap} title="Educación">
@@ -86,17 +78,22 @@ export default function AboutContent() {
             <div className="flex flex-wrap gap-2 justify-center">
               {[
                 "JavaScript",
+                "Typescript",
                 "React",
-                "Node.js",
-                "Express",
-                "MongoDB",
-                "SQL",
+                "Angular",
+                "NextJS",
+                "C#",
+                ".NET",
+                "MySQL",
                 "Git",
-                "AWS",
+                "Redes Sociales",
+                "Gestión Digital",
+                "Asesoramiento Tecnico",
+
               ].map((skill) => (
                 <span
                   key={skill}
-                  className="bg-indigo-600 text-white text-sm font-medium px-3 py-1 rounded shadow"
+                  className="bg-indigo-600 text-white text-sm font-medium px-3 py-1 rounded-full shadow-md transition-all hover:bg-indigo-700"
                 >
                   {skill}
                 </span>
@@ -105,81 +102,56 @@ export default function AboutContent() {
           </Section>
 
           <Section icon={Award} title="Certificaciones">
-            <ul className="list-disc list-inside">
-              <li className="text-gray-100">
-                <span className="font-semibold">
+            <ul className="space-y-4">
+              <li className="text-gray-200">
+                <span className="font-semibold text-indigo-300">
                   Formación y Entrenamiento Talentos Digitales:
                 </span>{" "}
                 Programación FullStack - Telco, UNNE, PoloIT, Gobierno de
                 Corrientes
-                <div className="">
+                <div className="mt-2">
                   <a
                     href="https://bit.ly/4cN8wvb"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-indigo-400 hover:text-indigo-300 transition-colors"
                   >
                     https://bit.ly/4cN8wvb
                   </a>
-                  <span>
-                    {" "}
+                  <span className="ml-2 text-gray-300">
                     (Código de validación: <strong>hvlPFq423l</strong>)
                   </span>
                 </div>
               </li>
 
-              <li className="text-gray-100">
-                <span className="font-semibold">Certificación: </span> 
+              <li className="text-gray-200">
+                <span className="font-semibold text-indigo-300">Certificación: </span> 
                 JavaScript, Algoritmo y Estructura de Datos - freecodecamp.org
               </li>
             </ul>
           </Section>
 
-          <Section icon={Award} title="Idiomas">
-            <p className="text-gray-100">
+          <Section icon={Globe} title="Idiomas">
+            <p className="text-gray-200">
               Inglés: Nivel intermedio-alto, con capacidad para comprender y
               redactar documentación técnica, interactuar en entornos bilingües
               y participar en comunicaciones internacionales.
             </p>
           </Section>
 
-          <Section icon={Award} title="Conocimientos Técnicos Adicionales">
-            <ul className="list-disc list-inside">
-              <li className="text-gray-100">
-                Frontend: HTML5, CSS3, Bootstrap 5, Tailwind CSS, Angular
-              </li>
-              <li className="text-gray-100">
-                Backend: C#, ASP.NET 8, PHP, MySQL, API Rest
-              </li>
-              <li className="text-gray-100">ORM: Entity Framework (C#)</li>
-              <li className="text-gray-100">
-                Lenguajes de Programación: C, C#, JAVA, JavaScript, TypeScript,
-                Common Lisp, Assembler
-              </li>
-              <li className="text-gray-100">
-                Bases de Datos: MySQL, Microsoft SQL Server, Redis, Upstash
-              </li>
-              <li className="text-gray-100">
-                Sistemas Operativos: Windows, Linux, MacOS, VirtualBox
-              </li>
-              <li className="text-gray-100">
-                Herramientas de Oficina: Microsoft Office, Google Workspace
-              </li>
-              <li className="text-gray-100">
-                Redes y Seguridad: TCP/IP, HTTP/HTTPS, FTP/SFTP, DNS,
-                configuración de routers y switches, firewalls, LAN/WAN, VPNs,
-                Wi-Fi
-              </li>
-              <li className="text-gray-100">
-                Servicios en la Nube: AWS, Azure, Google Cloud
-              </li>
-              <li className="text-gray-100">
-                Virtualización: Hyper-V, servidores Windows/Linux
-              </li>
-              <li className="text-gray-100">
-                Marketing Digital: Redes sociales, creación y edición de
-                contenido visual
-              </li>
+          <Section icon={Code} title="Conocimientos Técnicos Adicionales">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-200">
+              <li>Frontend: HTML5, CSS3, Bootstrap 5, Tailwind CSS, Angular</li>
+              <li>Backend: C#, ASP.NET 8, PHP, MySQL, API Rest</li>
+              <li>ORM: Entity Framework (C#)</li>
+              <li>Lenguajes: C, C#, JAVA, JavaScript, TypeScript, Common Lisp, Assembler</li>
+              <li>Bases de Datos: MySQL, Microsoft SQL Server, Redis, Upstash</li>
+              <li>Sistemas Operativos: Windows, Linux, MacOS, VirtualBox</li>
+              <li>Herramientas de Oficina: Microsoft Office, Google Workspace</li>
+              <li>Redes y Seguridad: TCP/IP, HTTP/HTTPS, FTP/SFTP, DNS, routers, switches, firewalls, LAN/WAN, VPNs, Wi-Fi</li>
+              <li>Servicios en la Nube: AWS, Azure, Google Cloud</li>
+              <li>Virtualización: Hyper-V, servidores Windows/Linux</li>
+              <li>Marketing Digital: Redes sociales, creación y edición de contenido visual</li>
             </ul>
           </Section>
         </div>

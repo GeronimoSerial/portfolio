@@ -13,8 +13,8 @@ export default function AboutPage() {
     <div className="relative min-h-screen">
       <div className="absolute inset-0 bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
         <Particles
-          className="absolute inset-0 -z-10 animate-fade-in"
-          quantity={100}
+          className="absolute inset-0 z-0 animate-fade-in"
+          quantity={500}
         />
       </div>
       <Navigation />
