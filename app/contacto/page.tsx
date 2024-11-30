@@ -36,7 +36,7 @@ const socials = [
 	{
 		icon: <Github size={20} />,
 		href: "https://github.com/geronimoserial",
-		label: "Github",
+		label: "GitHub",
 		handle: "geronimoserial",
 	},
   {
