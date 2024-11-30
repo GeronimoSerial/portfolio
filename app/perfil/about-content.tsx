@@ -63,7 +63,7 @@ export default function AboutContent() {
             <JobItem
               title="Help Desk"
               company="CGE Corrientes"
-              period="2020 - Presente"
+              period="2022 - Presente"
               description="Lideré el equipo de Help Desk, brindando soporte tecnológico y gestionando proyectos audiovisuales en RRSS."
             />
             {/* <JobItem
