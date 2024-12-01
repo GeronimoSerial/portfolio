@@ -10,7 +10,7 @@ const navigation = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
+    <div className="overflow-x-hidden overflow-y-hidden flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
 			<Particles
 			  className="absolute inset-0 -z-10 animate-fade-in"
 			  quantity={200}
