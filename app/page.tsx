@@ -13,7 +13,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
 			<Particles
 			  className="absolute inset-0 -z-10 animate-fade-in"
-			  quantity={500}
+			  quantity={200}
 			/>
       <nav className="my-16 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
