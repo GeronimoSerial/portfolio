@@ -37,6 +37,11 @@ export default function AboutContent() {
       <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
         <div className="p-8 sm:p-12">
           <div className="text-center mb-12">
+            <img
+              src="/memoji.png"
+              alt="Geronimo Serial"
+              className="w-30 h-32  mx-auto mb-4"
+            />
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-2">Geronimo Serial</h1>
             <p className="text-xl text-indigo-200 mb-4">
               Especialista en TI y Desarrollo de Software
@@ -62,7 +67,7 @@ export default function AboutContent() {
               title="Help Desk"
               company="CGE Corrientes"
               period="2022 - Presente"
-              description="Lideré el equipo de Help Desk, brindando soporte tecnológico y gestionando proyectos audiovisuales en RRSS."
+              description="Formé parte del equipo de Centro de Computos en CGE Corrientes, brindando soporte tecnológico y gestionando proyectos audiovisuales en RRSS."
             />
           </Section>
 
