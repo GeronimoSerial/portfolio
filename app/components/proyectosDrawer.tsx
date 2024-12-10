@@ -34,6 +34,7 @@ export default function ProyectosDrawer() {
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
+      
 
     
       <style jsx>{`
