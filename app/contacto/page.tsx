@@ -12,6 +12,7 @@ import { SocialCard } from "@/app/components/SocialCard"
 import { Navigation } from '../components/nav';
 import Particles from '../components/particles';
 import { type CarouselApi } from '@/components/ui/carousel';
+import {Card, CardContent} from '@/components/ui/card';
 
 const socials = [
   {
@@ -72,12 +73,35 @@ export default function Contact() {
   }, [api])
 
   return (
-	<div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0 overflow-hidden flex flex-col justify-center">
-	<Navigation />
-	<Particles className="absolute inset-0 -z-10" />
+	// <div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0 overflow-hidden flex flex-col justify-center">
+<div className="bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
+  <Navigation />
+  <Particles className="absolute inset-0 -z-10" />
+  <div className="flex items-center justify-center min-h-screen">
+    <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto">
+      <CarouselContent className="-ml-2 md:-ml-4">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+            <div className="p-1">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-4 sm:p-6 md:p-8">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious />
+      <CarouselNext />
+    </Carousel>
+  </div>
+</div>
+
+
 	
-	{/* Contenedor que ocupa toda la pantalla y centra el contenido */}
-	<div className="flex flex-col justify-center items-center w-full h-full p-4">
+/* Contenedor que ocupa toda la pantalla y centra el contenido */
+	/* <div className="flex flex-col justify-center items-center w-full h-full p-4">
 	  <div className="w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[1200px] xl:max-w-[1400px] mx-auto">
 		<Carousel 
 		  setApi={setApi}
@@ -127,9 +151,9 @@ export default function Contact() {
 		</Carousel>
 		<div className="py-2 text-white text-center text-sm text-muted-foreground">
 		  {current} de {count}
-		</div>
-	  </div>
-	</div>
-  </div>
+		</div> */
+	  
+	// </div>
+//   </div>
   );  
 }
