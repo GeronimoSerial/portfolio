@@ -206,20 +206,18 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-9 w-9 rounded-full border border-transparent p-0 text-gray-100 transition-opacity hover:text-gray-900 bg-transparent",
+        "absolute  h-8 w-8 rounded-full",
         orientation === "horizontal"
-          ? "-left-10 top-1/2 -translate-y-1/2"
-          : "-top-10 left-1/2 -translate-x-1/2 rotate-90",
-        canScrollPrev ? "opacity-100" : "opacity-50 cursor-not-allowed",
+          ? "-left-12 top-1/2 -translate-y-1/2"
+          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      {/* <img src="/right-arrow.svg" alt="Previous slide" className="h-5 w-5" /> */}
-      <ArrowLeft className="h-11 w-11" />
-      <span className="sr-only"></span>
+      <ArrowLeft className="h-4 w-4" />
+      <span className="sr-only">Previous slide</span>
     </Button>
   )
 })
@@ -237,19 +235,18 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-9 w-9 rounded-full border border-transparent p-0 text-gray-100 transition-opacity hover:text-gray-900 bg-transparent",
+        "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
-          ? "-right-10 top-1/2 -translate-y-1/2"
-          : "-bottom-10 left-1/2 -translate-x-1/2 rotate-90",
-        canScrollNext ? "opacity-100" : "opacity-50 cursor-not-allowed",
+          ? "-right-12 top-1/2 -translate-y-1/2"
+          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-11 w-11" />
-      <span className="sr-only"></span>
+      <ArrowRight className="h-4 w-4" />
+      <span className="sr-only">Next slide</span>
     </Button>
   )
 })

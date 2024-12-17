@@ -73,31 +73,43 @@ export default function Contact() {
   }, [api])
 
   return (
-	// <div className="min-h-screen bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0 overflow-hidden flex flex-col justify-center">
-<div className="bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
-  <Navigation />
-  <Particles className="absolute inset-0 -z-10" />
-  <div className="flex items-center justify-center min-h-screen">
-    <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto">
-      <CarouselContent className="-ml-2 md:-ml-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-4 sm:p-6 md:p-8">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+    <div className="bg-gradient-to-tl from-indigo-900 via-indigo-400/10 fixed inset-0">
+    <Navigation />
+    <Particles className="absolute inset-0 -z-10" />
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="relative w-full max-w-6xl">
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-indigo-900 to-transparent z-10"></div>
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-indigo-900 to-transparent z-10"></div>
+        <Carousel
+          opts={{
+            align: "center",
+            loop: true,
+            dragFree: false,
+            slidesToScroll: 1,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="flex gap-4">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <CarouselItem key={index} className="basis-full sm:basis-1/2 lg:basis-1/3 flex-shrink-0">
+                <div className="p-2">
+                  <Card className="bg-indigo-800/50 border-indigo-600">
+                    <CardContent className="flex aspect-square items-center justify-center p-6">
+                      <span className="text-3xl font-semibold text-indigo-100">{index + 1}</span>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          {/* <CarouselPrevious className="left-4 bg-indigo-700 hover:bg-indigo-600 text-indigo-100" /> */}
+          {/* <CarouselNext className="right-4 bg-indigo-700 hover:bg-indigo-600 text-indigo-100" /> */}
+        </Carousel>
+      </div>
+    </div>
   </div>
-</div>
-
+  
+  
 
 	
 /* Contenedor que ocupa toda la pantalla y centra el contenido */
