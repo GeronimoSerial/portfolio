@@ -80,7 +80,7 @@ export default function Contact() {
         <div className="relative w-full max-w-6xl">
           {/* <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-indigo-900 to-transparent z-10"></div>
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-indigo-900 to-transparent z-10"></div> */}
-          <Carousel
+          <Carousel setApi={setApi}
             opts={{
               align: "center",
               loop: true,
@@ -98,7 +98,12 @@ export default function Contact() {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <CarouselPrevious className="absolute -left-4 md:-left-8 lg:-left-12 transform -translate-y-1/2 top-1/2" />
+				<CarouselNext className="absolute -right-4 md:-right-8 lg:-right-12 transform -translate-y-1/2 top-1/2" />
           </Carousel>
+         <div className="py-2 text-white text-center text-sm text-muted-foreground">
+        	{current} de {count}
+		  </div>
         </div>
       </div>
     </div>
