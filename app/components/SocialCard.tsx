@@ -46,7 +46,7 @@ export function SocialCard({ href, icon, handle, label, className }: SocialCardP
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "mt-10 p-4 mx-auto relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16 h-80 w-80 md:h-96 md:w-96 lg:h-[400px] lg:w-[430px]",
+          "mt-10 p-4 mx-auto relative flex flex-col items-center gap-4 duration-700 group md:gap-8 md:py-24 lg:pb-48 md:p-16 h-80 w-80 md:h-96 md:w-96 lg:h-[350px] lg:w-[350px]",
           className
         )}
       >
@@ -54,11 +54,11 @@ export function SocialCard({ href, icon, handle, label, className }: SocialCardP
           className="absolute w-px h-2/3 bg-gradient-to-b from-zinc-500 via-zinc-500/50 to-transparent"
           aria-hidden="true"
         />
-        <span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
+        <span className="relative z-10 flex items-center justify-center w-10 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
           {icon}
         </span>
         <div className="z-10 flex flex-col items-center">
-          <span className="lg:text-xl font-medium duration-150 xl:text-3xl text-zinc-200 group-hover:text-white font-display">
+          <span className="text-xl lg:text-xl font-medium duration-150 xl:text-2xl text-zinc-200 group-hover:text-white font-display">
             {handle}
           </span>
           <span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200">
