@@ -12,8 +12,13 @@ import { SocialCard } from "@/app/components/SocialCard"
 import { Navigation } from '../components/nav';
 import Particles from '../components/particles';
 import { type CarouselApi } from '@/components/ui/carousel';
-import { Card, CardContent } from '@/components/ui/card';
+import { Metadata } from 'next';
 
+
+export const metadata: Metadata = {
+  title: 'Contacto',
+ description: 'Página de información personal y profesional de Geronimo Serial',
+ }
 const socials = [
   {
     icon: <X size={24} />,
