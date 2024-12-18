@@ -98,12 +98,15 @@ export default function Contact() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute -left-4 md:-left-8 lg:-left-12 transform -translate-y-1/2 top-1/2" />
-				<CarouselNext className="absolute -right-4 md:-right-8 lg:-right-12 transform -translate-y-1/2 top-1/2" />
+           <div className="sm:block hidden">
+           <CarouselPrevious className="absolute -left-4 md:-left-8 lg:-left-12 transform -translate-y-1/2 top-1/2" />
+            <CarouselNext className="absolute -right-4 md:-right-8 lg:-right-12 transform -translate-y-1/2 top-1/2" />
+
+           </div>
           </Carousel>
-         <div className="py-2 text-white text-center text-sm text-muted-foreground">
-        	{current} de {count}
-		  </div>
+          <div className="py-2 text-white text-center text-sm text-muted-foreground">
+            {current} de {count}
+          </div>
         </div>
       </div>
     </div>
