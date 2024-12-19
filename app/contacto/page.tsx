@@ -6,7 +6,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contacto',
- description: 'Página de información personal y profesional de Geronimo Serial',
+  description: 'Página de información personal y profesional de Geronimo Serial',
  }
 
 export default function Contact() {

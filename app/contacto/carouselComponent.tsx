@@ -9,38 +9,38 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { SocialCard } from "@/app/components/SocialCard";
+import { SocialCard } from "@/app/components/card";
 const socials = [
-  {
-    icon: <X size={20} />,
-    href: "https://twitter.com/geroserial",
-    label: "X",
-    handle: "@geroserial",
-  },
-  {
-    icon: <Mail size={24} />,
-    href: "mailto:serialgeronimo@gmail.com",
-    label: "Email",
-    handle: "serialgeronimo@gmail.com",
-  },
-  {
-    icon: <Github size={20} />,
-    href: "https://github.com/geronimoserial",
-    label: "GitHub",
-    handle: "geronimoserial",
-  },
-  {
-    icon: <Instagram size={20} />,
-    href: "https://instagram.com/geroserial",
-    label: "Instagram",
-    handle: "@geroserial",
-  },
-  {
-    icon: <MessageCircleIcon size={20} />,
-    href: "https://wa.me/543794376025",
-    label: "WhatsApp",
-    handle: "Enviame un mensaje",
-  },
+    {
+      icon: <Mail size={20} />,
+      href: "mailto:serialgeronimo@gmail.com",
+      label: "Email",
+      handle: "serialgeronimo@gmail.com",
+    },
+    {
+        icon: <Github size={20} />,
+        href: "https://github.com/geronimoserial",
+        label: "GitHub",
+        handle: "geronimoserial",
+    },
+    {
+        icon: <Instagram size={20} />,
+        href: "https://instagram.com/geroserial",
+        label: "Instagram",
+        handle: "@geroserial",
+    },
+    {
+        icon: <MessageCircleIcon size={20} />,
+        href: "https://wa.me/543794376025",
+        label: "WhatsApp",
+        handle: "Enviame un mensaje",
+    },
+    {
+      icon: <X size={20} />,
+      href: "https://twitter.com/geroserial",
+      label: "X",
+      handle: "@geroserial",
+    },
 ];
 
 export const CarouselComponent = () => {
