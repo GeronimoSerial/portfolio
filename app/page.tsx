@@ -15,7 +15,7 @@ export default function Home() {
 			  className="absolute inset-0 -z-10 animate-fade-in"
 			  quantity={200}
 			/>
-      <nav className="my-16 animate-fade-in">
+      <nav className="my-6 animate-fade-in">
         <ul className="flex items-center justify-center gap-4">
           {navigation.map((item) => (
             <Link
