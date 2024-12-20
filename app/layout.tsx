@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
+import { DynamicTitle } from "@/util/dynamicTitle";
 
 export const metadata: Metadata = {
   title: {
@@ -69,6 +70,7 @@ export default function RootLayout({
         className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
           }`}
       >
+        <DynamicTitle />
         {children}
       </body>
     </html>
