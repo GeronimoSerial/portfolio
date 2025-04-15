@@ -29,9 +29,9 @@ const socials = [
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:serialgeronimo@gmail.com",
+		href: "mailto:contacto@geroserial.com",
 		label: "Email",
-		handle: "serialgeronimo@gmail.com",
+		handle: "contacto@geroserial.com",
 	},
 	{
 		icon: <Github size={20} />,
