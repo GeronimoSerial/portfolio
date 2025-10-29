@@ -2,7 +2,7 @@ import "../global.css";
 import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
-import { Analytics } from "./components/analytics";
+import { Analytics } from "@/components/shared/analytics";
 
 export const metadata: Metadata = {
   title: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "geroserial.com",
     images: [
       {
-        url: "https://geroserial.com/og.png",
+        url: "https://geroserial.com/assets/images/og.png",
         width: 1920,
         height: 1080,
       },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/logo_geroserial.webp",
+    shortcut: "/assets/icons/favicon.png",
   },
 };
 const inter = Inter({

@@ -1,7 +1,9 @@
 "use client";
 
+import React from "react";
 import { motion } from "motion/react";
-import Particles from "../components/particles";
+import { ArrowDown } from "lucide-react";
+import Particles from "@/components/shared/particles";
 
 export default function Hero() {
   return (

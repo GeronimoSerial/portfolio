@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { SocialCard } from "@/app/components/card";
+import { SocialCard } from "@/components/shared/SocialCard";
 const socials = [
     {
       icon: <Mail size={20} />,

@@ -44,7 +44,7 @@ export default function About() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-xl opacity-20 animate-pulse" />
               <img
-                src="/memoji.png"
+                src="/assets/images/memoji.png"
                 alt="Geronimo Serial"
                 className="relative w-64 h-64 rounded-full object-cover border-2 border-zinc-700 hover:border-zinc-500 transition-all duration-300"
               />
