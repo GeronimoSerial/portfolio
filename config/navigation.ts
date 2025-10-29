@@ -3,7 +3,7 @@ export interface NavItem {
   label: string;
 }
 
-export const NAVIGATION_ITEMS: NavItem[] = [
+export const NAVIGATION_ITEMS = [
   { id: "hero", label: "Inicio" },
   { id: "about", label: "Sobre Mí" },
   { id: "skills", label: "Habilidades" },
@@ -12,6 +12,6 @@ export const NAVIGATION_ITEMS: NavItem[] = [
   { id: "testimonials", label: "Testimonios" },
   { id: "services", label: "Servicios" },
   { id: "contact", label: "Contacto" },
-] as const;
+] as const satisfies readonly NavItem[];
 
 export const SECTION_IDS = NAVIGATION_ITEMS.map((item) => item.id);
