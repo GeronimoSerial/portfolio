@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { motion, useMotionTemplate, useSpring } from "framer-motion";
+import { motion, useMotionTemplate, useSpring } from "motion/react";
 
 interface SocialCardProps {
   href: string;
