@@ -8,10 +8,10 @@ export default function About() {
   const { ref, inView } = useSectionInView();
 
   const stats = [
-    { label: "Proyectos", value: "+15" },
-    { label: "Clientes", value: "+5" },
-    { label: "Años exp.", value: "3+" },
-    { label: "Compromiso", value: "100%" },
+    { label: "Projects", value: "+15" },
+    { label: "Clients", value: "+5" },
+    { label: "Years of Experience", value: "2+" },
+    { label: "Commitment", value: "100%" },
   ];
 
   return (
@@ -23,9 +23,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Sobre Mí
-          </h2>
+          <h3 className="text-4xl md:text-5xl text-zinc-50 mb-4">About Me</h3>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto" />
         </motion.div>
 
@@ -38,9 +36,9 @@ export default function About() {
             className="flex justify-center"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-xl opacity-20 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10 " />
               <img
-                src="/assets/images/memoji.png"
+                src="/assets/images/remove-bg-profile.png"
                 alt="Geronimo Serial"
                 className="relative w-64 h-64 rounded-full object-cover border-2 border-zinc-700 hover:border-zinc-500 transition-all duration-300"
               />
@@ -63,23 +61,25 @@ export default function About() {
             </div>
 
             <p className="text-zinc-300 leading-relaxed">
-              Soy desarrollador web y técnico en sistemas con un enfoque
-              integral en tecnologías frontend y backend, programación,
-              hardware, redes y soluciones en la nube. Me destaco por mis
-              habilidades técnicas avanzadas, diagnóstico preciso y mi capacidad
-              para trabajar en entornos bilingües.
+              Systems analyst in training with experience in full-stack web
+              development, infrastructure management, and the design of scalable
+              and secure software architectures. Led province-wide, high-impact
+              digital transformation projects applying modern methodologies and
+              sustainable solutions.
             </p>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
               <Briefcase className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
-                  Help Desk - CGE Corrientes
+                  Tech Consultant - Consejo General de Educación de Corrientes
                 </h4>
-                <p className="text-sm text-zinc-400">2022 - Presente</p>
+                <p className="text-sm text-zinc-400">2022 - Present</p>
                 <p className="text-sm text-zinc-500 mt-2">
-                  Soporte tecnológico y gestión de proyectos audiovisuales en
-                  RRSS
+                  Leading the digital transformation of educational systems
+                  across the province, implementing scalable web solutions and
+                  infrastructure improvements to enhance pedagogical approach
+                  for over 10,000 teachers.
                 </p>
               </div>
             </div>
@@ -88,11 +88,9 @@ export default function About() {
               <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
-                  Licenciatura en Sistemas de Información
+                  Bachelor's in Systems Analysis
                 </h4>
-                <p className="text-sm text-zinc-400">
-                  Universidad Nacional del Nordeste - 2022
-                </p>
+                <p className="text-sm text-zinc-400">UNNE - 2025</p>
               </div>
             </div>
           </motion.div>

@@ -16,16 +16,16 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
         className="z-10 flex flex-col items-center"
       >
-        <h1 className="py-3.5 px-0.5 text-5xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text">
+        <h1 className="py-3.5 px-0.5 text-6xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text">
           geroserial.com
         </h1>
 
         <div className="my-8 text-center">
-          <h2 className="text-lg md:text-xl text-zinc-300 max-w-2xl px-4">
-            Desarrollador Full Stack & Especialista en TI
+          <h2 className="text-sm md:text-lg text-zinc-300 max-w-3xl px-4">
+            IT Specialist | Web Systems, Automation & Infrastructure Management{" "}
           </h2>
           <p className="mt-4 text-sm md:text-base text-zinc-500 max-w-xl px-4">
-            Transformando ideas en soluciones tecnológicas innovadoras
+            Methodical Approach. Real-World Solutions
           </p>
         </div>
 
@@ -39,18 +39,17 @@ export default function Hero() {
             href="#projects"
             className="px-6 py-3 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors duration-200"
           >
-            Ver Proyectos
+            See Projects
           </a>
           <a
             href="#contact"
             className="px-6 py-3 text-sm font-medium text-white bg-white/10 border border-zinc-700 rounded-lg hover:bg-white/20 hover:border-zinc-500 transition-all duration-200"
           >
-            Contactar
+            Contact
           </a>
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

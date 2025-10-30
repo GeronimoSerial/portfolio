@@ -2,116 +2,283 @@
 
 import { motion } from "motion/react";
 import { useSectionInView } from "@/hooks/useSectionInView";
-import { Code, Server, Cloud, Users } from "lucide-react";
+import { useState } from "react";
+import {
+  PowerBIIcon,
+  ExcelIcon,
+  StrapiIcon,
+  CommonLispIcon,
+} from "./CustomIcons";
+import { Button } from "@/components/ui/moving-border";
+
+interface Skill {
+  name: string;
+  icon: string;
+  className?: string;
+  customIcon?: "powerbi" | "excel" | "strapi" | "commonlisp";
+}
+
+interface Subcategory {
+  name: string;
+  skills: Skill[];
+}
+
+interface CategoryData {
+  subcategories: Subcategory[];
+}
 
 export default function Skills() {
   const { ref, inView } = useSectionInView();
+  const [selectedCategory, setSelectedCategory] = useState("Frontend");
 
-  const skillCategories = [
-    {
-      title: "Frontend Development",
-      icon: Code,
-      skills: [
-        { name: "React/Next.js", level: 90 },
-        { name: "TypeScript", level: 85 },
-        { name: "Tailwind CSS", level: 95 },
-        { name: "Angular", level: 75 },
+  const skillsData: Record<string, CategoryData> = {
+    Frontend: {
+      subcategories: [
+        {
+          name: "Frameworks & Libraries",
+          skills: [
+            { name: "React", icon: "devicon-react-original colored" },
+            {
+              name: "Next.js",
+              icon: "devicon-nextjs-original-wordmark",
+              className: "text-white",
+            },
+            { name: "Tailwind", icon: "devicon-tailwindcss-original colored" },
+            { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
+          ],
+        },
       ],
     },
-    {
-      title: "Backend Development",
-      icon: Server,
-      skills: [
-        { name: "C#/.NET", level: 85 },
-        { name: "Node.js", level: 80 },
-        { name: "MySQL", level: 80 },
-        { name: "API REST", level: 90 },
+    Backend: {
+      subcategories: [
+        {
+          name: "Runtime & Frameworks",
+          skills: [
+            { name: "Node.js", icon: "devicon-nodejs-plain colored" },
+            {
+              name: "Express",
+              icon: "devicon-express-original",
+              className: "text-white",
+            },
+            { name: "ASP.NET", icon: "devicon-dot-net-plain colored" },
+            {
+              name: "Strapi",
+              icon: "",
+              customIcon: "strapi",
+            },
+            { name: "Redis", icon: "devicon-redis-plain colored" },
+          ],
+        },
+        {
+          name: "ORM",
+          skills: [
+            { name: "Prisma", icon: "devicon-prisma-original colored" },
+            { name: "Entity Framework", icon: "devicon-dot-net-plain colored" },
+          ],
+        },
+        {
+          name: "Version Control",
+          skills: [
+            { name: "Git", icon: "devicon-git-plain colored" },
+            {
+              name: "GitHub",
+              icon: "devicon-github-original",
+              className: "text-white",
+            },
+          ],
+        },
       ],
     },
-    {
-      title: "DevOps & Cloud",
-      icon: Cloud,
-      skills: [
-        { name: "AWS", level: 70 },
-        { name: "Azure", level: 65 },
-        { name: "Git/GitHub", level: 90 },
-        { name: "Docker", level: 60 },
+    "Data Analysis": {
+      subcategories: [
+        {
+          name: "Database",
+          skills: [
+            {
+              name: "SQL Server",
+              icon: "devicon-microsoftsqlserver-plain colored",
+            },
+            { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
+            { name: "SQLite", icon: "devicon-sqlite-plain colored" },
+          ],
+        },
+        {
+          name: "BI Tools",
+          skills: [
+            {
+              name: "Power BI",
+              icon: "",
+              customIcon: "powerbi",
+            },
+            {
+              name: "Excel",
+              icon: "",
+              customIcon: "excel",
+            },
+          ],
+        },
       ],
     },
-    {
-      title: "Soft Skills",
-      icon: Users,
-      skills: [
-        { name: "Resolución de problemas", level: 95 },
-        { name: "Trabajo en equipo", level: 90 },
-        { name: "Comunicación efectiva", level: 85 },
-        { name: "Gestión de proyectos", level: 80 },
+    "Programming Languages": {
+      subcategories: [
+        {
+          name: "Languages",
+          skills: [
+            { name: "C", icon: "devicon-c-plain colored" },
+            { name: "C#", icon: "devicon-csharp-plain colored" },
+            { name: "Java", icon: "devicon-java-plain colored" },
+            { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+            { name: "TypeScript", icon: "devicon-typescript-plain colored" },
+            { name: "PHP", icon: "devicon-php-plain colored" },
+            {
+              name: "Common Lisp",
+              icon: "",
+              customIcon: "commonlisp",
+            },
+          ],
+        },
       ],
     },
-  ];
+  };
+
+  const categories = Object.keys(skillsData);
+  const currentData = skillsData[selectedCategory as keyof typeof skillsData];
 
   return (
     <section id="skills" ref={ref} className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Habilidades
+          <h2 className="text-3xl md:text-4xl font-display text-zinc-50 mb-3">
+            Skills & Technologies
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto" />
+          <p className="text-zinc-500 text-base mb-4">
+            Technical Proficiencies
+          </p>
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent mx-auto" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {skillCategories.map((category, categoryIndex) => {
-            const Icon = category.icon;
-            return (
-              <motion.div
-                key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
-                className="p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all duration-300"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <Icon className="w-6 h-6 text-zinc-400" />
-                  <h3 className="text-xl font-display text-zinc-50">
-                    {category.title}
-                  </h3>
-                </div>
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="lg:w-1/3 lg:sticky lg:top-24 lg:self-start"
+          >
+            <div className="space-y-3">
+              {categories.map((category, index) => (
+                <motion.div
+                  key={category}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                >
+                  <Button
+                    onClick={() => setSelectedCategory(category)}
+                    containerClassName="w-full h-12"
+                    borderRadius="0.5rem"
+                    borderClassName={`${
+                      selectedCategory === category
+                        ? "bg-zinc-400/60"
+                        : "bg-zinc-600/30"
+                    }`}
+                    className={`text-sm font-medium ${
+                      selectedCategory === category
+                        ? "text-zinc-50"
+                        : "text-zinc-400"
+                    }`}
+                  >
+                    {category}
+                  </Button>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skill.name}>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-zinc-300">
+          {/* Línea divisoria vertical */}
+          <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-zinc-800 to-transparent" />
+
+          {/* Content derecho - Tecnologías scrolleables */}
+          <div className="lg:w-2/3 relative">
+            <motion.div
+              key={selectedCategory}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="space-y-6 max-h-[500px] overflow-y-auto scrollbar-hide pr-2 pb-12"
+            >
+              {currentData.subcategories.map((subcategory, subIndex) => (
+                <motion.div
+                  key={subcategory.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: subIndex * 0.1 }}
+                  className="space-y-3"
+                >
+                  {/* Título de subcategoría */}
+                  <h3 className="text-base font-display text-zinc-300 flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full" />
+                    {subcategory.name}
+                  </h3>
+
+                  {/* Grid de tecnologías */}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4">
+                    {subcategory.skills.map((skill, skillIndex) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: subIndex * 0.1 + skillIndex * 0.05,
+                        }}
+                        className="group relative flex flex-col items-center justify-center gap-2 py-2"
+                      >
+                        {/* Icon */}
+                        <div className="relative transform group-hover:scale-125 transition-transform duration-300">
+                          {skill.customIcon ? (
+                            <>
+                              {skill.customIcon === "powerbi" && (
+                                <PowerBIIcon className="w-12 h-12 text-[#F2C811]" />
+                              )}
+                              {skill.customIcon === "excel" && (
+                                <ExcelIcon className="w-12 h-12" />
+                              )}
+                              {skill.customIcon === "strapi" && (
+                                <StrapiIcon className="w-12 h-12" />
+                              )}
+                              {skill.customIcon === "commonlisp" && (
+                                <CommonLispIcon className="w-12 h-12" />
+                              )}
+                            </>
+                          ) : (
+                            <i
+                              className={`${skill.icon} ${
+                                skill.className || ""
+                              } text-5xl`}
+                              title={skill.name}
+                            />
+                          )}
+                          {/* Glow effect detrás del icono */}
+                          <div className="absolute inset-0 bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 scale-150" />
+                        </div>
+
+                        {/* Name */}
+                        <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors duration-300 text-center leading-tight">
                           {skill.name}
                         </span>
-                        <span className="text-xs text-zinc-500">
-                          {skill.level}%
-                        </span>
-                      </div>
-                      <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={inView ? { width: `${skill.level}%` } : {}}
-                          transition={{
-                            duration: 1,
-                            delay: categoryIndex * 0.1 + skillIndex * 0.1,
-                            ease: "easeOut",
-                          }}
-                          className="h-full bg-gradient-to-r from-zinc-500 to-zinc-100 rounded-full"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

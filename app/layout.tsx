@@ -1,6 +1,7 @@
 import "../global.css";
-import { Inter } from "@next/font/google";
-import LocalFont from "@next/font/local";
+import { Inter } from "next/font/google";
+import { Lora } from "next/font/google";
+import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "@/components/shared/analytics";
 import StickyNav from "@/components/navigation/StickyNav";
@@ -57,14 +58,29 @@ const calSans = LocalFont({
   variable: "--font-calsans",
 });
 
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-lora",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <head>{/* <Analytics /> */}</head>
+    <html
+      lang="en"
+      className={[inter.variable, calSans.variable, lora.variable].join(" ")}
+    >
+      <head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
+      </head>
       <body
         className={`bg-black ${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
@@ -75,3 +91,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+
