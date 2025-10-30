@@ -5,7 +5,7 @@ Whenever you’re about to complete a user request, call the MCP interactive_fee
 
 ## Architecture Overview
 
-This is a **Next.js 13+ (App Router) portfolio** in active migration to a single-page application (SPA). Built with TypeScript, Tailwind CSS, and integrates Contentlayer for MDX-based project management.
+This is a **Next.js 13+ (App Router) portfolio** in active migration to a single-page application (SPA). Built with TypeScript, Tailwind CSS, and integrates Contentlayer for MDX-based project management.a
 
 **Current state (rebrand branch):** Migrating from multi-page to single-page vertical-scroll SPA. All content being consolidated into `app/page.tsx` with 8 main sections (Hero, About, Skills, Experience, Projects, Testimonials, Services, Contact) navigable via smooth scroll anchors.
 
