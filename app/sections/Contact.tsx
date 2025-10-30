@@ -18,13 +18,13 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // TODO: Implement form submission logic
     console.log("Form data:", formData);
-    
+
     // Simulate submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    
+
     alert("¡Mensaje enviado! Te contactaré pronto.");
     setFormData({ name: "", email: "", subject: "proyecto", message: "" });
     setIsSubmitting(false);
@@ -42,7 +42,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-black"
+      className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-6xl">
         <motion.div
@@ -244,7 +244,8 @@ export default function Contact() {
         className="text-center mt-20 pt-8 border-t border-zinc-800"
       >
         <p className="text-sm text-zinc-500">
-          © {new Date().getFullYear()} Geronimo Serial. Todos los derechos reservados.
+          © {new Date().getFullYear()} Geronimo Serial. Todos los derechos
+          reservados.
         </p>
       </motion.div>
     </section>

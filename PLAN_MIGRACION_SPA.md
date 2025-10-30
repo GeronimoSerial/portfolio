@@ -3,6 +3,7 @@
 ## 📋 Análisis de la Situación Actual
 
 **Estado Actual:**
+
 - Portfolio multi-página con Next.js 13 (App Router)
 - Rutas separadas: `/`, `/perfil`, `/contacto`, proyectos en drawer
 - Navegación tradicional con links entre páginas
@@ -10,6 +11,7 @@
 - Partículas y efectos visuales en cada página
 
 **Objetivo:**
+
 - Convertir a Single Page Application (SPA) con scroll vertical
 - Implementar View Transitions API nativa
 - Mantener SEO y accesibilidad
@@ -22,6 +24,7 @@
 ### **FASE 1: Preparación y Configuración**
 
 #### 1.1 Actualizar Dependencias
+
 - [ ] Actualizar Next.js a versión 14+
 - [ ] Desinstalar framer-motion e instalar motion:
   ```bash
@@ -32,11 +35,13 @@
 - [ ] Actualizar imports en archivos existentes que usen framer-motion
 
 #### 1.2 Configurar Sistema de Scroll
+
 - [ ] Crear hook personalizado `useScrollTo.ts` para navegación smooth
 - [ ] Configurar scroll-behavior smooth en CSS global
 - [ ] Implementar Intersection Observer para detectar sección activa
 
 #### 1.3 Estructura de Carpetas
+
 ```
 app/
   ├── page.tsx (SPA principal)
@@ -70,6 +75,7 @@ app/
 ### **FASE 2: Conversión a Single Page Application**
 
 #### 2.0 Consolidar Contenido en una Sola Página
+
 - [ ] Migrar contenido de `/perfil` a sección About
 - [ ] Migrar contenido de `/contacto` a sección Contact
 - [ ] Integrar proyectos del drawer en sección Projects
@@ -82,7 +88,9 @@ app/
 ### **FASE 3: Arquitectura de Secciones**
 
 #### 3.1 Sección Hero (Principal)
+
 **Contenido:**
+
 ```tsx
 - Logo animado con efecto de aparición
 - Nombre: "Geronimo Serial"
@@ -94,13 +102,16 @@ app/
 ```
 
 **Animaciones:**
+
 - Fade in secuencial de elementos
 - Typing effect en el título
 - Particles interactivas al hover
 - Transición suave al hacer scroll
 
 #### 3.2 Sección About (Sobre Mí)
+
 **Contenido:**
+
 ```tsx
 - Foto/Memoji profesional con hover effect
 - Bio breve (2-3 párrafos)
@@ -115,13 +126,16 @@ app/
 ```
 
 **Diseño:**
+
 - Layout en dos columnas (desktop)
 - Imagen con border gradient animado
 - Cards de estadísticas con counter animation
 - Background con blur gradient
 
 #### 3.3 Sección Skills (Habilidades)
+
 **Contenido:**
+
 ```tsx
 Categorías:
 1. Frontend Development
@@ -150,13 +164,16 @@ Categorías:
 ```
 
 **Diseño:**
+
 - Grid de categorías con tabs (fondo zinc-800, activo: white text on zinc-900)
 - Barras de progreso animadas: fondo zinc-700, relleno zinc-100 a white gradient
 - Iconos de tecnologías en zinc-400, hover: white con glow
 - Tooltip con años de experiencia (bg-zinc-800 border-zinc-700)
 
 #### 3.4 Sección Experience (Experiencia)
+
 **Contenido:**
+
 ```tsx
 Timeline vertical con:
 
@@ -179,13 +196,16 @@ Timeline vertical con:
 ```
 
 **Diseño:**
+
 - Timeline interactiva con línea animada
 - Cards que se expanden al hover
 - Iconos de empresas/instituciones
 - Badges de tecnologías usadas
 
 #### 3.5 Sección Projects (Proyectos)
+
 **Contenido:**
+
 ```tsx
 Grid de proyectos destacados (integrar los .mdx existentes):
 
@@ -213,6 +233,7 @@ Proyectos Ficticios Adicionales:
 ```
 
 **Diseño:**
+
 - Grid masonry responsivo
 - Cards con imagen, título, descripción breve
 - Hover: overlay con tech stack y CTA
@@ -220,34 +241,39 @@ Proyectos Ficticios Adicionales:
 - Filtros por tecnología
 
 #### 3.6 Sección Testimonials (Testimonios)
+
 **Contenido:**
+
 ```tsx
 Testimonios ficticios:
 
 1. María González - CEO de TechStartup
-   "Geronimo transformó nuestra visión en una plataforma funcional 
+   "Geronimo transformó nuestra visión en una plataforma funcional
    y escalable. Su profesionalismo y expertise técnico son excepcionales."
    ⭐⭐⭐⭐⭐
 
 2. Carlos Ramírez - Product Manager
-   "Trabajar con Geronimo fue una experiencia increíble. Siempre 
+   "Trabajar con Geronimo fue una experiencia increíble. Siempre
    disponible, propositivo y con soluciones innovadoras."
    ⭐⭐⭐⭐⭐
 
 3. Ana Martínez - Directora de Marketing
-   "La calidad del trabajo y atención al detalle superó nuestras 
+   "La calidad del trabajo y atención al detalle superó nuestras
    expectativas. Altamente recomendado."
    ⭐⭐⭐⭐⭐
 ```
 
 **Diseño:**
+
 - Carousel automático (usar embla-carousel)
 - Cards con foto, nombre, cargo, empresa
 - Estrellas de rating animadas
 - Fade in/out transitions
 
 #### 3.7 Sección Services (Servicios)
+
 **Contenido:**
+
 ```tsx
 1. Desarrollo Web Full Stack
    - Aplicaciones web escalables
@@ -275,6 +301,7 @@ Testimonios ficticios:
 ```
 
 **Diseño:**
+
 - Grid de 4 cards (2x2) con bg-white/5, border-zinc-800
 - Icono representativo en zinc-400
 - Lista de características en zinc-300
@@ -282,7 +309,9 @@ Testimonios ficticios:
 - Hover effect: elevación + border-white + subtle glow
 
 #### 3.8 Sección Contact (Contacto)
+
 **Contenido:**
+
 ```tsx
 Formulario:
 - Nombre completo (required)
@@ -303,6 +332,7 @@ Mapa interactivo (opcional):
 ```
 
 **Diseño:**
+
 - Layout 50/50 (formulario | info)
 - Validación en tiempo real
 - Mensajes de éxito/error
@@ -314,7 +344,9 @@ Mapa interactivo (opcional):
 ### **FASE 4: Componentes de Navegación y UX**
 
 #### 4.1 Sticky Navigation Bar
+
 **Características:**
+
 - Fixed en la parte superior
 - Transparente en hero, sólido después del scroll
 - Links a secciones con smooth scroll
@@ -323,23 +355,27 @@ Mapa interactivo (opcional):
 - Logo que vuelve a hero
 
 **Elementos:**
+
 ```tsx
 [Logo] | Hero | Sobre Mí | Skills | Experiencia | Proyectos | Testimonios | Servicios | Contacto | [GitHub Icon]
 ```
 
 #### 4.2 Scroll Progress Bar
+
 - Barra horizontal en top (debajo del nav)
 - Muestra % de scroll de la página
 - Color gradient (zinc-700 to white)
 - Animación fluida con ease-out
 
 #### 4.3 Section Indicators (Opcional)
+
 - Dots verticales en lateral derecho
 - Indica sección actual
 - Click para navegar
 - Hover muestra nombre de sección
 
 #### 4.4 Back to Top Button
+
 - Aparece después de scroll de 300px
 - Fixed en esquina inferior derecha
 - Smooth scroll al hero
@@ -350,11 +386,13 @@ Mapa interactivo (opcional):
 ### **FASE 5: Animaciones con Motion**
 
 #### 5.1 Configurar Motion (React)
+
 - [ ] Instalar y configurar `motion` (sucesor de framer-motion)
 - [ ] Crear variantes de animación reutilizables
 - [ ] Implementar scroll-triggered animations
 
 #### 5.2 Animaciones de Entrada
+
 ```tsx
 Usando motion:
 - Fade in cuando elementos entran en viewport
@@ -364,6 +402,7 @@ Usando motion:
 ```
 
 #### 5.3 Micro-interacciones
+
 - Hover effects en botones y links con motion.button
 - Loading states animados
 - Form field focus animations
@@ -371,8 +410,9 @@ Usando motion:
 - Progress bars que se llenan
 
 #### 5.4 Ejemplo de Uso
+
 ```tsx
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 
 <motion.div
   initial={{ opacity: 0, y: 20 }}
@@ -381,7 +421,7 @@ import { motion } from "motion/react"
   transition={{ duration: 0.5 }}
 >
   {/* Contenido */}
-</motion.div>
+</motion.div>;
 ```
 
 ---
@@ -389,12 +429,14 @@ import { motion } from "motion/react"
 ### **FASE 6: Optimización y Performance**
 
 #### 6.1 Lazy Loading
+
 - [ ] Imágenes con next/image
 - [ ] Lazy load de secciones no visibles
 - [ ] Dynamic imports para componentes pesados
 - [ ] Intersection Observer para cargas progresivas
 
 #### 6.2 SEO y Accesibilidad
+
 - [ ] Meta tags por sección (JSON-LD)
 - [ ] Semantic HTML5
 - [ ] ARIA labels
@@ -403,6 +445,7 @@ import { motion } from "motion/react"
 - [ ] Keyboard navigation
 
 #### 6.3 Performance
+
 - [ ] Code splitting
 - [ ] Image optimization
 - [ ] Minificación CSS/JS
@@ -415,6 +458,7 @@ import { motion } from "motion/react"
 ### **FASE 7: Responsive Design**
 
 #### 7.1 Breakpoints
+
 ```css
 - Mobile: 320px - 768px (single column)
 - Tablet: 769px - 1024px (adapt layouts)
@@ -422,6 +466,7 @@ import { motion } from "motion/react"
 ```
 
 #### 7.2 Adaptaciones Mobile
+
 - [ ] Hamburger menu con slide-in
 - [ ] Stack de columns en single column
 - [ ] Touch-friendly buttons (min 44px)
@@ -434,6 +479,7 @@ import { motion } from "motion/react"
 ### **FASE 8: Testing y Deploy**
 
 #### 8.1 Testing
+
 - [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
 - [ ] Responsive testing en múltiples dispositivos
 - [ ] Performance testing (Lighthouse)
@@ -442,6 +488,7 @@ import { motion } from "motion/react"
 - [ ] Form validation testing
 
 #### 8.2 Deploy
+
 - [ ] Build optimizado
 - [ ] Environment variables
 - [ ] Deploy en Vercel
@@ -456,18 +503,19 @@ import { motion } from "motion/react"
 ```json
 {
   "dependencies": {
-    "motion": "^10.18.0",                  // Animaciones (sucesor de framer-motion)
-    "react-scroll": "^1.9.0",              // Smooth scroll
+    "motion": "^10.18.0", // Animaciones (sucesor de framer-motion)
+    "react-scroll": "^1.9.0", // Smooth scroll
     "react-intersection-observer": "^9.5.3", // Lazy loading
-    "react-hook-form": "^7.48.0",          // Form management
-    "zod": "^3.22.4",                      // Validation
-    "react-hot-toast": "^2.4.1",           // Notifications
-    "sharp": "^0.33.0"                     // Image optimization
+    "react-hook-form": "^7.48.0", // Form management
+    "zod": "^3.22.4", // Validation
+    "react-hot-toast": "^2.4.1", // Notifications
+    "sharp": "^0.33.0" // Image optimization
   }
 }
 ```
 
 **IMPORTANTE:** Desinstalar `framer-motion` antes de instalar `motion`:
+
 ```bash
 pnpm remove framer-motion
 pnpm add motion
@@ -478,6 +526,7 @@ pnpm add motion
 ## 🎨 Paleta de Colores y Diseño
 
 ### Colores Principales (Grayscale)
+
 ```css
 --primary: #f4f4f5 (zinc-100)
 --primary-dark: #e4e4e7 (zinc-200)
@@ -494,6 +543,7 @@ pnpm add motion
 ```
 
 ### Highlights y Acentos
+
 ```css
 --highlight: #ffffff (white) - Para elementos importantes
 --highlight-subtle: #fafafa (zinc-50) - Hover states
@@ -502,11 +552,13 @@ pnpm add motion
 ```
 
 ### Tipografía
+
 - **Headings**: Cal Sans (actual)
 - **Body**: Inter (actual)
 - **Code**: Fira Code (nuevo)
 
 ### Espaciado
+
 - Section padding: 100px vertical (desktop), 60px (mobile)
 - Container max-width: 1280px
 - Grid gap: 32px (desktop), 16px (mobile)
@@ -516,17 +568,20 @@ pnpm add motion
 ## ⚡ Animaciones y Efectos
 
 ### Durations
+
 - **Rápido**: 150ms (hover, click)
 - **Normal**: 300ms (transiciones estándar)
 - **Lento**: 600ms (page transitions)
 
 ### Easing
+
 ```css
 --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1)
 --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1)
 ```
 
 ### Effects
+
 - Particles (mantener del Hero)
 - Gradient borders animados
 - Blur backgrounds
@@ -538,28 +593,33 @@ pnpm add motion
 ## 🔄 Roadmap de Implementación
 
 ### Sprint 1 (Semana 1) - PRIORIDAD ALTA
+
 - [ ] Migrar de framer-motion a motion
 - [ ] Consolidar todo en single page (`app/page.tsx`)
 - [ ] Crear estructura de 8 secciones básicas
 - [ ] Implementar Hero y About
 
 ### Sprint 2 (Semana 2) - PRIORIDAD ALTA
+
 - [ ] Skills y Experience
 - [ ] Navegación sticky con scroll spy
 - [ ] Scroll progress bar
 - [ ] Smooth scroll entre secciones
 
 ### Sprint 3 (Semana 3) - PRIORIDAD MEDIA
+
 - [ ] Projects y Testimonials
 - [ ] Services y Contact
 - [ ] Animaciones con motion (scroll-triggered)
 
 ### Sprint 4 (Semana 4) - PRIORIDAD MEDIA
+
 - [ ] Optimización y performance
 - [ ] Responsive design completo
 - [ ] Testing y deploy
 
 ### Sprint Bonus (Futuro) - BAJA PRIORIDAD
+
 - [ ] Implementar View Transitions API nativa
 - [ ] Transiciones avanzadas entre navegación
 - [ ] Efectos visuales adicionales
@@ -582,17 +642,20 @@ pnpm add motion
 ## 🚀 Mejoras Futuras (Post-Launch)
 
 ### Prioridad Alta (Siguiente Versión)
+
 1. **View Transitions API** - Transiciones nativas entre navegación
 2. **Modo oscuro/claro** toggle
 3. **Blog integrado** con MDX
 
 ### Prioridad Media
+
 4. **Internacionalización** (ES/EN)
 5. **Panel de administración** para contenido
 6. **Newsletter** subscription
 7. **Case studies** detallados de proyectos
 
 ### Prioridad Baja
+
 8. **Animaciones 3D** con Three.js
 9. **Chat en vivo** para consultas
 
@@ -601,10 +664,12 @@ pnpm add motion
 ## 🎨 Cambios de Diseño Visual
 
 ### Migración de Paleta de Colores
+
 **De:** Púrpura/Violeta/Magenta/Indigo  
 **A:** Grayscale (Escala de grises con blancos y negros)
 
 #### Reemplazos Específicos:
+
 ```css
 /* Antes */
 from-indigo-900 via-indigo-400/10  →  /* Después */ from-zinc-900 via-zinc-400/10
@@ -615,6 +680,7 @@ border-zinc-800                     →  border-zinc-700
 ```
 
 #### Gradientes Actualizados:
+
 ```css
 /* Hero Background */
 bg-gradient-to-tl from-zinc-950 via-zinc-900 to-black
@@ -623,9 +689,9 @@ bg-gradient-to-tl from-zinc-950 via-zinc-900 to-black
 bg-white/5 backdrop-blur-lg  →  bg-white/3 backdrop-blur-xl
 
 /* Borders Animados */
-border-gradient: linear-gradient(90deg, 
-  transparent, 
-  rgba(255, 255, 255, 0.3), 
+border-gradient: linear-gradient(90deg,
+  transparent,
+  rgba(255, 255, 255, 0.3),
   transparent
 )
 
@@ -634,12 +700,14 @@ bg-gradient-to-r from-white via-zinc-100 to-zinc-300
 ```
 
 #### Efectos y Animaciones:
+
 - **Glow effects:** Usar `box-shadow: 0 0 20px rgba(255, 255, 255, 0.1)`
 - **Hover states:** Transición de `zinc-500` a `white`
 - **Particles:** Color blanco con opacidad variable
 - **Progress bars:** Gradiente de `zinc-700` a `white`
 
 #### Archivos a Modificar:
+
 1. `global.css` - Variables CSS principales
 2. `tailwind.config.js` - Extender paleta grayscale
 3. `app/page.tsx` - Cambiar clases de Hero
@@ -652,6 +720,7 @@ bg-gradient-to-r from-white via-zinc-100 to-zinc-300
 ## 📝 Notas Importantes
 
 ### Prioridades del Proyecto
+
 1. **CRÍTICO:** Convertir a Single Page Application primero
 2. **CRÍTICO:** Migrar de framer-motion a motion
 3. **ALTO:** Cambiar paleta de colores a grayscale
@@ -659,6 +728,7 @@ bg-gradient-to-r from-white via-zinc-100 to-zinc-300
 5. **BONUS:** View Transitions API (post-launch)
 
 ### Lineamientos
+
 - Cambiar de gradientes indigo/violeta a grayscale (negro, grises, blanco)
 - Mantener particles pero en blanco/gris
 - Priorizar performance sobre efectos excesivos
@@ -696,4 +766,4 @@ bg-gradient-to-r from-white via-zinc-100 to-zinc-300
 
 ---
 
-*Este documento es un plan vivo y puede actualizarse según necesidades del proyecto.*
+_Este documento es un plan vivo y puede actualizarse según necesidades del proyecto._

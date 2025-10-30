@@ -44,7 +44,7 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-black"
+      className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-4xl">
         <motion.div

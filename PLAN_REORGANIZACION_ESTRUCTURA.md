@@ -5,24 +5,29 @@
 ### Problemas Identificados
 
 1. **Duplicación de carpetas `components/`**
+
    - ❌ `/components/ui/` (shadcn/ui components)
    - ❌ `/app/components/` (componentes custom)
    - **Problema:** Confusión sobre dónde crear nuevos componentes
 
 2. **Rutas legacy no consolidadas**
+
    - ❌ `/app/perfil/` (página antigua)
    - ❌ `/app/contacto/` (página antigua)
    - **Problema:** Ya migrado al SPA pero los archivos siguen existiendo
 
 3. **Componentes sin categorizar**
+
    - ❌ `card.tsx`, `nav.tsx`, `particles.tsx`, `analytics.tsx` mezclados en `/app/components/`
    - **Problema:** Difícil encontrar componentes específicos
 
 4. **Hooks dispersos**
+
    - ✅ `/hooks/` está bien organizado (root level)
    - ⚠️ Pero podría estar dentro de `/src/` para mejor estructura
 
 5. **Utilidades y tipos**
+
    - ✅ `/lib/utils.ts` (bien ubicado)
    - ✅ `/types/mdx.d.ts` (bien ubicado)
    - ⚠️ `/util/mouse.ts` (debería estar en `/lib/`)
@@ -171,6 +176,7 @@ portfolio/
 ### **FASE 1: Preparación y Backup**
 
 #### 1.1 Crear Backup
+
 ```bash
 # Crear una rama de backup
 git checkout -b backup-before-reorganization
@@ -181,6 +187,7 @@ git checkout rebrand
 ```
 
 #### 1.2 Documentar Imports Actuales
+
 - [ ] Listar todos los imports en componentes principales
 - [ ] Identificar dependencias críticas
 - [ ] Verificar que el build funciona antes de comenzar
@@ -190,12 +197,14 @@ git checkout rebrand
 ### **FASE 2: Reorganizar Public Assets**
 
 #### 2.1 Crear Estructura de Assets
+
 ```bash
 mkdir -p public/assets/images
 mkdir -p public/assets/icons
 ```
 
 #### 2.2 Mover Archivos
+
 - [ ] `logo_geroserial.webp` → `public/assets/images/`
 - [ ] `memoji.png` → `public/assets/images/`
 - [ ] `profile_photo.webp` → `public/assets/images/`
@@ -205,7 +214,9 @@ mkdir -p public/assets/icons
 - [ ] Mantener `/public/fonts/` como está
 
 #### 2.3 Actualizar Referencias
+
 Archivos a actualizar:
+
 - [ ] `app/layout.tsx` (favicon)
 - [ ] `app/sections/About.tsx` (memoji.png)
 - [ ] Cualquier referencia a OG image
@@ -219,6 +230,7 @@ Archivos a actualizar:
 **Razón:** Next.js 13+ con App Router no requiere `/src`. Mantener estructura plana es más idiomático.
 
 #### 3.1 Crear Nuevas Carpetas
+
 ```bash
 # Dentro de /components
 mkdir -p components/navigation
@@ -231,6 +243,7 @@ mkdir -p config
 ```
 
 #### 3.2 Crear Archivos de Configuración
+
 - [ ] `config/site.ts` - Metadata del sitio
 - [ ] `config/navigation.ts` - Items de navegación
 - [ ] `types/index.ts` - Barrel export de tipos
@@ -240,9 +253,11 @@ mkdir -p config
 ### **FASE 4: Reorganizar Componentes**
 
 #### 4.1 Mover Secciones (ya están bien ubicadas)
+
 ✅ Las secciones ya están en `app/sections/` - **NO MOVER**
 
 #### 4.2 Consolidar Componentes de Navegación
+
 **Origen:** `app/components/navigation/`  
 **Destino:** `components/navigation/`
 
@@ -251,9 +266,11 @@ mv app/components/navigation components/
 ```
 
 Actualizar imports en:
+
 - [ ] `app/page.tsx`
 
 #### 4.3 Mover Componentes de Layout
+
 **Origen:** `app/components/shared/`  
 **Destino:** `components/layout/`
 
@@ -263,9 +280,11 @@ mv app/components/shared/BackToTop.tsx components/layout/
 ```
 
 Actualizar imports en:
+
 - [ ] `app/page.tsx`
 
 #### 4.4 Consolidar UI Components
+
 **Origen:** Mezcla en `app/components/` y `/components/ui/`  
 **Destino:** `/components/ui/` (mantener shadcn/ui aquí)
 
@@ -274,9 +293,11 @@ Actualizar imports en:
 - [ ] Mantener `components/ui/carousel.tsx`
 
 **Renombrar para evitar conflictos:**
+
 - [ ] `app/components/card.tsx` → `components/shared/SocialCard.tsx` (es el card custom)
 
 #### 4.5 Reorganizar Componentes Shared
+
 **Mover a:** `components/shared/`
 
 ```bash
@@ -286,11 +307,13 @@ mv app/components/analytics.tsx components/shared/Analytics.tsx
 ```
 
 Actualizar imports en:
+
 - [ ] `app/layout.tsx` (Analytics)
 - [ ] `app/sections/Hero.tsx` (Particles)
 - [ ] Donde se use ProjectsDrawer
 
 #### 4.6 Componentes MDX
+
 **Mover a:** `components/mdx/`
 
 ```bash
@@ -300,10 +323,13 @@ mv mdx-components.tsx components/mdx/mdx-components.tsx
 ```
 
 Actualizar imports en:
+
 - [ ] Root `mdx-components.tsx` puede re-exportar desde aquí
 
 #### 4.7 Eliminar `app/components/nav.tsx`
+
 Este es el nav viejo. Ya tenemos `StickyNav.tsx`.
+
 - [ ] Verificar que no se use
 - [ ] Eliminar archivo
 
@@ -312,6 +338,7 @@ Este es el nav viejo. Ya tenemos `StickyNav.tsx`.
 ### **FASE 5: Reorganizar Lib y Utils**
 
 #### 5.1 Consolidar Utilidades
+
 **Mover:** `/util/mouse.ts` → `/lib/mouse.ts`
 
 ```bash
@@ -320,9 +347,11 @@ rmdir util  # Si queda vacío
 ```
 
 Actualizar imports en:
+
 - [ ] `components/shared/Particles.tsx`
 
 #### 5.2 Crear Constantes
+
 **Crear:** `lib/constants.ts`
 
 ```typescript
@@ -351,6 +380,7 @@ export const NAVIGATION_ITEMS = [
 ```
 
 Usar en:
+
 - [ ] `components/navigation/StickyNav.tsx`
 - [ ] `app/layout.tsx`
 
@@ -359,10 +389,11 @@ Usar en:
 ### **FASE 6: Reorganizar Types**
 
 #### 6.1 Consolidar Tipos
+
 **Crear:** `types/index.ts`
 
 ```typescript
-export * from './mdx';
+export * from "./mdx";
 
 // Tipos globales del proyecto
 export interface SectionProps {
@@ -383,7 +414,9 @@ export interface NavItem {
 ### **FASE 7: Limpiar Rutas Legacy**
 
 #### 7.1 Eliminar Páginas Antiguas
+
 Ya consolidadas en el SPA:
+
 - [ ] `app/perfil/` - **ELIMINAR COMPLETO**
 - [ ] `app/contacto/` - **ELIMINAR COMPLETO**
 
@@ -432,6 +465,7 @@ async redirects() {
 ### **FASE 9: Actualizar Imports Globalmente**
 
 #### 9.1 Herramientas para Buscar y Reemplazar
+
 ```bash
 # Buscar todos los imports de un archivo específico
 grep -r "from.*particles" app/
@@ -443,31 +477,34 @@ grep -r "from.*particles" app/
 
 #### 9.2 Lista de Imports a Actualizar
 
-| Archivo Original | Nuevo Path | Archivos Afectados |
-|-----------------|------------|-------------------|
-| `./components/particles` | `@/components/shared/Particles` | `app/sections/Hero.tsx` |
-| `./components/analytics` | `@/components/shared/Analytics` | `app/layout.tsx` |
-| `./components/navigation/StickyNav` | `@/components/navigation/StickyNav` | `app/page.tsx` |
-| `./components/shared/ScrollProgress` | `@/components/layout/ScrollProgress` | `app/page.tsx` |
-| `./components/shared/BackToTop` | `@/components/layout/BackToTop` | `app/page.tsx` |
-| `../util/mouse` | `@/lib/mouse` | `components/shared/Particles.tsx` |
-| `./components/mdx` | `@/components/mdx/MDXComponents` | Contentlayer |
+| Archivo Original                     | Nuevo Path                           | Archivos Afectados                |
+| ------------------------------------ | ------------------------------------ | --------------------------------- |
+| `./components/particles`             | `@/components/shared/Particles`      | `app/sections/Hero.tsx`           |
+| `./components/analytics`             | `@/components/shared/Analytics`      | `app/layout.tsx`                  |
+| `./components/navigation/StickyNav`  | `@/components/navigation/StickyNav`  | `app/page.tsx`                    |
+| `./components/shared/ScrollProgress` | `@/components/layout/ScrollProgress` | `app/page.tsx`                    |
+| `./components/shared/BackToTop`      | `@/components/layout/BackToTop`      | `app/page.tsx`                    |
+| `../util/mouse`                      | `@/lib/mouse`                        | `components/shared/Particles.tsx` |
+| `./components/mdx`                   | `@/components/mdx/MDXComponents`     | Contentlayer                      |
 
 ---
 
 ### **FASE 10: Testing y Validación**
 
 #### 10.1 Verificar Build
+
 ```bash
 pnpm run build
 ```
 
 #### 10.2 Verificar Dev Server
+
 ```bash
 pnpm dev
 ```
 
 #### 10.3 Checklist de Validación
+
 - [ ] El sitio carga correctamente
 - [ ] Todas las secciones se ven bien
 - [ ] La navegación funciona
@@ -567,21 +604,25 @@ portfolio/
 ## 🎯 Beneficios de la Nueva Estructura
 
 ### ✅ Organización Clara
+
 - Separación lógica por tipo de componente
 - Fácil localizar archivos
 - Escalable para nuevas features
 
 ### ✅ Mantenibilidad
+
 - Imports más claros con path aliases
 - Menos confusión sobre dónde crear componentes
 - Estructura estándar de Next.js 13+
 
 ### ✅ Performance
+
 - Sin archivos duplicados
 - Imports optimizados
 - Tree-shaking mejorado
 
 ### ✅ Developer Experience
+
 - Autocomplete mejor con path aliases
 - Navegación más rápida en el código
 - Menos fricción al agregar features
@@ -591,6 +632,7 @@ portfolio/
 ## 📝 Comandos Útiles Durante la Migración
 
 ### Buscar Referencias
+
 ```bash
 # Buscar imports de un archivo específico
 rg "from.*particles" -t tsx -t ts
@@ -603,12 +645,14 @@ grep "import" app/page.tsx
 ```
 
 ### Mover Archivos (con git)
+
 ```bash
 # Mantiene el historial
 git mv app/components/particles.tsx components/shared/Particles.tsx
 ```
 
 ### Verificar Imports Rotos
+
 ```bash
 # Compilar y ver errores
 pnpm run build 2>&1 | grep "Cannot find module"
@@ -664,4 +708,4 @@ pnpm run build 2>&1 | grep "Cannot find module"
 
 ---
 
-*Este plan es complementario al PLAN_MIGRACION_SPA.md y debe ejecutarse después de completar la migración a SPA.*
+_Este plan es complementario al PLAN_MIGRACION_SPA.md y debe ejecutarse después de completar la migración a SPA._

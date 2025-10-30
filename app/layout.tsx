@@ -3,13 +3,15 @@ import { Inter } from "@next/font/google";
 import LocalFont from "@next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "@/components/shared/analytics";
+import StickyNav from "@/components/navigation/StickyNav";
 
 export const metadata: Metadata = {
   title: {
     default: "geroserial.com",
     template: "%s | geroserial.com",
   },
-  description: "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
+  description:
+    "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
   openGraph: {
     title: "geroserial.com",
     description:
@@ -62,12 +64,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
-      <head>
-        <Analytics />
-      </head>
+      <head>{/* <Analytics /> */}</head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
+        className={`bg-black ${
+          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        }`}
       >
         {children}
       </body>

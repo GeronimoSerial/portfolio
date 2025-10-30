@@ -62,7 +62,7 @@ export default function Services() {
     <section
       id="services"
       ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-zinc-950"
+      className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-6xl">
         <motion.div

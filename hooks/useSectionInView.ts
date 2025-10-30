@@ -1,6 +1,6 @@
 "use client";
 
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 /**
  * Wrapper hook for react-intersection-observer

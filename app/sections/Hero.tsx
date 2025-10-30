@@ -3,19 +3,13 @@
 import React from "react";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import Particles from "@/components/shared/particles";
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gradient-to-tl from-zinc-950 via-zinc-900 to-black"
+      className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden"
     >
-      <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
-        quantity={200}
-      />
-      
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -25,7 +19,7 @@ export default function Hero() {
         <h1 className="py-3.5 px-0.5 text-5xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-9xl whitespace-nowrap bg-clip-text">
           geroserial.com
         </h1>
-        
+
         <div className="my-8 text-center">
           <h2 className="text-lg md:text-xl text-zinc-300 max-w-2xl px-4">
             Desarrollador Full Stack & Especialista en TI
@@ -63,7 +57,10 @@ export default function Hero() {
         transition={{ delay: 1, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
-        <a href="#about" className="flex flex-col items-center text-zinc-500 hover:text-zinc-300 transition-colors">
+        <a
+          href="#about"
+          className="flex flex-col items-center text-zinc-500 hover:text-zinc-300 transition-colors"
+        >
           <span className="text-xs mb-2">Scroll</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}

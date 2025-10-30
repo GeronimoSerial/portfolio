@@ -51,11 +51,7 @@ export default function Skills() {
   ];
 
   return (
-    <section
-      id="skills"
-      ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-gradient-to-b from-black to-zinc-950"
-    >
+    <section id="skills" ref={ref} className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

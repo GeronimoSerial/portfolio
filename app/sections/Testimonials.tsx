@@ -53,7 +53,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-gradient-to-b from-black to-zinc-950"
+      className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-4xl">
         <motion.div

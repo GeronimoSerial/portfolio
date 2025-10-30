@@ -34,7 +34,8 @@ This is a **Next.js 13+ (App Router) portfolio** in active migration to a single
 - **Highlights:** White (`#ffffff`) for important elements, CTAs, and hover states
 - **Gradients:** Always zinc-based (e.g., `from-zinc-950 via-zinc-900 to-black`)
 
-**When adding/editing components:** 
+**When adding/editing components:**
+
 - Use ONLY zinc/grayscale palette - NO indigo/purple/violet colors
 - Particles: white with opacity variations
 - Hover effects: transition from zinc shades to white
@@ -180,19 +181,13 @@ The **primary active task** is consolidating to SPA per `PLAN_MIGRACION_SPA.md`:
 ### Migration Status:
 
 ✅ **COMPLETED:**
+
 1. Migrated from framer-motion to motion (`pnpm remove framer-motion && pnpm add motion`)
 2. Installed scroll dependencies (react-scroll, react-intersection-observer)
 
-🚧 **IN PROGRESS:**
-3. Creating section components (Hero, About, Skills, etc.)
-4. Consolidating `/perfil` → About section, `/contacto` → Contact section
-5. Building main SPA in `app/page.tsx`
+🚧 **IN PROGRESS:** 3. Creating section components (Hero, About, Skills, etc.) 4. Consolidating `/perfil` → About section, `/contacto` → Contact section 5. Building main SPA in `app/page.tsx`
 
-⏳ **TODO:**
-6. Implement sticky navigation with scroll spy
-7. Add smooth scroll between sections
-8. Update all colors from indigo/purple to zinc/grayscale
-9. Remove old route folders
+⏳ **TODO:** 6. Implement sticky navigation with scroll spy 7. Add smooth scroll between sections 8. Update all colors from indigo/purple to zinc/grayscale 9. Remove old route folders
 
 ### Key Principles:
 

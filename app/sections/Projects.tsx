@@ -23,7 +23,7 @@ export default function Projects() {
     <section
       id="projects"
       ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-gradient-to-b from-zinc-950 to-black"
+      className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-6xl">
         <motion.div
@@ -37,7 +37,8 @@ export default function Projects() {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Una selección de proyectos en los que he trabajado, desde aplicaciones web hasta herramientas de desarrollo.
+            Una selección de proyectos en los que he trabajado, desde
+            aplicaciones web hasta herramientas de desarrollo.
           </p>
         </motion.div>
 

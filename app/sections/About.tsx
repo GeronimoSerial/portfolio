@@ -15,11 +15,7 @@ export default function About() {
   ];
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="relative min-h-screen py-20 px-4 bg-black"
-    >
+    <section id="about" ref={ref} className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +78,8 @@ export default function About() {
                 </h4>
                 <p className="text-sm text-zinc-400">2022 - Presente</p>
                 <p className="text-sm text-zinc-500 mt-2">
-                  Soporte tecnológico y gestión de proyectos audiovisuales en RRSS
+                  Soporte tecnológico y gestión de proyectos audiovisuales en
+                  RRSS
                 </p>
               </div>
             </div>

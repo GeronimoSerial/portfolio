@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook to detect which section is currently in view
@@ -20,8 +20,8 @@ export const useScrollSpy = (sectionIds: string[]) => {
         });
       },
       {
-        rootMargin: '-20% 0px -35% 0px',
-        threshold: 0
+        rootMargin: "-20% 0px -35% 0px",
+        threshold: 0,
       }
     );
 
