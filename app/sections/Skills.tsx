@@ -145,7 +145,11 @@ export default function Skills() {
   const currentData = skillsData[selectedCategory as keyof typeof skillsData];
 
   return (
-    <section id="skills" ref={ref} className="relative min-h-screen py-20 px-4">
+    <section
+      id="skills"
+      ref={ref}
+      className="relative py-12 px-4 min-h-[750px]"
+    >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
