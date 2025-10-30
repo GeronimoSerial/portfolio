@@ -1,10 +1,10 @@
 import "../global.css";
-import { Inter } from "next/font/google";
+import { DM_Sans, Inter } from "next/font/google";
 import { Lora } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
-import { Analytics } from "@/components/shared/analytics";
-import StickyNav from "@/components/navigation/StickyNav";
+// import { Analytics } from "@/components/shared/analytics";
+// import StickyNav from "@/components/navigation/StickyNav";
 
 export const metadata: Metadata = {
   title: {
@@ -64,6 +64,12 @@ const lora = Lora({
   variable: "--font-lora",
 });
 
+const dm_sans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-oswald",
+});
+
 export default function RootLayout({
   children,
 }: {
@@ -72,7 +78,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={[inter.variable, calSans.variable, lora.variable].join(" ")}
+      className={[
+        inter.variable,
+        calSans.variable,
+        lora.variable,
+        dm_sans.variable,
+      ].join(" ")}
     >
       <head>
         <link
@@ -91,5 +102,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

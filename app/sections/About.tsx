@@ -23,8 +23,16 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h3 className="text-4xl md:text-5xl text-zinc-50 mb-4">About Me</h3>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto" />
+          <h3 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4 tracking-tight">
+            <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+              About me
+            </span>
+          </h3>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-zinc-500" />
+            <div className="w-2 h-2 rounded-full bg-zinc-400 shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
+            <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-zinc-500" />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
@@ -61,18 +69,19 @@ export default function About() {
             </div>
 
             <p className="text-zinc-300 leading-relaxed">
-              Systems analyst in training with experience in full-stack web
-              development, infrastructure management, and the design of scalable
-              and secure software architectures. Led province-wide, high-impact
-              digital transformation projects applying modern methodologies and
-              sustainable solutions.
+              Systems analyst in training with experience in infrastructure
+              management, the design of scalable and secure software
+              architectures, and full-stack web development. Led province-wide,
+              high-impact digital transformation projects applying modern
+              methodologies and sustainable solutions.
             </p>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
               <Briefcase className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
-                  Tech Consultant - Consejo General de Educación de Corrientes
+                  Institutional Technology Coordinator - Consejo General de
+                  Educación de Corrientes
                 </h4>
                 <p className="text-sm text-zinc-400">2022 - Present</p>
                 <p className="text-sm text-zinc-500 mt-2">
@@ -90,7 +99,7 @@ export default function About() {
                 <h4 className="text-zinc-200 font-medium mb-1">
                   Bachelor's in Systems Analysis
                 </h4>
-                <p className="text-sm text-zinc-400">UNNE - 2025</p>
+                <p className="text-sm text-zinc-400">UNNE</p>
               </div>
             </div>
           </motion.div>
