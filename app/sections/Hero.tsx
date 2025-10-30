@@ -17,12 +17,15 @@ export default function Hero() {
         transition={{ duration: 0.8 }}
         className="z-10 flex flex-col items-center text-center px-4"
       >
-        <h1 className="mb-6 text-6xl md:text-9xl font-display text-transparent bg-clip-text bg-white cursor-default animate-title select-none">
-          geroserial.com
-        </h1>
+        {/* Contenedor fijo para el H1 - su animación no afecta al resto */}
+        <div className="mb-6 h-[4.5rem] md:h-[9rem] flex items-center justify-center">
+          <h1 className="text-6xl md:text-9xl font-display text-transparent bg-clip-text bg-white cursor-default animate-title select-none">
+            geroserial.com
+          </h1>
+        </div>
 
-        <h2 className="text-sm md:text-lg text-zinc-300 max-w-3xl leading-relaxed">
-          IT Specialist · Web Systems, Automation & Infrastructure Management
+        <h2 className="text-sm md:text-lg text-zinc-300 max-w-3xl">
+          IT Specialist · Infrastructure, Automation & Web Systems Management
         </h2>
 
         <p className="mt-4 text-sm md:text-base text-zinc-500 max-w-xl leading-relaxed">
@@ -80,8 +83,8 @@ export default function Hero() {
       </motion.div>
 
       {/* LÍNEAS SUPERIOR E INFERIOR */}
-      <div className="absolute top-0 w-screen h-px animate-glow animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <div className="absolute bottom-0 w-screen h-px animate-glow animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute top-0 w-screen h-px animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute bottom-0 w-screen h-px animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
     </section>
   );
 }

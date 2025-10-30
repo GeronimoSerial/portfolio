@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useSectionInView } from "@/hooks/useSectionInView";
-import { Briefcase, Code } from "lucide-react";
+import { Briefcase, Code, GraduationCap } from "lucide-react";
 
 export default function Experience() {
   const { ref, inView } = useSectionInView();
@@ -41,11 +41,7 @@ export default function Experience() {
   ];
 
   return (
-    <section
-      id="experience"
-      ref={ref}
-      className="relative py-12 px-4"
-    >
+    <section id="experience" ref={ref} className="relative py-12 px-4">
       <div className="container mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,10 +49,16 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Experiencia
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto" />
+          <h3 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4 tracking-tight">
+            <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+              Experience
+            </span>
+          </h3>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-zinc-500" />
+            <div className="w-2 h-2 rounded-full bg-zinc-400 shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
+            <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-zinc-500" />
+          </div>
         </motion.div>
 
         <div className="relative">
@@ -117,6 +119,3 @@ export default function Experience() {
     </section>
   );
 }
-
-// Import for GraduationCap icon
-import { GraduationCap } from "lucide-react";
