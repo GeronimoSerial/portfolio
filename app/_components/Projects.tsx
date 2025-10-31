@@ -1,12 +1,15 @@
-import { allProjects } from 'contentlayer/generated';
-import { ExternalLink, Github } from 'lucide-react';
-
+"use client";
+import { allProjects } from "contentlayer/generated";
+import { ExternalLink, Github } from "lucide-react";
+import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
+import { motion } from "motion/react";
 export default function ProjectsStatic() {
   const projects = allProjects
     .filter((project) => project.published)
-    .sort((a, b) =>
-      new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-      new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+    .sort(
+      (a, b) =>
+        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
     )
     .slice(0, 6);
 
@@ -14,16 +17,23 @@ export default function ProjectsStatic() {
     <section id="projects" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Featured Projects
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
-          <p className="text-zinc-400 max-w-2xl mx-auto">
-            A selection of projects showcasing web applications and development tools
+        <div>
+          <motion.div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row">
+            <LayoutTextFlip
+              text="Welcome to "
+              words={[
+                "Aceternity UI",
+                "Fight Club",
+                "The Matrix",
+                "The Jungle",
+              ]}
+            />
+          </motion.div>
+          <p className="mt-4 text-center text-base text-neutral-600 dark:text-neutral-400">
+            Experience the power of modern UI components that bring your ideas
+            to life.
           </p>
         </div>
-
         {/* Grid de proyectos */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
@@ -32,9 +42,7 @@ export default function ProjectsStatic() {
               className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors"
             >
               <div className="flex flex-col h-full">
-                <h3 className="text-xl text-zinc-50 mb-3">
-                  {project.title}
-                </h3>
+                <h3 className="text-xl text-zinc-50 mb-3">{project.title}</h3>
 
                 <p className="text-sm text-zinc-400 mb-4 flex-grow line-clamp-3">
                   {project.description}
