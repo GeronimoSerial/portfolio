@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/moving-border";
+import { MapPin } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -35,12 +36,49 @@ export default function Hero() {
           Methodical Approach. Real-World Solutions.
         </p>
 
+        {/* Trust Indicators */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="flex flex-wrap items-center justify-center gap-3 mt-6 text-xs md:text-sm text-zinc-600"
+        >
+          <span>+15 Projects Delivered</span>
+          <span className="text-zinc-800">•</span>
+          <span>+5 Satisfied Clients</span>
+          <span className="text-zinc-800">•</span>
+          <span>2+ Years Experience</span>
+        </motion.div>
+
+        {/* Location */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+          className="flex items-center gap-2 mt-3 text-xs md:text-sm text-zinc-600"
+        >
+          <MapPin className="w-3 h-3 md:w-4 md:h-4" />
+          <span>Corrientes, Argentina</span>
+          <span className="text-zinc-800">|</span>
+          <span>Remote Services Available</span>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="flex gap-4 mt-10"
         >
+          <a href="#services">
+            <Button
+              containerClassName="h-12"
+              borderRadius="0.75rem"
+              borderClassName="bg-zinc-600/30"
+              className="px-6 py-3 text-sm font-medium text-zinc-300"
+            >
+              View Services
+            </Button>
+          </a>
           <a href="#contact">
             <Button
               containerClassName="h-12"
@@ -48,7 +86,7 @@ export default function Hero() {
               borderClassName="bg-zinc-600/30"
               className="px-6 py-3 text-sm font-medium text-zinc-300"
             >
-              Contact
+              Get in Touch
             </Button>
           </a>
         </motion.div>
@@ -62,10 +100,9 @@ export default function Hero() {
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <a
-          href="#about"
+          href="#services"
           className="flex flex-col items-center text-zinc-500 hover:text-zinc-300 transition-colors"
         >
-          {/* <span className="text-xs mb-2 tracking-wider">Scroll</span> */}
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}

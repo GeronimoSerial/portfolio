@@ -15,7 +15,7 @@ export default function Testimonials() {
       role: "CEO",
       company: "TechStartup",
       content:
-        "Geronimo transformó nuestra visión en una plataforma funcional y escalable. Su profesionalismo y expertise técnico son excepcionales.",
+        "Geronimo transformed our vision into a functional and scalable platform. His professionalism and technical expertise are exceptional.",
       rating: 5,
       image: "/testimonials/maria.jpg", // Placeholder
     },
@@ -24,16 +24,16 @@ export default function Testimonials() {
       role: "Product Manager",
       company: "InnovaLabs",
       content:
-        "Trabajar con Geronimo fue una experiencia increíble. Siempre disponible, propositivo y con soluciones innovadoras.",
+        "Working with Geronimo was an incredible experience. Always available, proactive, and with innovative solutions.",
       rating: 5,
       image: "/testimonials/carlos.jpg", // Placeholder
     },
     {
       name: "Ana Martínez",
-      role: "Directora de Marketing",
+      role: "Marketing Director",
       company: "DigitalCorp",
       content:
-        "La calidad del trabajo y atención al detalle superó nuestras expectativas. Altamente recomendado.",
+        "The quality of work and attention to detail exceeded our expectations. Highly recommended.",
       rating: 5,
       image: "/testimonials/ana.jpg", // Placeholder
     },
@@ -63,11 +63,11 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Testimonios
+            Testimonials
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Lo que dicen quienes han trabajado conmigo
+            What clients say about working with me
           </p>
         </motion.div>
 
@@ -122,7 +122,7 @@ export default function Testimonials() {
             <button
               onClick={prevTestimonial}
               className="p-2 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-500 hover:bg-white/10 transition-all duration-200"
-              aria-label="Anterior testimonio"
+              aria-label="Previous testimonial"
             >
               <svg
                 className="w-5 h-5 text-zinc-400"
@@ -148,7 +148,7 @@ export default function Testimonials() {
                       ? "bg-zinc-300 w-8"
                       : "bg-zinc-700 hover:bg-zinc-600"
                   }`}
-                  aria-label={`Ir al testimonio ${index + 1}`}
+                  aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
             </div>
@@ -156,7 +156,7 @@ export default function Testimonials() {
             <button
               onClick={nextTestimonial}
               className="p-2 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-500 hover:bg-white/10 transition-all duration-200"
-              aria-label="Siguiente testimonio"
+              aria-label="Next testimonial"
             >
               <svg
                 className="w-5 h-5 text-zinc-400"

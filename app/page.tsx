@@ -1,14 +1,12 @@
 import React from "react";
 import BackToTop from "@/components/layout/BackToTop";
 import Particles from "@/components/shared/particles";
-import Hero from "./sections/Hero";
-import About from "./sections/About";
-import Skills from "./sections/Skills";
-import Experience from "./sections/Experience";
-import Projects from "./sections/Projects";
-import Testimonials from "./sections/Testimonials";
-import Services from "./sections/Services";
-import Contact from "./sections/Contact";
+import Hero from "@/components/sections/Hero";
+import Services from "@/components/sections/Services";
+import Process from "@/components/sections/Process";
+import Projects from "@/components/sections/Projects";
+import Testimonials from "@/components/sections/Testimonials";
+import Contact from "@/components/sections/Contact";
 import StickyNav from "@/components/navigation/StickyNav";
 
 export default function Home() {
@@ -21,13 +19,11 @@ export default function Home() {
       />
 
       <StickyNav />
-      <Hero /> 
-      <About />
-      <Skills />
-      <Experience />
+      <Hero />
+      <Services />
+      <Process />
       <Projects />
       <Testimonials />
-      <Services />
       <Contact />
 
       <BackToTop />

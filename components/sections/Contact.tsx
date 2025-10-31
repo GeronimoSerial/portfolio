@@ -25,7 +25,7 @@ export default function Contact() {
     // Simulate submission
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    alert("¡Mensaje enviado! Te contactaré pronto.");
+    alert("Message sent! I'll get back to you soon.");
     setFormData({ name: "", email: "", subject: "proyecto", message: "" });
     setIsSubmitting(false);
   };
@@ -52,11 +52,11 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Contacto
+            Get in Touch
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente? Hablemos sobre cómo puedo ayudarte.
+            Have a project in mind? Let's discuss how I can help you.
           </p>
         </motion.div>
 
@@ -73,7 +73,7 @@ export default function Contact() {
                   htmlFor="name"
                   className="block text-sm font-medium text-zinc-300 mb-2"
                 >
-                  Nombre completo *
+                  Full Name *
                 </label>
                 <input
                   type="text"
@@ -83,7 +83,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
-                  placeholder="Tu nombre"
+                  placeholder="Your name"
                 />
               </div>
 
@@ -102,7 +102,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
-                  placeholder="tu@email.com"
+                  placeholder="your@email.com"
                 />
               </div>
 
@@ -111,7 +111,7 @@ export default function Contact() {
                   htmlFor="subject"
                   className="block text-sm font-medium text-zinc-300 mb-2"
                 >
-                  Asunto
+                  Subject
                 </label>
                 <select
                   id="subject"
@@ -120,10 +120,10 @@ export default function Contact() {
                   onChange={handleChange}
                   className="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg text-zinc-100 focus:outline-none focus:border-zinc-500 transition-colors"
                 >
-                  <option value="proyecto">Nuevo Proyecto</option>
-                  <option value="consulta">Consulta</option>
-                  <option value="soporte">Soporte Técnico</option>
-                  <option value="otro">Otro</option>
+                  <option value="proyecto">New Project</option>
+                  <option value="consulta">Inquiry</option>
+                  <option value="soporte">Technical Support</option>
+                  <option value="otro">Other</option>
                 </select>
               </div>
 
@@ -132,7 +132,7 @@ export default function Contact() {
                   htmlFor="message"
                   className="block text-sm font-medium text-zinc-300 mb-2"
                 >
-                  Mensaje *
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -142,7 +142,7 @@ export default function Contact() {
                   onChange={handleChange}
                   rows={5}
                   className="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors resize-none"
-                  placeholder="Cuéntame sobre tu proyecto..."
+                  placeholder="Tell me about your project..."
                 />
               </div>
 
@@ -152,11 +152,11 @@ export default function Contact() {
                 className="w-full px-6 py-3 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
-                  "Enviando..."
+                  "Sending..."
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    Enviar Mensaje
+                    Send Message
                   </>
                 )}
               </button>
@@ -172,7 +172,7 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-2xl text-zinc-50 mb-6">
-                Información de Contacto
+                Contact Information
               </h3>
 
               <div className="space-y-4">
@@ -192,7 +192,7 @@ export default function Contact() {
                 <div className="flex items-center gap-4 p-4 bg-white/5 border border-zinc-800 rounded-lg">
                   <MapPin className="w-5 h-5 text-zinc-400 flex-shrink-0" />
                   <div>
-                    <p className="text-sm text-zinc-500 mb-1">Ubicación</p>
+                    <p className="text-sm text-zinc-500 mb-1">Location</p>
                     <p className="text-zinc-300">Corrientes, Argentina</p>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export default function Contact() {
 
             <div>
               <h4 className="text-lg font-display text-zinc-50 mb-4">
-                Redes Sociales
+                Social Media
               </h4>
               <div className="flex gap-4">
                 <a
@@ -225,11 +225,11 @@ export default function Contact() {
 
             <div className="p-6 bg-white/5 border border-zinc-800 rounded-lg">
               <h4 className="text-lg font-display text-zinc-50 mb-3">
-                Horario de Respuesta
+                Response Time
               </h4>
               <p className="text-sm text-zinc-400">
-                Respondo mensajes de Lunes a Viernes, de 9:00 a 18:00 (GMT-3).
-                Tiempo promedio de respuesta: 24 horas.
+                I respond to messages Monday through Friday, 9:00 AM to 6:00 PM (GMT-3).
+                Average response time: 24 hours.
               </p>
             </div>
           </motion.div>
@@ -244,8 +244,7 @@ export default function Contact() {
         className="text-center mt-20 pt-8 border-t border-zinc-800"
       >
         <p className="text-sm text-zinc-500">
-          © {new Date().getFullYear()} Geronimo Serial. Todos los derechos
-          reservados.
+          © {new Date().getFullYear()} Geronimo Serial. All rights reserved.
         </p>
       </motion.div>
     </section>

@@ -11,24 +11,20 @@ export default function StickyNav() {
 
   const sections = [
     "hero",
-    "about",
-    "skills",
-    "experience",
+    "services",
+    "process",
     "projects",
     "testimonials",
-    "services",
     "contact",
   ];
 
   const navItems = [
-    { id: "hero", label: "Inicio" },
-    { id: "about", label: "Sobre Mí" },
-    { id: "skills", label: "Habilidades" },
-    { id: "experience", label: "Experiencia" },
-    { id: "projects", label: "Proyectos" },
-    { id: "testimonials", label: "Testimonios" },
-    { id: "services", label: "Servicios" },
-    { id: "contact", label: "Contacto" },
+    { id: "hero", label: "Home" },
+    { id: "services", label: "Services" },
+    { id: "process", label: "Process" },
+    { id: "projects", label: "Projects" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact", label: "Contact" },
   ];
 
   const activeSection = useScrollSpy(sections);
@@ -87,6 +83,12 @@ export default function StickyNav() {
             {/* Right Side */}
             <div className="flex items-center gap-4">
               <a
+                href="/portfolio"
+                className="hidden md:block px-4 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-all duration-200"
+              >
+                Portfolio
+              </a>
+              <a
                 href="https://github.com/GeronimoSerial"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -140,6 +142,13 @@ export default function StickyNav() {
               ))}
 
               <div className="border-t border-zinc-800 my-2" />
+
+              <a
+                href="/portfolio"
+                className="px-4 py-3 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-all duration-200"
+              >
+                Portfolio
+              </a>
 
               <a
                 href="https://github.com/GeronimoSerial"

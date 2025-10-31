@@ -10,51 +10,51 @@ export default function Services() {
   const services = [
     {
       icon: Code,
-      title: "Desarrollo Web Full Stack",
-      description: "Aplicaciones web escalables y modernas",
+      title: "Full Stack Web Development",
+      description: "Scalable web applications built with modern technologies",
       features: [
-        "Aplicaciones web responsivas",
-        "APIs RESTful robustas",
-        "Integración de servicios",
-        "Optimización de rendimiento",
+        "Responsive web applications",
+        "Robust RESTful APIs",
+        "Third-party integrations",
+        "Performance optimization",
       ],
-      price: "Desde $800 USD",
+      price: "From $800 USD",
     },
     {
       icon: Lightbulb,
-      title: "Consultoría Tecnológica",
-      description: "Asesoramiento técnico especializado",
+      title: "Technology Consulting",
+      description: "Expert technical guidance for complex challenges",
       features: [
-        "Auditoría de código",
-        "Arquitectura de software",
-        "Optimización de sistemas",
-        "Mejores prácticas",
+        "Code audits & reviews",
+        "Software architecture design",
+        "System optimization",
+        "Best practices implementation",
       ],
-      price: "Desde $500 USD",
+      price: "From $500 USD",
     },
     {
       icon: Wrench,
-      title: "Soporte Técnico IT",
-      description: "Mantenimiento y soporte continuo",
+      title: "IT Technical Support",
+      description: "Ongoing maintenance and incident resolution",
       features: [
-        "Mantenimiento preventivo",
-        "Resolución de incidencias",
-        "Monitoreo de sistemas",
-        "Capacitación técnica",
+        "Preventive maintenance",
+        "Incident resolution",
+        "System monitoring",
+        "Technical training",
       ],
-      price: "Desde $400 USD/mes",
+      price: "From $400 USD/month",
     },
     {
       icon: TrendingUp,
-      title: "Transformación Digital",
-      description: "Modernización de procesos empresariales",
+      title: "Digital Transformation",
+      description: "Modernize business processes and infrastructure",
       features: [
-        "Estrategia digital",
-        "Migración a la nube",
-        "Automatización de procesos",
-        "Análisis de datos",
+        "Digital strategy planning",
+        "Cloud migration",
+        "Process automation",
+        "Data analytics implementation",
       ],
-      price: "Consultar precio",
+      price: "Custom Quote",
     },
   ];
 
@@ -72,11 +72,11 @@ export default function Services() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Servicios
+            Services
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Soluciones tecnológicas personalizadas para impulsar tu negocio
+            Scalable IT solutions designed to grow with your business
           </p>
         </motion.div>
 
@@ -135,7 +135,7 @@ export default function Services() {
                     href="#contact"
                     className="px-4 py-2 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors duration-200"
                   >
-                    Solicitar
+                    Request Quote
                   </a>
                 </div>
 
@@ -153,13 +153,13 @@ export default function Services() {
           className="text-center mt-12"
         >
           <p className="text-sm text-zinc-500 mb-4">
-            ¿Necesitas algo diferente? Hablemos sobre tu proyecto personalizado
+            Need something different? Let's discuss your custom project
           </p>
           <a
             href="#contact"
             className="inline-block px-6 py-3 text-sm font-medium text-white bg-white/10 border border-zinc-700 rounded-lg hover:bg-white/20 hover:border-zinc-500 transition-all duration-200"
           >
-            Consultar Proyecto Personalizado
+            Discuss Custom Project
           </a>
         </motion.div>
       </div>
