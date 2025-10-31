@@ -1,13 +1,13 @@
-import Link from 'next/link';
-import { Github } from 'lucide-react';
+import Link from "next/link";
+import { Github } from "lucide-react";
 
 export default function NavStatic() {
   const navItems = [
-    { id: 'hero', label: 'Home' },
-    { id: 'services', label: 'Services' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'testimonials', label: 'Testimonials' },
-    { id: 'contact', label: 'Contact' },
+    { id: "hero", label: "Home" },
+    { id: "services", label: "Services" },
+    { id: "projects", label: "Projects" },
+    { id: "testimonials", label: "Testimonials" },
+    { id: "contact", label: "Contact" },
   ];
 
   return (
@@ -15,7 +15,7 @@ export default function NavStatic() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#hero" className="text-xl font-display text-zinc-50">
+          <a href="/" className="text-xl font-display text-zinc-50">
             geroserial
           </a>
 
@@ -34,6 +34,12 @@ export default function NavStatic() {
 
           {/* Right Side */}
           <div className="flex items-center gap-4">
+            <Link
+              href="/portfolio"
+              className="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-colors"
+            >
+              Portfolio
+            </Link>
             <a
               href="https://github.com/GeronimoSerial"
               target="_blank"
