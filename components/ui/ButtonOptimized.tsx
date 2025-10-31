@@ -37,13 +37,13 @@ export function ButtonOptimized({
         className="absolute inset-0 animate-border-spin"
         style={{ borderRadius: borderRadius }}
       >
-        <div className="h-full w-full bg-gradient-conic from-transparent via-white/40 to-transparent" />
+        <div className="h-full w-full bg-gradient-conic from-transparent via-black/40 dark:via-white/40 to-transparent transition-colors" />
       </div>
 
       {/* Content */}
       <div
         className={cn(
-          "relative z-10 flex h-full w-full items-center justify-center bg-zinc-900/80 backdrop-blur-xs border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-300 antialiased transition-colors hover:bg-zinc-900/90 hover:text-zinc-50",
+          "relative z-10 flex h-full w-full items-center justify-center bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-xs border border-zinc-300 dark:border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-700 dark:text-zinc-300 antialiased transition-colors hover:bg-zinc-100/90 dark:hover:bg-zinc-900/90 hover:text-zinc-900 dark:hover:text-zinc-50",
           className,
         )}
         style={{

@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useMousePosition } from "@/lib/mouse";
+import { useTheme } from "@/app/providers/ThemeProvider";
 
 interface ParticlesProps {
   className?: string;
@@ -26,6 +27,7 @@ export default function Particles({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -47,6 +49,13 @@ export default function Particles({
   useEffect(() => {
     initCanvas();
   }, [refresh]);
+
+  // Redibujar cuando cambia el tema
+  useEffect(() => {
+    if (circles.current.length > 0) {
+      drawParticles();
+    }
+  }, [theme]);
 
   const initCanvas = () => {
     resizeCanvas();
@@ -124,7 +133,14 @@ export default function Particles({
       context.current.translate(translateX, translateY);
       context.current.beginPath();
       context.current.arc(x, y, size, 0, 2 * Math.PI);
-      context.current.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      
+      // Color dinámico según tema
+      const particleColor =
+        theme === "dark"
+          ? `rgba(255, 255, 255, ${alpha})`
+          : `rgba(0, 0, 0, ${alpha})`;
+      
+      context.current.fillStyle = particleColor;
       context.current.fill();
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);
 

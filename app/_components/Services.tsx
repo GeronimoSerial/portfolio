@@ -57,11 +57,18 @@ export default function ServicesStatic() {
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-display 
+                       text-zinc-950 dark:text-zinc-50 
+                       mb-4 transition-colors">
             Services
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
-          <p className="text-zinc-400 max-w-2xl mx-auto">
+          <div className="w-20 h-1 
+                        bg-linear-to-r from-transparent 
+                        via-zinc-400 dark:via-zinc-300 
+                        to-transparent 
+                        mx-auto mb-4" />
+          <p className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors">
             Scalable IT solutions designed to grow with your business
           </p>
         </div>
@@ -73,17 +80,29 @@ export default function ServicesStatic() {
             return (
               <article
                 key={service.title}
-                className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-white transition-colors"
+                className="group p-6 
+                         bg-black/5 dark:bg-white/5 
+                         border border-zinc-200 dark:border-zinc-800 
+                         rounded-lg 
+                         hover:border-zinc-400 dark:hover:border-white 
+                         transition-colors"
               >
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
-                    <Icon className="w-6 h-6 text-zinc-400" />
+                  <div className="p-3 
+                                bg-zinc-100 dark:bg-zinc-900 
+                                border border-zinc-200 dark:border-zinc-800 
+                                rounded-lg transition-colors">
+                    <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400 transition-colors" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl text-zinc-50 mb-2">
+                    <h3 className="text-xl 
+                                 text-zinc-950 dark:text-zinc-50 
+                                 mb-2 transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-zinc-400 mb-4">
+                    <p className="text-sm 
+                                text-zinc-600 dark:text-zinc-400 
+                                mb-4 transition-colors">
                       {service.description}
                     </p>
                   </div>
@@ -93,9 +112,11 @@ export default function ServicesStatic() {
                   {service.features.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-center gap-2 text-sm text-zinc-300"
+                      className="flex items-center gap-2 text-sm 
+                               text-zinc-700 dark:text-zinc-300 
+                               transition-colors"
                     >
-                      <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-zinc-500 dark:text-zinc-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       {feature}
@@ -103,11 +124,19 @@ export default function ServicesStatic() {
                   ))}
                 </ul>
 
-                <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
-                  <span className="text-lg font-display text-zinc-100">
+                <div className="flex items-center justify-between pt-4 
+                              border-t border-zinc-200 dark:border-zinc-800 
+                              transition-colors">
+                  <span className="text-lg font-display 
+                                 text-zinc-900 dark:text-zinc-100 
+                                 transition-colors">
                     {service.price}
                   </span>
-                  <span className="px-4 py-2 text-sm font-medium text-black bg-white rounded-lg cursor-default">
+                  <span className="px-4 py-2 text-sm font-medium 
+                                 text-white dark:text-black 
+                                 bg-black dark:bg-white 
+                                 rounded-lg cursor-default 
+                                 transition-colors">
                     Request Quote
                   </span>
                 </div>

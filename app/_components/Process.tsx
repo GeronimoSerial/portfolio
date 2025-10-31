@@ -49,11 +49,18 @@ export default function ProcessStatic() {
     <section id="process" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+          <h2 className="text-4xl md:text-5xl font-display 
+                       text-zinc-950 dark:text-zinc-50 
+                       mb-4 transition-colors">
             How I Work
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
-          <p className="text-zinc-400 max-w-2xl mx-auto">
+          <div className="w-20 h-1 
+                        bg-linear-to-r from-transparent 
+                        via-zinc-400 dark:via-zinc-300 
+                        to-transparent 
+                        mx-auto mb-4" />
+          <p className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors">
             Proven methodology for predictable results
           </p>
         </div>
@@ -64,28 +71,47 @@ export default function ProcessStatic() {
             return (
               <div
                 key={step.number}
-                className="relative p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all duration-300"
+                className="relative p-6 
+                         bg-black/5 dark:bg-white/5 
+                         border border-zinc-200 dark:border-zinc-800 
+                         rounded-lg 
+                         hover:border-zinc-400 dark:hover:border-zinc-700 
+                         transition-all duration-300"
               >
                 <div className="mb-4">
-                  <span className="text-5xl font-display text-zinc-800">
+                  <span className="text-5xl font-display 
+                                 text-zinc-200 dark:text-zinc-800 
+                                 transition-colors">
                     {step.number}
                   </span>
                 </div>
 
                 <div className="mb-4">
-                  <Icon className="w-8 h-8 text-zinc-400" />
+                  <Icon className="w-8 h-8 
+                                 text-zinc-600 dark:text-zinc-400 
+                                 transition-colors" />
                 </div>
 
-                <h3 className="text-xl text-zinc-50 mb-2">{step.title}</h3>
-                <p className="text-sm text-zinc-400 mb-4">{step.description}</p>
+                <h3 className="text-xl 
+                             text-zinc-950 dark:text-zinc-50 
+                             mb-2 transition-colors">
+                  {step.title}
+                </h3>
+                <p className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            mb-4 transition-colors">
+                  {step.description}
+                </p>
 
                 <ul className="space-y-2">
                   {step.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-start gap-2 text-sm text-zinc-500"
+                      className="flex items-start gap-2 text-sm 
+                               text-zinc-500 dark:text-zinc-500 
+                               transition-colors"
                     >
-                      <span className="text-zinc-700 mt-1">•</span>
+                      <span className="text-zinc-400 dark:text-zinc-700 mt-1">•</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -96,7 +122,7 @@ export default function ProcessStatic() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 transition-colors">
             Methodical Approach. Real-World Solutions.
           </p>
         </div>

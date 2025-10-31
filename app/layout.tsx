@@ -2,6 +2,7 @@ import "../global.css";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
@@ -85,8 +86,23 @@ export default function RootLayout({
         dm_sans.variable,
         geist_mono.variable,
       ].join(" ")}
+      suppressHydrationWarning
     >
       <head>
+        {/* Script de inicialización temprana para prevenir flash de tema incorrecto */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
         <link
           rel="stylesheet"
           type="text/css"
@@ -94,11 +110,11 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`bg-black ${
+        className={`bg-white dark:bg-black transition-colors duration-300 ${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

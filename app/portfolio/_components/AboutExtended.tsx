@@ -13,11 +13,18 @@ export default function AboutExtendedStatic() {
     <section id="about" className="relative py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-semibold 
+                       text-zinc-950 dark:text-zinc-50 
+                       mb-4 tracking-tight transition-colors">
             About Me
           </h2>
-          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
-          <p className="text-zinc-400 max-w-2xl mx-auto">
+          <div className="w-20 h-1 
+                        bg-linear-to-r from-transparent 
+                        via-zinc-400 dark:via-zinc-300 
+                        to-transparent 
+                        mx-auto mb-4" />
+          <p className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors">
             Professional Background & Experience
           </p>
         </div>
@@ -26,28 +33,41 @@ export default function AboutExtendedStatic() {
           {/* Image/Avatar */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="absolute inset-0 bg-linear-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10" />
+              <div className="absolute inset-0 
+                            bg-linear-to-r 
+                            from-zinc-300 to-zinc-200
+                            dark:from-zinc-500 dark:to-zinc-300 
+                            rounded-full blur-2xl opacity-10" />
               <Image
                 src="/assets/images/remove-bg-profile.png"
                 width={256}
                 height={256}
                 alt="Geronimo Serial"
-                className="relative w-64 h-64 rounded-full object-cover border-2 border-zinc-700 hover:border-zinc-500 transition-all duration-300"
+                className="relative w-64 h-64 rounded-full object-cover 
+                         border-2 
+                         border-zinc-300 dark:border-zinc-700 
+                         hover:border-zinc-500 dark:hover:border-zinc-500 
+                         transition-all duration-300"
               />
             </div>
           </div>
 
           {/* Bio */}
           <div className="space-y-6">
-            <h3 className="text-3xl font-display text-zinc-50">
+            <h3 className="text-3xl font-display 
+                         text-zinc-950 dark:text-zinc-50 
+                         transition-colors">
               Geronimo Serial
             </h3>
-            <div className="flex items-center gap-2 text-zinc-400">
+            <div className="flex items-center gap-2 
+                          text-zinc-600 dark:text-zinc-400 
+                          transition-colors">
               <MapPin className="w-4 h-4" />
               <span>Corrientes, Argentina</span>
             </div>
 
-            <p className="text-zinc-300 leading-relaxed">
+            <p className="text-zinc-700 dark:text-zinc-300 
+                        leading-relaxed transition-colors">
               Systems analyst in training with experience in infrastructure
               management, the design of scalable and secure software
               architectures, and full-stack web development. Led province-wide,
@@ -55,7 +75,8 @@ export default function AboutExtendedStatic() {
               methodologies and sustainable solutions.
             </p>
 
-            <p className="text-zinc-300 leading-relaxed">
+            <p className="text-zinc-700 dark:text-zinc-300 
+                        leading-relaxed transition-colors">
               With a strong foundation in both backend and frontend technologies,
               I specialize in building robust, maintainable systems that solve
               real-world business problems. My approach combines technical
@@ -63,17 +84,29 @@ export default function AboutExtendedStatic() {
               only work but scale.
             </p>
 
-            <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <Briefcase className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
+            <div className="flex items-start gap-3 p-4 
+                          bg-black/5 dark:bg-white/5 
+                          border border-zinc-200 dark:border-zinc-800 
+                          rounded-lg transition-colors">
+              <Briefcase className="w-5 h-5 
+                                  text-zinc-600 dark:text-zinc-400 
+                                  mt-1 shrink-0 transition-colors" />
               <div>
-                <h4 className="text-zinc-200 font-medium mb-1">
+                <h4 className="text-zinc-900 dark:text-zinc-200 
+                             font-medium mb-1 transition-colors">
                   Institutional Technology Coordinator
                 </h4>
-                <p className="text-sm text-zinc-400 mb-1">
+                <p className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            mb-1 transition-colors">
                   Consejo General de Educación de Corrientes
                 </p>
-                <p className="text-sm text-zinc-400 mb-2">2022 - Present</p>
-                <p className="text-sm text-zinc-500 mt-2">
+                <p className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            mb-2 transition-colors">2022 - Present</p>
+                <p className="text-sm 
+                            text-zinc-500 dark:text-zinc-500 
+                            mt-2 transition-colors">
                   Leading the digital transformation of educational systems
                   across the province, implementing scalable web solutions and
                   infrastructure improvements to enhance pedagogical approach
@@ -82,16 +115,26 @@ export default function AboutExtendedStatic() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
+            <div className="flex items-start gap-3 p-4 
+                          bg-black/5 dark:bg-white/5 
+                          border border-zinc-200 dark:border-zinc-800 
+                          rounded-lg transition-colors">
+              <GraduationCap className="w-5 h-5 
+                                      text-zinc-600 dark:text-zinc-400 
+                                      mt-1 shrink-0 transition-colors" />
               <div>
-                <h4 className="text-zinc-200 font-medium mb-1">
+                <h4 className="text-zinc-900 dark:text-zinc-200 
+                             font-medium mb-1 transition-colors">
                   Bachelor's in Systems Analysis
                 </h4>
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            transition-colors">
                   Universidad Nacional del Nordeste (UNNE)
                 </p>
-                <p className="text-sm text-zinc-500 mt-2">
+                <p className="text-sm 
+                            text-zinc-500 dark:text-zinc-500 
+                            mt-2 transition-colors">
                   In Progress - Expected completion 2026
                 </p>
               </div>
@@ -104,12 +147,21 @@ export default function AboutExtendedStatic() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="p-6 bg-white/5 border border-zinc-800 rounded-lg text-center hover:border-zinc-700 transition-colors duration-300"
+              className="p-6 
+                       bg-black/5 dark:bg-white/5 
+                       border border-zinc-200 dark:border-zinc-800 
+                       rounded-lg text-center 
+                       hover:border-zinc-400 dark:hover:border-zinc-700 
+                       transition-colors duration-300"
             >
-              <div className="text-3xl md:text-4xl font-display text-zinc-50 mb-2">
+              <div className="text-3xl md:text-4xl font-display 
+                            text-zinc-950 dark:text-zinc-50 
+                            mb-2 transition-colors">
                 {stat.value}
               </div>
-              <div className="text-sm text-zinc-400">{stat.label}</div>
+              <div className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            transition-colors">{stat.label}</div>
             </div>
           ))}
         </div>

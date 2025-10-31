@@ -40,7 +40,9 @@ export default function ProjectsStatic() {
               ]}
             />
           </motion.div>
-          <p className="mt-4 text-center text-base text-neutral-600 dark:text-neutral-400">
+          <p className="mt-4 text-center text-base 
+                      text-zinc-600 dark:text-zinc-400 
+                      transition-colors">
             Experience the power of modern UI components that bring your ideas
             to life.
           </p>
@@ -50,22 +52,37 @@ export default function ProjectsStatic() {
           {projects.map((project) => (
             <article
               key={project.slug}
-              className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors"
+              className="group p-6 
+                       bg-black/5 dark:bg-white/5 
+                       border border-zinc-200 dark:border-zinc-800 
+                       rounded-lg 
+                       hover:border-zinc-400 dark:hover:border-zinc-700 
+                       transition-colors"
             >
               <div className="flex flex-col h-full">
-                <h3 className="text-xl text-zinc-50 mb-3">{project.title}</h3>
+                <h3 className="text-xl 
+                             text-zinc-950 dark:text-zinc-50 
+                             mb-3 transition-colors">
+                  {project.title}
+                </h3>
 
-                <p className="text-sm text-zinc-400 mb-4 grow line-clamp-3">
+                <p className="text-sm 
+                            text-zinc-600 dark:text-zinc-400 
+                            mb-4 grow line-clamp-3 transition-colors">
                   {project.description}
                 </p>
 
-                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-zinc-800">
+                <div className="flex items-center gap-3 mt-auto pt-4 
+                              border-t border-zinc-200 dark:border-zinc-800 
+                              transition-colors">
                   {project.url && (
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-400 hover:text-zinc-100 transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 
+                               hover:text-zinc-900 dark:hover:text-zinc-100 
+                               transition-colors"
                       title="View project"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -76,14 +93,18 @@ export default function ProjectsStatic() {
                       href={project.repository}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-400 hover:text-zinc-100 transition-colors"
+                      className="text-zinc-600 dark:text-zinc-400 
+                               hover:text-zinc-900 dark:hover:text-zinc-100 
+                               transition-colors"
                       title="View code"
                     >
                       <Github className="w-4 h-4" />
                     </a>
                   )}
                   {project.date && (
-                    <span className="ml-auto text-xs text-zinc-600">
+                    <span className="ml-auto text-xs 
+                                   text-zinc-400 dark:text-zinc-600 
+                                   transition-colors">
                       {new Date(project.date).getFullYear()}
                     </span>
                   )}
