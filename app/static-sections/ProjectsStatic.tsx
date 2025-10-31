@@ -1,49 +1,38 @@
-"use client";
+import { allProjects } from 'contentlayer/generated';
+import { ExternalLink, Github } from 'lucide-react';
 
-import { motion } from "motion/react";
-import { allProjects } from "contentlayer/generated";
-import { ExternalLink, Github } from "lucide-react";
-
-export default function ProjectsShowcase() {
+export default function ProjectsStatic() {
   const projects = allProjects
     .filter((project) => project.published)
-    .sort(
-      (a, b) =>
-        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
-    );
+    .sort((a, b) =>
+      new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+      new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+    )
+    .slice(0, 6);
 
   return (
-    <section id="projects" className="relative py-20 px-4">
+    <section id="projects" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        {/* Header */}
+        <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
-            Projects Portfolio
+            Featured Projects
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
-            Technical showcase of web applications, tools, and contributions
+            A selection of projects showcasing web applications and development tools
           </p>
-        </motion.div>
+        </div>
 
+        {/* Grid de proyectos */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.article
+          {projects.map((project) => (
+            <article
               key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              className="group relative p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all duration-300"
+              className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors"
             >
               <div className="flex flex-col h-full">
-                <h3 className="text-xl text-zinc-50 mb-3 group-hover:text-white transition-colors">
+                <h3 className="text-xl text-zinc-50 mb-3">
                   {project.title}
                 </h3>
 
@@ -81,7 +70,7 @@ export default function ProjectsShowcase() {
                   )}
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>

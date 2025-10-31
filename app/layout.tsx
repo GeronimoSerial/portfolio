@@ -2,7 +2,7 @@ import "../global.css";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
-import { ScrollProvider } from "@/context/ScrollContext";
+
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
 
@@ -98,7 +98,7 @@ export default function RootLayout({
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >
-        <ScrollProvider>{children}</ScrollProvider>
+        {children}
       </body>
     </html>
   );

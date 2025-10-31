@@ -1,32 +1,35 @@
-import React from "react";
-import BackToTop from "@/components/layout/BackToTop";
-import ParticlesOptimized from "@/components/shared/ParticlesOptimized";
-import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import Process from "@/components/sections/Process";
-import Projects from "@/components/sections/Projects";
-import Testimonials from "@/components/sections/Testimonials";
-import Contact from "@/components/sections/Contact";
-import StickyNav from "@/components/navigation/StickyNav";
+import NavStatic from "@/components/NavStatic";
+import BackgroundStatic from "@/components/BackgroundStatic";
+import HeroStatic from "./static-sections/HeroStatic";
+import ServicesStatic from "./static-sections/ServicesStatic";
+import ProcessStatic from "./static-sections/ProcessStatic";
+import ProjectsStatic from "./static-sections/ProjectsStatic";
+import TestimonialsStatic from "./static-sections/TestimonialsStatic";
+import ContactStatic from "./static-sections/ContactStatic";
 
 export default function Home() {
   return (
     <>
-      {/* Fixed Background Layer */}
-      <ParticlesOptimized
-        className="pointer-events-none fixed inset-0 -z-50"
-        quantity={150}
-      />
+      <BackgroundStatic />
+      <NavStatic />
 
-      <StickyNav />
-      <Hero />
-      <Services />
-      <Process />
-      <Projects />
-      <Testimonials />
-      <Contact />
+      <main>
+        <HeroStatic />
+        <ServicesStatic />
+        <ProcessStatic />
+        <ProjectsStatic />
+        <TestimonialsStatic />
+        <ContactStatic />
+      </main>
 
-      <BackToTop />
+      {/* Footer simple */}
+      <footer className="border-t border-zinc-800 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()} geroserial.com. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </>
   );
 }
