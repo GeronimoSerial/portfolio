@@ -1,4 +1,4 @@
-import { Search, Layers, Code, Rocket } from 'lucide-react';
+import { Search, Layers, Code, Rocket } from "lucide-react";
 
 export default function ProcessStatic() {
   const steps = [
@@ -49,18 +49,24 @@ export default function ProcessStatic() {
     <section id="process" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display 
+          <h2
+            className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors">
+                       mb-4 transition-colors"
+          >
             How I Work
           </h2>
-          <div className="w-20 h-1 
+          <div
+            className="w-20 h-1 
                         bg-linear-to-r from-transparent 
                         via-zinc-400 dark:via-zinc-300 
                         to-transparent 
-                        mx-auto mb-4" />
-          <p className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors">
+                        mx-auto mb-4"
+          />
+          <p
+            className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors"
+          >
             Proven methodology for predictable results
           </p>
         </div>
@@ -79,27 +85,35 @@ export default function ProcessStatic() {
                          transition-all duration-300"
               >
                 <div className="mb-4">
-                  <span className="text-5xl font-display 
+                  <span
+                    className="text-5xl font-display 
                                  text-zinc-200 dark:text-zinc-800 
-                                 transition-colors">
+                                 transition-colors"
+                  >
                     {step.number}
                   </span>
                 </div>
 
                 <div className="mb-4">
-                  <Icon className="w-8 h-8 
+                  <Icon
+                    className="w-8 h-8 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors" />
+                                 transition-colors"
+                  />
                 </div>
 
-                <h3 className="text-xl 
+                <h3
+                  className="text-xl 
                              text-zinc-950 dark:text-zinc-50 
-                             mb-2 transition-colors">
+                             mb-2 transition-colors"
+                >
                   {step.title}
                 </h3>
-                <p className="text-sm 
+                <p
+                  className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-4 transition-colors">
+                            mb-4 transition-colors"
+                >
                   {step.description}
                 </p>
 
@@ -111,7 +125,9 @@ export default function ProcessStatic() {
                                text-zinc-500 dark:text-zinc-500 
                                transition-colors"
                     >
-                      <span className="text-zinc-400 dark:text-zinc-700 mt-1">•</span>
+                      <span className="text-zinc-400 dark:text-zinc-700 mt-1">
+                        •
+                      </span>
                       <span>{item}</span>
                     </li>
                   ))}

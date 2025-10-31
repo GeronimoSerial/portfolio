@@ -14,17 +14,22 @@ export default function NavStatic() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 
                     bg-white/95 dark:bg-zinc-900/95 
                     backdrop-blur-lg 
                     border-b border-zinc-200 dark:border-zinc-800
-                    transition-colors duration-300">
+                    transition-colors duration-300"
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="/" className="text-xl font-display 
+          <a
+            href="/"
+            className="text-xl font-display 
                                text-zinc-950 dark:text-zinc-50
-                               transition-colors">
+                               transition-colors"
+          >
             geroserial
           </a>
 

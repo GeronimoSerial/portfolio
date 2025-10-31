@@ -24,11 +24,13 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div className="relative min-h-screen 
+    <div
+      className="relative min-h-screen 
                     bg-linear-to-b 
                     from-white via-zinc-50 to-white
                     dark:from-black dark:via-zinc-950 dark:to-black
-                    transition-colors">
+                    transition-colors"
+    >
       {/* Background Effects */}
       <Background />
 
@@ -48,9 +50,11 @@ export default function PortfolioPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t 
+      <footer
+        className="border-t 
                        border-zinc-200 dark:border-zinc-800 
-                       py-8 transition-colors">
+                       py-8 transition-colors"
+      >
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-zinc-500 dark:text-zinc-500 transition-colors">
             © {new Date().getFullYear()} Geronimo Serial. All rights reserved.

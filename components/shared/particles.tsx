@@ -133,13 +133,13 @@ export default function Particles({
       context.current.translate(translateX, translateY);
       context.current.beginPath();
       context.current.arc(x, y, size, 0, 2 * Math.PI);
-      
+
       // Color dinámico según tema
       const particleColor =
         theme === "dark"
           ? `rgba(255, 255, 255, ${alpha})`
           : `rgba(0, 0, 0, ${alpha})`;
-      
+
       context.current.fillStyle = particleColor;
       context.current.fill();
       context.current.setTransform(dpr, 0, 0, dpr, 0, 0);

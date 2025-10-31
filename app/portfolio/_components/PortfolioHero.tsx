@@ -1,4 +1,4 @@
-import { MapPin, Download, Linkedin, Github, Mail } from 'lucide-react';
+import { MapPin, Download, Linkedin, Github, Mail } from "lucide-react";
 
 export default function PortfolioHeroStatic() {
   return (
@@ -8,21 +8,27 @@ export default function PortfolioHeroStatic() {
     >
       <div className="container mx-auto max-w-4xl">
         <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-display 
+          <h1
+            className="text-5xl md:text-7xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors">
+                       mb-4 transition-colors"
+          >
             Geronimo Serial
           </h1>
 
-          <p className="text-xl md:text-2xl 
+          <p
+            className="text-xl md:text-2xl 
                       text-zinc-600 dark:text-zinc-400 
-                      mb-6 transition-colors">
+                      mb-6 transition-colors"
+          >
             Systems Analyst & Full Stack Developer
           </p>
 
-          <div className="flex items-center justify-center gap-2 
+          <div
+            className="flex items-center justify-center gap-2 
                         text-zinc-500 dark:text-zinc-500 
-                        mb-8 transition-colors">
+                        mb-8 transition-colors"
+          >
             <MapPin className="w-4 h-4" />
             <span className="text-sm">Corrientes, Argentina</span>
           </div>

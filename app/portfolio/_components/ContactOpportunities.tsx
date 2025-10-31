@@ -1,22 +1,28 @@
-import { Mail, MapPin, Github, Linkedin, Calendar } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Calendar } from "lucide-react";
 
 export default function ContactOpportunitiesStatic() {
   return (
     <section id="contact" className="relative py-20 px-4">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-display 
+          <h2
+            className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors">
+                       mb-4 transition-colors"
+          >
             Let's Connect
           </h2>
-          <div className="w-20 h-1 
+          <div
+            className="w-20 h-1 
                         bg-linear-to-r from-transparent 
                         via-zinc-400 dark:via-zinc-300 
                         to-transparent 
-                        mx-auto mb-4" />
-          <p className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors">
+                        mx-auto mb-4"
+          />
+          <p
+            className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors"
+          >
             Open to new opportunities and collaborations
           </p>
         </div>
@@ -34,45 +40,71 @@ export default function ContactOpportunitiesStatic() {
                      transition-all duration-300"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 
+              <div
+                className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors">
-                <Mail className="w-5 h-5 
+                            rounded-lg transition-colors"
+              >
+                <Mail
+                  className="w-5 h-5 
                                text-zinc-600 dark:text-zinc-400 
-                               transition-colors" />
+                               transition-colors"
+                />
               </div>
               <div>
-                <p className="text-xs 
+                <p
+                  className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors">Email</p>
-                <p className="text-sm 
+                            mb-1 transition-colors"
+                >
+                  Email
+                </p>
+                <p
+                  className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors">contacto@geroserial.com</p>
+                            transition-colors"
+                >
+                  contacto@geroserial.com
+                </p>
               </div>
             </div>
           </a>
 
-          <div className="p-6 
+          <div
+            className="p-6 
                         bg-black/5 dark:bg-white/5 
                         border border-zinc-200 dark:border-zinc-800 
-                        rounded-lg transition-colors">
+                        rounded-lg transition-colors"
+          >
             <div className="flex items-center gap-4">
-              <div className="p-3 
+              <div
+                className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors">
-                <MapPin className="w-5 h-5 
+                            rounded-lg transition-colors"
+              >
+                <MapPin
+                  className="w-5 h-5 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors" />
+                                 transition-colors"
+                />
               </div>
               <div>
-                <p className="text-xs 
+                <p
+                  className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors">Location</p>
-                <p className="text-sm 
+                            mb-1 transition-colors"
+                >
+                  Location
+                </p>
+                <p
+                  className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors">Corrientes, Argentina</p>
+                            transition-colors"
+                >
+                  Corrientes, Argentina
+                </p>
               </div>
             </div>
           </div>
@@ -90,21 +122,33 @@ export default function ContactOpportunitiesStatic() {
                      transition-all duration-300"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 
+              <div
+                className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors">
-                <Github className="w-5 h-5 
+                            rounded-lg transition-colors"
+              >
+                <Github
+                  className="w-5 h-5 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors" />
+                                 transition-colors"
+                />
               </div>
               <div>
-                <p className="text-xs 
+                <p
+                  className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors">GitHub</p>
-                <p className="text-sm 
+                            mb-1 transition-colors"
+                >
+                  GitHub
+                </p>
+                <p
+                  className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors">@geroserial</p>
+                            transition-colors"
+                >
+                  @geroserial
+                </p>
               </div>
             </div>
           </a>
@@ -122,48 +166,69 @@ export default function ContactOpportunitiesStatic() {
                      transition-all duration-300"
           >
             <div className="flex items-center gap-4">
-              <div className="p-3 
+              <div
+                className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors">
-                <Linkedin className="w-5 h-5 
+                            rounded-lg transition-colors"
+              >
+                <Linkedin
+                  className="w-5 h-5 
                                    text-zinc-600 dark:text-zinc-400 
-                                   transition-colors" />
+                                   transition-colors"
+                />
               </div>
               <div>
-                <p className="text-xs 
+                <p
+                  className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors">LinkedIn</p>
-                <p className="text-sm 
+                            mb-1 transition-colors"
+                >
+                  LinkedIn
+                </p>
+                <p
+                  className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors">Geronimo Serial</p>
+                            transition-colors"
+                >
+                  Geronimo Serial
+                </p>
               </div>
             </div>
           </a>
         </div>
 
         {/* Availability Card */}
-        <div className="p-8 
+        <div
+          className="p-8 
                       bg-linear-to-br 
                       from-black/10 to-black/5
                       dark:from-white/10 dark:to-white/5 
                       border 
                       border-zinc-300 dark:border-zinc-700 
-                      rounded-lg text-center transition-colors">
+                      rounded-lg text-center transition-colors"
+        >
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Calendar className="w-5 h-5 
+            <Calendar
+              className="w-5 h-5 
                                text-zinc-700 dark:text-zinc-300 
-                               transition-colors" />
-            <h3 className="text-xl 
+                               transition-colors"
+            />
+            <h3
+              className="text-xl 
                          text-zinc-950 dark:text-zinc-50 
-                         font-semibold transition-colors">
+                         font-semibold transition-colors"
+            >
               Currently Available
             </h3>
           </div>
-          <p className="text-zinc-700 dark:text-zinc-300 
-                      mb-6 max-w-xl mx-auto transition-colors">
-            I'm open to freelance projects, consulting opportunities, and full-time positions.
-            Let's discuss how I can help bring your ideas to life.
+          <p
+            className="text-zinc-700 dark:text-zinc-300 
+                      mb-6 max-w-xl mx-auto transition-colors"
+          >
+            I'm open to freelance projects, consulting opportunities, and
+            full-time positions. Let's discuss how I can help bring your ideas
+            to life.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
@@ -195,9 +260,11 @@ export default function ContactOpportunitiesStatic() {
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          <p className="text-sm 
+          <p
+            className="text-sm 
                       text-zinc-500 dark:text-zinc-500 
-                      transition-colors">
+                      transition-colors"
+          >
             Response time: Usually within 24-48 hours
           </p>
         </div>

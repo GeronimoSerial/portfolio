@@ -40,9 +40,11 @@ export default function ProjectsStatic() {
               ]}
             />
           </motion.div>
-          <p className="mt-4 text-center text-base 
+          <p
+            className="mt-4 text-center text-base 
                       text-zinc-600 dark:text-zinc-400 
-                      transition-colors">
+                      transition-colors"
+          >
             Experience the power of modern UI components that bring your ideas
             to life.
           </p>
@@ -60,21 +62,27 @@ export default function ProjectsStatic() {
                        transition-colors"
             >
               <div className="flex flex-col h-full">
-                <h3 className="text-xl 
+                <h3
+                  className="text-xl 
                              text-zinc-950 dark:text-zinc-50 
-                             mb-3 transition-colors">
+                             mb-3 transition-colors"
+                >
                   {project.title}
                 </h3>
 
-                <p className="text-sm 
+                <p
+                  className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-4 grow line-clamp-3 transition-colors">
+                            mb-4 grow line-clamp-3 transition-colors"
+                >
                   {project.description}
                 </p>
 
-                <div className="flex items-center gap-3 mt-auto pt-4 
+                <div
+                  className="flex items-center gap-3 mt-auto pt-4 
                               border-t border-zinc-200 dark:border-zinc-800 
-                              transition-colors">
+                              transition-colors"
+                >
                   {project.url && (
                     <a
                       href={project.url}
@@ -102,9 +110,11 @@ export default function ProjectsStatic() {
                     </a>
                   )}
                   {project.date && (
-                    <span className="ml-auto text-xs 
+                    <span
+                      className="ml-auto text-xs 
                                    text-zinc-400 dark:text-zinc-600 
-                                   transition-colors">
+                                   transition-colors"
+                    >
                       {new Date(project.date).getFullYear()}
                     </span>
                   )}

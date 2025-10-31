@@ -111,18 +111,24 @@ export default function SkillsComprehensiveStatic() {
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-semibold 
+          <h2
+            className="text-4xl md:text-5xl font-semibold 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 tracking-tight transition-colors">
+                       mb-4 tracking-tight transition-colors"
+          >
             Technical Skills
           </h2>
-          <div className="w-20 h-1 
+          <div
+            className="w-20 h-1 
                         bg-linear-to-r from-transparent 
                         via-zinc-400 dark:via-zinc-300 
                         to-transparent 
-                        mx-auto mb-4" />
-          <p className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors">
+                        mx-auto mb-4"
+          />
+          <p
+            className="text-zinc-600 dark:text-zinc-400 
+                      max-w-2xl mx-auto transition-colors"
+          >
             Comprehensive toolkit for modern development
           </p>
         </div>
@@ -131,18 +137,22 @@ export default function SkillsComprehensiveStatic() {
         <div className="space-y-12">
           {Object.entries(skillsData).map(([categoryName, categoryData]) => (
             <div key={categoryName}>
-              <h3 className="text-2xl font-display 
+              <h3
+                className="text-2xl font-display 
                            text-zinc-950 dark:text-zinc-50 
-                           mb-6 text-center transition-colors">
+                           mb-6 text-center transition-colors"
+              >
                 {categoryName}
               </h3>
 
               <div className="space-y-8">
                 {categoryData.subcategories.map((subcategory) => (
                   <div key={subcategory.name}>
-                    <h4 className="text-lg 
+                    <h4
+                      className="text-lg 
                                  text-zinc-700 dark:text-zinc-300 
-                                 mb-4 font-medium transition-colors">
+                                 mb-4 font-medium transition-colors"
+                    >
                       {subcategory.name}
                     </h4>
 
@@ -164,9 +174,11 @@ export default function SkillsComprehensiveStatic() {
                                 skill.className || ""
                               }`}
                             ></i>
-                            <span className="text-sm 
+                            <span
+                              className="text-sm 
                                            text-zinc-700 dark:text-zinc-300 
-                                           font-medium transition-colors">
+                                           font-medium transition-colors"
+                            >
                               {skill.name}
                             </span>
                           </div>
