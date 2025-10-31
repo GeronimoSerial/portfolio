@@ -1,28 +1,20 @@
-// "use client";
+export default function BackgroundStatic() {
+  return (
+    <div className="fixed inset-0 -z-50 bg-black">
+      {/* Grid pattern estático */}
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px'
+        }}
+      />
 
-// import React from "react";
-// import Particles from "@/components/shared/particles";
-
-// interface BackgroundProps {
-//   children: React.ReactNode;
-//   showParticles?: boolean;
-//   particleQuantity?: number;
-// }
-
-// export default function Background({
-//   children,
-//   showParticles = true,
-//   particleQuantity = 100,
-// }: BackgroundProps) {
-//   return (
-//     <div className="relative w-full bg-black">
-//       {showParticles && (
-//         <Particles
-//           className="fixed inset-0 -z-10"
-//           quantity={particleQuantity}
-//         />
-//       )}
-//       {children}
-//     </div>
-//   );
-// }
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
+    </div>
+  );
+}

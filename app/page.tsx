@@ -1,25 +1,25 @@
-import NavStatic from "@/components/NavStatic";
-import BackgroundStatic from "@/components/BackgroundStatic";
-import HeroStatic from "./static-sections/HeroStatic";
-import ServicesStatic from "./static-sections/ServicesStatic";
-import ProcessStatic from "./static-sections/ProcessStatic";
-import ProjectsStatic from "./static-sections/ProjectsStatic";
-import TestimonialsStatic from "./static-sections/TestimonialsStatic";
-import ContactStatic from "./static-sections/ContactStatic";
+import Nav from "@/components/layout/Nav";
+import Background from "@/components/layout/Background";
+import Hero from "./_components/Hero";
+import Services from "./_components/Services";
+import Process from "./_components/Process";
+import Projects from "./_components/Projects";
+import Testimonials from "./_components/Testimonials";
+import Contact from "./_components/Contact";
 
 export default function Home() {
   return (
     <>
-      <BackgroundStatic />
-      <NavStatic />
+      <Background />
+      <Nav />
 
       <main>
-        <HeroStatic />
-        <ServicesStatic />
-        <ProcessStatic />
-        <ProjectsStatic />
-        <TestimonialsStatic />
-        <ContactStatic />
+        <Hero />
+        <Services />
+        <Process />
+        <Projects />
+        <Testimonials />
+        <Contact />
       </main>
 
       {/* Footer simple */}

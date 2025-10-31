@@ -1,14 +1,14 @@
 import { Metadata } from "next";
-import BackgroundStatic from "@/components/BackgroundStatic";
-import NavStatic from "@/components/NavStatic";
-import PortfolioHeroStatic from "./static-sections/PortfolioHeroStatic";
-import AboutExtendedStatic from "./static-sections/AboutExtendedStatic";
-import SkillsComprehensiveStatic from "./static-sections/SkillsComprehensiveStatic";
-import ExperienceTimelineStatic from "./static-sections/ExperienceTimelineStatic";
-import EducationSectionStatic from "./static-sections/EducationSectionStatic";
-import ProjectsStatic from "../static-sections/ProjectsStatic";
-import ResumeDownloadStatic from "./static-sections/ResumeDownloadStatic";
-import ContactOpportunitiesStatic from "./static-sections/ContactOpportunitiesStatic";
+import Background from "@/components/layout/Background";
+import Nav from "@/components/layout/Nav";
+import PortfolioHero from "./_components/PortfolioHero";
+import AboutExtended from "./_components/AboutExtended";
+import SkillsComprehensive from "./_components/SkillsComprehensive";
+import ExperienceTimeline from "./_components/ExperienceTimeline";
+import EducationSection from "./_components/EducationSection";
+import Projects from "../_components/Projects";
+import ResumeDownload from "./_components/ResumeDownload";
+import ContactOpportunities from "./_components/ContactOpportunities";
 
 export const metadata: Metadata = {
   title: "Portfolio | Geronimo Serial",
@@ -26,21 +26,21 @@ export default function PortfolioPage() {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black">
       {/* Background Effects */}
-      <BackgroundStatic />
+      <Background />
 
       {/* Navigation */}
-      <NavStatic />
+      <Nav />
 
       {/* Page Content */}
       <main className="relative">
-        <PortfolioHeroStatic />
-        <AboutExtendedStatic />
-        <SkillsComprehensiveStatic />
-        <ExperienceTimelineStatic />
-        <EducationSectionStatic />
-        <ProjectsStatic />
-        <ResumeDownloadStatic />
-        <ContactOpportunitiesStatic />
+        <PortfolioHero />
+        <AboutExtended />
+        <SkillsComprehensive />
+        <ExperienceTimeline />
+        <EducationSection />
+        <Projects />
+        <ResumeDownload />
+        <ContactOpportunities />
       </main>
 
       {/* Footer */}
