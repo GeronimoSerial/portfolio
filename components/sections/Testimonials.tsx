@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useSectionInView } from "@/hooks/useSectionInView";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Star } from "lucide-react";
 import { useState } from "react";
 
 export default function Testimonials() {
-  const { ref, inView } = useSectionInView();
+  const { ref: headerRef, style: headerStyle } = useScrollReveal();
+  const { ref: cardRef, style: cardStyle } = useScrollReveal({ delay: 0.2 });
   const [activeIndex, setActiveIndex] = useState(0);
 
   const testimonials = [
@@ -45,23 +45,14 @@ export default function Testimonials() {
 
   const prevTestimonial = () => {
     setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
   return (
-    <section
-      id="testimonials"
-      ref={ref}
-      className="relative min-h-screen py-20 px-4"
-    >
+    <section id="testimonials" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+        <div ref={headerRef} style={headerStyle} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Testimonials
           </h2>
@@ -69,14 +60,9 @@ export default function Testimonials() {
           <p className="text-zinc-400 max-w-2xl mx-auto">
             What clients say about working with me
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative"
-        >
+        <div ref={cardRef} style={cardStyle} className="relative">
           {/* Testimonial Card */}
           <div className="bg-white/5 border border-zinc-800 rounded-lg p-8 md:p-12">
             <div className="flex flex-col items-center text-center">
@@ -95,7 +81,7 @@ export default function Testimonials() {
                       key={i}
                       className="w-5 h-5 fill-zinc-300 text-zinc-300"
                     />
-                  )
+                  ),
                 )}
               </div>
 
@@ -171,7 +157,7 @@ export default function Testimonials() {
               </svg>
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

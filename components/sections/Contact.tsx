@@ -1,12 +1,13 @@
 "use client";
 
-import { motion } from "motion/react";
-import { useSectionInView } from "@/hooks/useSectionInView";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { useState } from "react";
 
 export default function Contact() {
-  const { ref, inView } = useSectionInView();
+  const { ref: headerRef, style: headerStyle } = useScrollReveal();
+  const { ref: formRef, style: formStyle } = useScrollReveal({ delay: 0.2 });
+  const { ref: infoRef, style: infoStyle } = useScrollReveal({ delay: 0.3 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,14 +42,12 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      ref={ref}
       className="relative min-h-screen py-20 px-4"
     >
       <div className="container mx-auto max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+        <div
+          ref={headerRef}
+          style={headerStyle}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
@@ -58,15 +57,11 @@ export default function Contact() {
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Have a project in mind? Let's discuss how I can help you.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Form */}
+          <div ref={formRef} style={formStyle}>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -161,15 +156,10 @@ export default function Contact() {
                 )}
               </button>
             </form>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-8"
-          >
+          <div ref={infoRef} style={infoStyle} className="space-y-6">
             <div>
               <h3 className="text-2xl text-zinc-50 mb-6">
                 Contact Information
