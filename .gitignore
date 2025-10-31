@@ -34,7 +34,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.contentlayer
 project-bolt-sb1-2zdvq2/project/.gitignore
 project-bolt-sb1-2zdvq2/project/eslint.config.js
 project-bolt-sb1-2zdvq2/project/index.html

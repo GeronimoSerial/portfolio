@@ -1,15 +1,26 @@
 "use client";
-import { allProjects } from "contentlayer/generated";
+import projectsData from "@/data/projects.json";
 import { ExternalLink, Github } from "lucide-react";
 import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { motion } from "motion/react";
+
+type Project = {
+  title: string;
+  description: string;
+  date?: string;
+  url?: string;
+  repository?: string;
+  published: boolean;
+  slug: string;
+};
+
 export default function ProjectsStatic() {
-  const projects = allProjects
+  const projects = (projectsData as Project[])
     .filter((project) => project.published)
     .sort(
       (a, b) =>
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
     )
     .slice(0, 6);
 
