@@ -1,0 +1,118 @@
+import { GraduationCap, Award, BookOpen } from 'lucide-react';
+
+export default function EducationSectionStatic() {
+  const education = [
+    {
+      degree: "Bachelor's in Systems Analysis",
+      institution: "Universidad Nacional del Nordeste (UNNE)",
+      location: "Corrientes, Argentina",
+      period: "2020 - 2026 (Expected)",
+      description:
+        "Comprehensive program covering software engineering, system design, database management, and project management.",
+      icon: GraduationCap,
+    },
+    {
+      degree: "Talentos Digitales - Full Stack Development",
+      institution: "Ministerio de Educación de Corrientes",
+      location: "Corrientes, Argentina",
+      period: "2022",
+      description:
+        "Intensive training in modern web development, agile methodologies, and collaborative projects.",
+      icon: Award,
+    },
+  ];
+
+  const certifications = [
+    "Agile Project Management",
+    "Cloud Infrastructure (AWS/Azure basics)",
+    "Database Administration",
+    "Software Architecture Design",
+  ];
+
+  return (
+    <section id="education" className="relative py-20 px-4">
+      <div className="container mx-auto max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+            Education & Certifications
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            Academic background and professional training
+          </p>
+        </div>
+
+        {/* Education */}
+        <div className="space-y-8 mb-12">
+          {education.map((edu, index) => {
+            const Icon = edu.icon;
+            return (
+              <div
+                key={index}
+                className="p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 hover:bg-white/10 transition-all duration-300"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                    <Icon className="w-6 h-6 text-zinc-400" />
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="text-xl text-zinc-50 font-semibold mb-1">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-sm text-zinc-400 mb-1">
+                      {edu.institution}
+                    </p>
+                    <p className="text-sm text-zinc-500 mb-3">
+                      {edu.location} • {edu.period}
+                    </p>
+                    <p className="text-zinc-300 leading-relaxed">
+                      {edu.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Certifications */}
+        <div className="p-6 bg-white/5 border border-zinc-800 rounded-lg">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+              <BookOpen className="w-6 h-6 text-zinc-400" />
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-xl text-zinc-50 font-semibold mb-4">
+                Relevant Certifications & Training
+              </h3>
+
+              <ul className="grid md:grid-cols-2 gap-3">
+                {certifications.map((cert) => (
+                  <li
+                    key={cert}
+                    className="flex items-center gap-2 text-sm text-zinc-300"
+                  >
+                    <svg
+                      className="w-4 h-4 text-zinc-500 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    {cert}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
