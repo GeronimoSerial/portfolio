@@ -1,14 +1,12 @@
-# Plan de Conversión a Sitio Estático Vanilla
+# Plan de Conversión a Mockup Estático Puro
 
 ## Objetivo
 
-Convertir el sitio actual de Next.js con React hooks y animaciones complejas a una versión **100% estática** que mantenga la misma estética visual pero utilizando únicamente:
-- HTML/CSS (Tailwind)
-- JavaScript vanilla mínimo e indispensable
-- Sin hooks de React
-- Sin librerías de animación pesadas
+Convertir el sitio actual a una versión **100% estática sin interactividad** que sirva como mockup visual. Solo HTML+CSS (Tailwind) manteniendo la estética grayscale idéntica.
 
-Esta versión servirá como base sólida y optimizada para luego añadir mejoras progresivas de manera controlada.
+**Sin JavaScript. Sin animaciones. Sin smooth scroll. Sin formularios. Sin carruseles.**
+
+Versión de exhibición visual lista para luego añadir funcionalidades de manera optimizada.
 
 ---
 
@@ -16,856 +14,816 @@ Esta versión servirá como base sólida y optimizada para luego añadir mejoras
 
 ### 1.1 Dependencias a Eliminar
 
-**Librerías de Animación:**
-- ❌ `motion` (framer-motion) - Usado en 20+ componentes
-- ❌ `@tsparticles/react` - Canvas particles con hooks
-- ❌ `@tsparticles/engine` & `@tsparticles/slim`
-
-**Hooks y Context:**
-- ❌ `react-intersection-observer` - Detección de scroll
-- ❌ `react-scroll` - Smooth scrolling
-- ❌ `ScrollContext` - Context personalizado para estado de scroll
-- ❌ Custom hooks: `useScrollSpy`, `useScrollTo`, `useSectionInView`, `useScrollReveal`, `useDraggable`
-
-**UI Complejas:**
-- ❌ `@radix-ui/react-dialog` - Modales
-- ❌ `embla-carousel-*` - Carruseles
-- ❌ Componentes UI con motion: `moving-border.tsx`, `card.tsx`, `SocialCard.tsx`
+**TODO:**
+- ❌ `motion` (framer-motion) - Remover completamente
+- ❌ `@tsparticles/*` - Canvas particles
+- ❌ `react-intersection-observer`
+- ❌ `react-scroll`
+- ❌ `ScrollContext` y todos los custom hooks
+- ❌ `@radix-ui/react-dialog`
+- ❌ `embla-carousel-*`
+- ❌ Componentes UI animados (`moving-border.tsx`, etc.)
 
 **Mantener:**
-- ✅ Next.js (para SSG - Static Site Generation)
+- ✅ Next.js (solo para SSG - Static Site Generation)
 - ✅ Tailwind CSS
 - ✅ Contentlayer (para proyectos MDX)
-- ✅ Lucide React (íconos - puede ser reemplazado por SVG estáticos)
-- ✅ TypeScript (opcional, pero recomendado)
+- ✅ Lucide React (íconos - o reemplazar por SVG)
+- ✅ TypeScript
 
-### 1.2 Funcionalidades Actuales con Hooks
+### 1.2 Simplificaciones
 
-| Componente | Hooks Usados | Funcionalidad |
-|------------|-------------|---------------|
-| `StickyNav` | `useScroll`, `useState` | Cambio de estilo al scroll, menú móvil |
-| `BackToTop` | `useScroll` | Botón que aparece al scrollear |
-| `Hero` | `motion` hooks | Animaciones de entrada/fade-in |
-| `Services` | `useSectionInView`, `motion` | Detección de vista + animaciones |
-| `Projects` | `useSectionInView`, `motion` | Detección de vista + animaciones |
-| `Contact` | `useSectionInView`, `useState`, `motion` | Formulario + animaciones |
-| `Testimonials` | `useSectionInView`, `useState`, `motion` | Carrusel manual + animaciones |
-| `ParticlesOptimized` | `useEffect`, `useState` | Canvas animado con interactividad mouse |
-| `ScrollContext` | `useEffect`, `useState`, `useCallback` | Estado global de scroll |
-
----
-
-## 2. Estrategia de Conversión
-
-### 2.1 Principios Fundamentales
-
-1. **Mobile-First Estático:** Todo el HTML se renderiza en build time
-2. **CSS-First Animations:** Usar solo `@keyframes` de Tailwind y CSS transitions
-3. **Progressive Enhancement:** JavaScript solo para interacciones esenciales
-4. **No Runtime Dependencies:** Cero librerías en el bundle del cliente (excepto necesarias)
-
-### 2.2 Mapeo de Reemplazos
-
-#### A. Animaciones `motion` → CSS Animations
-
-**Fade-in con delay:**
-```tsx
-// ANTES (motion)
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.2 }}
->
-
-// DESPUÉS (CSS + Tailwind)
-<div className="animate-fade-in opacity-0 [animation-delay:200ms]">
-```
-
-**Configuración en `tailwind.config.js`:**
-```js
-keyframes: {
-  'fade-in': {
-    '0%': { opacity: '0', transform: 'translateY(20px)' },
-    '100%': { opacity: '1', transform: 'translateY(0)' }
-  }
-}
-animation: {
-  'fade-in': 'fade-in 0.6s ease-out forwards'
-}
-```
-
-**Delays escalonados:**
-```html
-<!-- Usar classes utilitarias para delays -->
-<div class="[animation-delay:100ms]"></div>
-<div class="[animation-delay:200ms]"></div>
-<div class="[animation-delay:300ms]"></div>
-```
-
-#### B. Intersection Observer → CSS `animation-timeline`
-
-**OPCIÓN 1: Animaciones automáticas (sin JS)**
-```css
-/* Animaciones que inician automáticamente al cargar */
-.section {
-  animation: fade-in 0.8s ease-out forwards;
-}
-```
-
-**OPCIÓN 2: JavaScript vanilla mínimo**
-```js
-// Solo para animaciones que DEBEN iniciar al entrar en viewport
-document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    observer.observe(el);
-  });
-});
-```
-
-```css
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-```
-
-**RECOMENDACIÓN:** Usar OPCIÓN 1 para primera versión estática. Añadir OPCIÓN 2 solo si es crítico para UX.
-
-#### C. Particles Canvas → CSS Gradient Animado
-
-**Reemplazo 1: Gradiente animado simple**
-```html
-<div class="fixed inset-0 -z-50 bg-black">
-  <div class="absolute inset-0 bg-gradient-radial from-zinc-800/20 via-transparent to-transparent animate-pulse-slow"></div>
-</div>
-```
-
-**Reemplazo 2: Grid pattern estático**
-```css
-.bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-```
-
-**Reemplazo 3: Canvas estático (sin interactividad)**
-```html
-<!-- Imagen pre-renderizada de particles -->
-<div class="fixed inset-0 -z-50 opacity-20" 
-     style="background-image: url('/particles-static.png')"></div>
-```
-
-**RECOMENDACIÓN:** Usar Reemplazo 2 (Grid pattern) por mejor performance y estética limpia.
-
-#### D. Smooth Scroll → CSS `scroll-behavior`
-
-```css
-/* En global.css */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* Altura del nav */
-}
-```
-
-```html
-<!-- Links normales -->
-<a href="#services">Services</a>
-<a href="#contact">Contact</a>
-
-<!-- Secciones con IDs -->
-<section id="services">...</section>
-<section id="contact">...</section>
-```
-
-**Sin JavaScript necesario.**
-
-#### E. Sticky Nav con Blur → CSS puro
-
-```html
-<nav class="fixed top-0 w-full z-50 transition-colors duration-300
-            [&:has(~main:not(:first-child))]:bg-zinc-900/95
-            [&:has(~main:not(:first-child))]:backdrop-blur-lg
-            [&:has(~main:not(:first-child))]:border-b
-            [&:has(~main:not(:first-child))]:border-zinc-800">
-```
-
-**ALTERNATIVA con JavaScript mínimo:**
-```js
-// scroll-nav.js (< 10 líneas)
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  const scrolled = window.scrollY > 50;
-  nav.classList.toggle('scrolled', scrolled);
-}, { passive: true });
-```
-
-```css
-nav {
-  @apply fixed top-0 w-full z-50 transition-all duration-300;
-}
-nav.scrolled {
-  @apply bg-zinc-900/95 backdrop-blur-lg border-b border-zinc-800;
-}
-```
-
-#### F. Menú Móvil → Checkbox Hack (sin JS)
-
-```html
-<input type="checkbox" id="mobile-menu" class="peer hidden">
-
-<label for="mobile-menu" class="md:hidden cursor-pointer">
-  <svg><!-- hamburger icon --></svg>
-</label>
-
-<div class="hidden peer-checked:block fixed inset-0 bg-black/80">
-  <nav><!-- menu items --></nav>
-</div>
-```
-
-**CSS:**
-```css
-/* El menú se muestra cuando el checkbox está checked */
-.peer:checked ~ .mobile-menu {
-  display: block;
-}
-```
-
-#### G. BackToTop Button → CSS + Anchor
-
-```html
-<!-- Botón siempre presente, pero hidden -->
-<a href="#hero" 
-   class="fixed bottom-8 right-8 z-40 p-3 rounded-full
-          bg-white text-black opacity-0 pointer-events-none
-          [body:has(main:not(:first-child))]:opacity-100
-          [body:has(main:not(:first-child))]:pointer-events-auto
-          transition-opacity duration-300">
-  <svg><!-- arrow up --></svg>
-</a>
-```
-
-**ALTERNATIVA con JavaScript:**
-```js
-window.addEventListener('scroll', () => {
-  const btn = document.getElementById('back-to-top');
-  btn.classList.toggle('show', window.scrollY > 300);
-}, { passive: true });
-```
-
-#### H. Formulario de Contacto → Form Nativo
-
-```html
-<form action="/api/contact" method="POST" class="space-y-4">
-  <input type="text" name="name" required 
-         class="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg
-                focus:border-white focus:outline-none transition-colors">
-  
-  <textarea name="message" required rows="5"></textarea>
-  
-  <button type="submit" 
-          class="px-6 py-3 bg-white text-black rounded-lg
-                 hover:bg-zinc-100 transition-colors">
-    Send Message
-  </button>
-</form>
-```
-
-**Sin validación JS en primera versión.** HTML5 validation es suficiente.
-
-#### I. Testimonials Carousel → CSS Scroll Snap
-
-```html
-<div class="overflow-x-auto snap-x snap-mandatory flex gap-6 pb-4">
-  <article class="snap-center shrink-0 w-full md:w-1/2 lg:w-1/3">
-    <!-- testimonial card -->
-  </article>
-  <!-- más testimonials -->
-</div>
-```
-
-```css
-.testimonials-container {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.2) transparent;
-}
-```
-
-**Sin botones prev/next en versión estática.** Usuario hace scroll horizontal.
+| Componente | Estado Actual | Versión Estática |
+|------------|---------------|------------------|
+| `StickyNav` | Hooks, blur al scroll, menu móvil | Nav simple fijo sin interacciones |
+| `BackToTop` | Aparece con scroll | **Eliminar completamente** |
+| `Hero` | Animaciones motion fade-in | Contenido estático sin animaciones |
+| `Services` | Animaciones al scroll | Grid estático |
+| `Projects` | Animaciones + links dinámicos | Grid estático con datos de Contentlayer |
+| `Contact` | Formulario con estado | Solo info de contacto (email, links) |
+| `Testimonials` | Carrusel con botones | Grid estático de 3 columnas |
+| `ParticlesOptimized` | Canvas animado | Grid pattern CSS estático |
+| `Moving Border Button` | Animación SVG compleja | Botón simple con border estático |
 
 ---
 
-## 3. Estructura de Archivos Estáticos
+## 2. Estructura Simplificada
 
 ```
 portfolio/
 ├── app/
-│   ├── page.tsx                 # SPA principal (Server Component)
-│   ├── layout.tsx               # Root layout
-│   └── sections/                # Componentes de sección (Server Components)
+│   ├── page.tsx                 # SPA con todas las secciones
+│   ├── layout.tsx               # Layout básico
+│   └── static-sections/         # Secciones sin lógica
 │       ├── HeroStatic.tsx
 │       ├── ServicesStatic.tsx
 │       ├── ProjectsStatic.tsx
 │       ├── TestimonialsStatic.tsx
 │       └── ContactStatic.tsx
 ├── components/
-│   ├── navigation/
-│   │   └── NavStatic.tsx        # Nav sin hooks
-│   └── ui/
-│       └── ButtonStatic.tsx     # Botón sin motion
+│   └── NavStatic.tsx            # Nav sin menú móvil
 ├── styles/
-│   ├── animations.css           # Keyframes personalizados
-│   └── global.css
-├── public/
-│   ├── particles-bg.svg         # Background estático (opcional)
-│   └── grid-pattern.svg
-└── lib/
-    └── scroll.js                # JavaScript mínimo (< 50 líneas total)
+│   └── global.css               # Solo estilos base
+└── public/
+    └── (assets estáticos)
 ```
 
 ---
 
-## 4. Plan de Implementación por Fases
+## 3. Implementación por Componente
 
-### FASE 1: Preparación (1-2 horas)
+### 3.1 Layout Base
 
-**Crear rama y estructura:**
-```bash
-git checkout -b static-vanilla
-mkdir -p app/sections-static
-mkdir -p components/static
-mkdir -p styles/animations
-```
-
-**Configurar Tailwind con animaciones custom:**
-```js
-// tailwind.config.js - Extender con más keyframes
-module.exports = {
-  theme: {
-    extend: {
-      keyframes: {
-        'fade-in': { /* ... */ },
-        'fade-up': { /* ... */ },
-        'slide-in-left': { /* ... */ },
-        'slide-in-right': { /* ... */ },
-        'scale-in': { /* ... */ },
-        'pulse-slow': {
-          '0%, 100%': { opacity: '0.6' },
-          '50%': { opacity: '0.3' }
-        }
-      },
-      animation: {
-        'fade-in': 'fade-in 0.6s ease-out forwards',
-        'fade-up': 'fade-up 0.8s ease-out forwards',
-        'slide-in-left': 'slide-in-left 0.6s ease-out forwards',
-        'slide-in-right': 'slide-in-right 0.6s ease-out forwards',
-        'scale-in': 'scale-in 0.5s ease-out forwards',
-        'pulse-slow': 'pulse-slow 4s ease-in-out infinite'
-      }
-    }
-  }
-}
-```
-
-### FASE 2: Componentes Base (2-3 horas)
-
-#### 2.1 Layout y Navigation
-- [ ] Convertir `app/layout.tsx` a Server Component puro
-- [ ] Crear `NavStatic.tsx` sin hooks
-- [ ] Implementar menú móvil con checkbox hack
-- [ ] Añadir BackToTop con CSS puro
-
-#### 2.2 Background
-- [ ] Crear grid pattern CSS como reemplazo de particles
-- [ ] O crear SVG estático de particles
-- [ ] Configurar gradientes animados de fondo
-
-### FASE 3: Secciones Principales (3-4 horas)
-
-#### 3.1 Hero Section
-```tsx
-// app/sections-static/HeroStatic.tsx
-export default function HeroStatic() {
-  return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center">
-      <div className="animate-fade-in [animation-delay:200ms]">
-        <h1 className="animate-title">geroserial.com</h1>
-      </div>
-      
-      {/* Líneas decorativas con animación CSS */}
-      <div className="absolute top-0 w-full h-px animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <div className="absolute bottom-0 w-full h-px animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      
-      {/* Flecha con animación CSS pura */}
-      <a href="#services" className="absolute bottom-10 animate-bounce-slow">
-        <svg><!-- arrow down --></svg>
-      </a>
-    </section>
-  );
-}
-```
-
-#### 3.2 Services Section
-```tsx
-export default function ServicesStatic() {
-  const services = [/* data */];
-  
-  return (
-    <section id="services" className="py-20">
-      <div className="container">
-        <h2 className="animate-fade-up">Services</h2>
-        
-        <div className="grid md:grid-cols-2 gap-6">
-          {services.map((service, i) => (
-            <article 
-              key={service.title}
-              className="opacity-0 animate-fade-up"
-              style={{ animationDelay: `${i * 100}ms` }}
-            >
-              {/* Service card */}
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-```
-
-#### 3.3 Projects Section
-```tsx
-// Server Component con datos de Contentlayer
-import { allProjects } from "contentlayer/generated";
-
-export default function ProjectsStatic() {
-  const projects = allProjects
-    .filter(p => p.published)
-    .slice(0, 6);
-  
-  return (
-    <section id="projects" className="py-20">
-      <div className="grid md:grid-cols-3 gap-6">
-        {projects.map((project, i) => (
-          <article 
-            key={project.slug}
-            className="opacity-0 animate-fade-in"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="flex gap-3">
-              {project.url && <a href={project.url}>View</a>}
-              {project.repository && <a href={project.repository}>Code</a>}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-```
-
-#### 3.4 Testimonials (Scroll Horizontal)
-```tsx
-export default function TestimonialsStatic() {
-  const testimonials = [/* data */];
-  
-  return (
-    <section id="testimonials" className="py-20">
-      <div className="overflow-x-auto snap-x snap-mandatory">
-        <div className="flex gap-6 pb-4">
-          {testimonials.map(t => (
-            <article 
-              key={t.name}
-              className="snap-center shrink-0 w-full md:w-1/2 lg:w-1/3
-                         p-6 bg-white/5 border border-zinc-800 rounded-lg"
-            >
-              {/* Testimonial content */}
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-```
-
-#### 3.5 Contact Form
-```tsx
-export default function ContactStatic() {
-  return (
-    <section id="contact" className="py-20">
-      <form 
-        action="/api/contact" 
-        method="POST"
-        className="max-w-2xl mx-auto space-y-4"
-      >
-        <input 
-          type="text" 
-          name="name" 
-          required
-          placeholder="Your name"
-          className="w-full px-4 py-3 bg-white/5 border border-zinc-800 rounded-lg
-                     focus:border-white transition-colors"
-        />
-        
-        <input 
-          type="email" 
-          name="email" 
-          required
-          placeholder="your@email.com"
-        />
-        
-        <textarea 
-          name="message" 
-          required 
-          rows={5}
-          placeholder="Your message"
-        />
-        
-        <button 
-          type="submit"
-          className="w-full px-6 py-3 bg-white text-black rounded-lg
-                     hover:bg-zinc-100 transition-colors"
-        >
-          Send Message
-        </button>
-      </form>
-    </section>
-  );
-}
-```
-
-### FASE 4: JavaScript Mínimo (30 min - 1 hora)
-
-**Crear archivo único de JS vanilla:**
-```js
-// public/scripts/site.js (< 50 líneas)
-
-// 1. Sticky nav con blur
-const nav = document.querySelector('nav');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY > 50;
-  nav.classList.toggle('scrolled', scrolled);
-}, { passive: true });
-
-// 2. Back to top button
-const backBtn = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => {
-  backBtn.classList.toggle('show', window.scrollY > 300);
-}, { passive: true });
-
-// 3. (OPCIONAL) Animaciones al scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.animate-on-scroll').forEach(el => {
-  observer.observe(el);
-});
-```
-
-**Cargar en layout:**
 ```tsx
 // app/layout.tsx
-export default function RootLayout({ children }) {
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import './globals.css';
+
+export const metadata = {
+  title: 'geroserial.com',
+  description: 'IT Specialist · Infrastructure, Automation & Web Systems Management',
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
-      <body>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="bg-black text-zinc-50 antialiased">
         {children}
-        <script src="/scripts/site.js" defer />
       </body>
     </html>
   );
 }
 ```
 
-### FASE 5: Optimizaciones CSS (1 hora)
+### 3.2 Navigation (Sin Menú Móvil)
 
-**Crear archivo de animaciones:**
+```tsx
+// components/NavStatic.tsx
+import Link from 'next/link';
+import { Github } from 'lucide-react';
+
+export default function NavStatic() {
+  const navItems = [
+    { id: 'hero', label: 'Home' },
+    { id: 'services', label: 'Services' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'contact', label: 'Contact' },
+  ];
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-900/95 backdrop-blur-lg border-b border-zinc-800">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <span className="text-xl font-display text-zinc-50">
+            geroserial
+          </span>
+
+          {/* Desktop Navigation - Sin responsive, siempre visible */}
+          <div className="flex items-center gap-1">
+            {navItems.slice(1).map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="px-4 py-2 text-sm font-medium text-zinc-400 hover:text-zinc-100 hover:bg-white/5 rounded-lg transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right Side */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/GeronimoSerial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-400 hover:text-zinc-100 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
+```
+
+### 3.3 Background Estático
+
+```tsx
+// components/BackgroundStatic.tsx
+export default function BackgroundStatic() {
+  return (
+    <div className="fixed inset-0 -z-50 bg-black">
+      {/* Grid pattern estático */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: '80px 80px'
+        }}
+      />
+      
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
+    </div>
+  );
+}
+```
+
+### 3.4 Hero Section (Sin Animaciones)
+
+```tsx
+// app/static-sections/HeroStatic.tsx
+import { MapPin } from 'lucide-react';
+
+export default function HeroStatic() {
+  return (
+    <section id="hero" className="relative flex flex-col items-center justify-center w-full min-h-screen px-4">
+      <div className="z-10 flex flex-col items-center text-center">
+        {/* Título principal */}
+        <div className="mb-6">
+          <h1 className="text-6xl md:text-9xl font-display text-white">
+            geroserial.com
+          </h1>
+        </div>
+
+        {/* Subtítulo */}
+        <h2 className="text-sm md:text-lg text-zinc-300 max-w-3xl">
+          IT Specialist · Infrastructure, Automation & Web Systems Management
+        </h2>
+
+        <p className="mt-4 text-sm md:text-base text-zinc-500 max-w-xl leading-relaxed">
+          Methodical Approach. Real-World Solutions.
+        </p>
+
+        {/* Trust Indicators */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-6 text-xs md:text-sm text-zinc-600">
+          <span>+15 Projects Delivered</span>
+          <span className="text-zinc-800">•</span>
+          <span>+5 Satisfied Clients</span>
+          <span className="text-zinc-800">•</span>
+          <span>2+ Years Experience</span>
+        </div>
+
+        {/* Location */}
+        <div className="flex items-center gap-2 mt-3 text-xs md:text-sm text-zinc-600">
+          <MapPin className="w-3 h-3 md:w-4 md:h-4" />
+          <span>Corrientes, Argentina</span>
+          <span className="text-zinc-800">|</span>
+          <span>Remote Services Available</span>
+        </div>
+
+        {/* Botones simples */}
+        <div className="flex gap-4 mt-10">
+          <a 
+            href="#services"
+            className="px-6 py-3 text-sm font-medium text-zinc-300 bg-white/10 border border-zinc-700 rounded-lg hover:bg-white/20 hover:border-zinc-500 transition-colors"
+          >
+            View Services
+          </a>
+          <a 
+            href="#contact"
+            className="px-6 py-3 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors"
+          >
+            Get in Touch
+          </a>
+        </div>
+      </div>
+
+      {/* Líneas decorativas estáticas */}
+      <div className="absolute top-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute bottom-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+    </section>
+  );
+}
+```
+
+### 3.5 Services Section (Grid Estático)
+
+```tsx
+// app/static-sections/ServicesStatic.tsx
+import { Code, Lightbulb, Wrench, TrendingUp } from 'lucide-react';
+
+export default function ServicesStatic() {
+  const services = [
+    {
+      icon: Code,
+      title: 'Full Stack Web Development',
+      description: 'Scalable web applications built with modern technologies',
+      features: [
+        'Responsive web applications',
+        'Robust RESTful APIs',
+        'Third-party integrations',
+        'Performance optimization',
+      ],
+      price: 'From $800 USD',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Technology Consulting',
+      description: 'Expert technical guidance for complex challenges',
+      features: [
+        'Code audits & reviews',
+        'Software architecture design',
+        'System optimization',
+        'Best practices implementation',
+      ],
+      price: 'From $500 USD',
+    },
+    {
+      icon: Wrench,
+      title: 'IT Technical Support',
+      description: 'Ongoing maintenance and incident resolution',
+      features: [
+        'Preventive maintenance',
+        'Incident resolution',
+        'System monitoring',
+        'Technical training',
+      ],
+      price: 'From $400 USD/month',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Digital Transformation',
+      description: 'Modernize business processes and infrastructure',
+      features: [
+        'Digital strategy planning',
+        'Cloud migration',
+        'Process automation',
+        'Data analytics implementation',
+      ],
+      price: 'Custom Quote',
+    },
+  ];
+
+  return (
+    <section id="services" className="relative min-h-screen py-20 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+            Services
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            Scalable IT solutions designed to grow with your business
+          </p>
+        </div>
+
+        {/* Grid de servicios */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {services.map((service) => {
+            const Icon = service.icon;
+            return (
+              <article
+                key={service.title}
+                className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-white transition-colors"
+              >
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                    <Icon className="w-6 h-6 text-zinc-400" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl text-zinc-50 mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-zinc-400 mb-4">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+
+                <ul className="space-y-2 mb-6">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-2 text-sm text-zinc-300"
+                    >
+                      <svg className="w-4 h-4 text-zinc-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex items-center justify-between pt-4 border-t border-zinc-800">
+                  <span className="text-lg font-display text-zinc-100">
+                    {service.price}
+                  </span>
+                  <span className="px-4 py-2 text-sm font-medium text-black bg-white rounded-lg">
+                    Request Quote
+                  </span>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### 3.6 Projects Section (Contentlayer Estático)
+
+```tsx
+// app/static-sections/ProjectsStatic.tsx
+import { allProjects } from 'contentlayer/generated';
+import { ExternalLink, Github } from 'lucide-react';
+
+export default function ProjectsStatic() {
+  const projects = allProjects
+    .filter((project) => project.published)
+    .sort((a, b) => 
+      new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+      new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+    )
+    .slice(0, 6);
+
+  return (
+    <section id="projects" className="relative min-h-screen py-20 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+            Featured Projects
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            A selection of projects showcasing web applications and development tools
+          </p>
+        </div>
+
+        {/* Grid de proyectos */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <article
+              key={project.slug}
+              className="group p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors"
+            >
+              <div className="flex flex-col h-full">
+                <h3 className="text-xl text-zinc-50 mb-3">
+                  {project.title}
+                </h3>
+
+                <p className="text-sm text-zinc-400 mb-4 flex-grow line-clamp-3">
+                  {project.description}
+                </p>
+
+                <div className="flex items-center gap-3 mt-auto pt-4 border-t border-zinc-800">
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-400 hover:text-zinc-100 transition-colors"
+                      title="View project"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  )}
+                  {project.repository && (
+                    <a
+                      href={project.repository}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-zinc-400 hover:text-zinc-100 transition-colors"
+                      title="View code"
+                    >
+                      <Github className="w-4 h-4" />
+                    </a>
+                  )}
+                  {project.date && (
+                    <span className="ml-auto text-xs text-zinc-600">
+                      {new Date(project.date).getFullYear()}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### 3.7 Testimonials (Grid Estático, Sin Carrusel)
+
+```tsx
+// app/static-sections/TestimonialsStatic.tsx
+import { Star } from 'lucide-react';
+
+export default function TestimonialsStatic() {
+  const testimonials = [
+    {
+      name: 'Juan Pérez',
+      role: 'CEO, Tech Solutions',
+      content: 'Excellent work on our company website. Professional, timely, and exceeded expectations.',
+      rating: 5,
+      image: null,
+    },
+    {
+      name: 'María González',
+      role: 'Product Manager, StartupXYZ',
+      content: 'The automation tools developed have saved us countless hours. Highly recommended.',
+      rating: 5,
+      image: null,
+    },
+    {
+      name: 'Carlos Rodríguez',
+      role: 'CTO, Innovation Labs',
+      content: 'Outstanding technical expertise and problem-solving skills. A pleasure to work with.',
+      rating: 5,
+      image: null,
+    },
+  ];
+
+  return (
+    <section id="testimonials" className="relative min-h-screen py-20 px-4">
+      <div className="container mx-auto max-w-6xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+            What Clients Say
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            Testimonials from satisfied clients
+          </p>
+        </div>
+
+        {/* Grid de testimonials */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
+            <article
+              key={testimonial.name}
+              className="p-6 bg-white/5 border border-zinc-800 rounded-lg"
+            >
+              {/* Estrellas */}
+              <div className="flex gap-1 mb-4">
+                {Array.from({ length: testimonial.rating }).map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-zinc-400 text-zinc-400" />
+                ))}
+              </div>
+
+              {/* Content */}
+              <p className="text-zinc-300 mb-6 leading-relaxed">
+                "{testimonial.content}"
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center gap-3 pt-4 border-t border-zinc-800">
+                <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center">
+                  <span className="text-sm font-medium text-zinc-400">
+                    {testimonial.name.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-zinc-100">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-xs text-zinc-500">
+                    {testimonial.role}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### 3.8 Contact (Solo Info, Sin Formulario)
+
+```tsx
+// app/static-sections/ContactStatic.tsx
+import { Mail, MapPin, Github, Linkedin } from 'lucide-react';
+
+export default function ContactStatic() {
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'contact@geroserial.com',
+      href: 'mailto:contact@geroserial.com',
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: 'Corrientes, Argentina',
+      href: null,
+    },
+    {
+      icon: Github,
+      label: 'GitHub',
+      value: '@GeronimoSerial',
+      href: 'https://github.com/GeronimoSerial',
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      value: 'Geronimo Serial',
+      href: 'https://linkedin.com/in/geronimoserial',
+    },
+  ];
+
+  return (
+    <section id="contact" className="relative min-h-screen py-20 px-4">
+      <div className="container mx-auto max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
+            Get in Touch
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            Let's discuss your next project
+          </p>
+        </div>
+
+        {/* Contact Info Grid */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          {contactInfo.map((info) => {
+            const Icon = info.icon;
+            const content = (
+              <div className="p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg">
+                    <Icon className="w-5 h-5 text-zinc-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-zinc-500 mb-1">{info.label}</p>
+                    <p className="text-sm text-zinc-100">{info.value}</p>
+                  </div>
+                </div>
+              </div>
+            );
+
+            return info.href ? (
+              <a key={info.label} href={info.href} target="_blank" rel="noopener noreferrer">
+                {content}
+              </a>
+            ) : (
+              <div key={info.label}>{content}</div>
+            );
+          })}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <p className="text-zinc-500 mb-4">
+            Available for freelance projects and consulting opportunities
+          </p>
+          <a
+            href="mailto:contact@geroserial.com"
+            className="inline-block px-6 py-3 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors"
+          >
+            Send Email
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+### 3.9 Page Principal
+
+```tsx
+// app/page.tsx
+import NavStatic from '@/components/NavStatic';
+import BackgroundStatic from '@/components/BackgroundStatic';
+import HeroStatic from './static-sections/HeroStatic';
+import ServicesStatic from './static-sections/ServicesStatic';
+import ProjectsStatic from './static-sections/ProjectsStatic';
+import TestimonialsStatic from './static-sections/TestimonialsStatic';
+import ContactStatic from './static-sections/ContactStatic';
+
+export default function Home() {
+  return (
+    <>
+      <BackgroundStatic />
+      <NavStatic />
+      
+      <main>
+        <HeroStatic />
+        <ServicesStatic />
+        <ProjectsStatic />
+        <TestimonialsStatic />
+        <ContactStatic />
+      </main>
+
+      {/* Footer simple */}
+      <footer className="border-t border-zinc-800 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()} geroserial.com. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    </>
+  );
+}
+```
+
+---
+
+## 4. Estilos Globales
+
 ```css
-/* styles/animations.css */
+/* styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Delays utilitarios */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
-
-/* Bounce suave para flecha */
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 1.5s ease-in-out infinite;
-}
-
-/* Grid pattern background */
-.bg-grid {
-  background-image: 
-    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
-/* Gradient glow effect */
-.glow-hover {
-  position: relative;
-}
-
-.glow-hover::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-.glow-hover:hover::after {
-  opacity: 1;
-}
-```
-
-### FASE 6: Testing y Refinamiento (1-2 horas)
-
-**Checklist de testing:**
-- [ ] Todas las secciones visibles y con espaciado correcto
-- [ ] Navegación funciona con smooth scroll
-- [ ] Menú móvil abre/cierra correctamente
-- [ ] Formulario envía datos
-- [ ] Animaciones se ejecutan en orden
-- [ ] No hay flashes de contenido sin estilo (FOUC)
-- [ ] Colores grayscale consistentes
-- [ ] Links funcionan correctamente
-- [ ] Responsive en mobile/tablet/desktop
-- [ ] Performance: Lighthouse > 95
-
----
-
-## 5. Comparativa: Antes vs Después
-
-### Métricas Esperadas
-
-| Métrica | Antes (con hooks) | Después (estático) | Mejora |
-|---------|-------------------|-------------------|--------|
-| **Bundle JS** | ~250 KB | ~5 KB | -98% |
-| **Tiempo de Carga** | ~2.5s | ~0.8s | -68% |
-| **TTI** | ~3.2s | ~1.0s | -69% |
-| **Hydration** | ~800ms | 0ms | -100% |
-| **Dependencias** | 15+ | 2-3 | -80% |
-| **Líneas de JS** | ~2000+ | ~50 | -97% |
-| **Lighthouse** | 85-90 | 95-100 | +10% |
-
-### Funcionalidades Mantenidas
-
-✅ **Estética idéntica** - Mismo diseño visual grayscale  
-✅ **Smooth scroll** - Nativo con CSS  
-✅ **Animaciones** - CSS keyframes en lugar de motion  
-✅ **Sticky nav** - CSS + JS mínimo  
-✅ **Mobile menu** - Checkbox hack  
-✅ **Responsive** - Tailwind breakpoints  
-✅ **Formulario** - HTML5 form nativo  
-✅ **Projects** - Server-rendered desde Contentlayer  
-
-### Funcionalidades Simplificadas
-
-⚠️ **Particles** → Grid pattern estático (más limpio, menos distracción)  
-⚠️ **Carrusel testimonials** → Scroll horizontal nativo  
-⚠️ **Animaciones al scroll** → Automáticas al cargar (o con 10 líneas de JS)  
-⚠️ **Moving border button** → Border estático con hover glow  
-
----
-
-## 6. Rollback y Compatibilidad
-
-### Mantener Rama Original
-```bash
-# Rama actual (con hooks)
-git checkout rebrand
-
-# Nueva rama estática
-git checkout static-vanilla
-```
-
-### Comparar Performance
-```bash
-# Build estático
-pnpm build
-npx lighthouse http://localhost:3000 --view
-
-# Build con hooks (en rama rebrand)
-git checkout rebrand
-pnpm build
-npx lighthouse http://localhost:3000 --view
-```
-
-### Estrategia de Deploy
-
-**Opción A: A/B Testing**
-- Deploy estático en subdomain: `static.geroserial.com`
-- Medir métricas durante 1 semana
-- Decidir cuál mantener
-
-**Opción B: Progresivo**
-- Empezar con versión estática
-- Añadir features interactivas solo cuando sean necesarias
-- Mantener bundle pequeño
-
----
-
-## 7. Próximos Pasos (Post-Estático)
-
-Una vez validada la versión estática, **añadir mejoras progresivas:**
-
-1. **View Transitions API** (navegación suave entre secciones)
-2. **Lazy-load images** con `loading="lazy"` nativo
-3. **Prefetch links** con `<link rel="prefetch">`
-4. **Service Worker** para offline support
-5. **Web Vitals tracking** con analytics mínimo
-6. **Dark/Light mode toggle** (opcional, actualmente solo dark)
-
----
-
-## 8. Decisiones de Diseño
-
-### Mantener Estética Grayscale
-
-**Colores base:**
-```css
+/* Variables de color */
 :root {
   --bg-primary: #000000;
-  --bg-secondary: #09090b; /* zinc-950 */
-  --text-primary: #fafafa; /* zinc-50 */
-  --text-secondary: #d4d4d8; /* zinc-300 */
-  --text-muted: #71717a; /* zinc-500 */
-  --border: #27272a; /* zinc-800 */
-  --border-light: #3f3f46; /* zinc-700 */
-  --white: #ffffff;
+  --bg-secondary: #09090b;
+  --text-primary: #fafafa;
+  --text-secondary: #d4d4d8;
+  --text-muted: #71717a;
+  --border: #27272a;
+  --border-light: #3f3f46;
 }
-```
 
-### Transiciones Estándar
-```css
-/* Aplicar en todos los elementos interactivos */
-.transition-default {
-  transition-property: color, background-color, border-color, opacity, transform;
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @apply bg-black text-zinc-50 antialiased;
+  font-family: var(--font-sans);
+}
+
+/* Line clamp utility */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Transiciones estándar */
+a, button {
+  @apply transition-colors duration-200;
 }
 ```
 
 ---
 
-## 9. Scripts de Utilidad
+## 5. Checklist de Implementación
 
-### Script de Conversión Automatizada (Opcional)
+### Fase 1: Limpieza (30 min)
+- [ ] Eliminar `context/ScrollContext.tsx`
+- [ ] Eliminar carpeta `hooks/`
+- [ ] Eliminar `components/shared/ParticlesOptimized.tsx`
+- [ ] Eliminar `components/layout/BackToTop.tsx`
+- [ ] Eliminar `components/ui/moving-border.tsx`
+- [ ] Desinstalar dependencias: `pnpm remove motion @tsparticles/react @tsparticles/engine @tsparticles/slim react-intersection-observer react-scroll`
 
-```js
-// scripts/convert-to-static.js
-// Script para remover imports de motion automáticamente
+### Fase 2: Crear Componentes Estáticos (2-3 horas)
+- [ ] Crear `components/NavStatic.tsx`
+- [ ] Crear `components/BackgroundStatic.tsx`
+- [ ] Crear `app/static-sections/HeroStatic.tsx`
+- [ ] Crear `app/static-sections/ServicesStatic.tsx`
+- [ ] Crear `app/static-sections/ProjectsStatic.tsx`
+- [ ] Crear `app/static-sections/TestimonialsStatic.tsx`
+- [ ] Crear `app/static-sections/ContactStatic.tsx`
 
-const fs = require('fs');
-const path = require('path');
+### Fase 3: Integración (30 min)
+- [ ] Actualizar `app/page.tsx`
+- [ ] Actualizar `app/layout.tsx`
+- [ ] Verificar `styles/global.css`
 
-function removeMotionImports(filePath) {
-  let content = fs.readFileSync(filePath, 'utf8');
-  
-  // Remover imports de motion
-  content = content.replace(/import.*from ["']motion.*["'];?\n/g, '');
-  
-  // Remover "use client" directives
-  content = content.replace(/["']use client["'];?\n/g, '');
-  
-  // Remover motion. tags
-  content = content.replace(/<motion\./g, '<div ');
-  content = content.replace(/<\/motion\./g, '</div>');
-  
-  // Remover props de motion
-  content = content.replace(/\s*(initial|animate|transition|whileHover)=\{[^}]+\}/g, '');
-  
-  fs.writeFileSync(filePath, content);
-  console.log(`✅ Converted: ${filePath}`);
-}
-
-// Procesar todos los archivos tsx en app/sections
-const sectionsDir = path.join(__dirname, '../app/sections');
-fs.readdirSync(sectionsDir).forEach(file => {
-  if (file.endsWith('.tsx')) {
-    removeMotionImports(path.join(sectionsDir, file));
-  }
-});
-```
-
----
-
-## 10. Checklist Final
-
-### Pre-Deploy
-- [ ] Todas las animaciones CSS funcionan correctamente
+### Fase 4: Testing (30 min)
+- [ ] Build exitoso: `pnpm build`
+- [ ] Todas las secciones visibles
+- [ ] Links externos funcionan
+- [ ] Responsive en mobile/desktop
+- [ ] Contentlayer carga proyectos correctamente
 - [ ] No hay errores en consola
-- [ ] No hay warnings de hydration
-- [ ] Todas las secciones tienen IDs correctos
-- [ ] Links internos funcionan (#services, #contact, etc.)
-- [ ] Formulario de contacto funciona
-- [ ] Responsive en todos los breakpoints
-- [ ] Fuentes cargan correctamente (Inter, Cal Sans)
-- [ ] Favicon y meta tags configurados
 
-### Performance
-- [ ] Lighthouse Performance > 95
-- [ ] Lighthouse Accessibility > 90
-- [ ] Lighthouse Best Practices > 95
-- [ ] Lighthouse SEO > 95
-- [ ] Bundle JS < 10 KB
-- [ ] First Contentful Paint < 1s
-- [ ] Time to Interactive < 1.5s
+---
 
-### SEO
-- [ ] Meta tags presentes
-- [ ] OpenGraph configurado
-- [ ] Sitemap generado
-- [ ] robots.txt configurado
-- [ ] Structured data para proyectos
+## 6. Resultado Esperado
+
+### Lo Que Tendrás
+
+✅ **Mockup estático funcional** - HTML+CSS puro con Tailwind  
+✅ **Estética idéntica** - Mismo diseño grayscale  
+✅ **Sin JavaScript** - Cero interactividad  
+✅ **Sin animaciones** - Todo estático  
+✅ **Performance máximo** - Carga instantánea  
+✅ **Base limpia** - Lista para añadir features progresivamente  
+
+### Métricas
+
+- **Bundle JS:** ~0 KB (solo Next.js runtime mínimo)
+- **HTML puro:** Todo renderizado en build time
+- **Lighthouse:** 100/100/100/100
+- **Tiempo de carga:** < 0.5s
+
+### No Incluido (Añadir después si es necesario)
+
+❌ Smooth scroll  
+❌ Animaciones  
+❌ Menú móvil interactivo  
+❌ Formulario de contacto  
+❌ Carrusel de testimonials  
+❌ Botón back to top  
+❌ Particles animados  
+❌ Moving borders  
+
+---
+
+## 7. Comandos para Ejecutar
+
+```bash
+# Limpiar dependencias
+pnpm remove motion @tsparticles/react @tsparticles/engine @tsparticles/slim react-intersection-observer react-scroll embla-carousel-react embla-carousel-autoplay embla-carousel-wheel-gestures @radix-ui/react-dialog
+
+# Limpiar archivos
+rm -rf hooks/
+rm -rf context/
+rm components/shared/ParticlesOptimized.tsx
+rm components/layout/BackToTop.tsx
+rm components/ui/moving-border.tsx
+
+# Build
+pnpm build
+
+# Preview
+pnpm start
+```
 
 ---
 
 ## Conclusión
 
-Esta conversión a estático permitirá:
+Este plan crea un **mockup visual estático** del sitio que:
 
-1. **Base sólida:** Fundamento sin dependencias pesadas
-2. **Performance óptimo:** Carga ultrarrápida y TTI mínimo
-3. **Mantenibilidad:** Código simple y predecible
-4. **Escalabilidad:** Añadir features de manera controlada
+1. Mantiene la estética 100%
+2. Elimina TODA la interactividad
+3. No usa JavaScript del lado del cliente
+4. Sirve como base sólida para luego añadir features necesarias
 
-**La estética visual se mantiene 100% idéntica**, solo cambia la implementación técnica de animaciones y state management. El resultado es un sitio más rápido, ligero y fácil de mantener.
-
-**Tiempo estimado total: 8-12 horas de desarrollo.**
+**Tiempo de implementación: 3-4 horas**
