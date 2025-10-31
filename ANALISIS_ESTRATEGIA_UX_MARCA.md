@@ -1,4 +1,5 @@
 # UX Strategy Analysis: Brand → Person Positioning
+
 ### geroserial.com Portfolio
 
 **Analysis Date:** October 31, 2025  
@@ -69,6 +70,7 @@ The site is currently configured as a **Single Page Application (SPA)** in trans
 ### 1.2 Navegación y Flujo de Usuario
 
 **Sistema de Navegación:**
+
 - **Sticky Navigation Bar** con 8 items:
   - Hero → Sobre Mí → Habilidades → Experiencia → Proyectos → Testimonios → Servicios → Contacto
 - **Scroll suave** entre secciones con detección automática de sección activa
@@ -76,6 +78,7 @@ The site is currently configured as a **Single Page Application (SPA)** in trans
 - **Indicadores visuales** de progreso de scroll
 
 **Flujo actual del usuario:**
+
 1. Aterriza en Hero → Ve nombre personal
 2. Scroll natural → Conoce a la persona primero
 3. Habilidades → Experiencia → Proyectos (enfoque curricular)
@@ -84,14 +87,14 @@ The site is currently configured as a **Single Page Application (SPA)** in trans
 
 ### 1.3 Enfoque de Contenido
 
-| Aspecto | Análisis |
-|---------|----------|
-| **Primera impresión** | Portafolio personal / Currículum digital |
-| **Mensaje dominante** | "Soy Geronimo Serial, un desarrollador" |
-| **Propuesta de valor** | Aparece tarde (sección 7 de 8) |
-| **Diferenciación** | Poco clara en las primeras secciones |
-| **Narrativa** | Yo → Mi experiencia → Qué hago |
-| **Objetivo aparente** | Mostrar credenciales personales |
+| Aspecto                | Análisis                                 |
+| ---------------------- | ---------------------------------------- |
+| **Primera impresión**  | Portafolio personal / Currículum digital |
+| **Mensaje dominante**  | "Soy Geronimo Serial, un desarrollador"  |
+| **Propuesta de valor** | Aparece tarde (sección 7 de 8)           |
+| **Diferenciación**     | Poco clara en las primeras secciones     |
+| **Narrativa**          | Yo → Mi experiencia → Qué hago           |
+| **Objetivo aparente**  | Mostrar credenciales personales          |
 
 ---
 
@@ -122,22 +125,26 @@ antes de entender qué servicios puede contratar.
 #### ❌ **Debilidades de la Estructura Actual**
 
 1. **Falta de Claridad de Propuesta de Valor Inmediata**
+
    - Hero presenta solo título técnico genérico
    - No comunica diferenciación ni especialización
    - Mensaje: "IT Specialist · Infrastructure, Automation & Web Systems Management"
    - ⚠️ Problema: Muy técnico, poco orientado a beneficios del cliente
 
 2. **Jerarquía Invertida de Información Comercial**
+
    - Servicios en posición 7 de 8 (87.5% de scroll)
    - Usuario casual se va antes de ver la oferta comercial
    - Tasa de rebote potencialmente alta
 
 3. **Narrativa Orientada al Proveedor (no al Cliente)**
+
    - Contenido centrado en "yo soy", "yo sé", "yo hice"
    - Falta énfasis en "qué problemas resuelvo para TI"
    - Ausencia de pain points del cliente
 
 4. **Dilución del Mensaje de Marca**
+
    - "geroserial.com" es nombre de dominio, no propuesta de marca
    - No hay tagline memorable
    - Brand identity poco diferenciada del mercado
@@ -169,19 +176,20 @@ Analizando el contenido de Servicios (actualmente oculto hasta el final):
 
 #### 💡 **Elementos Valiosos Mal Posicionados**
 
-| Elemento | Ubicación Actual | Potencial sin Explotar |
-|----------|------------------|------------------------|
-| **Pricing transparency** | Servicios (final) | Diferenciador competitivo si está arriba |
-| **4 servicios diferenciados** | Sección 7/8 | Posicionamiento de especialista |
-| **Estadísticas (+15 proyectos, +5 clientes)** | About (sección 2) | Validación social temprana |
-| **Testimonios 5 estrellas** | Sección 6 | Proof social antes de pitch |
-| **"Methodical Approach. Real-World Solutions."** | Hero | Tagline enterrada, debería ser headline |
+| Elemento                                         | Ubicación Actual  | Potencial sin Explotar                   |
+| ------------------------------------------------ | ----------------- | ---------------------------------------- |
+| **Pricing transparency**                         | Servicios (final) | Diferenciador competitivo si está arriba |
+| **4 servicios diferenciados**                    | Sección 7/8       | Posicionamiento de especialista          |
+| **Estadísticas (+15 proyectos, +5 clientes)**    | About (sección 2) | Validación social temprana               |
+| **Testimonios 5 estrellas**                      | Sección 6         | Proof social antes de pitch              |
+| **"Methodical Approach. Real-World Solutions."** | Hero              | Tagline enterrada, debería ser headline  |
 
 ### 2.3 Comparación con Patrones de la Industria
 
 #### 🏆 **Estructura de Sitios de Servicios Exitosos**
 
 **Ejemplo: Agencia de desarrollo típica**
+
 ```
 1. Hero → Problema que resuelves + CTA
 2. Servicios → Qué ofreces (3-4 opciones claras)
@@ -193,6 +201,7 @@ Analizando el contenido de Servicios (actualmente oculto hasta el final):
 ```
 
 **Tu estructura actual:**
+
 ```
 1. Hero → Nombre personal
 2. About → Biografía extensa
@@ -210,16 +219,19 @@ Analizando el contenido de Servicios (actualmente oculto hasta el final):
 #### 📉 **Efectos Negativos Estimados**
 
 1. **Tasa de Rebote:**
+
    - Usuario busca "desarrollo web Corrientes" → Aterriza
    - Ve biografía personal → No encuentra oferta clara
    - ⚠️ Abandono antes de llegar a Servicios
 
 2. **Tiempo para Value Proposition:**
+
    - Actual: ~40 segundos de scroll hasta ver servicios
    - Competencia: 3-5 segundos (hero + servicios arriba)
    - ❌ Desventaja competitiva significativa
 
 3. **Percepción de Marca:**
+
    - Mensaje actual: "Soy un profesional buscando trabajo"
    - Mensaje deseado: "Soy una marca que soluciona tus problemas IT"
 
@@ -394,16 +406,19 @@ PIRÁMIDE DE VALOR (Marca → Persona):
 #### 🧭 **Nueva Estructura de Menú**
 
 **Antes:**
+
 ```
 Hero | Sobre Mí | Habilidades | Experiencia | Proyectos | Testimonios | Servicios | Contacto
 ```
 
 **Después:**
+
 ```
 Servicios | Proceso | Proyectos | Testimonios | Stack | Sobre Mí | Contacto
 ```
 
 **Justificación:**
+
 - Eliminar "Hero" del menú (obvio, es donde están)
 - **"Servicios" primero** en navegación (jerarquía visual)
 - "Sobre Mí" al final (trust builder, no introducción)
@@ -417,12 +432,14 @@ Servicios | Proceso | Proyectos | Testimonios | Stack | Sobre Mí | Contacto
 **Client Decision:** The current Hero effectively establishes personal brand identity as the foundation of the business. The name "geroserial.com" IS the brand.
 
 **Rationale:**
+
 - Personal brand authority is the primary differentiator
 - Name recognition builds trust in freelance/consulting context
 - "IT Specialist · Infrastructure, Automation & Web Systems Management" clearly states expertise
 - Tagline "Methodical Approach. Real-World Solutions." positions methodology
 
 **Current Hero - APPROVED:**
+
 ```tsx
 geroserial.com
 IT Specialist · Infrastructure, Automation & Web Systems Management
@@ -431,6 +448,7 @@ Methodical Approach. Real-World Solutions.
 ```
 
 **Recommended Minor Enhancement (Optional):**
+
 - Add trust indicators below tagline: "+15 Projects | +5 Clients | Corrientes, Argentina"
 - Enhance CTA: "Contact" → "View Services" or "Get in Touch"
 
@@ -465,6 +483,7 @@ geroserial.com/portfolio     Portfolio route (Recruitment/CV-focused)
 #### Implementation Architecture
 
 **Main Site Structure (/):**
+
 ```
 1. Hero (Brand Identity - geroserial.com)
 2. Services (Commercial Offer)
@@ -475,6 +494,7 @@ geroserial.com/portfolio     Portfolio route (Recruitment/CV-focused)
 ```
 
 **Portfolio Route (/portfolio):**
+
 ```
 1. Hero Mini (Name + Title)
 2. About Me (Extended Bio + Photo)
@@ -489,6 +509,7 @@ geroserial.com/portfolio     Portfolio route (Recruitment/CV-focused)
 #### Navigation Strategy
 
 **Main Site Nav:**
+
 ```
 [Logo] Services | Process | Projects | Testimonials | Contact | [Portfolio]
                                                                     ^
@@ -496,30 +517,33 @@ geroserial.com/portfolio     Portfolio route (Recruitment/CV-focused)
 ```
 
 **Portfolio Page Nav:**
+
 ```
 [Logo] About | Skills | Experience | Projects | [Download Resume] | [← Back to Main Site]
 ```
 
 #### Content Differentiation
 
-| Section | Main Site (/) | Portfolio (/portfolio) |
-|---------|---------------|------------------------|
-| **Hero** | Brand name + value proposition | Name + professional title |
-| **About** | Brief (trust builder) | Extended (career narrative) |
-| **Projects** | Business outcomes focus | Technical implementation focus |
-| **Skills** | Not present or minimal | Comprehensive with proficiency levels |
-| **Experience** | Not present | Full timeline with responsibilities |
-| **Services** | Primary focus with pricing | Not present |
-| **CTAs** | "Request Quote", "Contact" | "Download Resume", "Schedule Interview" |
+| Section        | Main Site (/)                  | Portfolio (/portfolio)                  |
+| -------------- | ------------------------------ | --------------------------------------- |
+| **Hero**       | Brand name + value proposition | Name + professional title               |
+| **About**      | Brief (trust builder)          | Extended (career narrative)             |
+| **Projects**   | Business outcomes focus        | Technical implementation focus          |
+| **Skills**     | Not present or minimal         | Comprehensive with proficiency levels   |
+| **Experience** | Not present                    | Full timeline with responsibilities     |
+| **Services**   | Primary focus with pricing     | Not present                             |
+| **CTAs**       | "Request Quote", "Contact"     | "Download Resume", "Schedule Interview" |
 
 #### SEO & Analytics Benefits
 
 **Main Site (/):**
+
 - Target keywords: "IT consulting Corrientes", "web development services", "infrastructure consulting"
 - Goal: Lead generation, service inquiries
 - Audience: Business owners, CTOs, project managers
 
 **Portfolio (/portfolio):**
+
 - Target keywords: "Geronimo Serial developer", "systems analyst Argentina", "full stack developer"
 - Goal: Employment opportunities, networking
 - Audience: Recruiters, HR managers, potential employers
@@ -531,7 +555,7 @@ geroserial.com/portfolio     Portfolio route (Recruitment/CV-focused)
 export const metadata = {
   title: "Portfolio | Geronimo Serial - Systems Analyst & Full Stack Developer",
   description: "Comprehensive portfolio and CV of Geronimo Serial...",
-  robots: "index, follow" // Allow indexing for recruitment
+  robots: "index, follow", // Allow indexing for recruitment
 };
 
 export default function PortfolioPage() {
@@ -554,23 +578,27 @@ export default function PortfolioPage() {
 **Advantage:** Clear separation allows targeting two distinct audiences without message confusion.
 
 #### 🎯 **Objetivo**
+
 Posicionar la oferta comercial inmediatamente después del hero para reducir tiempo hasta value proposition.
 
 #### 📊 **Justificación Estratégica**
 
 **Problema identificado:**
+
 - 87.5% de scroll requerido para ver servicios
 - Usuarios de búsqueda orgánica buscan "desarrollo web", "soporte IT", etc.
 - Expectativa: Ver oferta en primeros 3 segundos
 - Realidad actual: 40+ segundos hasta servicios
 
 **Beneficios del cambio:**
+
 1. **Reducción de bounce rate:** Usuario ve propuesta inmediatamente
 2. **Claridad de posicionamiento:** "Soy proveedor de servicios, no empleado"
 3. **Alignment con intent:** Usuario busca contratar, sitio muestra qué puede contratar
 4. **Ventaja competitiva:** Transparencia de precios temprana genera confianza
 
 **Impacto esperado:**
+
 - ⬆️ +40% tiempo en página (usuarios interesados se quedan)
 - ⬇️ -25% bounce rate (reducir rebote de visitantes de búsqueda)
 - ⬆️ +60% clicks en CTA "Solicitar Cotización" (más visible)
@@ -578,12 +606,14 @@ Posicionar la oferta comercial inmediatamente después del hero para reducir tie
 #### 🎨 **Implementación**
 
 **Contenido a mantener:**
+
 - Grid 2x2 de servicios (actual está bien diseñado)
 - Precios transparentes (diferenciador clave)
 - Características por servicio
 - CTAs claros
 
 **Mejoras sugeridas:**
+
 ```tsx
 // ANTES (Services.tsx actual)
 <h2>Servicios</h2>
@@ -611,16 +641,19 @@ Posicionar la oferta comercial inmediatamente después del hero para reducir tie
 ### 4.2 Cambio #2: Nueva Sección "Proceso" (Posición #3)
 
 #### 🎯 **Objetivo**
+
 Comunicar metodología de trabajo para reducir percepción de riesgo y posicionar expertise.
 
 #### 📊 **Justificación Estratégica**
 
 **Gap identificado:**
+
 - No existe sección que explique CÓMO trabajas
 - Clientes potenciales necesitan entender el proceso antes de contratar
 - Diferenciador vs. competencia (muchos solo listan servicios sin explicar enfoque)
 
 **Benchmark de industria:**
+
 - 85% de sitios de consultoría IT incluyen sección de "Proceso" o "Metodología"
 - Aumenta confianza al demostrar profesionalismo estructurado
 
@@ -690,6 +723,7 @@ Comunicar metodología de trabajo para reducir percepción de riesgo y posiciona
 ```
 
 **Ubicación en jerarquía:**
+
 - **Posición #3** (después de Servicios, antes de Proyectos)
 - **Razón:** Usuario ya vio QUÉ ofreces, ahora necesita saber CÓMO trabajas antes de ver resultados
 
@@ -698,11 +732,13 @@ Comunicar metodología de trabajo para reducir percepción de riesgo y posiciona
 ### 4.3 Cambio #3: Condensar "About" (De sección #2 → #7)
 
 #### 🎯 **Objetivo**
+
 Reducir énfasis en biografía personal y posicionarla como trust builder, no introducción.
 
 #### 📊 **Justificación Estratégica**
 
 **Problema con About actual:**
+
 - Sección muy extensa (foto, bio, experiencia laboral detallada, formación)
 - Consume espacio vertical crítico en primeras pantallas
 - Orientación: "conóceme como profesional buscando empleo"
@@ -710,14 +746,14 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
 
 **Cambios propuestos:**
 
-| Elemento | ACTUAL | PROPUESTO | Justificación |
-|----------|--------|-----------|---------------|
-| **Ubicación** | Posición #2 | Posición #7 | La persona valida después de ver servicios |
-| **Extensión** | ~600 palabras | ~150 palabras | Bio breve, enfocada en credibilidad |
-| **Foto** | Grande, protagonista | Mediana, complementaria | No es sitio personal, es comercial |
-| **Experience timeline** | Detallada con múltiples jobs | Solo rol actual | Evitar aspecto de CV |
-| **Educación** | Card destacada | Single line | Suficiente para credibilidad |
-| **Stats (+15 proyectos)** | En About | **Mover a Hero** | Trust badges arriba |
+| Elemento                  | ACTUAL                       | PROPUESTO               | Justificación                              |
+| ------------------------- | ---------------------------- | ----------------------- | ------------------------------------------ |
+| **Ubicación**             | Posición #2                  | Posición #7             | La persona valida después de ver servicios |
+| **Extensión**             | ~600 palabras                | ~150 palabras           | Bio breve, enfocada en credibilidad        |
+| **Foto**                  | Grande, protagonista         | Mediana, complementaria | No es sitio personal, es comercial         |
+| **Experience timeline**   | Detallada con múltiples jobs | Solo rol actual         | Evitar aspecto de CV                       |
+| **Educación**             | Card destacada               | Single line             | Suficiente para credibilidad               |
+| **Stats (+15 proyectos)** | En About                     | **Mover a Hero**        | Trust badges arriba                        |
 
 #### 🎨 **About Condensado - Propuesta**
 
@@ -727,7 +763,7 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
 <section id="about" className="py-16">  {/* ⚠️ Reducir padding de py-20 a py-16 */}
   <div className="container max-w-4xl">  {/* ⚠️ Reducir max-width */}
     <h2>Sobre mí</h2>
-    
+
     <div className="grid md:grid-cols-[200px_1fr] gap-8">  {/* Layout más compacto */}
       {/* Foto más pequeña */}
       <Image
@@ -737,26 +773,26 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
         alt="Geronimo Serial"
         className="rounded-full"
       />
-      
+
       {/* Bio condensada */}
       <div>
         <h3>Geronimo Serial</h3>
         <p className="text-zinc-400 mb-4">
           IT Specialist · Corrientes, Argentina
         </p>
-        
+
         <p className="text-zinc-300 leading-relaxed mb-4">
-          Analista de sistemas especializado en infraestructura escalable y 
-          desarrollo full-stack. Actualmente coordino tecnología en el Consejo 
-          General de Educación de Corrientes, liderando la transformación 
+          Analista de sistemas especializado en infraestructura escalable y
+          desarrollo full-stack. Actualmente coordino tecnología en el Consejo
+          General de Educación de Corrientes, liderando la transformación
           digital para más de 10,000 docentes.
         </p>
-        
+
         <p className="text-zinc-300 leading-relaxed mb-4">
-          Mi enfoque: soluciones que funcionan en el mundo real, con 
+          Mi enfoque: soluciones que funcionan en el mundo real, con
           metodología estructurada y soporte continuo.
         </p>
-        
+
         {/* Single line credentials */}
         <div className="flex flex-col gap-2 text-sm text-zinc-400">
           <div className="flex items-center gap-2">
@@ -768,7 +804,7 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
             <span>Licenciatura en Análisis de Sistemas - UNNE</span>
           </div>
         </div>
-        
+
         {/* ⚠️ ELIMINAR: Timeline de experiencia completa */}
         {/* ⚠️ ELIMINAR: Stats (mover a Hero) */}
       </div>
@@ -778,6 +814,7 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
 ```
 
 **Reducción estimada:**
+
 - Altura de sección: ~800px → ~400px (-50%)
 - Palabras: ~600 → ~150 (-75%)
 - Elementos visuales: 6 cards → 2 iconos (-66%)
@@ -787,16 +824,19 @@ Reducir énfasis en biografía personal y posicionarla como trust builder, no in
 ### 4.4 Cambio #4: Eliminar "Experience" como Sección Independiente
 
 #### 🎯 **Objetivo**
+
 Reducir énfasis en historial laboral (orientación CV) y enfocarse en capacidades (orientación comercial).
 
 #### 📊 **Justificación Estratégica**
 
 **Problema identificado:**
+
 - Experience es una sección de **currículum vitae**
 - En sitio de servicios, el historial laboral es **secundario**
 - Lo importante: qué puedes hacer HOY, no dónde trabajaste antes
 
 **Análisis de valor:**
+
 ```
 PARA UN CLIENTE:
 ❌ Poco relevante: "Trabajó en X empresa en 2020"
@@ -805,11 +845,13 @@ PARA UN CLIENTE:
 ```
 
 **Recomendación:**
+
 - ❌ Eliminar sección Experience completa
 - ✅ Mantener solo rol actual en About (1 línea)
 - ✅ Enfatizar resultados en sección Proyectos
 
 **Excepción:**
+
 - Si tienes clientes logo-worthy (empresas reconocidas), crear sección **"Clientes"** con logos
 
 ---
@@ -817,16 +859,19 @@ PARA UN CLIENTE:
 ### 4.5 Cambio #5: Renombrar y Reposicionar "Skills" → "Stack Tecnológico"
 
 #### 🎯 **Objetivo**
+
 Cambiar percepción de "habilidades que tengo" a "tecnologías con las que resuelvo problemas".
 
 #### 📊 **Justificación Estratégica**
 
 **Problema con "Skills":**
+
 - Término orientado a contratación laboral
 - Implica "estoy listando lo que sé hacer"
 - Falta conexión con beneficios para el cliente
 
 **Mejora con "Stack Tecnológico":**
+
 - Término orientado a proyectos/soluciones
 - Implica "estas son las herramientas que uso para resolver tu problema"
 - Posiciona expertise sin sonar a CV
@@ -845,13 +890,14 @@ Cambiar percepción de "habilidades que tengo" a "tecnologías con las que resue
 // AGREGAR: Contexto de aplicación
 <div className="mb-8">
   <p className="text-sm text-zinc-400">
-    ¿Tu proyecto requiere una tecnología específica? 
+    ¿Tu proyecto requiere una tecnología específica?
     <a href="#contact" className="text-white underline">Consulta disponibilidad</a>
   </p>
 </div>
 ```
 
 **Ubicación:**
+
 - **Antes:** Posición #3 (muy arriba)
 - **Después:** Posición #6 (después de Proyectos, antes de About)
 - **Razón:** Mostrar stack técnico DESPUÉS de demostrar resultados
@@ -861,11 +907,13 @@ Cambiar percepción de "habilidades que tengo" a "tecnologías con las que resue
 ### 4.6 Cambio #6: Testimonios Después de Proyectos (Mantener lógica narrativa)
 
 #### 🎯 **Objetivo**
+
 Mantener testimonios en flujo lógico: Servicios → Proceso → Proyectos → Testimonios → Stack → About.
 
 #### 📊 **Justificación Estratégica**
 
 **Flujo narrativo correcto:**
+
 1. **Servicios:** "Esto es lo que ofrezco"
 2. **Proceso:** "Así trabajo"
 3. **Proyectos:** "Estos son los resultados"
@@ -874,10 +922,12 @@ Mantener testimonios en flujo lógico: Servicios → Proceso → Proyectos → T
 6. **About:** "Y esta es la persona detrás"
 
 **Problema si Testimonios están antes de Proyectos:**
+
 - Testimonios validan algo que el usuario aún no ha visto
 - Lógica inversa: "Dicen que soy bueno" → "¿Bueno en qué?" → "Ah, en esto"
 
 **Decisión:**
+
 - ✅ Mantener Testimonios en posición actual (#5)
 - ❌ NO moverlos arriba arbitrariamente
 
@@ -887,26 +937,26 @@ Mantener testimonios en flujo lógico: Servicios → Proceso → Proyectos → T
 
 #### 📊 **Tabla Comparativa: Antes vs. Después**
 
-| # | ESTRUCTURA ACTUAL | # | ESTRUCTURA PROPUESTA | Cambio |
-|---|-------------------|---|----------------------|--------|
-| 1 | Hero (nombre personal) | 1 | Hero (propuesta valor) | ✏️ Reescritura |
-| 2 | **About** (biografía) | 2 | **Servicios** (oferta) | 🔼 Sube 5 posiciones |
-| 3 | Skills (técnico) | 3 | **Proceso** (metodología) | ✨ Nuevo |
-| 4 | **Experience** (CV) | 4 | Proyectos (casos) | 🔼 Sube 1 |
-| 5 | Proyectos (portafolio) | 5 | Testimonios (validación) | ✅ Mantiene |
-| 6 | Testimonios (opiniones) | 6 | Stack (tecnologías) | ✏️ Renombrado |
-| 7 | **Servicios** (oferta) | 7 | **About** (trust) | 🔽 Baja 5 posiciones |
-| 8 | Contact (formulario) | 8 | Contact | ✅ Mantiene |
+| #   | ESTRUCTURA ACTUAL       | #   | ESTRUCTURA PROPUESTA      | Cambio               |
+| --- | ----------------------- | --- | ------------------------- | -------------------- |
+| 1   | Hero (nombre personal)  | 1   | Hero (propuesta valor)    | ✏️ Reescritura       |
+| 2   | **About** (biografía)   | 2   | **Servicios** (oferta)    | 🔼 Sube 5 posiciones |
+| 3   | Skills (técnico)        | 3   | **Proceso** (metodología) | ✨ Nuevo             |
+| 4   | **Experience** (CV)     | 4   | Proyectos (casos)         | 🔼 Sube 1            |
+| 5   | Proyectos (portafolio)  | 5   | Testimonios (validación)  | ✅ Mantiene          |
+| 6   | Testimonios (opiniones) | 6   | Stack (tecnologías)       | ✏️ Renombrado        |
+| 7   | **Servicios** (oferta)  | 7   | **About** (trust)         | 🔽 Baja 5 posiciones |
+| 8   | Contact (formulario)    | 8   | Contact                   | ✅ Mantiene          |
 
 #### 🎯 **Cambios Cuantitativos**
 
-| Métrica | Antes | Después | Impacto |
-|---------|-------|---------|---------|
-| **Scroll hasta servicios** | 87.5% | 12.5% | ⬇️ -75% |
-| **Palabras sobre persona** | ~1200 | ~200 | ⬇️ -83% |
-| **Palabras sobre servicios** | ~400 | ~800 | ⬆️ +100% |
-| **Secciones orientadas a CV** | 3 (About, Skills, Experience) | 0 | ⬇️ -100% |
-| **Secciones orientadas a cliente** | 2 (Services, Projects) | 5 (Services, Process, Projects, Testimonials, Stack) | ⬆️ +150% |
+| Métrica                            | Antes                         | Después                                              | Impacto  |
+| ---------------------------------- | ----------------------------- | ---------------------------------------------------- | -------- |
+| **Scroll hasta servicios**         | 87.5%                         | 12.5%                                                | ⬇️ -75%  |
+| **Palabras sobre persona**         | ~1200                         | ~200                                                 | ⬇️ -83%  |
+| **Palabras sobre servicios**       | ~400                          | ~800                                                 | ⬆️ +100% |
+| **Secciones orientadas a CV**      | 3 (About, Skills, Experience) | 0                                                    | ⬇️ -100% |
+| **Secciones orientadas a cliente** | 2 (Services, Projects)        | 5 (Services, Process, Projects, Testimonials, Stack) | ⬆️ +150% |
 
 ---
 
@@ -915,6 +965,7 @@ Mantener testimonios en flujo lógico: Servicios → Proceso → Proyectos → T
 ### Hero Messaging
 
 #### ❌ **Actual:**
+
 ```
 geroserial.com
 IT Specialist · Infrastructure, Automation & Web Systems Management
@@ -922,11 +973,13 @@ Methodical Approach. Real-World Solutions.
 ```
 
 **Problemas:**
+
 - Nombre de dominio no es propuesta de valor
 - Job title técnico (no beneficios)
 - Tagline enterrada como subtítulo
 
 #### ✅ **Propuesto:**
+
 ```
 Infraestructura IT confiable para tu negocio
 Desarrollo full-stack, consultoría y soporte técnico desde Corrientes, Argentina.
@@ -938,6 +991,7 @@ Soluciones escalables para el mundo real.
 ```
 
 **Mejoras:**
+
 - Headline orientado a resultado
 - Ubicación geográfica visible (confianza + SEO local)
 - Tagline adaptado a lenguaje de beneficios
@@ -948,10 +1002,12 @@ Soluciones escalables para el mundo real.
 ### Call-to-Actions
 
 #### ❌ **Genéricos actuales:**
+
 - "Contact"
 - "Solicitar"
 
 #### ✅ **Específicos propuestos:**
+
 - "Solicitar Consulta Gratuita" (Hero)
 - "Ver Qué Puedo Hacer Por Ti" (Hero alternativo)
 - "Solicitar Cotización" (Servicios)
@@ -968,16 +1024,16 @@ Soluciones escalables para el mundo real.
 
 ```tsx
 // Hero
-"✓ Respuesta en 24-48hs"
-"✓ Servicios remotos disponibles"
+"✓ Respuesta en 24-48hs";
+"✓ Servicios remotos disponibles";
 
 // Servicios
-"✓ Primera consulta sin costo"
-"✓ Presupuesto sin compromiso en 48hs"
+"✓ Primera consulta sin costo";
+"✓ Presupuesto sin compromiso en 48hs";
 
 // Contact
-"✓ Tus datos están protegidos"
-"✓ No spam, solo respuestas útiles"
+"✓ Tus datos están protegidos";
+"✓ No spam, solo respuestas útiles";
 ```
 
 **Razón:** Reducir fricción y objeciones antes de que surjan
@@ -997,16 +1053,19 @@ Tu sitio actual está **estructuralmente posicionado como portafolio de empleado
 ### Prioridades de Implementación
 
 #### 🚨 **Crítico (Semana 1):**
+
 1. Reescribir Hero con propuesta de valor clara
 2. Mover Servicios a posición #2
 3. Condensar About y mover a posición #7
 
 #### ⚠️ **Alto (Semana 2):**
+
 4. Crear sección Proceso/Metodología
 5. Eliminar sección Experience
 6. Renombrar Skills → Stack y reposicionar
 
 #### 💡 **Medio (Semana 3):**
+
 7. Mejorar CTAs en todas las secciones
 8. Agregar microcopy de trust
 9. Revisar proyectos con enfoque problema/solución
@@ -1014,6 +1073,7 @@ Tu sitio actual está **estructuralmente posicionado como portafolio de empleado
 ### Métricas de Éxito Post-Implementación
 
 Medir después de 30 días:
+
 - ⬇️ Bounce rate (objetivo: -25%)
 - ⬆️ Tiempo promedio en página (objetivo: +40%)
 - ⬆️ Scroll depth hasta servicios (objetivo: 90% de visitantes)

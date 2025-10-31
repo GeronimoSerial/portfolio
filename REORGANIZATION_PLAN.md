@@ -1,4 +1,5 @@
 # Project Reorganization Plan
+
 ### Following Next.js 13+ Best Practices
 
 **Date:** October 31, 2025  
@@ -11,11 +12,12 @@
 1. **Mixed component locations:**
    - `app/components/` (partial)
    - `components/` (root level - different components)
-   
 2. **Legacy routes:**
+
    - `app/contacto/` - Old contact route (unused, replaced by Contact section)
 
 3. **Inconsistent naming:**
+
    - Some files use PascalCase, others use kebab-case
 
 4. **Deep nesting:**
@@ -131,18 +133,23 @@ portfolio/
 ## Key Changes
 
 ### 1. Move `app/sections/` → `components/sections/`
+
 **Reason:** Sections are components, not routes. Keep routes clean in `app/`
 
 ### 2. Rename `app/portfolio/components/` → `app/portfolio/_components/`
+
 **Reason:** Underscore prefix = private folder (Next.js convention), not a route
 
 ### 3. Move `app/contacto/` → `.archive/routes/contacto/`
+
 **Reason:** Unused legacy route, keep for reference but remove from active structure
 
 ### 4. Consolidate `app/components/` into root `components/`
+
 **Reason:** Single source of truth for shared components
 
 ### 5. Move `app/sections/.old/` → `.archive/sections/`
+
 **Reason:** Centralized archive location, cleaner structure
 
 ---
@@ -150,6 +157,7 @@ portfolio/
 ## Migration Steps
 
 ### Step 1: Create new structure
+
 ```bash
 mkdir -p .archive/sections .archive/routes
 mkdir -p app/portfolio/_components
@@ -157,11 +165,13 @@ mkdir -p components/sections
 ```
 
 ### Step 2: Move active sections
+
 ```bash
 mv app/sections/*.tsx components/sections/
 ```
 
 ### Step 3: Move legacy files
+
 ```bash
 mv app/sections/.old/* .archive/sections/
 mv app/contacto .archive/routes/
@@ -170,12 +180,14 @@ rmdir app/sections
 ```
 
 ### Step 4: Move portfolio components
+
 ```bash
 mv app/portfolio/components/* app/portfolio/_components/
 rmdir app/portfolio/components
 ```
 
 ### Step 5: Consolidate app/components
+
 ```bash
 # Move card.tsx to components/ui/
 mv app/components/card.tsx components/ui/
@@ -186,6 +198,7 @@ rmdir app/components 2>/dev/null || true
 ```
 
 ### Step 6: Update imports across codebase
+
 - Update `app/page.tsx` section imports
 - Update `app/portfolio/page.tsx` component imports
 - Search/replace: `from "./sections/` → `from "@/components/sections/`

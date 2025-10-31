@@ -143,10 +143,7 @@ export default function SkillsComprehensive() {
   const currentData = skillsData[selectedCategory as keyof typeof skillsData];
 
   return (
-    <section
-      id="skills"
-      className="relative py-12 px-4 min-h-[750px]"
-    >
+    <section id="skills" className="relative py-12 px-4 min-h-[750px]">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <motion.div

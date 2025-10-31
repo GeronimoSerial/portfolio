@@ -1,4 +1,5 @@
 # UX Strategy Analysis: Brand-First Positioning
+
 ### geroserial.com - Business Services Site
 
 **Analysis Date:** October 31, 2025  
@@ -9,6 +10,7 @@
 ## EXECUTIVE SUMMARY
 
 ### Current State
+
 - **Structure:** Single Page Application (SPA) with 8 sections
 - **Primary Issue:** Services positioned at 87.5% scroll depth (section 7 of 8)
 - **Message:** Portfolio/CV orientation rather than business service offering
@@ -16,6 +18,7 @@
 - **Problem:** Commercial offer hidden until near-end of page
 
 ### Proposed State
+
 - **Structure:** Dual-path architecture (Main Site + Portfolio Route)
 - **Services:** Positioned at section 2 (12.5% scroll depth)
 - **Message:** Business-focused with clear service offering upfront
@@ -24,12 +27,12 @@
 
 ### Key Metrics
 
-| Metric | Current | Proposed | Impact |
-|--------|---------|----------|--------|
-| Scroll to services | 87.5% | 12.5% | -75% |
-| Business-focused sections | 2/8 (25%) | 5/6 (83%) | +58% |
-| CV-focused sections | 3/8 (37%) | 0/6 (0%) | -37% |
-| Value proposition clarity | Implicit | Explicit | Clear messaging |
+| Metric                    | Current   | Proposed  | Impact          |
+| ------------------------- | --------- | --------- | --------------- |
+| Scroll to services        | 87.5%     | 12.5%     | -75%            |
+| Business-focused sections | 2/8 (25%) | 5/6 (83%) | +58%            |
+| CV-focused sections       | 3/8 (37%) | 0/6 (0%)  | -37%            |
+| Value proposition clarity | Implicit  | Explicit  | Clear messaging |
 
 ---
 
@@ -89,16 +92,19 @@ CURRENT HIERARCHY (Main Site - /):
 **Critical Issues:**
 
 1. **Inverted Value Pyramid**
+
    - User must scroll 70% of content before understanding what can be hired
    - High bounce risk for business-focused visitors
    - Services (commercial offer) buried below personal bio
 
 2. **CV/Portfolio Orientation**
+
    - Structure follows job application pattern (About → Skills → Experience)
    - Message: "Hire me as employee" vs "Hire me for services"
    - Multiple sections irrelevant for potential clients
 
 3. **Mixed Audience Targeting**
+
    - Content tries to serve both recruiters and clients simultaneously
    - Diluted messaging for both audiences
    - No clear primary focus
@@ -251,6 +257,7 @@ CURRENT HIERARCHY (Main Site - /):
 ```
 
 **Main Site Navigation:**
+
 ```
 [geroserial.com] Services | Process | Projects | Testimonials | Contact | [Portfolio →]
 ```
@@ -338,23 +345,24 @@ CURRENT HIERARCHY (Main Site - /):
 ```
 
 **Portfolio Navigation:**
+
 ```
 [geroserial.com] About | Skills | Experience | Education | Projects | [Download Resume] | [← Main Site]
 ```
 
 ### 2.4 Content Migration Map
 
-| Current Section | Main Site (/) | Portfolio (/portfolio) |
-|----------------|---------------|------------------------|
-| Hero | Keep (Brand Identity) | Simplified (Name + Title) |
-| About | REMOVE | MOVE HERE (Extended) |
-| Skills | REMOVE | MOVE HERE (Comprehensive) |
-| Experience | REMOVE | MOVE HERE (Timeline) |
-| Projects | Keep (Business Results) | Keep (Technical Details) |
-| Testimonials | Keep | REMOVE (not relevant for recruitment) |
-| Services | MOVE UP (position 2) | REMOVE (not relevant for recruitment) |
-| Contact | Keep (Lead Gen) | Adapt (Career Opportunities) |
-| **NEW: Process** | ADD (position 3) | REMOVE |
+| Current Section  | Main Site (/)           | Portfolio (/portfolio)                |
+| ---------------- | ----------------------- | ------------------------------------- |
+| Hero             | Keep (Brand Identity)   | Simplified (Name + Title)             |
+| About            | REMOVE                  | MOVE HERE (Extended)                  |
+| Skills           | REMOVE                  | MOVE HERE (Comprehensive)             |
+| Experience       | REMOVE                  | MOVE HERE (Timeline)                  |
+| Projects         | Keep (Business Results) | Keep (Technical Details)              |
+| Testimonials     | Keep                    | REMOVE (not relevant for recruitment) |
+| Services         | MOVE UP (position 2)    | REMOVE (not relevant for recruitment) |
+| Contact          | Keep (Lead Gen)         | Adapt (Career Opportunities)          |
+| **NEW: Process** | ADD (position 3)        | REMOVE                                |
 
 ---
 
@@ -363,18 +371,21 @@ CURRENT HIERARCHY (Main Site - /):
 ### 3.1 Why Services Position 2 (Currently Position 7)
 
 **Current Problem:**
+
 - Services hidden at 87.5% scroll depth
 - Organic search users looking for "web development services" don't see offer
 - Average user sees personal bio before commercial proposition
 - Estimated 40+ seconds to reach service information
 
 **Proposed Solution:**
+
 - Services immediately after hero (12.5% scroll depth)
 - 5-second value proposition clarity
 - Aligned with user search intent
 - Competitive advantage through pricing transparency
 
 **Expected Impact:**
+
 - -25% bounce rate (users see offer immediately)
 - +60% CTA clicks (more visible)
 - +40% time on page (interested users stay)
@@ -382,11 +393,13 @@ CURRENT HIERARCHY (Main Site - /):
 ### 3.2 Why New "Process" Section
 
 **Current Gap:**
+
 - No explanation of HOW you work
 - Clients need methodology understanding before commitment
 - Industry standard: 85% of IT consulting sites include process/methodology
 
 **Added Value:**
+
 - Reduces perceived risk
 - Demonstrates professional structure
 - Differentiates from competitors who only list services
@@ -395,6 +408,7 @@ CURRENT HIERARCHY (Main Site - /):
 ### 3.3 Why Separate /portfolio Route
 
 **Current Problem:**
+
 - Single page tries to serve both clients and recruiters
 - Message dilution for both audiences
 - CV content irrelevant for business clients
@@ -403,18 +417,21 @@ CURRENT HIERARCHY (Main Site - /):
 **Dual Path Benefits:**
 
 **For Business Clients (Main Site):**
+
 - Clear commercial focus
 - No distraction from CV content
 - Professional service provider perception
 - Faster path to conversion
 
 **For Recruiters (Portfolio Route):**
+
 - Complete professional profile
 - Detailed skills and experience
 - Resume download option
 - Interview scheduling focus
 
 **SEO Benefits:**
+
 - Main site targets: "IT consulting Corrientes", "web development services"
 - Portfolio targets: "Geronimo Serial developer", "systems analyst Argentina"
 - Distinct keywords for distinct audiences
@@ -422,16 +439,19 @@ CURRENT HIERARCHY (Main Site - /):
 ### 3.4 Why Condense About on Main Site
 
 **Current Issue:**
+
 - 600+ word biography on business site
 - Extended personal history distracts from commercial offer
 - CV-style presentation inappropriate for client-facing site
 
 **Solution:**
+
 - Remove About section entirely from main site
 - Trust built through: Process, Projects, Testimonials
 - Full bio available in /portfolio for those interested
 
 **Rationale:**
+
 - Clients care about results, not career history
 - Personal story relevant for employment, not service purchase
 - Apple doesn't have "About Tim Cook" on product pages
@@ -475,6 +495,7 @@ app/
 ### 4.2 New Components Required
 
 **1. Process Section (app/sections/Process.tsx)**
+
 ```tsx
 "use client";
 
@@ -490,12 +511,13 @@ export default function Process() {
       icon: Search,
       number: "01",
       title: "Discovery & Analysis",
-      description: "Understanding your business challenges and technical requirements",
+      description:
+        "Understanding your business challenges and technical requirements",
       items: [
         "Requirements gathering",
         "Technical audit (if applicable)",
-        "Solution proposal & roadmap"
-      ]
+        "Solution proposal & roadmap",
+      ],
     },
     {
       icon: Layers,
@@ -505,19 +527,15 @@ export default function Process() {
       items: [
         "System architecture diagram",
         "Technology stack selection",
-        "Implementation timeline"
-      ]
+        "Implementation timeline",
+      ],
     },
     {
       icon: Code,
       number: "03",
       title: "Agile Development",
       description: "Iterative development with continuous feedback",
-      items: [
-        "2-week sprints",
-        "Progressive demos",
-        "Continuous testing & QA"
-      ]
+      items: ["2-week sprints", "Progressive demos", "Continuous testing & QA"],
     },
     {
       icon: Rocket,
@@ -527,13 +545,17 @@ export default function Process() {
       items: [
         "Staged rollout",
         "Technical documentation",
-        "30-day post-launch support"
-      ]
-    }
+        "30-day post-launch support",
+      ],
+    },
   ];
 
   return (
-    <section id="process" ref={ref} className="relative min-h-screen py-20 px-4">
+    <section
+      id="process"
+      ref={ref}
+      className="relative min-h-screen py-20 px-4"
+    >
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -576,7 +598,10 @@ export default function Process() {
 
                 <ul className="space-y-2">
                   {step.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-zinc-500">
+                    <li
+                      key={item}
+                      className="flex items-start gap-2 text-sm text-zinc-500"
+                    >
                       <span className="text-zinc-700 mt-1">•</span>
                       <span>{item}</span>
                     </li>
@@ -604,6 +629,7 @@ export default function Process() {
 ```
 
 **2. Portfolio Page (app/portfolio/page.tsx)**
+
 ```tsx
 import React from "react";
 import Particles from "@/components/shared/particles";
@@ -619,8 +645,9 @@ import ContactOpportunities from "./components/ContactOpportunities";
 
 export const metadata = {
   title: "Portfolio | Geronimo Serial - Systems Analyst & Full Stack Developer",
-  description: "Comprehensive professional portfolio and resume of Geronimo Serial. Systems Analyst specializing in infrastructure, full-stack development, and digital transformation.",
-  robots: "index, follow"
+  description:
+    "Comprehensive professional portfolio and resume of Geronimo Serial. Systems Analyst specializing in infrastructure, full-stack development, and digital transformation.",
+  robots: "index, follow",
 };
 
 export default function PortfolioPage() {
@@ -648,6 +675,7 @@ export default function PortfolioPage() {
 ### 4.3 Navigation Updates
 
 **Main Site Navigation (components/navigation/StickyNav.tsx):**
+
 ```tsx
 // Add Portfolio link
 export const MAIN_NAV_ITEMS = [
@@ -656,11 +684,12 @@ export const MAIN_NAV_ITEMS = [
   { id: "projects", label: "Projects" },
   { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
-  { href: "/portfolio", label: "Portfolio", isExternal: true } // NEW
+  { href: "/portfolio", label: "Portfolio", isExternal: true }, // NEW
 ] as const;
 ```
 
 **Portfolio Navigation (components/navigation/PortfolioNav.tsx):**
+
 ```tsx
 "use client";
 
@@ -676,13 +705,23 @@ export default function PortfolioNav() {
           </Link>
 
           <div className="flex items-center gap-6">
-            <a href="#about" className="text-zinc-400 hover:text-zinc-100">About</a>
-            <a href="#skills" className="text-zinc-400 hover:text-zinc-100">Skills</a>
-            <a href="#experience" className="text-zinc-400 hover:text-zinc-100">Experience</a>
-            <a href="#projects" className="text-zinc-400 hover:text-zinc-100">Projects</a>
-            <a href="#resume" className="text-zinc-400 hover:text-zinc-100">Resume</a>
-            
-            <Link 
+            <a href="#about" className="text-zinc-400 hover:text-zinc-100">
+              About
+            </a>
+            <a href="#skills" className="text-zinc-400 hover:text-zinc-100">
+              Skills
+            </a>
+            <a href="#experience" className="text-zinc-400 hover:text-zinc-100">
+              Experience
+            </a>
+            <a href="#projects" className="text-zinc-400 hover:text-zinc-100">
+              Projects
+            </a>
+            <a href="#resume" className="text-zinc-400 hover:text-zinc-100">
+              Resume
+            </a>
+
+            <Link
               href="/"
               className="px-4 py-2 text-sm font-medium text-black bg-white rounded-lg hover:bg-zinc-100 transition-colors"
             >
@@ -699,6 +738,7 @@ export default function PortfolioNav() {
 ### 4.4 Main Site Page Update
 
 **app/page.tsx:**
+
 ```tsx
 import React from "react";
 import BackToTop from "@/components/layout/BackToTop";
@@ -718,15 +758,13 @@ export default function Home() {
         className="pointer-events-none fixed inset-0 -z-50"
         quantity={150}
       />
-
       <StickyNav />
       <Hero />
-      <Services />  {/* MOVED: Was position 7, now position 2 */}
-      <Process />   {/* NEW: Methodology section */}
+      <Services /> {/* MOVED: Was position 7, now position 2 */}
+      <Process /> {/* NEW: Methodology section */}
       <Projects />
       <Testimonials />
       <Contact />
-
       <BackToTop />
     </>
   );
@@ -738,6 +776,7 @@ export default function Home() {
 ## SECTION 5: Implementation Roadmap
 
 ### Phase 1: Core Restructuring (Week 1)
+
 - [ ] Create Process section component
 - [ ] Update main page.tsx to new section order
 - [ ] Remove About, Skills, Experience from main site
@@ -745,6 +784,7 @@ export default function Home() {
 - [ ] Test scroll behavior and section detection
 
 ### Phase 2: Portfolio Route (Week 2)
+
 - [ ] Create /portfolio directory structure
 - [ ] Build PortfolioNav component
 - [ ] Migrate About → AboutExtended
@@ -755,6 +795,7 @@ export default function Home() {
 - [ ] Create ContactOpportunities component
 
 ### Phase 3: Content & Copy (Week 3)
+
 - [ ] Translate all remaining Spanish content to English
 - [ ] Remove all emojis from content
 - [ ] Update Services section copy (business-focused)
@@ -763,6 +804,7 @@ export default function Home() {
 - [ ] Add trust indicators to Hero
 
 ### Phase 4: Testing & Polish (Week 4)
+
 - [ ] Cross-browser testing
 - [ ] Mobile responsiveness
 - [ ] SEO audit (main site vs portfolio)
@@ -771,6 +813,7 @@ export default function Home() {
 - [ ] Deploy to production
 
 ### Time Estimate
+
 - **Phase 1:** 12-16 hours
 - **Phase 2:** 16-20 hours
 - **Phase 3:** 8-12 hours
@@ -782,12 +825,14 @@ export default function Home() {
 ## SECTION 6: Success Metrics
 
 ### Pre-Implementation Baseline (Current)
+
 - Bounce rate: (measure current)
 - Average session duration: (measure current)
 - Services section views: (measure current)
 - Contact form submissions: (measure current)
 
 ### Post-Implementation Goals (30 days)
+
 - Bounce rate: -25%
 - Average session duration: +40%
 - Services section views: +90% (from increased visibility)
@@ -795,6 +840,7 @@ export default function Home() {
 - Portfolio page visits: 15-20% of total traffic
 
 ### Analytics Setup
+
 ```
 Main Site (/) Goals:
 - Contact form submission
@@ -828,12 +874,14 @@ Portfolio Route (/portfolio) Goals:
 ### Content Changes
 
 **Main Site:**
+
 - Remove: About (extended bio), Skills (comprehensive), Experience (timeline)
 - Add: Process (methodology), Trust indicators (Hero)
 - Reposition: Services (to #2), Projects (business results emphasis)
 - Keep: Hero (brand identity), Testimonials, Contact
 
 **Portfolio Route:**
+
 - Include: All removed sections from main site
 - Add: Resume download, Career opportunities contact
 - Focus: Technical details, career history, comprehensive skills
@@ -908,7 +956,8 @@ Portfolio Route (/portfolio) Goals:
   </div>
 
   <p className="footer-cta">
-    Need something different? <a href="#contact">Let's discuss your custom project</a>
+    Need something different?{" "}
+    <a href="#contact">Let's discuss your custom project</a>
   </p>
 </section>
 ```
