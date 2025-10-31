@@ -2,8 +2,7 @@
 
 import { useScrollReveal, useStaggerReveal } from "@/hooks/useScrollReveal";
 import { allProjects } from "contentlayer/generated";
-import Link from "next/link";
-import { Eye, Github, ExternalLink } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 
 export default function Projects() {
   const { ref: headerRef, style: headerStyle } = useScrollReveal();
@@ -44,7 +43,16 @@ export default function Projects() {
   );
 }
 
-function ProjectCard({ project, index }: { project: any; index: number }) {
+interface Project {
+  slug: string;
+  title: string;
+  description?: string;
+  url?: string;
+  repository?: string;
+  date?: string;
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { ref, style } = useStaggerReveal(index);
 
   return (

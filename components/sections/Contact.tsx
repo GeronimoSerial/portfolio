@@ -34,22 +34,15 @@ export default function Contact() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section
-      id="contact"
-      className="relative min-h-screen py-20 px-4"
-    >
+    <section id="contact" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div
-          ref={headerRef}
-          style={headerStyle}
-          className="text-center mb-16"
-        >
+        <div ref={headerRef} style={headerStyle} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Get in Touch
           </h2>
@@ -218,25 +211,32 @@ export default function Contact() {
                 Response Time
               </h4>
               <p className="text-sm text-zinc-400">
-                I respond to messages Monday through Friday, 9:00 AM to 6:00 PM (GMT-3).
-                Average response time: 24 hours.
+                I respond to messages Monday through Friday, 9:00 AM to 6:00 PM
+                (GMT-3). Average response time: 24 hours.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="text-center mt-20 pt-8 border-t border-zinc-800"
-      >
-        <p className="text-sm text-zinc-500">
-          © {new Date().getFullYear()} Geronimo Serial. All rights reserved.
-        </p>
-      </motion.div>
+      <FooterSection />
     </section>
+  );
+}
+
+function FooterSection() {
+  const { ref, style } = useScrollReveal({ delay: 0.6 });
+
+  return (
+    <div
+      ref={ref}
+      style={style}
+      className="text-center mt-20 pt-8 border-t border-zinc-800"
+    >
+      <p className="text-sm text-zinc-500">
+        © {new Date().getFullYear()} Geronimo Serial. All rights reserved.
+      </p>
+    </div>
   );
 }

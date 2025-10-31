@@ -75,7 +75,21 @@ export default function Process() {
   );
 }
 
-function ProcessStep({ step, index }: { step: any; index: number }) {
+interface ProcessStepData {
+  icon: React.ComponentType<{ className?: string }>;
+  number: string;
+  title: string;
+  description: string;
+  items: string[];
+}
+
+function ProcessStep({
+  step,
+  index,
+}: {
+  step: ProcessStepData;
+  index: number;
+}) {
   const { ref, style } = useStaggerReveal(index);
   const Icon = step.icon;
 
@@ -99,7 +113,7 @@ function ProcessStep({ step, index }: { step: any; index: number }) {
       <p className="text-sm text-zinc-400 mb-4">{step.description}</p>
 
       <ul className="space-y-2">
-        {step.items.map((item) => (
+        {step.items.map((item: string) => (
           <li
             key={item}
             className="flex items-start gap-2 text-sm text-zinc-500"

@@ -90,13 +90,21 @@ export default function Services() {
   );
 }
 
+interface Service {
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  description: string;
+  features: string[];
+  price: string;
+}
+
 function ServiceCard({
   service,
   icon: Icon,
   index,
 }: {
-  service: any;
-  icon: any;
+  service: Service;
+  icon: React.ComponentType<{ className?: string }>;
   index: number;
 }) {
   const { ref, style } = useStaggerReveal(index);
@@ -120,7 +128,7 @@ function ServiceCard({
       </div>
 
       <ul className="space-y-2 mb-6">
-        {service.features.map((feature) => (
+        {service.features.map((feature: string) => (
           <li
             key={feature}
             className="flex items-center gap-2 text-sm text-zinc-300"
@@ -165,7 +173,7 @@ function CTASection() {
   return (
     <div ref={ref} style={style} className="text-center mt-12">
       <p className="text-sm text-zinc-500 mb-4">
-        Need something different? Let's discuss your custom project
+        Need something different? Let&apos;s discuss your custom project
       </p>
       <a
         href="#contact"

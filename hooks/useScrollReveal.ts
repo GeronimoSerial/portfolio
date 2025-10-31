@@ -27,7 +27,7 @@ interface ScrollRevealReturn {
  * return <div ref={ref} style={style}>Content</div>
  */
 export function useScrollReveal(
-  options: ScrollRevealOptions = {}
+  options: ScrollRevealOptions = {},
 ): ScrollRevealReturn {
   const {
     threshold = 0.1,
@@ -47,20 +47,24 @@ export function useScrollReveal(
 
   useEffect(() => {
     if (inView && !hasAnimated) {
-      if (delay > 0) {
-        timeoutRef.current = setTimeout(() => {
+      // Use requestAnimationFrame to defer setState to next frame
+      const rafId = requestAnimationFrame(() => {
+        if (delay > 0) {
+          timeoutRef.current = setTimeout(() => {
+            setHasAnimated(true);
+          }, delay * 1000);
+        } else {
           setHasAnimated(true);
-        }, delay * 1000);
-      } else {
-        setHasAnimated(true);
-      }
-    }
+        }
+      });
 
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
+      return () => {
+        cancelAnimationFrame(rafId);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      };
+    }
   }, [inView, delay, hasAnimated]);
 
   // Estilos optimizados para prevenir flicker
@@ -96,7 +100,7 @@ export function useScrollReveal(
  */
 export function useStaggerReveal(
   index: number,
-  options: ScrollRevealOptions = {}
+  options: ScrollRevealOptions = {},
 ): ScrollRevealReturn {
   const baseDelay = options.delay || 0;
   const staggerDelay = index * 0.1; // 100ms entre elementos
@@ -111,7 +115,7 @@ export function useStaggerReveal(
  * Hook para animaciones de fade simple (sin translateY)
  */
 export function useFadeReveal(
-  options: ScrollRevealOptions = {}
+  options: ScrollRevealOptions = {},
 ): ScrollRevealReturn {
   const result = useScrollReveal(options);
 
