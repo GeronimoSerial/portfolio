@@ -1,20 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { useScroll } from "@/context/ScrollContext";
 
 export default function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { showBackToTop } = useScroll();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -22,7 +13,7 @@ export default function BackToTop() {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {showBackToTop && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}

@@ -3,33 +3,59 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+    html {
+        scroll-behavior: smooth;
+    }
 
-  body {
-    overflow-x: hidden;
-  }
+    body {
+        overflow-x: hidden;
+    }
 
-  .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-  }
-  
-  :root {
-    --radius: 0.5rem;
-  }
+    .text-edge-outline {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    }
 
-  h3 {
-    font-family: var(--font-geist), serif;
-  }
+    :root {
+        --radius: 0.5rem;
+    }
 
-  /* Ocultar scrollbar pero mantener funcionalidad */
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
-} 
+    h3 {
+        font-family: var(--font-geist), serif;
+    }
+
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+}
+
+@layer utilities {
+    /* Animación de borde giratorio - GPU accelerated */
+    @keyframes border-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .animate-border-spin {
+        animation: border-spin var(--border-duration, 5s) linear infinite;
+    }
+
+    /* Gradiente cónico para bordes animados */
+    .bg-gradient-conic {
+        background: conic-gradient(
+            from 0deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 100%
+        );
+    }
+}

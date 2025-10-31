@@ -1,22 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useState } from "react";
+import { useScroll } from "@/context/ScrollContext";
 import { useScrollTo } from "@/hooks/useScrollTo";
 import { Menu, X, Github } from "lucide-react";
 
 export default function StickyNav() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { isScrolled, activeSection } = useScroll();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const sections = [
-    "hero",
-    "services",
-    "process",
-    "projects",
-    "testimonials",
-    "contact",
-  ];
 
   const navItems = [
     { id: "hero", label: "Home" },
@@ -27,17 +18,7 @@ export default function StickyNav() {
     { id: "contact", label: "Contact" },
   ];
 
-  const activeSection = useScrollSpy(sections);
   const { scrollToSection } = useScrollTo();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleNavClick = (sectionId: string) => {
     scrollToSection(sectionId);
@@ -49,7 +30,7 @@ export default function StickyNav() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-zinc-900/80 backdrop-blur-lg border-b border-zinc-800"
+            ? "bg-gradient-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
             : "bg-transparent"
         }`}
       >

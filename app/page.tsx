@@ -1,6 +1,6 @@
 import React from "react";
 import BackToTop from "@/components/layout/BackToTop";
-import Particles from "@/components/shared/particles";
+import ParticlesOptimized from "@/components/shared/ParticlesOptimized";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import Process from "@/components/sections/Process";
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       {/* Fixed Background Layer */}
-      <Particles
+      <ParticlesOptimized
         className="pointer-events-none fixed inset-0 -z-50"
         quantity={150}
       />

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { Button } from "@/components/ui/moving-border";
+import { ButtonOptimized } from "@/components/ui/ButtonOptimized";
 import { MapPin } from "lucide-react";
 
 export default function Hero() {
@@ -70,24 +70,24 @@ export default function Hero() {
           className="flex gap-4 mt-10"
         >
           <a href="#services">
-            <Button
+            <ButtonOptimized
               containerClassName="h-12"
               borderRadius="0.75rem"
-              borderClassName="bg-zinc-600/30"
+              duration={5}
               className="px-6 py-3 text-sm font-medium text-zinc-300"
             >
               View Services
-            </Button>
+            </ButtonOptimized>
           </a>
           <a href="#contact">
-            <Button
+            <ButtonOptimized
               containerClassName="h-12"
               borderRadius="0.75rem"
-              borderClassName="bg-zinc-600/30"
+              duration={5}
               className="px-6 py-3 text-sm font-medium text-zinc-300"
             >
               Get in Touch
-            </Button>
+            </ButtonOptimized>
           </a>
         </motion.div>
       </motion.div>

@@ -2,7 +2,7 @@ import { withContentlayer } from "next-contentlayer";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  turbopack: true,
+  turbopack: {},
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   experimental: {
     mdxRs: true,
