@@ -23,6 +23,9 @@ export default function Hero() {
             geroserial.com
           </h1>
         </div>
+        {/* LÍNEAS SUPERIOR E INFERIOR */}
+        <div className="absolute top-0 w-screen h-px animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+        <div className="absolute bottom-0 w-screen h-px animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
 
         <h2 className="text-sm md:text-lg text-zinc-300 max-w-3xl">
           IT Specialist · Infrastructure, Automation & Web Systems Management
@@ -81,10 +84,6 @@ export default function Hero() {
           </motion.div>
         </a>
       </motion.div>
-
-      {/* LÍNEAS SUPERIOR E INFERIOR */}
-      <div className="absolute top-0 w-screen h-px animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <div className="absolute bottom-0 w-screen h-px animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
     </section>
   );
 }

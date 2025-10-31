@@ -96,7 +96,7 @@ export default function Services() {
                     <Icon className="w-6 h-6 text-zinc-400 group-hover:text-zinc-100 transition-colors" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-display text-zinc-50 mb-2 group-hover:text-white transition-colors">
+                    <h3 className="text-xl text-zinc-50 mb-2 group-hover:text-white transition-colors">
                       {service.title}
                     </h3>
                     <p className="text-sm text-zinc-400 mb-4">

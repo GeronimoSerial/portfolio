@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { User, MapPin, Briefcase, GraduationCap } from "lucide-react";
+import { MapPin, Briefcase, GraduationCap } from "lucide-react";
 import { useSectionInView } from "@/hooks/useSectionInView";
+import Image from "next/image";
 
 export default function About() {
   const { ref, inView } = useSectionInView();
@@ -23,7 +24,7 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h3 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4 tracking-tight">
+          <h3 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
             <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               About me
             </span>
@@ -45,8 +46,10 @@ export default function About() {
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10 " />
-              <img
+              <Image
                 src="/assets/images/remove-bg-profile.png"
+                width={256}
+                height={256}
                 alt="Geronimo Serial"
                 className="relative w-64 h-64 rounded-full object-cover border-2 border-zinc-700 hover:border-zinc-500 transition-all duration-300"
               />

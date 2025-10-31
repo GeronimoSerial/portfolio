@@ -171,7 +171,7 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-display text-zinc-50 mb-6">
+              <h3 className="text-2xl text-zinc-50 mb-6">
                 Información de Contacto
               </h3>
 

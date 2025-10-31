@@ -85,7 +85,7 @@ export default function Experience() {
                         <Icon className="w-6 h-6 text-zinc-400" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-display text-zinc-50 mb-1">
+                        <h3 className="text-xl text-zinc-50 mb-1">
                           {exp.title}
                         </h3>
                         <p className="text-zinc-400 text-sm mb-1">

@@ -52,7 +52,7 @@ export default function Projects() {
               className="group relative p-6 bg-white/5 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-all duration-300"
             >
               <div className="flex flex-col h-full">
-                <h3 className="text-xl font-display text-zinc-50 mb-3 group-hover:text-white transition-colors">
+                <h3 className="text-xl text-zinc-50 mb-3 group-hover:text-white transition-colors">
                   {project.title}
                 </h3>
 

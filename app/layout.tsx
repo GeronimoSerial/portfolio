@@ -1,6 +1,5 @@
 import "../global.css";
-import { DM_Sans, Inter } from "next/font/google";
-import { Lora } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 // import { Analytics } from "@/components/shared/analytics";
@@ -48,9 +47,10 @@ export const metadata: Metadata = {
     shortcut: "/assets/icons/favicon.png",
   },
 };
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist",
 });
 
 const calSans = LocalFont({
@@ -58,16 +58,16 @@ const calSans = LocalFont({
   variable: "--font-calsans",
 });
 
-const lora = Lora({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-lora",
-});
-
 const dm_sans = DM_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
-  variable: "--font-oswald",
+  variable: "--font-dm_sans",
+});
+
+const geist_mono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist-mono",
 });
 
 export default function RootLayout({
@@ -79,10 +79,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={[
-        inter.variable,
+        geist.variable,
         calSans.variable,
-        lora.variable,
         dm_sans.variable,
+        geist_mono.variable,
       ].join(" ")}
     >
       <head>

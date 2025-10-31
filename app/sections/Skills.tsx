@@ -158,7 +158,7 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h3 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4 tracking-tight">
+          <h3 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
             <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               Skills & Technologies
             </span>
