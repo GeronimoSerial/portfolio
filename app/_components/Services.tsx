@@ -60,7 +60,7 @@ export default function ServicesStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Services
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Scalable IT solutions designed to grow with your business
           </p>
@@ -95,7 +95,7 @@ export default function ServicesStatic() {
                       key={feature}
                       className="flex items-center gap-2 text-sm text-zinc-300"
                     >
-                      <svg className="w-4 h-4 text-zinc-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       {feature}

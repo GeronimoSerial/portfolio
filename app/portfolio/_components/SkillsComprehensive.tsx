@@ -114,7 +114,7 @@ export default function SkillsComprehensiveStatic() {
           <h2 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
             Technical Skills
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Comprehensive toolkit for modern development
           </p>

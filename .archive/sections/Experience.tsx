@@ -50,14 +50,14 @@ export default function Experience() {
           className="text-center mb-16"
         >
           <h3 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4 tracking-tight">
-            <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+            <span className="bg-linear-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               Experience
             </span>
           </h3>
           <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-zinc-500" />
+            <div className="w-12 h-px bg-linear-to-r from-transparent to-zinc-500" />
             <div className="w-2 h-2 rounded-full bg-zinc-400 shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-            <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-zinc-500" />
+            <div className="w-12 h-px bg-linear-to-l from-transparent to-zinc-500" />
           </div>
         </motion.div>
 

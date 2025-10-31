@@ -55,8 +55,8 @@ export default function HeroStatic() {
       </div>
 
       {/* Líneas decorativas estáticas */}
-      <div className="absolute top-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <div className="absolute bottom-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute top-0 w-screen h-px bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute bottom-0 w-screen h-px bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
     </section>
   );
 }

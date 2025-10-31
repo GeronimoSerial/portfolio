@@ -14,7 +14,7 @@ export default function BackgroundStatic() {
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
+      <div className="absolute inset-0 bg-linear-to-b from-zinc-900/50 via-black to-black" />
     </div>
   );
 }

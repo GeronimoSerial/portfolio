@@ -36,7 +36,7 @@ export default function EducationSectionStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Education & Certifications
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Academic background and professional training
           </p>
@@ -95,7 +95,7 @@ export default function EducationSectionStatic() {
                     className="flex items-center gap-2 text-sm text-zinc-300"
                   >
                     <svg
-                      className="w-4 h-4 text-zinc-500 flex-shrink-0"
+                      className="w-4 h-4 text-zinc-500 shrink-0"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >

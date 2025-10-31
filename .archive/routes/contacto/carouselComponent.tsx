@@ -71,7 +71,7 @@ export const CarouselComponent = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="relative w-full max-w-6xl">
-        <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-violet-950 to-gray-400 font-sans text-center mb-8 mt-4">
+        <h1 className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-violet-950 to-gray-400 font-sans text-center mb-8 mt-4">
           ¿Charlamos?
         </h1>
         <Carousel
@@ -88,7 +88,7 @@ export const CarouselComponent = () => {
             {socials.map((social, index) => (
               <CarouselItem
                 key={index}
-                className="basis-full sm:basis-1/2 lg:basis-1/3 flex-shrink-0"
+                className="basis-full sm:basis-1/2 lg:basis-1/3 shrink-0"
               >
                 <div className="p-2">
                   <SocialCard {...social} />

@@ -203,7 +203,7 @@ export function ButtonOptimized({
   return (
     <button
       className={cn(
-        "relative overflow-hidden rounded-xl p-[1px]",
+        "relative overflow-hidden rounded-xl p-px",
         containerClassName
       )}
       style={
@@ -221,7 +221,7 @@ export function ButtonOptimized({
       {/* Content */}
       <div
         className={cn(
-          "relative z-10 flex h-full w-full items-center justify-center rounded-[11px] bg-zinc-900/80 backdrop-blur-sm border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-900/90",
+          "relative z-10 flex h-full w-full items-center justify-center rounded-[11px] bg-zinc-900/80 backdrop-blur-xs border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-900/90",
           className
         )}
       >

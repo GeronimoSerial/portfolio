@@ -96,7 +96,7 @@ git commit -m "refactor: replace manual components with optimized versions
 - Replace Particles with @tsparticles (-70% CPU)
 - Replace MovingBorder with CSS animations (GPU-accelerated)
 - Centralize scroll listeners in ScrollContext (-91% events)
-- Optimize backdrop-blur in navigation
+- Optimize backdrop-blur-sm in navigation
 
 Performance improvements:
 - Frame time: 28-35ms → 12-16ms (+117% improvement)
@@ -279,7 +279,7 @@ grep -A 5 "ScrollProvider" app/layout.tsx
 # 1. Reducir quantity de particles
 # quantity={100} en vez de {150}
 
-# 2. Verificar que backdrop-blur fue removido
+# 2. Verificar que backdrop-blur-sm fue removido
 grep "backdrop-blur-lg" components/navigation/StickyNav.tsx
 # No debe retornar nada
 ```

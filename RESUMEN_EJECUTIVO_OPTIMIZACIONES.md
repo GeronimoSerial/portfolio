@@ -174,7 +174,7 @@ pnpm add @tsparticles/react @tsparticles/slim
 - [ ] Agregar ScrollProvider en layout.tsx
 - [ ] Actualizar StickyNav.tsx con useScroll
 - [ ] Actualizar BackToTop.tsx con useScroll
-- [ ] Optimizar backdrop-blur en StickyNav
+- [ ] Optimizar backdrop-blur-sm en StickyNav
 
 ### Testing
 - [ ] Visual testing (desktop)

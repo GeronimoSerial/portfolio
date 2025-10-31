@@ -173,7 +173,7 @@ export default function BackgroundStatic() {
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/50 via-black to-black" />
+      <div className="absolute inset-0 bg-linear-to-b from-zinc-900/50 via-black to-black" />
     </div>
   );
 }
@@ -240,8 +240,8 @@ export default function HeroStatic() {
       </div>
 
       {/* Líneas decorativas estáticas */}
-      <div className="absolute top-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <div className="absolute bottom-0 w-screen h-px bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute top-0 w-screen h-px bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="absolute bottom-0 w-screen h-px bg-linear-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
     </section>
   );
 }
@@ -313,7 +313,7 @@ export default function ServicesStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Services
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Scalable IT solutions designed to grow with your business
           </p>
@@ -348,7 +348,7 @@ export default function ServicesStatic() {
                       key={feature}
                       className="flex items-center gap-2 text-sm text-zinc-300"
                     >
-                      <svg className="w-4 h-4 text-zinc-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-zinc-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       {feature}
@@ -398,7 +398,7 @@ export default function ProjectsStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Featured Projects
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             A selection of projects showcasing web applications and development tools
           </p>
@@ -416,7 +416,7 @@ export default function ProjectsStatic() {
                   {project.title}
                 </h3>
 
-                <p className="text-sm text-zinc-400 mb-4 flex-grow line-clamp-3">
+                <p className="text-sm text-zinc-400 mb-4 grow line-clamp-3">
                   {project.description}
                 </p>
 
@@ -498,7 +498,7 @@ export default function TestimonialsStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             What Clients Say
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Testimonials from satisfied clients
           </p>
@@ -590,7 +590,7 @@ export default function ContactStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Get in Touch
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Let's discuss your next project
           </p>

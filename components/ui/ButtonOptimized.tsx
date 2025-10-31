@@ -23,7 +23,7 @@ export function ButtonOptimized({
   return (
     <Component
       className={cn(
-        "relative overflow-hidden p-[1px] bg-transparent",
+        "relative overflow-hidden p-px bg-transparent",
         containerClassName,
       )}
       style={{
@@ -43,7 +43,7 @@ export function ButtonOptimized({
       {/* Content */}
       <div
         className={cn(
-          "relative z-10 flex h-full w-full items-center justify-center bg-zinc-900/80 backdrop-blur-sm border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-300 antialiased transition-colors hover:bg-zinc-900/90 hover:text-zinc-50",
+          "relative z-10 flex h-full w-full items-center justify-center bg-zinc-900/80 backdrop-blur-xs border border-zinc-700 px-6 py-3 text-sm font-medium text-zinc-300 antialiased transition-colors hover:bg-zinc-900/90 hover:text-zinc-50",
           className,
         )}
         style={{

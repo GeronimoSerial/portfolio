@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black">
+    <div className="relative min-h-screen bg-linear-to-b from-black via-zinc-950 to-black">
       {/* Background Effects */}
       <Background />
 

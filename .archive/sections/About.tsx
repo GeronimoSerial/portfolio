@@ -25,14 +25,14 @@ export default function About() {
           className="text-center mb-16"
         >
           <h3 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
-            <span className="bg-gradient-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+            <span className="bg-linear-to-b from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]">
               About me
             </span>
           </h3>
           <div className="flex items-center justify-center gap-3 mb-2">
-            <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-zinc-500" />
+            <div className="w-12 h-px bg-linear-to-r from-transparent to-zinc-500" />
             <div className="w-2 h-2 rounded-full bg-zinc-400 shadow-[0_0_10px_rgba(255,255,255,0.3)]" />
-            <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-zinc-500" />
+            <div className="w-12 h-px bg-linear-to-l from-transparent to-zinc-500" />
           </div>
         </motion.div>
 
@@ -45,7 +45,7 @@ export default function About() {
             className="flex justify-center"
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10 " />
+              <div className="absolute inset-0 bg-linear-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10 " />
               <Image
                 src="/assets/images/remove-bg-profile.png"
                 width={256}
@@ -80,7 +80,7 @@ export default function About() {
             </p>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <Briefcase className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
+              <Briefcase className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
                   Institutional Technology Coordinator - Consejo General de
@@ -97,7 +97,7 @@ export default function About() {
             </div>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
+              <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
                   Bachelor's in Systems Analysis

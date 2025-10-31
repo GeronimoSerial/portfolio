@@ -206,7 +206,7 @@ useEffect(() => {
 ```tsx
 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
   isScrolled
-    ? "bg-zinc-900/80 backdrop-blur-lg border-b border-zinc-800" // ⚠️ backdrop-blur es costoso
+    ? "bg-zinc-900/80 backdrop-blur-lg border-b border-zinc-800" // ⚠️ backdrop-blur-sm es costoso
     : "bg-transparent"
 }`}
 ```
@@ -239,7 +239,7 @@ JavaScript → Style → Layout → Paint → Composite
 
 2. **Paint**
    - Causado por: Canvas redraw completo 60 veces/segundo
-   - Causado por: `backdrop-blur` en navegación
+   - Causado por: `backdrop-blur-sm` en navegación
    - Impacto: Rasterización de píxeles
    - Coste: Proporcional al área del elemento
 
@@ -280,7 +280,7 @@ drawCircle(/*...*/);  // WRITE
 - ❌ `line-height` (animación `title`)
 - ❌ `letter-spacing` (animación `title`)
 - ❌ Canvas 2D API (no puede ser acelerado por GPU en la mayoría de navegadores)
-- ❌ `backdrop-blur` (parcialmente GPU pero muy costoso)
+- ❌ `backdrop-blur-sm` (parcialmente GPU pero muy costoso)
 
 ### 2.4 React Rendering Overhead
 
@@ -533,7 +533,7 @@ export const MovingBorder = ({ duration = 5000, rx, ry, ...otherProps }) => {
 // StickyNav.tsx - Línea 50
 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
   isScrolled
-    ? "bg-gradient-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
+    ? "bg-linear-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
     : "bg-transparent"
 }`}
 ```
@@ -541,8 +541,8 @@ className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
 **Opción B - Reducir intensidad del blur:**
 
 ```tsx
-// Cambiar backdrop-blur-lg → backdrop-blur-sm
-? "bg-zinc-900/90 backdrop-blur-sm border-b border-zinc-800"
+// Cambiar backdrop-blur-lg → backdrop-blur-xs
+? "bg-zinc-900/90 backdrop-blur-xs border-b border-zinc-800"
 ```
 
 **Opción C - Usar will-change (con precaución):**
@@ -671,7 +671,7 @@ const onMouseMove = () => {
 
 **Sprint 2 (Impacto visual - 3-4 horas):**
 4. ✅ Rediseñar animación `title` con `transform: scale()` en lugar de `line-height`
-5. ✅ Reemplazar `backdrop-blur` con gradiente sólido
+5. ✅ Reemplazar `backdrop-blur-sm` con gradiente sólido
 6. ✅ Cachear `getBoundingClientRect()` en Particles
 
 **Sprint 3 (Optimización avanzada - 4-6 horas):**

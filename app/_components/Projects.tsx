@@ -44,7 +44,7 @@ export default function ProjectsStatic() {
               <div className="flex flex-col h-full">
                 <h3 className="text-xl text-zinc-50 mb-3">{project.title}</h3>
 
-                <p className="text-sm text-zinc-400 mb-4 flex-grow line-clamp-3">
+                <p className="text-sm text-zinc-400 mb-4 grow line-clamp-3">
                   {project.description}
                 </p>
 

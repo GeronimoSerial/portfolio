@@ -16,7 +16,7 @@ export default function AboutExtendedStatic() {
           <h2 className="text-4xl md:text-5xl font-semibold text-zinc-50 mb-4 tracking-tight">
             About Me
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Professional Background & Experience
           </p>
@@ -26,7 +26,7 @@ export default function AboutExtendedStatic() {
           {/* Image/Avatar */}
           <div className="flex justify-center">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10" />
+              <div className="absolute inset-0 bg-linear-to-r from-zinc-500 to-zinc-300 rounded-full blur-2xl opacity-10" />
               <Image
                 src="/assets/images/remove-bg-profile.png"
                 width={256}
@@ -64,7 +64,7 @@ export default function AboutExtendedStatic() {
             </p>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <Briefcase className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
+              <Briefcase className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
                   Institutional Technology Coordinator
@@ -83,7 +83,7 @@ export default function AboutExtendedStatic() {
             </div>
 
             <div className="flex items-start gap-3 p-4 bg-white/5 border border-zinc-800 rounded-lg">
-              <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 flex-shrink-0" />
+              <GraduationCap className="w-5 h-5 text-zinc-400 mt-1 shrink-0" />
               <div>
                 <h4 className="text-zinc-200 font-medium mb-1">
                   Bachelor's in Systems Analysis

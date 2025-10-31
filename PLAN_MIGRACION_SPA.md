@@ -683,7 +683,7 @@ border-zinc-800                     →  border-zinc-700
 
 ```css
 /* Hero Background */
-bg-gradient-to-tl from-zinc-950 via-zinc-900 to-black
+bg-linear-to-tl from-zinc-950 via-zinc-900 to-black
 
 /* Cards y Surfaces */
 bg-white/5 backdrop-blur-lg  →  bg-white/3 backdrop-blur-xl
@@ -696,7 +696,7 @@ border-gradient: linear-gradient(90deg,
 )
 
 /* Text Gradients */
-bg-gradient-to-r from-white via-zinc-100 to-zinc-300
+bg-linear-to-r from-white via-zinc-100 to-zinc-300
 ```
 
 #### Efectos y Animaciones:

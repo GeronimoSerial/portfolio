@@ -8,7 +8,7 @@ export default function ContactOpportunitiesStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             Let's Connect
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Open to new opportunities and collaborations
           </p>
@@ -79,7 +79,7 @@ export default function ContactOpportunitiesStatic() {
         </div>
 
         {/* Availability Card */}
-        <div className="p-8 bg-gradient-to-br from-white/10 to-white/5 border border-zinc-700 rounded-lg text-center">
+        <div className="p-8 bg-linear-to-br from-white/10 to-white/5 border border-zinc-700 rounded-lg text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Calendar className="w-5 h-5 text-zinc-300" />
             <h3 className="text-xl text-zinc-50 font-semibold">

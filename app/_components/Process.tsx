@@ -52,7 +52,7 @@ export default function ProcessStatic() {
           <h2 className="text-4xl md:text-5xl font-display text-zinc-50 mb-4">
             How I Work
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
+          <div className="w-20 h-1 bg-linear-to-r from-transparent via-zinc-300 to-transparent mx-auto mb-4" />
           <p className="text-zinc-400 max-w-2xl mx-auto">
             Proven methodology for predictable results
           </p>

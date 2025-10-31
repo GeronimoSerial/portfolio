@@ -93,7 +93,7 @@ const { isScrolled, activeSection, showBackToTop } = useScroll();
 
 ```diff
 - "bg-zinc-900/80 backdrop-blur-lg border-b border-zinc-800"
-+ "bg-gradient-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
++ "bg-linear-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
 ```
 
 **Resultado:**
@@ -209,7 +209,7 @@ const { isScrolled, activeSection, showBackToTop } = useScroll();
 - Backgrounds: zinc-900 con gradientes
 
 ✅ **Efectos glassmorphism**
-- Buttons: `bg-zinc-900/80 backdrop-blur-sm`
+- Buttons: `bg-zinc-900/80 backdrop-blur-xs`
 - Navegación: gradiente en lugar de blur pesado
 
 ✅ **Animaciones suaves**

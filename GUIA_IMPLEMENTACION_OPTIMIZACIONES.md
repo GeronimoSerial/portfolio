@@ -298,7 +298,7 @@ className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
 ```typescript
 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
   isScrolled
-    ? "bg-gradient-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
+    ? "bg-linear-to-b from-zinc-900 to-zinc-900/95 border-b border-zinc-800"
     : "bg-transparent"
 }`}
 ```
@@ -307,7 +307,7 @@ className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
 ```typescript
 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
   isScrolled
-    ? "bg-zinc-900/90 backdrop-blur-sm border-b border-zinc-800" // blur-sm en vez de blur-lg
+    ? "bg-zinc-900/90 backdrop-blur-xs border-b border-zinc-800" // blur-xs en vez de blur-lg
     : "bg-transparent"
 }`}
 ```
@@ -458,7 +458,7 @@ git commit -m "perf: optimize animations and scroll listeners
 - Replace manual canvas Particles with @tsparticles (-70% CPU)
 - Replace MovingBorder SVG with CSS animations (GPU-accelerated)
 - Centralize scroll listeners in ScrollContext (-91% events)
-- Optimize backdrop-blur in navigation
+- Optimize backdrop-blur-sm in navigation
 - Frame time improved from ~30ms to ~15ms (+100% FPS)"
 
 # Push
