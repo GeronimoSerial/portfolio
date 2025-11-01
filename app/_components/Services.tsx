@@ -1,6 +1,13 @@
+"use client";
+
 import { Code, Lightbulb, Wrench, TrendingUp } from "lucide-react";
+import { useRef } from "react";
+import { useServicesAnimations } from "@/hooks/useServicesAnimations";
 
 export default function ServicesStatic() {
+  const containerRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
   const services = [
     {
       icon: Code,
@@ -52,83 +59,74 @@ export default function ServicesStatic() {
     },
   ];
 
+  // Apply animations
+  useServicesAnimations(containerRef, headerRef);
+
   return (
-    <section id="services" className="relative min-h-screen py-20 px-4 ">
+    <section
+      ref={containerRef}
+      id="services"
+      className="relative min-h-screen py-20 px-4"
+    >
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2
-            className="text-4xl md:text-6xl font-display text-zinc-950 dark:text-white 
-                       mb-4 gsap-element"
-          >
+        <div ref={headerRef} className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-display text-zinc-950 dark:text-white mb-4">
             Services
           </h2>
 
-          <p
-            className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 
-                      max-w-2xl mx-auto gsap-element"
-          >
+          <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
             Comprehensive IT solutions tailored to your business needs
           </p>
         </div>
 
         {/* Grid de servicios */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="services-grid grid md:grid-cols-2 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
-            const delayClass =
-              index === 0
-                ? "delay-0"
-                : index === 1
-                ? "delay-200"
-                : index === 2
-                ? "delay-400"
-                : "delay-600";
             return (
               <article
                 key={service.title}
-                className={`group p-6 
+                className="service-card group p-6 
                          bg-black/5 dark:bg-white/5 
                          border border-zinc-200 dark:border-zinc-800 
                          rounded-lg 
                          hover:border-zinc-400 dark:hover:border-white 
-                         gsap-element
-                         `}
+                         transition-all duration-300
+                         relative overflow-hidden"
               >
-                <div className="flex items-start gap-4 mb-4">
+                {/* Glow effect on hover */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                             transition-opacity duration-500 pointer-events-none
+                             bg-gradient-to-br from-white/5 via-transparent to-transparent"
+                />
+
+                <div className="flex items-start gap-4 mb-4 relative z-10">
                   <div
-                    className="p-3 
+                    className="icon-container p-3 
                                 bg-zinc-100 dark:bg-zinc-900 
                                 border border-zinc-200 dark:border-zinc-800 
-                                rounded-lg gsap-element"
+                                rounded-lg"
                   >
-                    <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400 gsap-element" />
+                    <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
                   </div>
                   <div className="flex-1">
-                    <h3
-                      className="text-xl 
-                                 text-zinc-950 dark:text-zinc-50 
-                                 mb-2 gsap-element"
-                    >
+                    <h3 className="text-xl text-zinc-950 dark:text-zinc-50 mb-2">
                       {service.title}
                     </h3>
-                    <p
-                      className="text-sm 
-                                text-zinc-600 dark:text-zinc-400 
-                                mb-4 gsap-element"
-                    >
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
                       {service.description}
                     </p>
                   </div>
                 </div>
 
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature) => (
+                <ul className="space-y-2 mb-6 relative z-10">
+                  {service.features.map((feature, featureIndex) => (
                     <li
                       key={feature}
-                      className="flex items-center gap-2 text-sm 
-                               text-zinc-700 dark:text-zinc-300 
-                               gsap-element"
+                      className="feature-item flex items-center gap-2 text-sm 
+                               text-zinc-700 dark:text-zinc-300"
                     >
                       <svg
                         className="w-4 h-4 text-zinc-500 dark:text-zinc-500 shrink-0"
@@ -149,21 +147,18 @@ export default function ServicesStatic() {
                 <div
                   className="flex items-center justify-between pt-4 
                               border-t border-zinc-200 dark:border-zinc-800 
-                              gsap-element"
+                              relative z-10"
                 >
-                  <span
-                    className="text-lg font-display 
-                                 text-zinc-900 dark:text-zinc-100 
-                                 gsap-element"
-                  >
+                  <span className="text-lg font-display text-zinc-900 dark:text-zinc-100">
                     {service.price}
                   </span>
                   <span
                     className="px-4 py-2 text-sm font-medium 
                                  text-white dark:text-black 
                                  bg-black dark:bg-white 
-                                 rounded-lg cursor-default 
-                                 gsap-element"
+                                 rounded-lg cursor-pointer 
+                                 transition-all duration-300
+                                 hover:shadow-lg hover:shadow-black/20 dark:hover:shadow-white/20"
                   >
                     Request Quote
                   </span>
