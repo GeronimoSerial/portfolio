@@ -4,6 +4,7 @@ import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Background } from "@/components/layout/Background";
+import AnimatedNav from "@/components/layout/AnimatedNav";
 
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
