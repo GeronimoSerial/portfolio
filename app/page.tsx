@@ -1,32 +1,43 @@
-import React from "react";
-import Particles from "./components/particles";
+import Nav from "@/components/layout/Nav";
+import Background from "@/components/layout/Background";
+import Hero from "@/app/_components/Hero";
+import Services from "@/app/_components/Services";
+import Process from "@/app/_components/Process";
+import Projects from "@/app/_components/Projects";
+import Results from "@/app/_components/Results";
+import Contact from "@/app/_components/Contact";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden overflow-y-hidden flex flex-col items-center justify-center w-full h-screen overflow-hidden bg-gradient-to-tl from-indigo-900 via-indigo-400/10">
-			<Particles
-			  className="absolute inset-0 -z-10 animate-fade-in"
-			  quantity={200}
-			/>
-      
-      <div className="max-w-2xl px-6 text-center">
-        <div className="w-full h-px animate-glow animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 mb-8" />
-        
-        <h1 className="py-3.5 px-0.5 z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-5xl md:text-7xl whitespace-nowrap bg-clip-text mb-8">
-          geroserial.com
-        </h1>
+    <>
+      <Background />
+      <Nav />
 
-        <div className="w-full h-px animate-glow animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0 mb-8" />
-        
-        <div className="my-8 animate-fade-in space-y-4">
-          <h2 className="text-xl text-zinc-300">
-            Actualizando el portfolio
-          </h2>
-          <p className="text-lg font-semibold text-indigo-300 mt-6">
-            Regresa pronto
+      <main className="relative">
+        <Hero />
+        <Services />
+        <Process />
+        <Projects />
+        <Results />
+        <Contact />
+      </main>
+
+      {/* Footer simple */}
+      <footer className="border-t border-zinc-800 py-8">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()}{" "}
+            <Link
+              href="https://geroserial.com"
+              className="text-black hover:underline dark:text-white"
+            >
+              geroserial.com
+            </Link>
+            .
           </p>
         </div>
-      </div>
-    </div>
+      </footer>
+    </>
   );
 }

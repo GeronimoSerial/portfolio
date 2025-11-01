@@ -11,14 +11,16 @@
 # next.js
 /.next/
 /out/
+/md/
 
 # production
 /build
-
 # misc
 .DS_Store
 *.pem
-
+test-results
+playwright-report
+tests
 # debug
 npm-debug.log*
 yarn-debug.log*
@@ -35,7 +37,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.contentlayer
 project-bolt-sb1-2zdvq2/project/.gitignore
 project-bolt-sb1-2zdvq2/project/eslint.config.js
 project-bolt-sb1-2zdvq2/project/index.html
@@ -59,3 +60,10 @@ project-bolt-sb1-2zdvq2/project/src/components/ui/carousel.tsx
 project-bolt-sb1-2zdvq2/project/src/hooks/useDraggable.ts
 project-bolt-sb1-2zdvq2/project/src/lib/utils.ts
 project-bolt-sb1-2zdvq2.zip
+.github/copilot-instructions.md
+test-results.json
+TEST_ANALYSIS.md
+playwright.config.ts
+MIGRATION_NEXT_THEMES.md
+MIGRATION_COMPLETE.md
+DARK_MODE_TECHNICAL_AUDIT.md

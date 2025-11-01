@@ -1,13 +1,106 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
-  .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
-  :root {
-    --radius: 0.5rem;
-  }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .text-edge-outline {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+    }
+
+    :root {
+        --radius: 0.5rem;
+    }
+
+    h3 {
+        font-family: var(--font-geist), serif;
+    }
+
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
+
+    /* GPU optimization básica para elementos animados con GSAP */
+    .gsap-element {
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Optimización para project cards */
+    .project-card {
+        perspective: 1000px;
+        transform-style: preserve-3d;
+    }
+
+    .project-card .card-content {
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+
+    /* SVG stroke animation optimization */
+    .card-border path,
+    .card-border rect,
+    .card-border circle {
+        vector-effect: non-scaling-stroke;
+    }
+
+    .decorative-svg path,
+    .decorative-svg circle,
+    .decorative-svg line {
+        vector-effect: non-scaling-stroke;
+    }
+
+    /* Smooth font rendering para caracteres animados */
+    .char {
+        display: inline-block;
+        transform-origin: 50% 100%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Word animation container */
+    .word {
+        display: inline-block;
+        transform-origin: 50% 100%;
+        perspective: 1000px;
+    }
+
+    /* Mejora visual para iconos animados */
+    .card-icon {
+        transform-origin: center;
+        backface-visibility: hidden;
+    }
 } 
 

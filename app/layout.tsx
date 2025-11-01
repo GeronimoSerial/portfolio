@@ -1,15 +1,19 @@
 import "../global.css";
-import { Inter } from "@next/font/google";
-import LocalFont from "@next/font/local";
+import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import LocalFont from "next/font/local";
 import { Metadata } from "next";
-import { Analytics } from "./components/analytics";
+import { ThemeProvider } from "./providers/ThemeProvider";
+
+// import { Analytics } from "@/components/shared/analytics";
+// import StickyNav from "@/components/navigation/StickyNav";
 
 export const metadata: Metadata = {
   title: {
     default: "geroserial.com",
     template: "%s | geroserial.com",
   },
-  description: "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
+  description:
+    "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
   openGraph: {
     title: "geroserial.com",
     description:
@@ -18,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "geroserial.com",
     images: [
       {
-        url: "https://geroserial.com/og.png",
+        url: "https://geroserial.com/assets/images/og.png",
         width: 1920,
         height: 1080,
       },
@@ -42,17 +46,30 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    shortcut: "/logo_geroserial.webp",
+    shortcut: "/assets/icons/favicon.png",
   },
 };
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist",
 });
 
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
+});
+
+const dm_sans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: "--font-dm_sans",
+});
+
+const geist_mono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist-mono",
 });
 
 export default function RootLayout({
@@ -61,15 +78,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html
+      lang="en"
+      className={[
+        geist.variable,
+        calSans.variable,
+        dm_sans.variable,
+        geist_mono.variable,
+      ].join(" ")}
+      suppressHydrationWarning
+    >
       <head>
-        <Analytics />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+        />
       </head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
+        className={`bg-white dark:bg-black gsap-element ${
+          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        }`}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
