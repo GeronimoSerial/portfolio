@@ -40,11 +40,11 @@ export function useProcessAnimations() {
 
         // Animate cards with unique entrance per card
         const cards = gsap.utils.toArray<HTMLElement>(".process-card");
-        
+
         cards.forEach((card, index) => {
           const direction = index % 2 === 0 ? -1 : 1;
           const rotation = index % 2 === 0 ? -8 : 8;
-          
+
           // Card entrance with rotation and slide - smoother easing
           gsap.from(card, {
             x: direction * 80,
@@ -152,7 +152,8 @@ export function useProcessAnimations() {
         });
 
         // Animate connecting lines between cards (decorative)
-        const connectors = gsap.utils.toArray<HTMLElement>(".process-connector");
+        const connectors =
+          gsap.utils.toArray<HTMLElement>(".process-connector");
         connectors.forEach((connector, index) => {
           gsap.from(connector, {
             scaleX: 0,

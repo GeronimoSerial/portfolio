@@ -4,7 +4,7 @@ import Hero from "@/app/_components/Hero";
 import Services from "@/app/_components/Services";
 import Process from "@/app/_components/Process";
 import Projects from "@/app/_components/Projects";
-import Testimonials from "@/app/_components/Testimonials";
+import Results from "@/app/_components/Results";
 import Contact from "@/app/_components/Contact";
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export default function Home() {
         <Services />
         <Process />
         <Projects />
-        <Testimonials />
+        <Results />
         <Contact />
       </main>
 
