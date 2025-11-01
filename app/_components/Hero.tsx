@@ -3,6 +3,7 @@
 import { MapPin } from "lucide-react";
 import React, { useRef } from "react";
 import { useGSAPOnly, useGSAPScroll } from "@/hooks/useGSAPOnly";
+import { GradientHeading } from "@/components/ui/gradient-heading";
 
 export default function HeroStatic() {
   const container = useRef<HTMLElement>(null);
@@ -40,12 +41,20 @@ export default function HeroStatic() {
       <div className="hero-content z-10 flex flex-col items-center text-center hero-fade">
         {/* Título principal */}
         <div className="mb-6">
-          <h1
+          <GradientHeading
+            variant="default"
+            size="xxxl"
+            weight="bold"
+            className="hero-title gsap-element "
+          >
+            geroserial.com
+          </GradientHeading>
+          {/* <h1
             className="hero-title gsap-element text-6xl md:text-9xl font-display 
                        text-zinc-950 dark:text-white"
           >
             geroserial.com
-          </h1>
+          </h1> */}
         </div>
 
         <h2
@@ -63,8 +72,7 @@ export default function HeroStatic() {
         >
           Methodical Approach. Real-World Solutions.
         </p>
-
-        {/* Trust Indicators */}
+        {/* 
         <div
           className="hero-details gsap-element flex flex-wrap items-center justify-center gap-3 mt-6 
                       text-xs md:text-sm 
@@ -75,10 +83,10 @@ export default function HeroStatic() {
           <span>+5 Satisfied Clients</span>
           <span className="text-zinc-300 dark:text-zinc-800">•</span>
           <span>2+ Years Experience</span>
-        </div>
+        </div> */}
 
         {/* Location */}
-        <div
+        {/* <div
           className="hero-details gsap-element flex items-center gap-2 mt-3 
                       text-xs md:text-sm 
                       text-zinc-400 dark:text-zinc-600"
@@ -87,7 +95,7 @@ export default function HeroStatic() {
           <span>Corrientes, Argentina</span>
           <span className="text-zinc-300 dark:text-zinc-800">|</span>
           <span>Remote Services Available</span>
-        </div>
+        </div> */}
 
         {/* Botones simples */}
         <div className="hero-buttons gsap-element flex gap-4 mt-10">
