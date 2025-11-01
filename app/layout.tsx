@@ -96,7 +96,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body
-				className={`bg-white dark:bg-black transition-colors duration-300 ${
+				className={`bg-white dark:bg-black gsap-element ${
 					process.env.NODE_ENV === "development" ? "debug-screens" : undefined
 				}`}
 			>
@@ -104,7 +104,6 @@ export default function RootLayout({
 					attribute="class"
 					defaultTheme="system"
 					enableSystem
-					disableTransitionOnChange
 				>
 					{children}
 				</ThemeProvider>

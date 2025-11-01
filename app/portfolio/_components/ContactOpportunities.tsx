@@ -8,7 +8,7 @@ export default function ContactOpportunitiesStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
 					>
 						Let's Connect
 					</h2>
@@ -21,7 +21,7 @@ export default function ContactOpportunitiesStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Open to new opportunities and collaborations
 					</p>
@@ -37,33 +37,33 @@ export default function ContactOpportunitiesStatic() {
                      rounded-lg 
                      hover:border-zinc-400 dark:hover:border-zinc-700 
                      hover:bg-black/10 dark:hover:bg-white/10 
-                     transition-all duration-300"
+                     "
 					>
 						<div className="flex items-center gap-4">
 							<div
 								className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors"
+                            rounded-lg gsap-element"
 							>
 								<Mail
 									className="w-5 h-5 
                                text-zinc-600 dark:text-zinc-400 
-                               transition-colors"
+                               gsap-element"
 								/>
 							</div>
 							<div>
 								<p
 									className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors"
+                            mb-1 gsap-element"
 								>
 									Email
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors"
+                            gsap-element"
 								>
 									contacto@geroserial.com
 								</p>
@@ -75,33 +75,33 @@ export default function ContactOpportunitiesStatic() {
 						className="p-6 
                         bg-black/5 dark:bg-white/5 
                         border border-zinc-200 dark:border-zinc-800 
-                        rounded-lg transition-colors"
+                        rounded-lg gsap-element"
 					>
 						<div className="flex items-center gap-4">
 							<div
 								className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors"
+                            rounded-lg gsap-element"
 							>
 								<MapPin
 									className="w-5 h-5 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors"
+                                 gsap-element"
 								/>
 							</div>
 							<div>
 								<p
 									className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors"
+                            mb-1 gsap-element"
 								>
 									Location
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors"
+                            gsap-element"
 								>
 									Corrientes, Argentina
 								</p>
@@ -119,33 +119,33 @@ export default function ContactOpportunitiesStatic() {
                      rounded-lg 
                      hover:border-zinc-400 dark:hover:border-zinc-700 
                      hover:bg-black/10 dark:hover:bg-white/10 
-                     transition-all duration-300"
+                     "
 					>
 						<div className="flex items-center gap-4">
 							<div
 								className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors"
+                            rounded-lg gsap-element"
 							>
 								<Github
 									className="w-5 h-5 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors"
+                                 gsap-element"
 								/>
 							</div>
 							<div>
 								<p
 									className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors"
+                            mb-1 gsap-element"
 								>
 									GitHub
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors"
+                            gsap-element"
 								>
 									@geroserial
 								</p>
@@ -163,33 +163,33 @@ export default function ContactOpportunitiesStatic() {
                      rounded-lg 
                      hover:border-zinc-400 dark:hover:border-zinc-700 
                      hover:bg-black/10 dark:hover:bg-white/10 
-                     transition-all duration-300"
+                     "
 					>
 						<div className="flex items-center gap-4">
 							<div
 								className="p-3 
                             bg-zinc-100 dark:bg-zinc-900 
                             border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg transition-colors"
+                            rounded-lg gsap-element"
 							>
 								<Linkedin
 									className="w-5 h-5 
                                    text-zinc-600 dark:text-zinc-400 
-                                   transition-colors"
+                                   gsap-element"
 								/>
 							</div>
 							<div>
 								<p
 									className="text-xs 
                             text-zinc-500 dark:text-zinc-500 
-                            mb-1 transition-colors"
+                            mb-1 gsap-element"
 								>
 									LinkedIn
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-900 dark:text-zinc-100 
-                            transition-colors"
+                            gsap-element"
 								>
 									Geronimo Serial
 								</p>
@@ -206,25 +206,25 @@ export default function ContactOpportunitiesStatic() {
                       dark:from-white/10 dark:to-white/5 
                       border 
                       border-zinc-300 dark:border-zinc-700 
-                      rounded-lg text-center transition-colors"
+                      rounded-lg text-center gsap-element"
 				>
 					<div className="flex items-center justify-center gap-2 mb-4">
 						<Calendar
 							className="w-5 h-5 
                                text-zinc-700 dark:text-zinc-300 
-                               transition-colors"
+                               gsap-element"
 						/>
 						<h3
 							className="text-xl 
                          text-zinc-950 dark:text-zinc-50 
-                         font-semibold transition-colors"
+                         font-semibold gsap-element"
 						>
 							Currently Available
 						</h3>
 					</div>
 					<p
 						className="text-zinc-700 dark:text-zinc-300 
-                      mb-6 max-w-xl mx-auto transition-colors"
+                      mb-6 max-w-xl mx-auto gsap-element"
 					>
 						I'm open to freelance projects, consulting opportunities, and
 						full-time positions. Let's discuss how I can help bring your ideas
@@ -238,7 +238,7 @@ export default function ContactOpportunitiesStatic() {
                        bg-black dark:bg-white 
                        rounded-lg 
                        hover:bg-zinc-800 dark:hover:bg-zinc-100 
-                       transition-colors"
+                       gsap-element"
 						>
 							Send Email
 						</a>
@@ -251,7 +251,7 @@ export default function ContactOpportunitiesStatic() {
                        rounded-lg 
                        hover:bg-black/20 dark:hover:bg-white/20 
                        hover:border-zinc-500 dark:hover:border-zinc-500 
-                       transition-all"
+                       "
 						>
 							View Resume
 						</a>
@@ -263,7 +263,7 @@ export default function ContactOpportunitiesStatic() {
 					<p
 						className="text-sm 
                       text-zinc-500 dark:text-zinc-500 
-                      transition-colors"
+                      gsap-element"
 					>
 						Response time: Usually within 24-48 hours
 					</p>

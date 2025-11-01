@@ -11,7 +11,7 @@ export default function PortfolioHeroStatic() {
 					<h1
 						className="text-5xl md:text-7xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
 					>
 						Geronimo Serial
 					</h1>
@@ -19,7 +19,7 @@ export default function PortfolioHeroStatic() {
 					<p
 						className="text-xl md:text-2xl 
                       text-zinc-600 dark:text-zinc-400 
-                      mb-6 transition-colors"
+                      mb-6 gsap-element"
 					>
 						Systems Analyst & Full Stack Developer
 					</p>
@@ -27,7 +27,7 @@ export default function PortfolioHeroStatic() {
 					<div
 						className="flex items-center justify-center gap-2 
                         text-zinc-500 dark:text-zinc-500 
-                        mb-8 transition-colors"
+                        mb-8 gsap-element"
 					>
 						<MapPin className="w-4 h-4" />
 						<span className="text-sm">Corrientes, Argentina</span>
@@ -43,7 +43,7 @@ export default function PortfolioHeroStatic() {
                        rounded-lg 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
-                       transition-all"
+                       "
 						>
 							<Mail className="w-4 h-4" />
 							contacto@geroserial.com
@@ -60,7 +60,7 @@ export default function PortfolioHeroStatic() {
                        rounded-lg 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
-                       transition-all"
+                       "
 						>
 							<Github className="w-4 h-4" />
 							GitHub
@@ -77,7 +77,7 @@ export default function PortfolioHeroStatic() {
                        rounded-lg 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
-                       transition-all"
+                       "
 						>
 							<Linkedin className="w-4 h-4" />
 							LinkedIn
@@ -92,7 +92,7 @@ export default function PortfolioHeroStatic() {
                        bg-black dark:bg-white 
                        rounded-lg 
                        hover:bg-zinc-800 dark:hover:bg-zinc-100 
-                       transition-colors"
+                       gsap-element"
 						>
 							<Download className="w-4 h-4" />
 							Download Resume
@@ -107,7 +107,7 @@ export default function PortfolioHeroStatic() {
                        rounded-lg 
                        hover:bg-black/20 dark:hover:bg-white/20 
                        hover:border-zinc-500 dark:hover:border-zinc-500 
-                       transition-all"
+                       "
 						>
 							Open to Opportunities
 						</a>

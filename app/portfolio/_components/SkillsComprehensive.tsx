@@ -114,7 +114,7 @@ export default function SkillsComprehensiveStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-semibold 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 tracking-tight transition-colors"
+                       mb-4 tracking-tight gsap-element"
 					>
 						Technical Skills
 					</h2>
@@ -127,7 +127,7 @@ export default function SkillsComprehensiveStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Comprehensive toolkit for modern development
 					</p>
@@ -140,7 +140,7 @@ export default function SkillsComprehensiveStatic() {
 							<h3
 								className="text-2xl font-display 
                            text-zinc-950 dark:text-zinc-50 
-                           mb-6 text-center transition-colors"
+                           mb-6 text-center gsap-element"
 							>
 								{categoryName}
 							</h3>
@@ -151,7 +151,7 @@ export default function SkillsComprehensiveStatic() {
 										<h4
 											className="text-lg 
                                  text-zinc-700 dark:text-zinc-300 
-                                 mb-4 font-medium transition-colors"
+                                 mb-4 font-medium gsap-element"
 										>
 											{subcategory.name}
 										</h4>
@@ -166,7 +166,7 @@ export default function SkillsComprehensiveStatic() {
                                    rounded-lg 
                                    hover:border-zinc-400 dark:hover:border-zinc-700 
                                    hover:bg-black/10 dark:hover:bg-white/10 
-                                   transition-all duration-300 text-center"
+                                   "
 												>
 													<div className="flex flex-col items-center gap-3">
 														<i
@@ -177,7 +177,7 @@ export default function SkillsComprehensiveStatic() {
 														<span
 															className="text-sm 
                                            text-zinc-700 dark:text-zinc-300 
-                                           font-medium transition-colors"
+                                           font-medium gsap-element"
 														>
 															{skill.name}
 														</span>

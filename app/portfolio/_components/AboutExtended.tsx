@@ -16,7 +16,7 @@ export default function AboutExtendedStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-semibold 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 tracking-tight transition-colors"
+                       mb-4 tracking-tight gsap-element"
 					>
 						About Me
 					</h2>
@@ -29,7 +29,7 @@ export default function AboutExtendedStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Professional Background & Experience
 					</p>
@@ -55,7 +55,7 @@ export default function AboutExtendedStatic() {
                          border-2 
                          border-zinc-300 dark:border-zinc-700 
                          hover:border-zinc-500 dark:hover:border-zinc-500 
-                         transition-all duration-300"
+                         "
 							/>
 						</div>
 					</div>
@@ -65,14 +65,14 @@ export default function AboutExtendedStatic() {
 						<h3
 							className="text-3xl font-display 
                          text-zinc-950 dark:text-zinc-50 
-                         transition-colors"
+                         gsap-element"
 						>
 							Geronimo Serial
 						</h3>
 						<div
 							className="flex items-center gap-2 
                           text-zinc-600 dark:text-zinc-400 
-                          transition-colors"
+                          gsap-element"
 						>
 							<MapPin className="w-4 h-4" />
 							<span>Corrientes, Argentina</span>
@@ -80,7 +80,7 @@ export default function AboutExtendedStatic() {
 
 						<p
 							className="text-zinc-700 dark:text-zinc-300 
-                        leading-relaxed transition-colors"
+                        leading-relaxed gsap-element"
 						>
 							Systems analyst in training with experience in infrastructure
 							management, the design of scalable and secure software
@@ -91,7 +91,7 @@ export default function AboutExtendedStatic() {
 
 						<p
 							className="text-zinc-700 dark:text-zinc-300 
-                        leading-relaxed transition-colors"
+                        leading-relaxed gsap-element"
 						>
 							With a strong foundation in both backend and frontend
 							technologies, I specialize in building robust, maintainable
@@ -104,38 +104,38 @@ export default function AboutExtendedStatic() {
 							className="flex items-start gap-3 p-4 
                           bg-black/5 dark:bg-white/5 
                           border border-zinc-200 dark:border-zinc-800 
-                          rounded-lg transition-colors"
+                          rounded-lg gsap-element"
 						>
 							<Briefcase
 								className="w-5 h-5 
                                   text-zinc-600 dark:text-zinc-400 
-                                  mt-1 shrink-0 transition-colors"
+                                  mt-1 shrink-0 gsap-element"
 							/>
 							<div>
 								<h4
 									className="text-zinc-900 dark:text-zinc-200 
-                             font-medium mb-1 transition-colors"
+                             font-medium mb-1 gsap-element"
 								>
 									Institutional Technology Coordinator
 								</h4>
 								<p
 									className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-1 transition-colors"
+                            mb-1 gsap-element"
 								>
 									Consejo General de Educación de Corrientes
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-2 transition-colors"
+                            mb-2 gsap-element"
 								>
 									2022 - Present
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-500 dark:text-zinc-500 
-                            mt-2 transition-colors"
+                            mt-2 gsap-element"
 								>
 									Leading the digital transformation of educational systems
 									across the province, implementing scalable web solutions and
@@ -149,31 +149,31 @@ export default function AboutExtendedStatic() {
 							className="flex items-start gap-3 p-4 
                           bg-black/5 dark:bg-white/5 
                           border border-zinc-200 dark:border-zinc-800 
-                          rounded-lg transition-colors"
+                          rounded-lg gsap-element"
 						>
 							<GraduationCap
 								className="w-5 h-5 
                                       text-zinc-600 dark:text-zinc-400 
-                                      mt-1 shrink-0 transition-colors"
+                                      mt-1 shrink-0 gsap-element"
 							/>
 							<div>
 								<h4
 									className="text-zinc-900 dark:text-zinc-200 
-                             font-medium mb-1 transition-colors"
+                             font-medium mb-1 gsap-element"
 								>
 									Bachelor's in Systems Analysis
 								</h4>
 								<p
 									className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            transition-colors"
+                            gsap-element"
 								>
 									Universidad Nacional del Nordeste (UNNE)
 								</p>
 								<p
 									className="text-sm 
                             text-zinc-500 dark:text-zinc-500 
-                            mt-2 transition-colors"
+                            mt-2 gsap-element"
 								>
 									In Progress - Expected completion 2026
 								</p>
@@ -192,19 +192,19 @@ export default function AboutExtendedStatic() {
                        border border-zinc-200 dark:border-zinc-800 
                        rounded-lg text-center 
                        hover:border-zinc-400 dark:hover:border-zinc-700 
-                       transition-colors duration-300"
+                       gsap-element duration-300"
 						>
 							<div
 								className="text-3xl md:text-4xl font-display 
                             text-zinc-950 dark:text-zinc-50 
-                            mb-2 transition-colors"
+                            mb-2 gsap-element"
 							>
 								{stat.value}
 							</div>
 							<div
 								className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            transition-colors"
+                            gsap-element"
 							>
 								{stat.label}
 							</div>

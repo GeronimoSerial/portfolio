@@ -36,7 +36,7 @@ export default function ContactStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
 					>
 						Get in Touch
 					</h2>
@@ -49,7 +49,7 @@ export default function ContactStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Let's discuss your next project
 					</p>
@@ -66,33 +66,33 @@ export default function ContactStatic() {
                             border border-zinc-200 dark:border-zinc-800 
                             rounded-lg 
                             hover:border-zinc-400 dark:hover:border-zinc-700 
-                            transition-colors"
+                            gsap-element"
 							>
 								<div className="flex items-center gap-4">
 									<div
 										className="p-3 
                                 bg-zinc-100 dark:bg-zinc-900 
                                 border border-zinc-200 dark:border-zinc-800 
-                                rounded-lg transition-colors"
+                                rounded-lg gsap-element"
 									>
 										<Icon
 											className="w-5 h-5 
                                    text-zinc-600 dark:text-zinc-400 
-                                   transition-colors"
+                                   gsap-element"
 										/>
 									</div>
 									<div>
 										<p
 											className="text-xs 
                                 text-zinc-500 dark:text-zinc-500 
-                                mb-1 transition-colors"
+                                mb-1 gsap-element"
 										>
 											{info.label}
 										</p>
 										<p
 											className="text-sm 
                                 text-zinc-900 dark:text-zinc-100 
-                                transition-colors"
+                                gsap-element"
 										>
 											{info.value}
 										</p>
@@ -120,7 +120,7 @@ export default function ContactStatic() {
 				<div className="text-center mt-12">
 					<p
 						className="text-zinc-500 dark:text-zinc-500 
-                      mb-4 transition-colors"
+                      mb-4 gsap-element"
 					>
 						Available for freelance projects and consulting opportunities
 					</p>
@@ -131,7 +131,7 @@ export default function ContactStatic() {
                      bg-black dark:bg-white 
                      rounded-lg 
                      hover:bg-zinc-800 dark:hover:bg-zinc-100 
-                     transition-colors"
+                     gsap-element"
 					>
 						Send Email
 					</a>

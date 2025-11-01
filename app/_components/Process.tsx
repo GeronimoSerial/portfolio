@@ -52,7 +52,7 @@ export default function ProcessStatic() {
           <h2
             className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
           >
             How I Work
           </h2>
@@ -65,7 +65,7 @@ export default function ProcessStatic() {
           />
           <p
             className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
           >
             Proven methodology for predictable results
           </p>
@@ -82,13 +82,13 @@ export default function ProcessStatic() {
                          border border-zinc-200 dark:border-zinc-800 
                          rounded-lg 
                          hover:border-zinc-400 dark:hover:border-zinc-700 
-                         transition-all duration-300"
+                         "
               >
                 <div className="mb-4">
                   <span
                     className="text-5xl font-display 
                                  text-zinc-500 dark:text-zinc-800 
-                                 transition-colors"
+                                 gsap-element"
                   >
                     {step.number}
                   </span>
@@ -98,21 +98,21 @@ export default function ProcessStatic() {
                   <Icon
                     className="w-8 h-8 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors"
+                                 gsap-element"
                   />
                 </div>
 
                 <h3
                   className="text-xl 
                              text-zinc-950 dark:text-zinc-50 
-                             mb-2 transition-colors"
+                             mb-2 gsap-element"
                 >
                   {step.title}
                 </h3>
                 <p
                   className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-4 transition-colors"
+                            mb-4 gsap-element"
                 >
                   {step.description}
                 </p>
@@ -123,7 +123,7 @@ export default function ProcessStatic() {
                       key={item}
                       className="flex items-start gap-2 text-sm 
                                text-zinc-500 dark:text-zinc-500 
-                               transition-colors"
+                               gsap-element"
                     >
                       <span className="text-zinc-400 dark:text-zinc-700 mt-1">
                         •
@@ -138,7 +138,7 @@ export default function ProcessStatic() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-sm text-zinc-500 dark:text-zinc-500 transition-colors">
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
             Methodical Approach. Real-World Solutions.
           </p>
         </div>

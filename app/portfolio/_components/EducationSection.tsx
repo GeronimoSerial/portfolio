@@ -36,7 +36,7 @@ export default function EducationSectionStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
 					>
 						Education & Certifications
 					</h2>
@@ -49,7 +49,7 @@ export default function EducationSectionStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Academic background and professional training
 					</p>
@@ -68,19 +68,19 @@ export default function EducationSectionStatic() {
                          rounded-lg 
                          hover:border-zinc-400 dark:hover:border-zinc-700 
                          hover:bg-black/10 dark:hover:bg-white/10 
-                         transition-all duration-300"
+                         "
 							>
 								<div className="flex items-start gap-4">
 									<div
 										className="p-3 
                                 bg-zinc-100 dark:bg-zinc-900 
                                 border border-zinc-200 dark:border-zinc-800 
-                                rounded-lg transition-colors"
+                                rounded-lg gsap-element"
 									>
 										<Icon
 											className="w-6 h-6 
                                    text-zinc-600 dark:text-zinc-400 
-                                   transition-colors"
+                                   gsap-element"
 										/>
 									</div>
 
@@ -88,27 +88,27 @@ export default function EducationSectionStatic() {
 										<h3
 											className="text-xl 
                                  text-zinc-950 dark:text-zinc-50 
-                                 font-semibold mb-1 transition-colors"
+                                 font-semibold mb-1 gsap-element"
 										>
 											{edu.degree}
 										</h3>
 										<p
 											className="text-sm 
                                 text-zinc-600 dark:text-zinc-400 
-                                mb-1 transition-colors"
+                                mb-1 gsap-element"
 										>
 											{edu.institution}
 										</p>
 										<p
 											className="text-sm 
                                 text-zinc-500 dark:text-zinc-500 
-                                mb-3 transition-colors"
+                                mb-3 gsap-element"
 										>
 											{edu.location} • {edu.period}
 										</p>
 										<p
 											className="text-zinc-700 dark:text-zinc-300 
-                                leading-relaxed transition-colors"
+                                leading-relaxed gsap-element"
 										>
 											{edu.description}
 										</p>
@@ -124,19 +124,19 @@ export default function EducationSectionStatic() {
 					className="p-6 
                       bg-black/5 dark:bg-white/5 
                       border border-zinc-200 dark:border-zinc-800 
-                      rounded-lg transition-colors"
+                      rounded-lg gsap-element"
 				>
 					<div className="flex items-start gap-4">
 						<div
 							className="p-3 
                           bg-zinc-100 dark:bg-zinc-900 
                           border border-zinc-200 dark:border-zinc-800 
-                          rounded-lg transition-colors"
+                          rounded-lg gsap-element"
 						>
 							<BookOpen
 								className="w-6 h-6 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors"
+                                 gsap-element"
 							/>
 						</div>
 
@@ -144,7 +144,7 @@ export default function EducationSectionStatic() {
 							<h3
 								className="text-xl 
                            text-zinc-950 dark:text-zinc-50 
-                           font-semibold mb-4 transition-colors"
+                           font-semibold mb-4 gsap-element"
 							>
 								Relevant Certifications & Training
 							</h3>
@@ -155,7 +155,7 @@ export default function EducationSectionStatic() {
 										key={cert}
 										className="flex items-center gap-2 text-sm 
                              text-zinc-700 dark:text-zinc-300 
-                             transition-colors"
+                             gsap-element"
 									>
 										<svg
 											className="w-4 h-4 text-zinc-500 dark:text-zinc-500 shrink-0"

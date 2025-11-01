@@ -41,7 +41,7 @@ export default function ExperienceTimelineStatic() {
 					<h3
 						className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 tracking-tight transition-colors"
+                       mb-4 tracking-tight gsap-element"
 					>
 						<span
 							className="bg-linear-to-b 
@@ -76,7 +76,7 @@ export default function ExperienceTimelineStatic() {
 					<div
 						className="absolute left-8 top-0 bottom-0 w-px 
                         bg-zinc-200 dark:bg-zinc-800 
-                        hidden md:block transition-colors"
+                        hidden md:block gsap-element"
 					/>
 
 					<div className="space-y-12">
@@ -90,7 +90,7 @@ export default function ExperienceTimelineStatic() {
                                 bg-white dark:bg-zinc-950 
                                 border-2 
                                 border-zinc-300 dark:border-zinc-700 
-                                hidden md:block z-10 transition-colors"
+                                hidden md:block z-10 gsap-element"
 									/>
 
 									{/* Content card */}
@@ -102,19 +102,19 @@ export default function ExperienceTimelineStatic() {
                                   rounded-lg 
                                   hover:border-zinc-400 dark:hover:border-zinc-700 
                                   hover:bg-black/10 dark:hover:bg-white/10 
-                                  transition-all duration-300"
+                                  "
 										>
 											<div className="flex items-start gap-4 mb-4">
 												<div
 													className="p-3 
                                       bg-zinc-100 dark:bg-zinc-900 
                                       border border-zinc-200 dark:border-zinc-800 
-                                      rounded-lg transition-colors"
+                                      rounded-lg gsap-element"
 												>
 													<Icon
 														className="w-6 h-6 
                                          text-zinc-600 dark:text-zinc-400 
-                                         transition-colors"
+                                         gsap-element"
 													/>
 												</div>
 
@@ -124,14 +124,14 @@ export default function ExperienceTimelineStatic() {
 															<h4
 																className="text-xl 
                                            text-zinc-950 dark:text-zinc-50 
-                                           font-semibold mb-1 transition-colors"
+                                           font-semibold mb-1 gsap-element"
 															>
 																{exp.title}
 															</h4>
 															<p
 																className="text-sm 
                                           text-zinc-600 dark:text-zinc-400 
-                                          transition-colors"
+                                          gsap-element"
 															>
 																{exp.company}
 															</p>
@@ -139,7 +139,7 @@ export default function ExperienceTimelineStatic() {
 														<div
 															className="flex items-center gap-2 
                                           text-zinc-500 dark:text-zinc-500 
-                                          text-sm shrink-0 transition-colors"
+                                          text-sm shrink-0 gsap-element"
 														>
 															<Calendar className="w-4 h-4" />
 															<span>{exp.period}</span>
@@ -148,7 +148,7 @@ export default function ExperienceTimelineStatic() {
 
 													<p
 														className="text-zinc-700 dark:text-zinc-300 
-                                      mb-4 leading-relaxed transition-colors"
+                                      mb-4 leading-relaxed gsap-element"
 													>
 														{exp.description}
 													</p>
@@ -161,7 +161,7 @@ export default function ExperienceTimelineStatic() {
                                          text-zinc-700 dark:text-zinc-300 
                                          bg-zinc-100 dark:bg-zinc-900 
                                          border border-zinc-200 dark:border-zinc-800 
-                                         rounded-full transition-colors"
+                                         rounded-full gsap-element"
 															>
 																{tech}
 															</span>

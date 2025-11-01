@@ -33,7 +33,7 @@ export default function TestimonialsStatic() {
 					<h2
 						className="text-4xl md:text-5xl font-display 
                        text-zinc-950 dark:text-zinc-50 
-                       mb-4 transition-colors"
+                       mb-4 gsap-element"
 					>
 						What Clients Say
 					</h2>
@@ -46,7 +46,7 @@ export default function TestimonialsStatic() {
 					/>
 					<p
 						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto transition-colors"
+                      max-w-2xl mx-auto gsap-element"
 					>
 						Testimonials from satisfied clients
 					</p>
@@ -61,7 +61,7 @@ export default function TestimonialsStatic() {
                        bg-black/5 dark:bg-white/5 
                        border border-zinc-200 dark:border-zinc-800 
                        rounded-lg 
-                       transition-colors"
+                       gsap-element"
 						>
 							{/* Estrellas */}
 							<div className="flex gap-1 mb-4">
@@ -78,7 +78,7 @@ export default function TestimonialsStatic() {
 							{/* Content */}
 							<p
 								className="text-zinc-700 dark:text-zinc-300 
-                          mb-6 leading-relaxed transition-colors"
+                          mb-6 leading-relaxed gsap-element"
 							>
 								"{testimonial.content}"
 							</p>
@@ -87,18 +87,18 @@ export default function TestimonialsStatic() {
 							<div
 								className="flex items-center gap-3 pt-4 
                             border-t border-zinc-200 dark:border-zinc-800 
-                            transition-colors"
+                            gsap-element"
 							>
 								<div
 									className="w-10 h-10 rounded-full 
                               bg-zinc-200 dark:bg-zinc-800 
                               flex items-center justify-center 
-                              transition-colors"
+                              gsap-element"
 								>
 									<span
 										className="text-sm font-medium 
                                  text-zinc-600 dark:text-zinc-400 
-                                 transition-colors"
+                                 gsap-element"
 									>
 										{testimonial.name.charAt(0)}
 									</span>
@@ -107,14 +107,14 @@ export default function TestimonialsStatic() {
 									<p
 										className="text-sm font-medium 
                               text-zinc-900 dark:text-zinc-100 
-                              transition-colors"
+                              gsap-element"
 									>
 										{testimonial.name}
 									</p>
 									<p
 										className="text-xs 
                               text-zinc-500 dark:text-zinc-500 
-                              transition-colors"
+                              gsap-element"
 									>
 										{testimonial.role}
 									</p>

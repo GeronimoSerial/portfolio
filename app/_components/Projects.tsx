@@ -43,7 +43,7 @@ export default function ProjectsStatic() {
           <p
             className="mt-4 mb-12 text-center text-base 
                       text-zinc-600 dark:text-zinc-400 
-                      transition-colors"
+                      gsap-element"
           >
             Experience the power of modern UI components that bring your ideas
             to life.
@@ -59,13 +59,13 @@ export default function ProjectsStatic() {
                        border border-zinc-200 dark:border-zinc-800 
                        rounded-lg 
                        hover:border-zinc-400 dark:hover:border-zinc-700 
-                       transition-colors"
+                       gsap-element"
             >
               <div className="flex flex-col h-full">
                 <h3
                   className="text-xl 
                              text-zinc-950 dark:text-zinc-50 
-                             mb-3 transition-colors"
+                             mb-3 gsap-element"
                 >
                   {project.title}
                 </h3>
@@ -73,7 +73,7 @@ export default function ProjectsStatic() {
                 <p
                   className="text-sm 
                             text-zinc-600 dark:text-zinc-400 
-                            mb-4 grow line-clamp-3 transition-colors"
+                            mb-4 grow line-clamp-3 gsap-element"
                 >
                   {project.description}
                 </p>
@@ -81,7 +81,7 @@ export default function ProjectsStatic() {
                 <div
                   className="flex items-center gap-3 mt-auto pt-4 
                               border-t border-zinc-200 dark:border-zinc-800 
-                              transition-colors"
+                              gsap-element"
                 >
                   {project.url && (
                     <a
@@ -90,7 +90,7 @@ export default function ProjectsStatic() {
                       rel="noopener noreferrer"
                       className="text-zinc-600 dark:text-zinc-400 
                                hover:text-zinc-900 dark:hover:text-zinc-100 
-                               transition-colors"
+                               gsap-element"
                       title="View project"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -103,7 +103,7 @@ export default function ProjectsStatic() {
                       rel="noopener noreferrer"
                       className="text-zinc-600 dark:text-zinc-400 
                                hover:text-zinc-900 dark:hover:text-zinc-100 
-                               transition-colors"
+                               gsap-element"
                       title="View code"
                     >
                       <Github className="w-4 h-4" />
@@ -113,7 +113,7 @@ export default function ProjectsStatic() {
                     <span
                       className="ml-auto text-xs 
                                    text-zinc-400 dark:text-zinc-600 
-                                   transition-colors"
+                                   gsap-element"
                     >
                       {new Date(project.date).getFullYear()}
                     </span>

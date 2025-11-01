@@ -1,11 +1,11 @@
 import Nav from "@/components/layout/Nav";
 import Background from "@/components/layout/Background";
-import Hero from "./_components/Hero";
-import Services from "./_components/Services";
-import Process from "./_components/Process";
-import Projects from "./_components/Projects";
-import Testimonials from "./_components/Testimonials";
-import Contact from "./_components/Contact";
+import Hero from "@/app/_components/Hero";
+import Services from "@/app/_components/Services";
+import Process from "@/app/_components/Process";
+import Projects from "@/app/_components/Projects";
+import Testimonials from "@/app/_components/Testimonials";
+import Contact from "@/app/_components/Contact";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
       <Background />
       <Nav />
 
-      <main>
+      <main className="relative">
         <Hero />
         <Services />
         <Process />

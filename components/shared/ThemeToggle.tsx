@@ -3,7 +3,6 @@
 import * as React from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { motion } from "motion/react";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -13,29 +12,28 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   if (!mounted) {
     return null;
   }
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative p-2 rounded-lg border border-zinc-800 dark:border-zinc-700 
-                 bg-white/5 dark:bg-white/5 hover:bg-white/10 dark:hover:bg-white/10 
-                 transition-colors"
+      onClick={handleThemeSwitch}
+      className="gsap-element relative p-2 rounded-lg border border-zinc-800 dark:border-zinc-700 
+                 bg-white/5 dark:bg-white/5 hover:bg-white/10 dark:hover:bg-white/10"
       aria-label="Toggle theme"
     >
-      <motion.div
-        initial={false}
-        animate={{ rotate: theme === "dark" ? 0 : 180 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-      >
+      <div className="gsap-element">
         {theme === "dark" ? (
           <Moon className="w-5 h-5 text-zinc-400" />
         ) : (
           <Sun className="w-5 h-5 text-zinc-600" />
         )}
-      </motion.div>
+      </div>
     </button>
   );
 }

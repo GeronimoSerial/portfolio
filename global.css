@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-
-@config './tailwind.config.js';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -18,24 +18,7 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
 
-@utility animate-border-spin {
-  /* Animación de borde giratorio - GPU accelerated */
-  animation: border-spin var(--border-duration, 5s) linear infinite;
-}
-
-@utility bg-gradient-conic {
-  /* Gradiente cónico para bordes animados */
-  background: conic-gradient(
-    from 0deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
-}
-
-@layer base {
     html {
         scroll-behavior: smooth;
     }
@@ -65,34 +48,13 @@
     .scrollbar-hide::-webkit-scrollbar {
         display: none; /* Chrome, Safari and Opera */
     }
-}
 
-@layer utilities {
-    @keyframes border-spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+    /* GPU optimization básica para elementos animados con GSAP */
+    .gsap-element {
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
     }
-    @keyframes hero-reveal {
-        0% {
-            opacity: 0;
-            transform: translateY(30px) scale(0.98);
-            filter: blur(8px);
-        }
-        60% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
-    .animate-hero-reveal {
-        animation: hero-reveal 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) both;
-    }
-}
+} 

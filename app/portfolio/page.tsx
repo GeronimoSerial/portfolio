@@ -29,7 +29,7 @@ export default function PortfolioPage() {
                     bg-linear-to-b 
                     from-white via-zinc-50 to-white
                     dark:from-black dark:via-zinc-950 dark:to-black
-                    transition-colors"
+                    gsap-element"
 		>
 			{/* Background Effects */}
 			<Background />
@@ -53,10 +53,10 @@ export default function PortfolioPage() {
 			<footer
 				className="border-t 
                        border-zinc-200 dark:border-zinc-800 
-                       py-8 transition-colors"
+                       py-8 gsap-element"
 			>
 				<div className="container mx-auto px-4 text-center">
-					<p className="text-sm text-zinc-500 dark:text-zinc-500 transition-colors">
+					<p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
 						© {new Date().getFullYear()} Geronimo Serial. All rights reserved.
 					</p>
 				</div>
