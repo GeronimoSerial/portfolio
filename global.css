@@ -49,6 +49,36 @@
     display: none; /* Chrome, Safari and Opera */
   }
 
+  /* GSAP Performance Optimizations */
+  .gsap-mask-1,
+  .gsap-mask-2,
+  .gsap-float-1,
+  .gsap-float-2,
+  .gsap-float-3,
+  .gsap-fade-left,
+  .gsap-fade-right,
+  .gsap-title,
+  .gsap-line,
+  .gsap-description,
+  .gsap-info,
+  .gsap-frame,
+  .gsap-field,
+  .gsap-submit,
+  .gsap-privacy,
+  .gsap-accent,
+  .gsap-social {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Prevent layout thrashing for animated sections */
+  #contact {
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
   .process-card {
     will-change: transform, opacity;
     backface-visibility: hidden;

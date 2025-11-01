@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Background } from "@/components/layout/Background";
 import Nav from "@/components/layout/Nav";
 import PortfolioHero from "./_components/PortfolioHero";
-import AboutExtended from "./_components/AboutExtended";
+import About from "./_components/About";
 import SkillsComprehensive from "./_components/SkillsComprehensive";
 import ExperienceTimeline from "./_components/ExperienceTimeline";
 import EducationSection from "./_components/EducationSection";
@@ -24,43 +24,30 @@ export const metadata: Metadata = {
 
 export default function PortfolioPage() {
   return (
-    <div
-      className="relative min-h-screen 
-                    bg-linear-to-b 
-                    from-white via-zinc-50 to-white
-                    dark:from-black dark:via-zinc-950 dark:to-black
-                    gsap-element"
-    >
-      {/* Background Effects */}
-      {/* <Background /> */}
-
-      {/* Navigation */}
-      <Nav />
-
-      {/* Page Content */}
+    <>
       <main className="relative">
-        <PortfolioHero />
-        <AboutExtended />
-        <SkillsComprehensive />
-        <ExperienceTimeline />
-        <EducationSection />
-        <Projects />
-        <ResumeDownload />
-        <ContactOpportunities />
+        <Background>
+          <About />
+          <SkillsComprehensive />
+          <ExperienceTimeline />
+          <EducationSection />
+          <Projects />
+          <ResumeDownload />
+          <ContactOpportunities />
+        </Background>
       </main>
 
-      {/* Footer */}
       <footer
         className="border-t 
-                       border-zinc-200 dark:border-zinc-800 
-                       py-8 gsap-element"
+        border-zinc-200 dark:border-zinc-800 
+        py-8 gsap-element"
       >
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
-            © {new Date().getFullYear()} Geronimo Serial. All rights reserved.
+            © {new Date().getFullYear()} Geronimo Serial.
           </p>
         </div>
       </footer>
-    </div>
+    </>
   );
 }
