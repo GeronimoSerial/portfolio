@@ -76,4 +76,23 @@
             transform: rotate(360deg);
         }
     }
+    @keyframes hero-reveal {
+        0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(8px);
+        }
+        60% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .animate-hero-reveal {
+        animation: hero-reveal 1.2s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+    }
 }
