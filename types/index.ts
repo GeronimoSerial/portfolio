@@ -3,11 +3,11 @@
 
 // Global types
 export interface SectionProps {
-  id: string;
-  className?: string;
+	id: string;
+	className?: string;
 }
 
 export interface NavItem {
-  id: string;
-  label: string;
+	id: string;
+	label: string;
 }

@@ -87,7 +87,7 @@ export default function ProcessStatic() {
                 <div className="mb-4">
                   <span
                     className="text-5xl font-display 
-                                 text-zinc-200 dark:text-zinc-800 
+                                 text-zinc-500 dark:text-zinc-800 
                                  transition-colors"
                   >
                     {step.number}

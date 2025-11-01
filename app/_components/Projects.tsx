@@ -31,17 +31,17 @@ export default function ProjectsStatic() {
         <div>
           <motion.div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row">
             <LayoutTextFlip
-              text="Welcome to "
+              text="Let's build "
               words={[
-                "Aceternity UI",
-                "Fight Club",
-                "The Matrix",
-                "The Jungle",
+                "Awesome Apps",
+                "Innovative Solutions",
+                "Cutting-Edge Technology",
+                "Modern UIs",
               ]}
             />
           </motion.div>
           <p
-            className="mt-4 text-center text-base 
+            className="mt-4 mb-12 text-center text-base 
                       text-zinc-600 dark:text-zinc-400 
                       transition-colors"
           >
