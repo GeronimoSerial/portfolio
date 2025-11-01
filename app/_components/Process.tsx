@@ -100,8 +100,7 @@ export default function Process() {
                              }
                              border-2 border-zinc-200 dark:border-zinc-800 
                              rounded-2xl
-                             shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50
-                             transition-all duration-300`}
+                             shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50`}
                   >
                     {/* Number Badge */}
                     <div

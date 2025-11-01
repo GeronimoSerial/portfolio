@@ -1,6 +1,6 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -19,88 +19,98 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 
-    html {
-        scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 
-    body {
-        overflow-x: hidden;
-    }
+  body {
+    overflow-x: hidden;
+  }
 
-    .text-edge-outline {
-        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-    }
+  .text-edge-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  }
 
-    :root {
-        --radius: 0.5rem;
-    }
+  :root {
+    --radius: 0.5rem;
+  }
 
-    h3 {
-        font-family: var(--font-geist), serif;
-    }
+  h3 {
+    font-family: var(--font-geist), serif;
+  }
 
-    /* Ocultar scrollbar pero mantener funcionalidad */
-    .scrollbar-hide {
-        -ms-overflow-style: none; /* IE and Edge */
-        scrollbar-width: none; /* Firefox */
-    }
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
-    }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
 
-    /* GPU optimization básica para elementos animados con GSAP */
-    .gsap-element {
-        will-change: transform, opacity;
-        backface-visibility: hidden;
-        transform: translateZ(0);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+  .process-card {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  .process-card svg,
+  .process-card rect {
+    vector-effect: non-scaling-stroke;
+    shape-rendering: geometricPrecision;
+  }
 
-    /* Optimización para project cards */
-    .project-card {
-        perspective: 1000px;
-        transform-style: preserve-3d;
-    }
+  /* GPU optimization básica para elementos animados con GSAP */
+  .gsap-element {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    .project-card .card-content {
-        backface-visibility: hidden;
-        transform: translateZ(0);
-    }
+  /* Optimización para project cards */
+  .project-card {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
 
-    /* SVG stroke animation optimization */
-    .card-border path,
-    .card-border rect,
-    .card-border circle {
-        vector-effect: non-scaling-stroke;
-    }
+  .project-card .card-content {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
 
-    .decorative-svg path,
-    .decorative-svg circle,
-    .decorative-svg line {
-        vector-effect: non-scaling-stroke;
-    }
+  /* SVG stroke animation optimization */
+  .card-border path,
+  .card-border rect,
+  .card-border circle {
+    vector-effect: non-scaling-stroke;
+  }
 
-    /* Smooth font rendering para caracteres animados */
-    .char {
-        display: inline-block;
-        transform-origin: 50% 100%;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+  .decorative-svg path,
+  .decorative-svg circle,
+  .decorative-svg line {
+    vector-effect: non-scaling-stroke;
+  }
 
-    /* Word animation container */
-    .word {
-        display: inline-block;
-        transform-origin: 50% 100%;
-        perspective: 1000px;
-    }
+  /* Smooth font rendering para caracteres animados */
+  .char {
+    display: inline-block;
+    transform-origin: 50% 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    /* Mejora visual para iconos animados */
-    .card-icon {
-        transform-origin: center;
-        backface-visibility: hidden;
-    }
-} 
+  /* Word animation container */
+  .word {
+    display: inline-block;
+    transform-origin: 50% 100%;
+    perspective: 1000px;
+  }
 
+  /* Mejora visual para iconos animados */
+  .card-icon {
+    transform-origin: center;
+    backface-visibility: hidden;
+  }
+}

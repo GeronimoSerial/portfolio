@@ -87,7 +87,6 @@ export default function ServicesStatic() {
                          border border-zinc-200 dark:border-zinc-800 
                          rounded-lg 
                         hover:cursor-pointer                      
-                         transition-all duration-300
                          relative overflow-hidden"
               >
                 <svg
@@ -171,7 +170,6 @@ export default function ServicesStatic() {
                                  text-white dark:text-black 
                                  bg-black dark:bg-white 
                                  rounded-lg cursor-pointer 
-                                 transition-all duration-300
                                  hover:shadow-lg hover:shadow-black/20 dark:hover:shadow-white/20"
                   >
                     Request Quote
