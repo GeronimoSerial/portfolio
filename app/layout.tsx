@@ -100,7 +100,14 @@ export default function RootLayout({
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
