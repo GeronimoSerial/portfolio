@@ -1,12 +1,10 @@
 "use client";
 
 import { Code, Lightbulb, Wrench, TrendingUp } from "lucide-react";
-import { useRef } from "react";
 import { useServicesAnimations } from "@/hooks/useServicesAnimations";
 
 export default function ServicesStatic() {
-  const containerRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const { containerRef, headerRef } = useServicesAnimations();
 
   const services = [
     {
@@ -59,9 +57,6 @@ export default function ServicesStatic() {
     },
   ];
 
-  // Apply animations
-  useServicesAnimations(containerRef, headerRef);
-
   return (
     <section
       ref={containerRef}
@@ -81,8 +76,8 @@ export default function ServicesStatic() {
         </div>
 
         {/* Grid de servicios */}
-        <div className="services-grid grid md:grid-cols-2 gap-6">
-          {services.map((service, index) => {
+        <div className="services-grid grid md:grid-cols-2 gap-8">
+          {services.map((service) => {
             const Icon = service.icon;
             return (
               <article
@@ -95,6 +90,25 @@ export default function ServicesStatic() {
                          transition-all duration-300
                          relative overflow-hidden"
               >
+                <svg
+                  className="card-border-svg absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 100% 100%"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <rect
+                    x="1"
+                    y="1"
+                    width="calc(100% - 2px)"
+                    height="calc(100% - 2px)"
+                    rx="8"
+                    className="stroke-zinc-400 dark:stroke-white"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                </svg>
+
                 {/* Glow effect on hover */}
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 
@@ -122,7 +136,7 @@ export default function ServicesStatic() {
                 </div>
 
                 <ul className="space-y-2 mb-6 relative z-10">
-                  {service.features.map((feature, featureIndex) => (
+                  {service.features.map((feature) => (
                     <li
                       key={feature}
                       className="feature-item flex items-center gap-2 text-sm 
@@ -145,7 +159,7 @@ export default function ServicesStatic() {
                 </ul>
 
                 <div
-                  className="flex items-center justify-between pt-4 
+                  className="service-footer flex items-center justify-between pt-4 
                               border-t border-zinc-200 dark:border-zinc-800 
                               relative z-10"
                 >
