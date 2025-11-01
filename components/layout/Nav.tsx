@@ -33,8 +33,8 @@ export default function NavStatic() {
             geroserial
           </a>
 
-          {/* Desktop Navigation - Sin responsive, siempre visible */}
-          <div className="flex items-center gap-1">
+          {/* Desktop Navigation - Hidden on mobile */}
+          <div className="hidden md:flex items-center gap-1">
             {navItems.slice(1).map((item) => (
               <a
                 key={item.id}
@@ -50,11 +50,11 @@ export default function NavStatic() {
             ))}
           </div>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-4">
+          {/* Right Side - Always visible with responsive spacing */}
+          <div className="flex items-center gap-2 md:gap-4">
             <Link
               href="/portfolio"
-              className="px-4 py-2 text-sm font-medium 
+              className="hidden sm:block px-4 py-2 text-sm font-medium 
                        text-zinc-600 dark:text-zinc-400 
                        hover:text-zinc-900 dark:hover:text-zinc-100 
                        hover:bg-black/5 dark:hover:bg-white/5 
@@ -62,6 +62,7 @@ export default function NavStatic() {
             >
               Portfolio
             </Link>
+            {/* ThemeToggle - Visible on ALL viewports */}
             <ThemeToggle />
             <a
               href="https://github.com/GeronimoSerial"

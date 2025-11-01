@@ -1,6 +1,9 @@
 export default function BackgroundStatic() {
   return (
-    <div className="fixed inset-0 -z-50 bg-white dark:bg-black transition-colors duration-300">
+    <div
+      className="fixed inset-0 -z-50 bg-white dark:bg-black transition-colors duration-300"
+      aria-hidden="true"
+    >
       {/* Grid pattern adaptativo */}
       <div
         className="absolute inset-0 opacity-20 
