@@ -8,18 +8,6 @@ export default function ServicesStatic() {
 
   const services = [
     {
-      icon: Code,
-      title: "Full Stack Web Development",
-      description: "Scalable web applications built with modern technologies",
-      features: [
-        "Responsive web applications",
-        "Robust RESTful APIs",
-        "Third-party integrations",
-        "Performance optimization",
-      ],
-      price: "From $800 USD",
-    },
-    {
       icon: Lightbulb,
       title: "Technology Consulting",
       description: "Expert technical guidance for complex challenges",
@@ -29,7 +17,7 @@ export default function ServicesStatic() {
         "System optimization",
         "Best practices implementation",
       ],
-      price: "From $500 USD",
+      price: "From $xxx USD",
     },
     {
       icon: Wrench,
@@ -41,7 +29,7 @@ export default function ServicesStatic() {
         "System monitoring",
         "Technical training",
       ],
-      price: "From $400 USD/month",
+      price: "From $xxx USD/month",
     },
     {
       icon: TrendingUp,
@@ -54,6 +42,18 @@ export default function ServicesStatic() {
         "Data analytics implementation",
       ],
       price: "Custom Quote",
+    },
+    {
+      icon: Code,
+      title: "Full Stack Web Development",
+      description: "Scalable web applications built with modern technologies",
+      features: [
+        "Responsive web applications",
+        "Robust RESTful APIs",
+        "Third-party integrations",
+        "Performance optimization",
+      ],
+      price: "From $xxx USD",
     },
   ];
 
