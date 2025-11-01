@@ -31,20 +31,20 @@ export const useGSAPOnly = () => {
     // Animación de entrada básica
     fadeIn: (target: string | Element, options = {}) => {
       const { delay = 0, duration = 0.6, y = 30 } = options as any;
-      
+
       return gsap.fromTo(
         target,
-        { 
-          opacity: 0, 
-          y, 
-          force3D: true 
+        {
+          opacity: 0,
+          y,
+          force3D: true,
         },
-        { 
-          opacity: 1, 
-          y: 0, 
-          delay, 
-          duration, 
-          ease: "power2.out" 
+        {
+          opacity: 1,
+          y: 0,
+          delay,
+          duration,
+          ease: "power2.out",
         }
       );
     },
@@ -52,20 +52,20 @@ export const useGSAPOnly = () => {
     // Animación escalonada
     stagger: (targets: string | Element[], options = {}) => {
       const { delay = 0.1, duration = 0.5, scale = 0.95 } = options as any;
-      
+
       return gsap.fromTo(
         targets,
-        { 
-          opacity: 0, 
-          scale, 
-          force3D: true 
+        {
+          opacity: 0,
+          scale,
+          force3D: true,
         },
-        { 
-          opacity: 1, 
-          scale: 1, 
-          stagger: delay, 
-          duration, 
-          ease: "power2.out" 
+        {
+          opacity: 1,
+          scale: 1,
+          stagger: delay,
+          duration,
+          ease: "power2.out",
         }
       );
     },
@@ -147,8 +147,13 @@ export const useGSAPOnly = () => {
 
     // Parallax de scroll
     parallaxScroll: (target: string | Element, options = {}) => {
-      const { yPercent = -30, trigger, start = "top top", end = "bottom top" } = options as any;
-      
+      const {
+        yPercent = -30,
+        trigger,
+        start = "top top",
+        end = "bottom top",
+      } = options as any;
+
       return gsap.to(target, {
         yPercent,
         ease: "none",
@@ -164,8 +169,13 @@ export const useGSAPOnly = () => {
 
     // Fade out en scroll
     fadeOnScroll: (target: string | Element, options = {}) => {
-      const { opacity = 0.3, trigger, start = "top top", end = "bottom top" } = options as any;
-      
+      const {
+        opacity = 0.3,
+        trigger,
+        start = "top top",
+        end = "bottom top",
+      } = options as any;
+
       return gsap.to(target, {
         opacity,
         ease: "none",
@@ -224,10 +234,10 @@ export const useGSAPSimple = () => {
  */
 export const useGSAPScroll = () => {
   const { parallaxScroll, fadeOnScroll, cleanup } = useGSAPOnly();
-  
+
   useLayoutEffect(() => {
     return cleanup; // Cleanup automático
   }, [cleanup]);
-  
+
   return { parallaxScroll, fadeOnScroll };
 };

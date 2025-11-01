@@ -57,7 +57,7 @@ export default function ServicesStatic() {
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
-                    <h2
+          <h2
             className="text-4xl md:text-6xl font-display text-zinc-950 dark:text-white 
                        mb-4 gsap-element"
           >
