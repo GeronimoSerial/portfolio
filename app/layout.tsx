@@ -3,6 +3,7 @@ import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { ThemeProvider } from "./providers/ThemeProvider";
+import { Background } from "@/components/layout/Background";
 
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
@@ -96,7 +97,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`bg-white dark:bg-black gsap-element ${
+        className={`gsap-element ${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >
