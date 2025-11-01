@@ -86,7 +86,7 @@ export default function ServicesStatic() {
                          bg-black/5 dark:bg-white/5 
                          border border-zinc-200 dark:border-zinc-800 
                          rounded-lg 
-                         hover:border-zinc-400 dark:hover:border-white 
+                        hover:cursor-pointer                      
                          transition-all duration-300
                          relative overflow-hidden"
               >
