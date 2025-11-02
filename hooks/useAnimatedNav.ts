@@ -3,6 +3,7 @@
 import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useIsMobile } from "./useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,14 +14,16 @@ export const useAnimatedNav = (
   actionsRef: React.RefObject<HTMLDivElement>
 ) => {
   const isExpandedRef = useRef(true);
-  const lastScrollY = useRef(window.scrollY);
+  const lastScrollY = useRef(0);
   const ticking = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const isAnimatingRef = useRef(false);
 
   const SCROLL_THRESHOLD = 10;
+  const isMobile = useIsMobile();
 
   useLayoutEffect(() => {
+    if (isMobile) return;
     const nav = navRef.current;
     const navItems = navItemsRef.current;
     const actions = actionsRef.current;
@@ -116,7 +119,7 @@ export const useAnimatedNav = (
       window.removeEventListener("scroll", onScroll);
       timelineRef.current?.kill();
     };
-  }, []);
+  }, [isMobile]);
 
   return {
     isExpanded: isExpandedRef.current,
