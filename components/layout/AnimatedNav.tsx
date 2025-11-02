@@ -27,10 +27,7 @@ export default function AnimatedNav() {
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 left-0 right-0 z-50
-         
-        
-        will-change-transform"
+      className="sticky top-0 left-0 right-0 z-50 will-change-transform"
       style={{ height: "5rem" }}
     >
       <div className="container mx-auto px-4 sm:px-6 h-full">
