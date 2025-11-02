@@ -33,7 +33,7 @@ export default function HeroStatic() {
     <section
       ref={container}
       id="hero"
-      className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
+      className="relative flex flex-col items-center justify-center w-full min-h-[calc(100vh-10rem)] px-4 overflow-hidden"
     >
       <div className="hero-content z-10 flex flex-col items-center text-center hero-fade">
         {/* Título principal */}
@@ -46,12 +46,6 @@ export default function HeroStatic() {
           >
             geroserial.com
           </GradientHeading>
-          {/* <h1
-            className="hero-title gsap-element text-6xl md:text-9xl font-display 
-                       text-zinc-950 dark:text-white"
-          >
-            geroserial.com
-          </h1> */}
         </div>
 
         <h2
