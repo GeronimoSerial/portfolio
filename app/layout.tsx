@@ -105,6 +105,7 @@ export default function RootLayout({
         <div id="smooth-wrapper">
           <div id="smooth-content">
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <AnimatedNav />
               {children}
             </ThemeProvider>
           </div>

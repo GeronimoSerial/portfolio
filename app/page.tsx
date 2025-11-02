@@ -11,7 +11,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <AnimatedNav />
+      {/* <AnimatedNav /> */}
 
       <Background>
         <main className="relative">

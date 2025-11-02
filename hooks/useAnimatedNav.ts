@@ -1,258 +1,124 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 export const useAnimatedNav = (
-  navRef: React.RefObject<HTMLElement | null>,
-  logoRef: React.RefObject<HTMLAnchorElement | null>,
-  navItemsRef: React.RefObject<HTMLDivElement | null>,
-  actionsRef: React.RefObject<HTMLDivElement | null>,
-  expandButtonRef: React.RefObject<HTMLDivElement | null>
+  navRef: React.RefObject<HTMLElement>,
+  logoRef: React.RefObject<HTMLAnchorElement>,
+  navItemsRef: React.RefObject<HTMLDivElement>,
+  actionsRef: React.RefObject<HTMLDivElement>
 ) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isExpandedRef = useRef(true);
+  const lastScrollY = useRef(window.scrollY);
+  const ticking = useRef(false);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const isAnimatingRef = useRef(false);
 
-  useGSAP(
-    () => {
-      if (!navRef.current || window.innerWidth < 768) return;
+  const SCROLL_THRESHOLD = 10;
 
-      const nav = navRef.current;
-      const navItems = navItemsRef.current;
-      const actions = actionsRef.current;
-      const expandButton = expandButtonRef.current;
-      const logo = logoRef.current;
+  useLayoutEffect(() => {
+    const nav = navRef.current;
+    const navItems = navItemsRef.current;
+    const actions = actionsRef.current;
+    const logo = logoRef.current;
 
-      gsap.set(expandButton, { autoAlpha: 0 });
+    if (!nav || !navItems || !actions || !logo) return;
 
-      const shrinkTimeline = gsap.timeline({
-        paused: true,
-        defaults: { duration: 0.4, ease: "power2.out", force3D: true },
-      });
+    gsap.set([navItems, actions], { autoAlpha: 1, x: 0 });
+    gsap.set(logo, { position: "relative", left: "auto", x: 0 });
 
-      shrinkTimeline
-        .to(nav, {
+    timelineRef.current = gsap
+      .timeline({ paused: true })
+      .to(
+        nav,
+        {
           height: "3.5rem",
           paddingTop: "0.5rem",
           paddingBottom: "0.5rem",
-          backgroundColor: "transparent",
-          borderColor: "transparent",
-          // backdropFilter: "blur(0px)",
+          backgroundColor: "rgba(0,0,0,0)",
+          borderColor: "rgba(0,0,0,0)",
           boxShadow: "none",
-        })
-        .to(
-          navItems,
-          {
-            autoAlpha: 0,
-            x: -20,
-            pointerEvents: "none",
-          },
-          "<"
-        )
-        .to(
-          actions,
-          {
-            autoAlpha: 0,
-            x: 20,
-            pointerEvents: "none",
-          },
-          "<"
-        )
-        .to(
-          logo,
-          {
-            position: "absolute",
-            left: "50%",
-            x: "-50%",
-            scale: 1,
-            marginLeft: "0px",
-          },
-          "<"
-        )
-        .to(
-          expandButton,
-          {
-            autoAlpha: 1,
-            scale: 1,
-            x: 0,
-            pointerEvents: "auto",
-          },
-          "<0.15"
-        );
-
-      ScrollTrigger.create({
-        trigger: "body",
-        start: "100px top",
-        end: "bottom bottom",
-        onEnter: () => {
-          shrinkTimeline.play();
-          setIsExpanded(false);
-        },
-        onLeaveBack: () => {
-          shrinkTimeline.reverse();
-          setIsExpanded(true);
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: "body",
-        start: "50px top",
-        toggleClass: {
-          targets: nav,
-          className: "backdrop-saturate-150",
-        },
-      });
-
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    },
-    { scope: navRef, dependencies: [] }
-  );
-
-  const handleExpand = () => {
-    if (
-      !navRef.current ||
-      !navItemsRef.current ||
-      !actionsRef.current ||
-      !expandButtonRef.current ||
-      !logoRef.current
-    )
-      return;
-
-    const tl = gsap.timeline({
-      defaults: { duration: 0.5, ease: "elastic.out(1, 0.75)", force3D: true },
-    });
-
-    tl.to(navRef.current, {
-      height: "5rem",
-      clearProps: "backgroundColor,borderColor,backdropFilter,boxShadow",
-      duration: 0.4,
-      ease: "power2.out",
-    })
-      .to(
-        expandButtonRef.current,
-        {
-          autoAlpha: 0,
-          scale: 0.8,
-          x: 20,
-          pointerEvents: "none",
           duration: 0.3,
-          ease: "power2.in",
         },
-        "<"
+        0
       )
       .to(
-        logoRef.current,
-        {
-          position: "relative",
-          left: "auto",
-          x: 0,
-          scale: 1,
-          marginLeft: 0,
-        },
-        "<"
-      )
-      .to(
-        navItemsRef.current,
-        {
-          autoAlpha: 1,
-          x: 0,
-          pointerEvents: "auto",
-        },
-        "<0.1"
-      )
-      .to(
-        actionsRef.current,
-        {
-          autoAlpha: 1,
-          x: 0,
-          pointerEvents: "auto",
-        },
-        "<"
-      );
-
-    setIsExpanded(true);
-
-    if (window.scrollY > 100) {
-      setTimeout(() => {
-        handleCollapse();
-      }, 3000);
-    }
-  };
-
-  const handleCollapse = () => {
-    if (
-      !navRef.current ||
-      !navItemsRef.current ||
-      !actionsRef.current ||
-      !expandButtonRef.current ||
-      !logoRef.current
-    )
-      return;
-    if (window.scrollY < 100) return;
-
-    const tl = gsap.timeline({
-      defaults: { duration: 0.4, ease: "power2.out", force3D: true },
-    });
-
-    tl.to(navRef.current, {
-      height: "3.5rem",
-      backgroundColor: "transparent",
-      borderColor: "transparent",
-      // backdropFilter: "blur(0px)",
-      boxShadow: "none",
-    })
-      .to(
-        navItemsRef.current,
+        navItems,
         {
           autoAlpha: 0,
           x: -20,
           pointerEvents: "none",
+          duration: 0.3,
         },
-        "<"
+        0
       )
       .to(
-        actionsRef.current,
+        actions,
         {
           autoAlpha: 0,
           x: 20,
           pointerEvents: "none",
+          duration: 0.3,
         },
-        "<"
+        0
       )
       .to(
-        logoRef.current,
+        logo,
         {
           position: "absolute",
           left: "50%",
           x: "-50%",
-          scale: 1,
+          duration: 0.3,
         },
-        "<"
-      )
-      .to(
-        expandButtonRef.current,
-        {
-          autoAlpha: 1,
-          scale: 1,
-          pointerEvents: "auto",
-        },
-        "<0.15"
+        0
       );
 
-    setIsExpanded(false);
-  };
+    const updateScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+      if (Math.abs(delta) >= SCROLL_THRESHOLD && !isAnimatingRef.current) {
+        const goingDown = delta > 0;
 
-  return { isExpanded, isMobileMenuOpen, handleExpand, toggleMobileMenu };
+        if (goingDown && isExpandedRef.current) {
+          isAnimatingRef.current = true;
+          timelineRef.current?.play().then(() => {
+            isExpandedRef.current = false;
+            isAnimatingRef.current = false;
+          });
+        } else if (!goingDown && !isExpandedRef.current) {
+          isAnimatingRef.current = true;
+          timelineRef.current?.reverse().then(() => {
+            isExpandedRef.current = true;
+            isAnimatingRef.current = false;
+          });
+        }
+      }
+
+      lastScrollY.current = currentY;
+      ticking.current = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking.current) {
+        requestAnimationFrame(updateScroll);
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      timelineRef.current?.kill();
+    };
+  }, []);
+
+  return {
+    isExpanded: isExpandedRef.current,
+  };
 };

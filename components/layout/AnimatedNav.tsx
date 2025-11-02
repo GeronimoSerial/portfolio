@@ -2,54 +2,54 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import { Github, Menu, X } from "lucide-react";
+import { Github } from "lucide-react";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { NAVIGATION_ITEMS } from "@/config/navigation";
 import { SITE_CONFIG } from "@/config/site";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 
 export default function AnimatedNav() {
-  const navRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLAnchorElement>(null);
-  const navItemsRef = useRef<HTMLDivElement>(null);
-  const actionsRef = useRef<HTMLDivElement>(null);
-  const expandButtonRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null!);
+  const logoRef = useRef<HTMLAnchorElement>(null!);
+  const navItemsRef = useRef<HTMLDivElement>(null!);
+  const actionsRef = useRef<HTMLDivElement>(null!);
 
-  const { isMobileMenuOpen, handleExpand, toggleMobileMenu } = useAnimatedNav(
+  const { isExpanded } = useAnimatedNav(
     navRef,
     logoRef,
     navItemsRef,
-    actionsRef,
-    expandButtonRef
+    actionsRef
   );
 
   return (
     <>
       <nav
         ref={navRef}
-        className="sticky top-0 left-0 right-0 z-50 
-                    backdrop-blur-xl
-                    border-b border-zinc-200/50 dark:border-zinc-800/50
-                    shadow-lg shadow-zinc-900/5 dark:shadow-black/20
-                    will-change-transform"
+        className="sticky top-0 left-0 right-0 z-50
+                   backdrop-blur-xl
+                   border-b border-zinc-200/50 dark:border-zinc-800/50
+                   shadow-lg shadow-zinc-900/5 dark:shadow-black/20
+                   will-change-transform transition-all"
         style={{ height: "5rem" }}
       >
         <div className="container mx-auto px-4 sm:px-6 h-full">
           <div className="relative flex items-center justify-between h-full">
+            {/* Logo */}
             <a
               ref={logoRef}
               href="/"
               className="text-xl sm:text-2xl font-display font-bold
-                               text-zinc-950 dark:text-zinc-50
-                               hover:text-zinc-700 dark:hover:text-zinc-300
-                               transition-colors duration-300
-                               relative group
-                               will-change-transform"
+                         text-zinc-950 dark:text-zinc-50
+                         hover:text-zinc-700 dark:hover:text-zinc-300
+                         transition-colors duration-300
+                         relative group
+                         will-change-transform"
             >
               <span className="relative z-10">geroserial</span>
               <span className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 dark:from-zinc-500/20 dark:to-zinc-300/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </a>
 
+            {/* Desktop Nav Items */}
             <div
               ref={navItemsRef}
               className="hidden md:flex items-center gap-1"
@@ -75,32 +75,9 @@ export default function AnimatedNav() {
               ))}
             </div>
 
-            <div
-              ref={expandButtonRef}
-              className="hidden md:block absolute left-1/2 top-1/2 -translate-y-1/2
-                       will-change-transform"
-              style={{
-                marginLeft: "-120px",
-              }}
-            >
-              <button
-                onClick={handleExpand}
-                className="flex items-center justify-center
-                           w-10 h-10
-                           bg-zinc-100 dark:bg-zinc-800 
-                           hover:bg-zinc-200 dark:hover:bg-zinc-700
-                           text-zinc-700 dark:text-zinc-300
-                           rounded-lg 
-                           shadow-md hover:shadow-lg
-                           border border-zinc-300 dark:border-zinc-700
-                           hover:scale-110 active:scale-95
-                           will-change-transform"
-                aria-label="Expand navigation"
-              >
-                <Menu className="w-5 h-5" />
-              </button>
-            </div>
 
+
+            {/* Desktop Actions */}
             <div ref={actionsRef} className="hidden md:flex items-center gap-3">
               <Link
                 href="/portfolio"
@@ -136,78 +113,12 @@ export default function AnimatedNav() {
               </a>
             </div>
 
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden p-2 text-zinc-600 dark:text-zinc-400 
-                       hover:text-zinc-900 dark:hover:text-zinc-100 
-                       hover:bg-zinc-100 dark:hover:bg-zinc-800
-                       rounded-lg "
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+
           </div>
         </div>
       </nav>
 
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden" style={{ top: "5rem" }}>
-          <div
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={toggleMobileMenu}
-          />
-          <div className="relative bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 shadow-2xl">
-            <div className="container mx-auto px-4 py-6 space-y-4">
-              {NAVIGATION_ITEMS.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={toggleMobileMenu}
-                  className="block px-4 py-3 text-base font-medium 
-                             text-zinc-700 dark:text-zinc-300 
-                             hover:text-zinc-900 dark:hover:text-zinc-100 
-                             hover:bg-zinc-100 dark:hover:bg-zinc-800 
-                             rounded-lg "
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 space-y-3">
-                <Link
-                  href="/portfolio"
-                  onClick={toggleMobileMenu}
-                  className="block px-4 py-3 text-base font-medium text-center
-                             bg-zinc-950 dark:bg-zinc-100
-                             text-zinc-50 dark:text-zinc-950
-                             hover:bg-zinc-800 dark:hover:bg-zinc-300
-                             rounded-lg "
-                >
-                  Portfolio
-                </Link>
-                <div className="flex items-center justify-center gap-4 px-4 py-2">
-                  <ThemeToggle />
-                  <a
-                    href={SITE_CONFIG.links.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 text-zinc-600 dark:text-zinc-400 
-                               hover:text-zinc-900 dark:hover:text-zinc-100 
-                               hover:bg-zinc-100 dark:hover:bg-zinc-800
-                               rounded-lg "
-                    aria-label="GitHub"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+
     </>
   );
 }
