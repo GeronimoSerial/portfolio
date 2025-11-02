@@ -1,36 +1,33 @@
 "use client";
 
-import { MapPin } from "lucide-react";
 import React, { useRef } from "react";
 import { useGSAPOnly, useGSAPScroll } from "@/hooks/useGSAPOnly";
 import { GradientHeading } from "@/components/ui/gradient-heading";
 
 export default function HeroStatic() {
   const container = useRef<HTMLElement>(null);
-  const { heroEntrance, parallaxScroll, fadeOnScroll } = useGSAPOnly();
+  const { heroEntrance } = useGSAPOnly();
+  const { parallaxScroll, fadeOnScroll } = useGSAPScroll();
 
-  // Usar hook simplificado para scroll animations
-  const { parallaxScroll: scroll, fadeOnScroll: fade } = useGSAPScroll();
-
-  // Animaciones de entrada con el nuevo sistema
+  // Animaciones de entrada y scroll optimizadas
   React.useEffect(() => {
-    if (container.current) {
-      // Hero entrance optimizado
-      heroEntrance(container.current);
+    if (!container.current) return;
 
-      // Parallax effect
-      scroll(".hero-content", {
-        yPercent: -30,
-        trigger: container.current,
-      });
+    // Hero entrance optimizado
+    heroEntrance(container.current);
 
-      // Fade effect
-      fade(".hero-fade", {
-        opacity: 0.3,
-        trigger: container.current,
-      });
-    }
-  }, [heroEntrance, scroll, fade]);
+    // Parallax effect
+    parallaxScroll(".hero-content", {
+      yPercent: -30,
+      trigger: container.current,
+    });
+
+    // Fade effect
+    fadeOnScroll(".hero-fade", {
+      opacity: 0.3,
+      trigger: container.current,
+    });
+  }, [heroEntrance, parallaxScroll, fadeOnScroll]);
 
   return (
     <section
@@ -72,30 +69,6 @@ export default function HeroStatic() {
         >
           Methodical Approach. Real-World Solutions.
         </p>
-        {/* 
-        <div
-          className="hero-details gsap-element flex flex-wrap items-center justify-center gap-3 mt-6 
-                      text-xs md:text-sm 
-                      text-zinc-400 dark:text-zinc-600"
-        >
-          <span>+15 Projects Delivered</span>
-          <span className="text-zinc-300 dark:text-zinc-800">•</span>
-          <span>+5 Satisfied Clients</span>
-          <span className="text-zinc-300 dark:text-zinc-800">•</span>
-          <span>2+ Years Experience</span>
-        </div> */}
-
-        {/* Location */}
-        {/* <div
-          className="hero-details gsap-element flex items-center gap-2 mt-3 
-                      text-xs md:text-sm 
-                      text-zinc-400 dark:text-zinc-600"
-        >
-          <MapPin className="w-3 h-3 md:w-4 md:h-4" />
-          <span>Corrientes, Argentina</span>
-          <span className="text-zinc-300 dark:text-zinc-800">|</span>
-          <span>Remote Services Available</span>
-        </div> */}
 
         {/* Botones simples */}
         <div className="hero-buttons gsap-element flex gap-4 mt-10">

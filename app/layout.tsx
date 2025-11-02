@@ -4,6 +4,7 @@ import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Background } from "@/components/layout/Background";
+import AnimatedNav from "@/components/layout/AnimatedNav";
 
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
@@ -104,6 +105,7 @@ export default function RootLayout({
         <div id="smooth-wrapper">
           <div id="smooth-content">
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <AnimatedNav />
               {children}
             </ThemeProvider>
           </div>

@@ -1,4 +1,4 @@
-import Nav from "@/components/layout/Nav";
+import AnimatedNav from "@/components/layout/AnimatedNav";
 import { Background } from "@/components/layout/Background";
 import Hero from "@/app/_components/Hero";
 import Services from "@/app/_components/Services";
@@ -11,7 +11,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <Nav />
+      {/* <AnimatedNav /> */}
+
       <Background>
         <main className="relative">
           <Hero />
