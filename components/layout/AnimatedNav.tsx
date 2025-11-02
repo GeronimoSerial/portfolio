@@ -41,7 +41,7 @@ export default function AnimatedNav() {
           <a
             ref={logoRef}
             href="/"
-            className="mx-auto md:mx-0 
+            className="mr-auto ml-4 md:mr-0 md:ml-0
                          text-xl sm:text-2xl font-display font-bold
                          text-zinc-950 dark:text-zinc-50
                          hover:text-zinc-700 dark:hover:text-zinc-300
@@ -92,9 +92,7 @@ export default function AnimatedNav() {
                 <Menu className="w-6 h-6" />
               </button>
             </SheetTrigger>
-            <MobileMenu
-              navigationItems={NAVIGATION_ITEMS}
-            />
+            <MobileMenu navigationItems={NAVIGATION_ITEMS} />
           </Sheet>
 
           {/* Desktop Actions */}

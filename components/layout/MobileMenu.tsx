@@ -20,10 +20,10 @@ interface MobileMenuProps {
 export function MobileMenu({ navigationItems }: MobileMenuProps) {
   return (
     <SheetContent
-      side="bottom"
-      className="w-full sm:w-[400px] 
+      side="left"
+      className="w-[300px] sm:w-[400px] 
                  bg-white dark:bg-zinc-950 
-                 border-zinc-200 dark:border-zinc-800 sticky"
+                 border-zinc-200 dark:border-zinc-800 sticky h-dvh"
       onOpenAutoFocus={(e) => {
         e.preventDefault();
       }}
