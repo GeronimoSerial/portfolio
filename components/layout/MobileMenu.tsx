@@ -1,0 +1,122 @@
+"use client";
+
+import Link from "next/link";
+import { Github } from "lucide-react";
+import { motion } from "motion/react";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
+import { SITE_CONFIG } from "@/config/site";
+import { NavItem } from "@/config/navigation";
+import {
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
+
+interface MobileMenuProps {
+  navigationItems: NavItem[];
+}
+
+export function MobileMenu({ navigationItems }: MobileMenuProps) {
+  return (
+    <SheetContent
+      side="left"
+      className="w-[300px] sm:w-[400px] 
+                 bg-white dark:bg-zinc-950 
+                 border-zinc-200 dark:border-zinc-800
+                  sticky  h-screen"
+      onOpenAutoFocus={(e) => {
+        // Prevent auto-focus from scrolling
+        e.preventDefault();
+      }}
+    >
+      <SheetHeader className="px-6 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+        <SheetTitle className="text-2xl font-display text-zinc-950 dark:text-zinc-50">
+          Navigation
+        </SheetTitle>
+        <SheetDescription className="text-zinc-600 dark:text-zinc-400">
+          Explore my work
+        </SheetDescription>
+      </SheetHeader>
+
+      <div className="flex flex-col py-6 space-y-1">
+        {/* Navigation Links */}
+        {navigationItems.slice(1).map((item, index) => (
+          <SheetClose key={item.id} asChild>
+            <motion.a
+              href={`#${item.id}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.06, duration: 0.3 }}
+              className="text-lg font-semibold 
+                         text-zinc-700 dark:text-zinc-300
+                         hover:text-zinc-950 dark:hover:text-zinc-50
+                         hover:bg-zinc-100 dark:hover:bg-zinc-900
+                         px-6 py-3
+                         transition-colors duration-200
+                         border-l-4 border-transparent
+                         hover:border-zinc-950 dark:hover:border-zinc-50"
+            >
+              {item.label}
+            </motion.a>
+          </SheetClose>
+        ))}
+
+        {/* Divider */}
+        <div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
+
+        {/* Portfolio CTA */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 0.3 }}
+          className="px-6 pt-2"
+        >
+          <SheetClose asChild>
+            <Link
+              href="/portfolio"
+              className="block w-full px-6 py-3 text-center text-base font-bold
+                         bg-zinc-950 dark:bg-zinc-100
+                         text-zinc-50 dark:text-zinc-950
+                         rounded-lg
+                         shadow-md hover:shadow-lg
+                         hover:scale-[1.02] active:scale-[0.98]
+                         transition-all duration-200"
+            >
+              About me
+            </Link>
+          </SheetClose>
+        </motion.div>
+
+        {/* Divider */}
+        <div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
+
+        {/* Actions (Theme + GitHub) */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35, duration: 0.3 }}
+          className="flex items-center justify-center gap-6 px-6 pt-2"
+        >
+          <ThemeToggle />
+          <a
+            href={SITE_CONFIG.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-3 
+                         text-zinc-600 dark:text-zinc-400
+                         hover:text-zinc-900 dark:hover:text-zinc-100
+                         hover:bg-zinc-100 dark:hover:bg-zinc-900
+                         rounded-lg
+                         transition-all duration-200
+                         hover:scale-110 active:scale-95"
+            aria-label="GitHub"
+          >
+            <Github className="w-6 h-6" />
+          </a>
+        </motion.div>
+      </div>
+    </SheetContent>
+  );
+}

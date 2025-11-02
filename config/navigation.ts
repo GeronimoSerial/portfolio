@@ -10,6 +10,6 @@ export const NAVIGATION_ITEMS = [
   { id: "projects", label: "Projects" },
   { id: "results", label: "Results" },
   { id: "contact", label: "Contact" },
-] as const satisfies readonly NavItem[];
+] as NavItem[];
 
 export const SECTION_IDS = NAVIGATION_ITEMS.map((item) => item.id);
