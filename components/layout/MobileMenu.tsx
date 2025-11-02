@@ -44,12 +44,10 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
               href={`#${item.id}`}
               className="text-lg font-semibold 
                          text-zinc-700 dark:text-zinc-300
-                         hover:text-zinc-950 dark:hover:text-zinc-50
-                         hover:bg-zinc-100 dark:hover:bg-zinc-900
                          px-6 py-3
                          transition-colors duration-200
                          border-l-4 border-transparent
-                         hover:border-zinc-950 dark:hover:border-zinc-50"
+                         "
             >
               {item.label}
             </a>
@@ -69,9 +67,8 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
                          bg-zinc-950 dark:bg-zinc-100
                          text-zinc-50 dark:text-zinc-950
                          rounded-lg
-                         shadow-md hover:shadow-lg
-                         hover:scale-[1.02] active:scale-[0.98]
-                         transition-all duration-200"
+                         shadow-md 
+                         "
           >
             About me
           </Link>
@@ -89,11 +86,9 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
           rel="noopener noreferrer"
           className="p-3 
                          text-zinc-600 dark:text-zinc-400
-                         hover:text-zinc-900 dark:hover:text-zinc-100
-                         hover:bg-zinc-100 dark:hover:bg-zinc-900
                          rounded-lg
                          transition-all duration-200
-                         hover:scale-110 active:scale-95"
+                         "
           aria-label="GitHub"
         >
           <Github className="w-6 h-6" />
