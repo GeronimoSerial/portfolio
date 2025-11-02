@@ -58,15 +58,6 @@ export default function Results() {
           </p>
         </div>
 
-        {/* Intro Text */}
-        <div className="results-intro text-center mb-20">
-          <p className="text-base text-zinc-500 dark:text-zinc-500 max-w-2xl mx-auto leading-relaxed">
-            From high-traffic websites to optimized infrastructures, these
-            metrics showcase the tangible value delivered to clients across
-            diverse projects.
-          </p>
-        </div>
-
         {/* Results Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Card 1: Morph Animation */}

@@ -159,3 +159,17 @@
     animation: fade-in-down 0.3s ease-out forwards;
   }
 }
+
+/* Critical for smooth animations */
+.animated-element {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Force GPU layer */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prevent layout thrashing */
+.animation-container {
+  contain: layout style paint;
+  transform: translateZ(0);
+}

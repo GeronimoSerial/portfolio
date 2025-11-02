@@ -28,16 +28,13 @@ export default function AnimatedNav() {
     <nav
       ref={navRef}
       className="sticky top-0 left-0 right-0 z-50
-        backdrop-blur-xl
-        border-b border-zinc-200/50 dark:border-zinc-800/50
-        shadow-lg shadow-zinc-900/5 dark:shadow-black/20
+         
+        
         will-change-transform"
       style={{ height: "5rem" }}
     >
       <div className="container mx-auto px-4 sm:px-6 h-full">
         <div className="relative flex items-center justify-between h-full">
-          {/* Logo - Always centered on mobile, left-aligned on desktop */}
-          {/* No conditional positioning to prevent layout shifts */}
           <a
             ref={logoRef}
             href="/"
@@ -82,8 +79,6 @@ export default function AnimatedNav() {
               <button
                 className="md:hidden p-2 
                 text-zinc-600 dark:text-zinc-400
-                hover:text-zinc-900 dark:hover:text-zinc-100
-                hover:bg-zinc-100 dark:hover:bg-zinc-800
                 rounded-lg
                 transition-all duration-300
                 hover:scale-110 active:scale-95"

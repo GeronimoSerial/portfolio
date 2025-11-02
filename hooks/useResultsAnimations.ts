@@ -1,5 +1,5 @@
 "use client";
-
+gsap.defaults({ force3D: true, lazy: false });
 import { useLayoutEffect, RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -235,6 +235,11 @@ export function useResultsAnimations(
           const digits = card3.querySelectorAll(".result-digit");
           if (digits.length > 0) {
             digits.forEach((digit, index) => {
+              const target = digit.textContent || "0";
+              const targetNum = parseInt(target, 10);
+              const counter = { val: 0 };
+
+              // Visual animation for the digit
               tl3.from(
                 digit,
                 {
@@ -243,28 +248,22 @@ export function useResultsAnimations(
                   rotation: 180,
                   duration: 0.8,
                   ease: "back.out(2)",
-                  onStart: () => {
-                    // Counter effect for each digit
-                    const target = digit.textContent || "0";
-                    const targetNum = parseInt(target);
-                    gsap.from(digit, {
-                      textContent: 0,
-                      duration: 1,
-                      ease: "power2.out",
-                      snap: { textContent: 1 },
-                      onUpdate: function () {
-                        if (digit.textContent) {
-                          const current = parseInt(digit.textContent);
-                          digit.textContent = Math.min(
-                            current,
-                            targetNum
-                          ).toString();
-                        }
-                      },
-                    });
+                },
+                `-=${index === 0 ? 0 : 0.6}` // Stagger the visual animation
+              );
+
+              // Counter animation for the digit, starting at the same time
+              tl3.to(
+                counter,
+                {
+                  val: targetNum,
+                  duration: 1,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    digit.textContent = Math.round(counter.val).toString();
                   },
                 },
-                `-=${index === 0 ? 0 : 0.15}`
+                "<" // Start at the same time as the previous tween
               );
             });
           }
@@ -358,22 +357,6 @@ export function useResultsAnimations(
             },
             "-=1.5"
           );
-        }
-
-        // Intro text animation
-        const intro = containerRef.current?.querySelector(".results-intro");
-        if (intro) {
-          gsap.from(intro, {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: intro,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          });
         }
       }, containerRef);
 
