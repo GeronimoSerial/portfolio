@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { Github } from "lucide-react";
-import { gsap } from "gsap";
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { SITE_CONFIG } from "@/config/site";
 import { NavItem } from "@/config/navigation";
@@ -21,77 +18,13 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ navigationItems }: MobileMenuProps) {
-  const navLinksRef = useRef(null);
-  const ctaRef = useRef(null);
-  const actionsRef = useRef(null);
-  useGSAP(
-    () => {
-      if (navLinksRef.current) {
-        gsap.fromTo(
-          navLinksRef.current,
-          { opacity: 0, x: -20 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.3,
-            stagger: 0.06,
-            ease: "power2.out",
-            force3D: true,
-          }
-        );
-      }
-    },
-    { scope: navLinksRef }
-  );
-
-  useGSAP(
-    () => {
-      if (ctaRef.current) {
-        gsap.fromTo(
-          ctaRef.current,
-          { opacity: 0, scale: 0.95 },
-          {
-            opacity: 1,
-            scale: 1,
-            delay: 0.3,
-            duration: 0.3,
-            ease: "power2.out",
-            force3D: true,
-          }
-        );
-      }
-    },
-    { scope: ctaRef }
-  );
-
-  useGSAP(
-    () => {
-      if (actionsRef.current) {
-        gsap.fromTo(
-          actionsRef.current,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            delay: 0.35,
-            duration: 0.3,
-            ease: "power2.out",
-            force3D: true,
-          }
-        );
-      }
-    },
-    { scope: actionsRef }
-  );
-
   return (
     <SheetContent
-      side="left"
-      className="w-[300px] sm:w-[400px] 
+      side="bottom"
+      className="w-full sm:w-[400px] 
                  bg-white dark:bg-zinc-950 
-                 border-zinc-200 dark:border-zinc-800
-                  sticky  h-screen"
+                 border-zinc-200 dark:border-zinc-800 sticky"
       onOpenAutoFocus={(e) => {
-        // Prevent auto-focus from scrolling
         e.preventDefault();
       }}
     >
@@ -104,29 +37,31 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
         </SheetDescription>
       </SheetHeader>
 
-      <div ref={navLinksRef} className="flex flex-col py-6 space-y-1">
-        {/* Navigation Links */}
-        {navigationItems.slice(1).map((item, index) => (
+      <div className="flex flex-col py-6 space-y-1">
+        {navigationItems.slice(1).map((item) => (
           <SheetClose key={item.id} asChild>
             <a
               href={`#${item.id}`}
               className="text-lg font-semibold 
                          text-zinc-700 dark:text-zinc-300
+                         hover:text-zinc-950 dark:hover:text-zinc-50
+                         hover:bg-zinc-100 dark:hover:bg-zinc-900
                          px-6 py-3
                          transition-colors duration-200
                          border-l-4 border-transparent
-                        "
+                         hover:border-zinc-950 dark:hover:border-zinc-50"
             >
               {item.label}
             </a>
           </SheetClose>
         ))}
       </div>
+
       {/* Divider */}
       <div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
 
       {/* Portfolio CTA */}
-      <div ref={ctaRef} className="px-6 pt-2">
+      <div className="px-6 pt-2">
         <SheetClose asChild>
           <Link
             href="/portfolio"
@@ -134,8 +69,9 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
                          bg-zinc-950 dark:bg-zinc-100
                          text-zinc-50 dark:text-zinc-950
                          rounded-lg
-                         shadow-md 
-                         "
+                         shadow-md hover:shadow-lg
+                         hover:scale-[1.02] active:scale-[0.98]
+                         transition-all duration-200"
           >
             About me
           </Link>
@@ -145,11 +81,7 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
       {/* Divider */}
       <div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
 
-      {/* Actions (Theme + GitHub) */}
-      <div
-        ref={actionsRef}
-        className="flex items-center justify-center gap-6 px-6 pt-2"
-      >
+      <div className="flex items-center justify-center gap-6 px-6 pt-2">
         <ThemeToggle />
         <a
           href={SITE_CONFIG.links.github}
@@ -157,9 +89,11 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
           rel="noopener noreferrer"
           className="p-3 
                          text-zinc-600 dark:text-zinc-400
+                         hover:text-zinc-900 dark:hover:text-zinc-100
+                         hover:bg-zinc-100 dark:hover:bg-zinc-900
                          rounded-lg
                          transition-all duration-200
-                        "
+                         hover:scale-110 active:scale-95"
           aria-label="GitHub"
         >
           <Github className="w-6 h-6" />
