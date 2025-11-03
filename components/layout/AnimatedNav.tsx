@@ -10,6 +10,7 @@ import { SITE_CONFIG } from "@/config/site";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { MirrorButton } from "../ui/mirror_button";
 
 export default function AnimatedNav() {
   const t = useTranslations("nav");
@@ -23,7 +24,7 @@ export default function AnimatedNav() {
     navRef,
     logoRef,
     navItemsRef,
-    actionsRef
+    actionsRef,
   );
 
   // Navigation items con traducciones
@@ -85,7 +86,7 @@ export default function AnimatedNav() {
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <button
-                className="md:hidden p-2 
+                className="md:hidden p-2
                 text-zinc-600 dark:text-zinc-400
                 rounded-lg
                 transition-all duration-300
@@ -102,21 +103,9 @@ export default function AnimatedNav() {
 
           {/* Desktop Actions */}
           <div ref={actionsRef} className="hidden md:flex items-center gap-3">
-            <Link
-              href="/portfolio"
-              className="px-4 py-2 text-sm font-medium
-                bg-zinc-950 dark:bg-zinc-100
-                text-zinc-50 dark:text-zinc-950
-                hover:bg-zinc-800 dark:hover:bg-zinc-300
-                rounded-lg
-                shadow-md hover:shadow-xl
-                hover:scale-105 active:scale-95
-                relative overflow-hidden group
-                will-change-transform"
-            >
-              <span className="relative z-10">{t("portfolio")}</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-900 dark:from-zinc-300 dark:to-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </Link>
+            <MirrorButton size="xs" href="/portfolio">
+              {t("portfolio")}
+            </MirrorButton>
 
             <LocaleSwitcher />
 

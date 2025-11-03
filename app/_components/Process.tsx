@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Search, Layers, Code, Rocket } from "lucide-react";
 import { useProcessAnimations } from "@/hooks/useProcessAnimations";
-
+import { Button } from "@/components/ui/moving-border";
 export default function Process() {
   const t = useTranslations("process");
   const containerRef = useProcessAnimations();
@@ -45,7 +45,7 @@ export default function Process() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-300 to-transparent mx-auto mb-6 process-divider" />
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
-            {t("subtitle", { highlight: t("highlight") })}
+            {t("subtitle")}
           </p>
         </div>
 
@@ -148,12 +148,15 @@ export default function Process() {
 
         {/* Footer */}
         <div className="text-center mt-16 process-footer">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800">
-            <div className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 animate-pulse" />
-            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              {t("tagline")}
-            </p>
-          </div>
+          <Button
+            borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
+            containerClassName="w-96 h-12 "
+            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium "
+            type="primary"
+            size="lg"
+          >
+            {t("tagline")}
+          </Button>
         </div>
       </div>
     </section>

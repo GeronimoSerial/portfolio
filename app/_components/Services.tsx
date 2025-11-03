@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Lightbulb, Wrench, TrendingUp, Code } from "lucide-react";
 import { useServicesAnimations } from "@/hooks/useServicesAnimations";
 import { Button } from "@/components/ui/moving-border";
+import { MirrorButton } from "@/components/ui/mirror_button";
 
 export default function ServicesStatic() {
   const t = useTranslations("services");
@@ -56,7 +57,7 @@ export default function ServicesStatic() {
             const price = t(`items.${service.key}.price`);
             const cta = t("cta");
             const features = [0, 1, 2, 3].map((i) =>
-              t(`items.${service.key}.features.${i}`)
+              t(`items.${service.key}.features.${i}`),
             );
 
             return (
@@ -85,16 +86,16 @@ export default function ServicesStatic() {
 
                 {/* Glow effect on hover */}
                 <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100
                              transition-opacity duration-500 pointer-events-none
                              bg-gradient-to-br from-white/5 via-transparent to-transparent"
                 />
 
                 <div className="flex items-start gap-4 mb-4 relative z-10">
                   <div
-                    className="icon-container p-3 
-                                bg-zinc-100 dark:bg-zinc-900 
-                                border border-zinc-200 dark:border-zinc-800 
+                    className="icon-container p-3
+                                bg-zinc-100 dark:bg-zinc-900
+                                border border-zinc-200 dark:border-zinc-800
                                 rounded-lg"
                   >
                     <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
@@ -113,7 +114,7 @@ export default function ServicesStatic() {
                   {features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="feature-item flex items-center gap-2 text-sm 
+                      className="feature-item flex items-center gap-2 text-sm
                                text-zinc-700 dark:text-zinc-300"
                     >
                       <svg
@@ -133,29 +134,22 @@ export default function ServicesStatic() {
                 </ul>
 
                 <div
-                  className="service-footer flex items-center justify-between pt-4 
-                              border-t border-zinc-200 dark:border-zinc-800 
+                  className="service-footer flex items-center justify-between pt-4
+                              border-t border-zinc-200 dark:border-zinc-800
                               relative z-10"
                 >
                   <span className="text-lg font-display text-zinc-900 dark:text-zinc-100">
                     {price}
                   </span>
-
-                  <Button
-                    containerClassName="h-12 w-32"
-                    borderRadius="0.75rem"
-                    borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
-                    as="button"
-                    className="bg-white dark:bg-zinc-900/70 text-black dark:text-zinc-300 border-neutral-200 dark:border-slate-800 text-xs font-medium py-2"
-                  >
-                    {cta}
-                  </Button>
+                  <MirrorButton type="button" size="sm">
+                    Request quote
+                  </MirrorButton>
                 </div>
 
                 {/* Decorative corner accent */}
                 <div
-                  className="absolute bottom-0 right-0 w-16 h-16 
-                             bg-gradient-to-tl from-zinc-400/30 dark:from-zinc-800/30 to-transparent 
+                  className="absolute bottom-0 right-0 w-16 h-16
+                             bg-gradient-to-tl from-zinc-400/30 dark:from-zinc-800/30 to-transparent
                              rounded-tl-full rounded-br-2xl pointer-events-none"
                 />
               </article>

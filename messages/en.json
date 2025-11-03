@@ -6,7 +6,7 @@
     "projects": "Projects",
     "results": "Results",
     "contact": "Contact",
-    "portfolio": "Portfolio"
+    "portfolio": "About me"
   },
   "hero": {
     "title": "geroserial.com",
@@ -114,7 +114,7 @@
   },
   "results": {
     "title": "Results that speak",
-    "subtitle": "Every project is measured by the impact it creates. These aren't just numbers, they're real results clients achieve when working with me.",
+    "subtitle": "Every project is measured by the impact it creates.",
     "stats": {
       "visits": {
         "label": "Website Visits",

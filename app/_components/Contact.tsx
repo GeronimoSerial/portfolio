@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useContactAnimations } from "@/hooks/useContactAnimations";
-
+import { MirrorButton } from "@/components/ui/mirror_button";
 export default function Contact() {
   const t = useTranslations("contact");
   const containerRef = useContactAnimations();
@@ -22,7 +22,7 @@ export default function Contact() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -257,13 +257,9 @@ export default function Contact() {
 
               {/* Submit Button */}
               <div className="pt-3 gsap-submit">
-                <button
-                  type="submit"
-                  className="group relative w-full py-4 text-sm font-medium uppercase tracking-widest text-white dark:text-black bg-zinc-950 dark:bg-zinc-50 overflow-hidden transition-all duration-500 hover:tracking-[0.3em]"
-                >
-                  <span className="relative z-10">{t("form.submit")}</span>
-                  <div className="absolute inset-0 bg-zinc-800 dark:bg-zinc-200 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                </button>
+                <MirrorButton type="submit" variant="default" size="full">
+                  {t("form.submit")}
+                </MirrorButton>
               </div>
 
               {/* Privacy Notice */}
