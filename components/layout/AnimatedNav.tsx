@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Github, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -19,7 +20,8 @@ export default function AnimatedNav() {
   const navItemsRef = useRef<HTMLDivElement>(null!);
   const actionsRef = useRef<HTMLDivElement>(null!);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const { isExpanded } = useAnimatedNav(
     navRef,
     logoRef,
@@ -44,7 +46,7 @@ export default function AnimatedNav() {
     >
       <div className="container mx-auto px-4 sm:px-6 h-full">
         <div className="relative flex items-center justify-between h-full">
-          <a
+          <Link
             ref={logoRef}
             href="/"
             className="mr-auto ml-4 md:mr-0 md:ml-0
@@ -57,14 +59,14 @@ export default function AnimatedNav() {
           >
             <span className="relative z-10">geroserial</span>
             <span className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 dark:from-zinc-500/20 dark:to-zinc-300/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </a>
+          </Link>
 
           {/* Desktop Nav Items */}
           <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
             {navItems.map((item, index) => (
-              <a
+              <Link
                 key={item.id}
-                href={`#${item.id}`}
+                href={`/#${item.id}`}
                 className="px-4 py-2 text-sm font-medium
                              text-zinc-600 dark:text-zinc-400
                              hover:text-zinc-900 dark:hover:text-zinc-100
@@ -78,7 +80,7 @@ export default function AnimatedNav() {
               >
                 <span className="relative z-10">{item.label}</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -110,8 +112,8 @@ export default function AnimatedNav() {
 
           {/* Desktop Actions */}
           <div ref={actionsRef} className="hidden md:flex items-center gap-3">
-            <MirrorButton size="xs" href="/portfolio">
-              {t("portfolio")}
+            <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
+              {isHome ? t("portfolio") : t("home")}{" "}
             </MirrorButton>
 
             <LocaleSwitcher />
