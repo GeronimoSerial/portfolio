@@ -63,11 +63,11 @@ export default function Process() {
             How I Work
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-300 to-transparent mx-auto mb-6 process-divider" />
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+          <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
             A proven methodology designed for{" "}
-            <span className="text-zinc-900 dark:text-zinc-100 font-medium">
+            <strong className="text-zinc-900 dark:text-zinc-100">
               predictable results
-            </span>{" "}
+            </strong>{" "}
             and seamless collaboration
           </p>
         </div>

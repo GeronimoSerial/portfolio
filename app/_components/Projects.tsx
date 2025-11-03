@@ -1,7 +1,6 @@
 "use client";
 import projectsData from "@/data/projects.json";
 import { ExternalLink, Github } from "lucide-react";
-import { LayoutTextFlip } from "@/components/ui/layout-text-flip";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
 
 type Project = {
@@ -137,7 +136,7 @@ export default function ProjectsStatic() {
               <div className="card-content relative p-6 h-full bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800">
                 <div className="flex flex-col h-full">
                   {/* Número del proyecto */}
-                  <div className="absolute top-4 right-4 text-6xl font-display font-bold text-zinc-100 dark:text-zinc-900 opacity-50 leading-none">
+                  <div className="absolute top-4 right-4 text-6xl font-display font-bold text-zinc-200/60 dark:text-zinc-900 opacity-100 leading-none">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 

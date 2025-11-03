@@ -48,12 +48,12 @@ export default function Results() {
 
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mb-6" />
 
-          <p className="result-subtitle text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto">
+          <p className="result-subtitle text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed">
             Every project is measured by the impact it creates. These aren't
-            just numbers—they're{" "}
-            <span className="font-medium text-zinc-900 dark:text-zinc-50">
+            just numbers, they're{" "}
+            <strong className="font-medium text-zinc-900 dark:text-zinc-50 whitespace-nowrap">
               real results
-            </span>{" "}
+            </strong>{" "}
             clients achieve when working with me.
           </p>
         </div>
