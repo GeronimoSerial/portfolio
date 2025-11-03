@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { Background } from "@/components/layout/Background";
-import Nav from "@/components/layout/Nav";
 import PortfolioHero from "./_components/PortfolioHero";
 import About from "./_components/About";
 import SkillsComprehensive from "./_components/SkillsComprehensive";
@@ -38,8 +37,8 @@ export default function PortfolioPage() {
       </main>
 
       <footer
-        className="border-t 
-        border-zinc-200 dark:border-zinc-800 
+        className="border-t
+        border-zinc-200 dark:border-zinc-800
         py-8 gsap-element"
       >
         <div className="container mx-auto px-4 text-center">
