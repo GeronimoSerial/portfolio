@@ -66,44 +66,44 @@
     "cta": "Request Quote"
   },
   "process": {
-    "title": "How I Work",
-    "subtitle": "A proven methodology designed for predictable results and seamless collaboration",
-    "tagline": "Methodical Approach · Real-World Solutions",
+    "title": "Process",
+    "subtitle": "A clear and collaborative way to build technology that works.",
+    "tagline": "Discover · Design · Build · Launch",
     "steps": {
-      "discovery": {
-        "title": "Discovery & Analysis",
-        "description": "Understanding your business challenges and technical requirements",
+      "1": {
+        "title": "Discover",
+        "description": "We define goals, needs, and opportunities through analysis and strategy.",
         "items": [
-          "Requirements gathering",
-          "Technical audit (if applicable)",
-          "Solution proposal & roadmap"
+          "Understand your business context",
+          "Audit systems and workflows",
+          "Set a clear direction for the project"
         ]
       },
-      "architecture": {
-        "title": "Architecture Design",
-        "description": "Planning scalable and maintainable solutions",
+      "2": {
+        "title": "Design",
+        "description": "We shape the structure, experience, and visual identity of your solution.",
         "items": [
-          "System architecture diagram",
-          "Technology stack selection",
-          "Implementation timeline"
+          "Information architecture and UX design",
+          "Wireframes and visual system",
+          "Functional plan and feedback loop"
         ]
       },
-      "development": {
-        "title": "Agile Development",
-        "description": "Iterative development with continuous feedback",
+      "3": {
+        "title": "Build",
+        "description": "We develop, integrate, and test everything with precision and transparency.",
         "items": [
-          "2-week sprints",
-          "Progressive demos",
-          "Continuous testing & QA"
+          "Iterative development and reviews",
+          "Secure, scalable implementation",
+          "Performance and quality testing"
         ]
       },
-      "deployment": {
-        "title": "Deployment & Support",
-        "description": "Controlled launch with ongoing assistance",
+      "4": {
+        "title": "Launch",
+        "description": "We deploy your solution and ensure a smooth transition with real support.",
         "items": [
-          "Staged rollout",
-          "Technical documentation",
-          "30-day post-launch support"
+          "Controlled rollout and documentation",
+          "Monitoring and adjustments",
+          "Post-launch support and evolution plan"
         ]
       }
     }

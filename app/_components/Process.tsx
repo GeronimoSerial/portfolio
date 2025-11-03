@@ -12,22 +12,22 @@ export default function Process() {
     {
       icon: Search,
       number: "01",
-      key: "discovery",
+      key: "1",
     },
     {
       icon: Layers,
       number: "02",
-      key: "architecture",
+      key: "2",
     },
     {
       icon: Code,
       number: "03",
-      key: "development",
+      key: "3",
     },
     {
       icon: Rocket,
       number: "04",
-      key: "deployment",
+      key: "4",
     },
   ];
 
@@ -45,7 +45,7 @@ export default function Process() {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-300 to-transparent mx-auto mb-6 process-divider" />
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
-            {t("subtitle")}
+            {t("subtitle", { highlight: t("highlight") })}
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function Process() {
                   {/* Connector Line (hidden on mobile, visible on lg) */}
                   {index < steps.length - 1 && (
                     <div
-                      className="process-connector hidden lg:block absolute top-16 -right-3 w-6 h-0.5 
+                      className="process-connector hidden lg:block absolute top-16 -right-3 w-6 h-0.5
                                  bg-gradient-to-r from-zinc-300 dark:from-zinc-700 to-transparent"
                       style={{ transformOrigin: "left center" }}
                     />
@@ -75,17 +75,17 @@ export default function Process() {
                                  ? "from-zinc-50 to-zinc-100 dark:from-zinc-900/50 dark:to-zinc-800/30"
                                  : "from-zinc-100 to-zinc-50 dark:from-zinc-800/30 dark:to-zinc-900/50"
                              }
-                             border-2 border-zinc-200 dark:border-zinc-800 
+                             border-2 border-zinc-200 dark:border-zinc-800
                              rounded-2xl
                              shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50`}
                   >
                     {/* Number Badge */}
                     <div
-                      className="process-number absolute -top-4 -left-4 
-                                   w-16 h-16 
+                      className="process-number absolute -top-4 -left-4
+                                   w-16 h-16
                                    bg-zinc-950 dark:bg-zinc-50
                                    text-zinc-50 dark:text-zinc-950
-                                   rounded-full 
+                                   rounded-full
                                    flex items-center justify-center
                                    text-2xl font-display font-bold
                                    border-4 border-white dark:border-zinc-950
@@ -97,7 +97,7 @@ export default function Process() {
                     {/* Icon */}
                     <div className="mb-6 mt-6">
                       <div
-                        className="process-icon inline-flex p-3 
+                        className="process-icon inline-flex p-3
                                    bg-zinc-200 dark:bg-zinc-800
                                    rounded-xl"
                       >
@@ -123,7 +123,7 @@ export default function Process() {
                           className="process-list-item flex items-start gap-3 text-sm text-zinc-700 dark:text-zinc-300"
                         >
                           <span
-                            className="flex-shrink-0 w-1.5 h-1.5 rounded-full 
+                            className="flex-shrink-0 w-1.5 h-1.5 rounded-full
                                        bg-zinc-400 dark:bg-zinc-600 mt-1.5"
                           />
                           <span className="leading-relaxed">
@@ -135,8 +135,8 @@ export default function Process() {
 
                     {/* Decorative corner accent */}
                     <div
-                      className="absolute bottom-0 right-0 w-20 h-20 
-                                 bg-gradient-to-tl from-zinc-200/50 dark:from-zinc-800/50 to-transparent 
+                      className="absolute bottom-0 right-0 w-20 h-20
+                                 bg-gradient-to-tl from-zinc-200/50 dark:from-zinc-800/50 to-transparent
                                  rounded-tl-full rounded-br-2xl"
                     />
                   </div>

@@ -2,161 +2,159 @@
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
-    "process": "Proceso",
+    "process": "Metodología",
     "projects": "Proyectos",
     "results": "Resultados",
     "contact": "Contacto",
-    "portfolio": "Portafolio"
+    "portfolio": "Portfolio"
   },
   "hero": {
     "title": "geroserial.com",
-    "subtitle": "Especialista en TI · Infraestructura, Automatización y Gestión de Sistemas Web",
-    "description": "Enfoque Metódico. Soluciones del Mundo Real.",
-    "cta": "Ver Servicios"
+    "subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas Web",
+    "description": "Método preciso. Soluciones reales.",
+    "cta": "Ver servicios"
   },
   "services": {
     "title": "Servicios",
-    "subtitle": "Soluciones tecnológicas de vanguardia",
-    "priceLabel": "Desde",
+    "subtitle": "Soluciones inteligentes para crecer en digital",
     "items": {
       "consulting": {
         "title": "Consultoría Tecnológica",
-        "description": "Transformo ideas en soluciones digitales efectivas.",
+        "description": "Transformo desafíos en estrategias claras y aplicables.",
         "features": [
-          "Evaluación de sistemas y herramientas actuales",
-          "Estrategias tecnológicas personalizadas",
-          "Mejora de flujos de trabajo y eficiencia",
-          "Orientación práctica para la toma de decisiones"
+          "Revisión completa de sistemas y procesos",
+          "Planes personalizados para optimizar y escalar",
+          "Orientación precisa para decisiones tecnológicas",
+          "Soluciones prácticas alineadas a tus objetivos"
         ],
-        "price": "Desde $xxx USD"
+        "price": "Desde $800 USD"
       },
       "support": {
-        "title": "Soporte y Mantenimiento IT",
-        "description": "Asistencia confiable para mantener tus sistemas funcionando sin problemas.",
+        "title": "Soporte y Optimización IT",
+        "description": "Mantené tus sistemas estables con asistencia y monitoreo continuo.",
         "features": [
           "Mantenimiento preventivo y actualizaciones",
-          "Resolución de problemas y respuesta a incidentes",
-          "Monitoreo y optimización de sistemas",
-          "Capacitación y soporte al personal"
+          "Atención y resolución de incidencias",
+          "Optimización de rendimiento y disponibilidad",
+          "Recomendaciones de mejora continua"
         ],
-        "price": "Desde $xxx USD/mes"
+        "price": "Desde $300 USD/mes"
       },
       "transformation": {
         "title": "Transformación Digital",
-        "description": "Moderniza tu negocio con herramientas modernas y automatización.",
+        "description": "Actualizá tu operación con automatización, nube y flujos más inteligentes.",
         "features": [
-          "Diseño de estrategia digital",
-          "Configuración de soluciones en la nube",
-          "Automatización de procesos manuales",
-          "Análisis de datos para mejores decisiones"
+          "Estrategia de automatización de procesos",
+          "Migración y configuración en la nube",
+          "Integración de sistemas y capacitación",
+          "Análisis de datos para decisiones efectivas"
         ],
-        "price": "Cotización Personalizada"
+        "price": "Presupuesto personalizado"
       },
       "development": {
-        "title": "Desarrollo de Sitios Web y Aplicaciones",
-        "description": "Sitios web profesionales y plataformas que crecen con tu negocio.",
+        "title": "Desarrollo Web y Plataformas",
+        "description": "Diseño experiencias digitales seguras, rápidas y escalables.",
         "features": [
-          "Diseño moderno y responsive",
-          "Funcionalidades personalizadas e integraciones",
-          "Rendimiento rápido y seguridad",
-          "Actualizaciones continuas y escalabilidad"
+          "Diseño moderno enfocado en conversión",
+          "Funcionalidades e integraciones a medida",
+          "SEO y analítica desde el inicio",
+          "Soporte y evolución constante"
         ],
-        "price": "Desde $xxx USD"
+        "price": "Desde $1000 USD"
       }
     },
-    "cta": "Solicitar Cotización"
+    "cta": "Solicitar presupuesto"
   },
   "process": {
-    "title": "Cómo Trabajo",
-    "subtitle": "Una metodología comprobada diseñada para {highlight} y colaboración fluida",
-    "highlight": "resultados predecibles",
-    "tagline": "Enfoque Metódico · Soluciones del Mundo Real",
+    "title": "Metodología",
+    "subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",
+    "tagline": "Descubrir · Diseñar · Construir · Lanzar",
     "steps": {
-      "discovery": {
-        "title": "Descubrimiento y Análisis",
-        "description": "Comprendiendo los desafíos de tu negocio y requisitos técnicos",
+      "1": {
+        "title": "Descubrir",
+        "description": "Definimos objetivos, necesidades y oportunidades a través del análisis y la estrategia.",
         "items": [
-          "Recopilación de requisitos",
-          "Auditoría técnica (si aplica)",
-          "Propuesta de solución y hoja de ruta"
+          "Comprender el contexto de tu negocio",
+          "Auditar sistemas y flujos de trabajo",
+          "Marcar una dirección clara para el proyecto"
         ]
       },
-      "architecture": {
-        "title": "Diseño de Arquitectura",
-        "description": "Planificando soluciones escalables y mantenibles",
+      "2": {
+        "title": "Diseñar",
+        "description": "Damos forma a la estructura, experiencia e identidad visual de tu solución.",
         "items": [
-          "Diagrama de arquitectura del sistema",
-          "Selección de stack tecnológico",
-          "Cronograma de implementación"
+          "Arquitectura de información y diseño UX",
+          "Wireframes y sistema visual",
+          "Plan funcional y revisión constante"
         ]
       },
-      "development": {
-        "title": "Desarrollo Ágil",
-        "description": "Desarrollo iterativo con retroalimentación continua",
+      "3": {
+        "title": "Construir",
+        "description": "Desarrollamos e integramos con precisión y total transparencia.",
         "items": [
-          "Sprints de 2 semanas",
-          "Demos progresivas",
-          "Pruebas y QA continuo"
+          "Desarrollo iterativo con revisiones frecuentes",
+          "Implementación segura y escalable",
+          "Pruebas de rendimiento y calidad"
         ]
       },
-      "deployment": {
-        "title": "Despliegue y Soporte",
-        "description": "Lanzamiento controlado con asistencia continua",
+      "4": {
+        "title": "Lanzar",
+        "description": "Publicamos tu solución y garantizamos una transición fluida con soporte real.",
         "items": [
-          "Despliegue por etapas",
-          "Documentación técnica",
-          "Soporte post-lanzamiento de 30 días"
+          "Despliegue controlado y documentación",
+          "Monitoreo y ajustes iniciales",
+          "Soporte post-lanzamiento y plan de evolución"
         ]
       }
     }
   },
   "projects": {
-    "title": "Proyectos Destacados",
-    "subtitle": "Experimenta el poder de componentes UI modernos que dan vida a tus ideas."
+    "title": "Proyectos destacados",
+    "subtitle": "Interfaces modernas y componentes dinámicos que dan vida a tus ideas."
   },
   "results": {
     "title": "Resultados que hablan",
-    "subtitle": "Cada proyecto se mide por el impacto que crea. Estos no son solo números, son resultados reales que los clientes logran al trabajar conmigo.",
+    "subtitle": "Cada proyecto se mide por su impacto real. Estos son logros concretos alcanzados junto a mis clientes.",
     "stats": {
       "visits": {
-        "label": "Visitas al Sitio",
-        "period": "en 20 Días"
+        "label": "Visitas al sitio",
+        "period": "en 20 días"
       },
       "performance": {
-        "label": "Tiempos de Carga",
-        "period": "Después de Optimización"
+        "label": "Tiempos de carga",
+        "period": "más rápidos tras la optimización"
       },
       "projects": {
-        "label": "Proyectos Exitosos",
-        "period": "Entregados"
+        "label": "Proyectos finalizados",
+        "period": "con éxito"
       },
       "uptime": {
         "label": "Promedio de",
-        "period": "Disponibilidad"
+        "period": "disponibilidad"
       }
     },
     "cta": {
-      "text": "¿Listo para ver resultados similares en tu proyecto?",
+      "text": "¿Querés lograr resultados similares?",
       "link": "Hablemos"
     }
   },
   "contact": {
     "heading": {
-      "line1": "Trabajemos",
-      "line2": "Juntos"
+      "line1": "Hablemos de tu",
+      "line2": "próximo proyecto"
     },
-    "description": "Comparte tu visión y hagámosla realidad.",
+    "description": "Compartí tu visión y hagámosla realidad.",
     "info": {
-      "directContact": "Contacto Directo",
-      "basedIn": "Ubicado En"
+      "directContact": "Contacto directo",
+      "basedIn": "Con base en"
     },
     "form": {
       "name": {
-        "label": "Tu Nombre",
-        "placeholder": "Ingresa tu nombre completo"
+        "label": "Tu nombre",
+        "placeholder": "Ingresá tu nombre completo"
       },
       "email": {
-        "label": "Correo Electrónico",
+        "label": "Correo electrónico",
         "placeholder": "tu@email.com"
       },
       "company": {
@@ -165,32 +163,32 @@
         "placeholder": "Nombre de tu empresa"
       },
       "message": {
-        "label": "Detalles del Proyecto",
-        "placeholder": "Cuéntame sobre tu proyecto, objetivos y cronograma..."
+        "label": "Detalles del proyecto",
+        "placeholder": "Contame sobre tu proyecto, objetivos y plazos..."
       },
-      "submit": "Enviar Mensaje",
-      "privacy": "Tu información es confidencial y solo se utilizará para responder a tu consulta. Respetamos tu privacidad y nunca compartimos datos con terceros."
+      "submit": "Enviar mensaje",
+      "privacy": "Tu información es confidencial y será utilizada solo para responder a tu consulta. No compartimos datos con terceros."
     },
-    "availability": "DISPONIBLE PARA PROYECTOS SELECTOS"
+    "availability": "DISPONIBLE PARA PROYECTOS SELECCIONADOS"
   },
   "testimonials": {
-    "title": "Lo Que Dicen los Clientes",
-    "subtitle": "Testimonios de clientes satisfechos",
+    "title": "Opiniones de clientes",
+    "subtitle": "Experiencias de quienes confiaron en mi trabajo",
     "items": {
       "client1": {
         "name": "Juan Pérez",
         "role": "CEO, Tech Solutions",
-        "content": "Excelente trabajo en el sitio web de nuestra empresa. Profesional, puntual y superó las expectativas."
+        "content": "Excelente trabajo con el sitio web de nuestra empresa. Profesional, puntual y superó las expectativas."
       },
       "client2": {
         "name": "María González",
         "role": "Product Manager, StartupXYZ",
-        "content": "Las herramientas de automatización desarrolladas nos han ahorrado innumerables horas. Altamente recomendado."
+        "content": "Las herramientas de automatización nos ahorran horas de trabajo. Altamente recomendado."
       },
       "client3": {
         "name": "Carlos Rodríguez",
         "role": "CTO, Innovation Labs",
-        "content": "Experiencia técnica sobresaliente y habilidades para resolver problemas. Un placer trabajar juntos."
+        "content": "Gran conocimiento técnico y capacidad para resolver problemas complejos. Un gusto colaborar."
       }
     }
   },
@@ -200,11 +198,11 @@
   "meta": {
     "home": {
       "title": "geroserial.com",
-      "description": "Brindando soluciones tecnológicas que simplifican y potencian proyectos."
+      "description": "Soluciones tecnológicas que simplifican y potencian tus proyectos."
     },
     "portfolio": {
-      "title": "Portafolio | Geronimo Serial",
-      "description": "Portafolio y currículum completo de Geronimo Serial - Desarrollador Full-stack y Consultor Técnico especializado en Next.js, React y tecnologías web modernas."
+      "title": "Portfolio | Geronimo Serial",
+      "description": "Portfolio y experiencia profesional de Geronimo Serial — Desarrollador Full-stack y Consultor Técnico especializado en Next.js, React y tecnologías web modernas."
     }
   }
 }
