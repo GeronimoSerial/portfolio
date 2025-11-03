@@ -82,24 +82,31 @@ export default function AnimatedNav() {
             ))}
           </div>
 
-          {/* Mobile Menu Trigger */}
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <button
-                className="md:hidden p-2
-                text-zinc-600 dark:text-zinc-400
-                rounded-lg
-                transition-all duration-300
-                hover:scale-110 active:scale-95"
-                aria-label="Toggle mobile menu"
-              >
-                <Menu className="w-6 h-6" />
-              </button>
-            </SheetTrigger>
-            <MobileMenu
-              navigationItems={[{ id: "hero", label: t("home") }, ...navItems]}
-            />
-          </Sheet>
+          {/* Mobile Actions */}
+          <div className="flex md:hidden items-center gap-2">
+            <LocaleSwitcher />
+
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className="p-2
+                  text-zinc-600 dark:text-zinc-400
+                  rounded-lg
+                  transition-all duration-300
+                  hover:scale-110 active:scale-95"
+                  aria-label="Toggle mobile menu"
+                >
+                  <Menu className="w-6 h-6" />
+                </button>
+              </SheetTrigger>
+              <MobileMenu
+                navigationItems={[
+                  { id: "hero", label: t("home") },
+                  ...navItems,
+                ]}
+              />
+            </Sheet>
+          </div>
 
           {/* Desktop Actions */}
           <div ref={actionsRef} className="hidden md:flex items-center gap-3">
