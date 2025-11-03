@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { useGSAPOnly, useGSAPScroll } from "@/hooks/useGSAPOnly";
 import { GradientHeading } from "@/components/ui/gradient-heading";
+import { Button } from "@/components/ui/moving-border";
 
 export default function HeroStatic() {
   const container = useRef<HTMLElement>(null);
@@ -66,28 +67,19 @@ export default function HeroStatic() {
 
         {/* Botones simples */}
         <div className="hero-buttons gsap-element flex gap-4 mt-10">
-          <a
-            href="#services"
-            className="px-6 py-3 text-sm font-medium 
-                     text-zinc-700 dark:text-zinc-300 
-                     bg-black/10 dark:bg-white/10 
-                     border border-zinc-300 dark:border-zinc-700 
-                     rounded-lg 
-                     hover:bg-black/20 dark:hover:bg-white/20 
-                     hover:border-zinc-500 dark:hover:border-zinc-500"
+          <Button
+            borderRadius="0.75rem"
+            borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
+            as="button"
+            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium"
+            onClick={() => {
+              document
+                .getElementById("services")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             View Services
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 text-sm font-medium 
-                     text-white dark:text-black 
-                     bg-black dark:bg-white 
-                     rounded-lg 
-                     hover:bg-zinc-800 dark:hover:bg-zinc-100"
-          >
-            Get in Touch
-          </a>
+          </Button>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useServicesAnimations } from "@/hooks/useServicesAnimations";
 import { services } from "@/lib/constants";
+import { Button } from "@/components/ui/moving-border";
 
 export default function ServicesStatic() {
   const { containerRef, headerRef } = useServicesAnimations();
@@ -108,15 +109,16 @@ export default function ServicesStatic() {
                   <span className="text-lg font-display text-zinc-900 dark:text-zinc-100">
                     {service.price}
                   </span>
-                  <span
-                    className="px-4 py-2 text-sm font-medium 
-                                 text-white dark:text-black 
-                                 bg-black dark:bg-white 
-                                 rounded-lg cursor-pointer 
-                                 hover:shadow-lg hover:shadow-black/20 dark:hover:shadow-white/20"
+
+                  <Button
+                    containerClassName="h-12 w-32"
+                    borderRadius="0.75rem"
+                    borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
+                    as="button"
+                    className="bg-white dark:bg-zinc-900/70 text-black dark:text-zinc-300 border-neutral-200 dark:border-slate-800 text-xs font-medium py-2"
                   >
                     Request Quote
-                  </span>
+                  </Button>
                 </div>
 
                 {/* Decorative corner accent */}
