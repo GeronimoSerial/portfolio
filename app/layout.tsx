@@ -7,6 +7,7 @@ import { getMessages, getLocale } from "next-intl/server";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Background } from "@/components/layout/Background";
 import AnimatedNav from "@/components/layout/AnimatedNav";
+import { DevelopmentNotice } from "@/components/shared/DevelopmentNotice";
 
 // import { Analytics } from "@/components/shared/analytics";
 // import StickyNav from "@/components/navigation/StickyNav";
@@ -107,20 +108,20 @@ export default async function RootLayout({
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >
-        <div id="smooth-wrapper">
-          <div id="smooth-content">
-            <NextIntlClientProvider messages={messages}>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
+        {/* Portal container for dialogs - outside GSAP flow */}
+        <div id="portal-root" style={{ position: "relative", zIndex: 9999 }} />
+
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <DevelopmentNotice />
+            <div id="smooth-wrapper">
+              <div id="smooth-content">
                 <AnimatedNav />
                 {children}
-              </ThemeProvider>
-            </NextIntlClientProvider>
-          </div>
-        </div>
+              </div>
+            </div>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
