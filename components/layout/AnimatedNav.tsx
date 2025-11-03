@@ -3,14 +3,16 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { Github, Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
-import { NAVIGATION_ITEMS } from "@/config/navigation";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 export default function AnimatedNav() {
+  const t = useTranslations('nav');
   const navRef = useRef<HTMLElement>(null!);
   const logoRef = useRef<HTMLAnchorElement>(null!);
   const navItemsRef = useRef<HTMLDivElement>(null!);
@@ -23,6 +25,15 @@ export default function AnimatedNav() {
     navItemsRef,
     actionsRef
   );
+
+  // Navigation items con traducciones
+  const navItems = [
+    { id: 'services', label: t('services') },
+    { id: 'process', label: t('process') },
+    { id: 'projects', label: t('projects') },
+    { id: 'results', label: t('results') },
+    { id: 'contact', label: t('contact') },
+  ];
 
   return (
     <nav
@@ -49,7 +60,7 @@ export default function AnimatedNav() {
 
           {/* Desktop Nav Items */}
           <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
-            {NAVIGATION_ITEMS.slice(1).map((item, index) => (
+            {navItems.map((item, index) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
@@ -84,7 +95,12 @@ export default function AnimatedNav() {
                 <Menu className="w-6 h-6" />
               </button>
             </SheetTrigger>
-            <MobileMenu navigationItems={NAVIGATION_ITEMS} />
+            <MobileMenu 
+              navigationItems={[
+                { id: 'hero', label: t('home') },
+                ...navItems
+              ]} 
+            />
           </Sheet>
 
           {/* Desktop Actions */}
@@ -101,9 +117,11 @@ export default function AnimatedNav() {
                 relative overflow-hidden group
                 will-change-transform"
             >
-              <span className="relative z-10">Portfolio</span>
+              <span className="relative z-10">{t('portfolio')}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-900 dark:from-zinc-300 dark:to-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
+
+            <LocaleSwitcher />
 
             <ThemeToggle />
 

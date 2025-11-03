@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { useGSAPOnly, useGSAPScroll } from "@/hooks/useGSAPOnly";
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import { Button } from "@/components/ui/moving-border";
 
 export default function HeroStatic() {
+  const t = useTranslations('hero');
   const container = useRef<HTMLElement>(null);
   const { heroEntrance } = useGSAPOnly();
   const { parallaxScroll, fadeOnScroll } = useGSAPScroll();
@@ -45,7 +47,7 @@ export default function HeroStatic() {
             weight="bold"
             className="hero-title gsap-element "
           >
-            geroserial.com
+            {t('title')}
           </GradientHeading>
         </div>
 
@@ -54,7 +56,7 @@ export default function HeroStatic() {
                      text-zinc-700 dark:text-zinc-300 
                      max-w-3xl"
         >
-          IT Specialist · Infrastructure, Automation & Web Systems Management
+          {t('subtitle')}
         </h2>
 
         <p
@@ -62,7 +64,7 @@ export default function HeroStatic() {
                     text-zinc-500 dark:text-zinc-500 
                     max-w-xl leading-relaxed"
         >
-          Methodical Approach. Real-World Solutions.
+          {t('description')}
         </p>
 
         {/* Botones simples */}
@@ -78,7 +80,7 @@ export default function HeroStatic() {
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            View Services
+            {t('cta')}
           </Button>
         </div>
       </div>

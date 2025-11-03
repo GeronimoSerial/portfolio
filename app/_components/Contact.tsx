@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useContactAnimations } from "@/hooks/useContactAnimations";
 
 export default function Contact() {
+  const t = useTranslations('contact');
   const containerRef = useContactAnimations();
 
   const [formData, setFormData] = useState({
@@ -100,16 +102,16 @@ export default function Contact() {
             <div className="space-y-5">
               <div className="overflow-hidden">
                 <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-light tracking-tight text-zinc-950 dark:text-zinc-50 leading-[0.9] gsap-title">
-                  Let's
+                  {t('heading.line1')}
                   <br />
-                  <span className="font-normal italic">Collaborate</span>
+                  <span className="font-normal italic">{t('heading.line2')}</span>
                 </h2>
               </div>
 
               <div className="h-px w-20 bg-gradient-to-r from-zinc-950 dark:from-zinc-50 to-transparent gsap-line" />
 
               <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-md leading-relaxed gsap-description">
-                Share your vision and let's make it happen.
+                {t('description')}
               </p>
             </div>
 
@@ -117,7 +119,7 @@ export default function Contact() {
             <div className="space-y-6 gsap-info">
               <div className="space-y-2">
                 <p className="text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500">
-                  Direct Contact
+                  {t('info.directContact')}
                 </p>
                 <a
                   href="mailto:contact@geroserial.com"
@@ -129,7 +131,7 @@ export default function Contact() {
 
               <div className="space-y-2">
                 <p className="text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500">
-                  Based In
+                  {t('info.basedIn')}
                 </p>
                 <p className="text-lg text-zinc-950 dark:text-zinc-50">
                   Corrientes, Argentina
@@ -174,7 +176,7 @@ export default function Contact() {
                     htmlFor="name"
                     className="block text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-2"
                   >
-                    Your Name
+                    {t('form.name.label')}
                   </label>
                   <input
                     type="text"
@@ -184,7 +186,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-700 py-2.5 text-base text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-zinc-950 dark:focus:border-zinc-50 focus:outline-none transition-colors duration-300"
-                    placeholder="Enter your full name"
+                    placeholder={t('form.name.placeholder')}
                   />
                 </div>
 
@@ -194,7 +196,7 @@ export default function Contact() {
                     htmlFor="email"
                     className="block text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-2"
                   >
-                    Email Address
+                    {t('form.email.label')}
                   </label>
                   <input
                     type="email"
@@ -204,7 +206,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-700 py-2.5 text-base text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-zinc-950 dark:focus:border-zinc-50 focus:outline-none transition-colors duration-300"
-                    placeholder="your@email.com"
+                    placeholder={t('form.email.placeholder')}
                   />
                 </div>
 
@@ -214,9 +216,9 @@ export default function Contact() {
                     htmlFor="company"
                     className="block text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-2"
                   >
-                    Company
+                    {t('form.company.label')}
                     <span className="text-zinc-400 dark:text-zinc-600 ml-2 normal-case tracking-normal">
-                      (Optional)
+                      {t('form.company.optional')}
                     </span>
                   </label>
                   <input
@@ -226,7 +228,7 @@ export default function Contact() {
                     value={formData.company}
                     onChange={handleChange}
                     className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-700 py-2.5 text-base text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-zinc-950 dark:focus:border-zinc-50 focus:outline-none transition-colors duration-300"
-                    placeholder="Your company name"
+                    placeholder={t('form.company.placeholder')}
                   />
                 </div>
 
@@ -236,7 +238,7 @@ export default function Contact() {
                     htmlFor="message"
                     className="block text-xs font-medium uppercase tracking-widest text-zinc-500 dark:text-zinc-500 mb-2"
                   >
-                    Project Details
+                    {t('form.message.label')}
                   </label>
                   <textarea
                     id="message"
@@ -246,7 +248,7 @@ export default function Contact() {
                     required
                     rows={3}
                     className="w-full bg-transparent border-b border-zinc-300 dark:border-zinc-700 py-2.5 text-base text-zinc-950 dark:text-zinc-50 placeholder:text-zinc-400 dark:placeholder:text-zinc-600 focus:border-zinc-950 dark:focus:border-zinc-50 focus:outline-none transition-colors duration-300 resize-none"
-                    placeholder="Tell me about your project, goals, and timeline..."
+                    placeholder={t('form.message.placeholder')}
                   />
                 </div>
               </div>
@@ -257,16 +259,14 @@ export default function Contact() {
                   type="submit"
                   className="group relative w-full py-4 text-sm font-medium uppercase tracking-widest text-white dark:text-black bg-zinc-950 dark:bg-zinc-50 overflow-hidden transition-all duration-500 hover:tracking-[0.3em]"
                 >
-                  <span className="relative z-10">Send Message</span>
+                  <span className="relative z-10">{t('form.submit')}</span>
                   <div className="absolute inset-0 bg-zinc-800 dark:bg-zinc-200 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 </button>
               </div>
 
               {/* Privacy Notice */}
               <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-relaxed gsap-privacy">
-                Your information is confidential and will only be used to
-                respond to your inquiry. We respect your privacy and never share
-                data with third parties.
+                {t('form.privacy')}
               </p>
             </form>
           </div>
@@ -277,7 +277,7 @@ export default function Contact() {
           <div className="flex items-center gap-4">
             <div className="h-px w-12 bg-zinc-300 dark:bg-zinc-700" />
             <p className="text-xs text-zinc-500 dark:text-zinc-500 tracking-widest">
-              AVAILABLE FOR SELECT PROJECTS
+              {t('availability')}
             </p>
             <div className="h-px w-12 bg-zinc-300 dark:bg-zinc-700" />
           </div>

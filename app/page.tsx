@@ -1,3 +1,5 @@
+"use client";
+
 import AnimatedNav from "@/components/layout/AnimatedNav";
 import { Background } from "@/components/layout/Background";
 import Hero from "@/app/_components/Hero";
@@ -7,8 +9,10 @@ import Projects from "@/app/_components/Projects";
 import Results from "@/app/_components/Results";
 import Contact from "@/app/_components/Contact";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
+  const t = useTranslations('footer');
   return (
     <>
       {/* <AnimatedNav /> */}
@@ -34,7 +38,7 @@ export default function Home() {
               >
                 geroserial.com
               </Link>
-              .
+              . {t('rights')}
             </p>
           </div>
         </footer>

@@ -1,52 +1,33 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Search, Layers, Code, Rocket } from "lucide-react";
 import { useProcessAnimations } from "@/hooks/useProcessAnimations";
 
 export default function Process() {
+  const t = useTranslations('process');
   const containerRef = useProcessAnimations();
 
   const steps = [
     {
       icon: Search,
       number: "01",
-      title: "Discovery & Analysis",
-      description:
-        "Understanding your business challenges and technical requirements",
-      items: [
-        "Requirements gathering",
-        "Technical audit (if applicable)",
-        "Solution proposal & roadmap",
-      ],
+      key: "discovery",
     },
     {
       icon: Layers,
       number: "02",
-      title: "Architecture Design",
-      description: "Planning scalable and maintainable solutions",
-      items: [
-        "System architecture diagram",
-        "Technology stack selection",
-        "Implementation timeline",
-      ],
+      key: "architecture",
     },
     {
       icon: Code,
       number: "03",
-      title: "Agile Development",
-      description: "Iterative development with continuous feedback",
-      items: ["2-week sprints", "Progressive demos", "Continuous testing & QA"],
+      key: "development",
     },
     {
       icon: Rocket,
       number: "04",
-      title: "Deployment & Support",
-      description: "Controlled launch with ongoing assistance",
-      items: [
-        "Staged rollout",
-        "Technical documentation",
-        "30-day post-launch support",
-      ],
+      key: "deployment",
     },
   ];
 
@@ -60,15 +41,11 @@ export default function Process() {
         {/* Header */}
         <div className="text-center mb-20 process-header">
           <h2 className="text-5xl md:text-6xl font-display text-zinc-950 dark:text-zinc-50 mb-6">
-            How I Work
+            {t('title')}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-300 to-transparent mx-auto mb-6 process-divider" />
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
-            A proven methodology designed for{" "}
-            <strong className="text-zinc-900 dark:text-zinc-100">
-              predictable results
-            </strong>{" "}
-            and seamless collaboration
+            {t('subtitle')}
           </p>
         </div>
 
@@ -130,17 +107,17 @@ export default function Process() {
 
                     {/* Title */}
                     <h3 className="process-title text-xl font-bold text-zinc-950 dark:text-zinc-50 mb-3">
-                      {step.title}
+                      {t(`steps.${step.key}.title`)}
                     </h3>
 
                     {/* Description */}
                     <p className="process-description text-sm text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-                      {step.description}
+                      {t(`steps.${step.key}.description`)}
                     </p>
 
                     {/* Items List */}
                     <ul className="space-y-3">
-                      {step.items.map((item, itemIndex) => (
+                      {[0, 1, 2].map((itemIndex) => (
                         <li
                           key={itemIndex}
                           className="process-list-item flex items-start gap-3 text-sm text-zinc-700 dark:text-zinc-300"
@@ -149,7 +126,7 @@ export default function Process() {
                             className="flex-shrink-0 w-1.5 h-1.5 rounded-full 
                                        bg-zinc-400 dark:bg-zinc-600 mt-1.5"
                           />
-                          <span className="leading-relaxed">{item}</span>
+                          <span className="leading-relaxed">{t(`steps.${step.key}.items.${itemIndex}`)}</span>
                         </li>
                       ))}
                     </ul>
@@ -172,7 +149,7 @@ export default function Process() {
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800">
             <div className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 animate-pulse" />
             <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              Methodical Approach · Real-World Solutions
+              {t('tagline')}
             </p>
           </div>
         </div>

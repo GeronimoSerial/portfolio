@@ -1,4 +1,7 @@
 "use client";
+
+import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import projectsData from "@/data/projects.json";
 import { ExternalLink, Github } from "lucide-react";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
@@ -13,7 +16,8 @@ type Project = {
   slug: string;
 };
 
-export default function ProjectsStatic() {
+export default function Projects() {
+  const t = useTranslations('projects');
   const { containerRef, headlineRef } = useProjectsAnimations();
 
   const projects = (projectsData as Project[])
@@ -84,15 +88,11 @@ export default function ProjectsStatic() {
         <div ref={headlineRef} className="mb-16">
           <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
             <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              Featured
-            </span>
-            <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              Projects
+              {t('title')}
             </span>
           </div>
           <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
-            Experience the power of modern UI components that bring your ideas
-            to life.
+            {t('subtitle')}
           </p>
         </div>
         {/* Grid de proyectos */}

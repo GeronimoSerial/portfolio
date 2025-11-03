@@ -2,6 +2,8 @@ import "../global.css";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages, getLocale } from 'next-intl/server';
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Background } from "@/components/layout/Background";
 import AnimatedNav from "@/components/layout/AnimatedNav";
@@ -74,14 +76,17 @@ const geist_mono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={[
         geist.variable,
         calSans.variable,
@@ -104,10 +109,12 @@ export default function RootLayout({
       >
         <div id="smooth-wrapper">
           <div id="smooth-content">
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <AnimatedNav />
-              {children}
-            </ThemeProvider>
+            <NextIntlClientProvider messages={messages}>
+              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                <AnimatedNav />
+                {children}
+              </ThemeProvider>
+            </NextIntlClientProvider>
           </div>
         </div>
       </body>

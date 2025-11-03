@@ -1,0 +1,208 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "process": "Process",
+    "projects": "Projects",
+    "results": "Results",
+    "contact": "Contact",
+    "portfolio": "Portfolio"
+  },
+  "hero": {
+    "title": "geroserial.com",
+    "subtitle": "IT Specialist · Infrastructure, Automation & Web Systems Management",
+    "description": "Methodical Approach. Real-World Solutions.",
+    "cta": "View Services"
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "Specialized technical solutions",
+    "items": {
+      "consulting": {
+        "title": "Technology Consulting",
+        "description": "I transform ideas into effective digital solutions.",
+        "features": [
+          "Current systems and tools evaluation",
+          "Customized technology strategies",
+          "Workflow and efficiency improvements",
+          "Practical guidance for decision-making"
+        ],
+        "price": "From $xxx USD"
+      },
+      "support": {
+        "title": "IT Support & Maintenance",
+        "description": "Reliable assistance to keep your systems running smoothly.",
+        "features": [
+          "Preventive maintenance and updates",
+          "Problem solving and incident response",
+          "System monitoring and optimization",
+          "Staff training and support"
+        ],
+        "price": "From $xxx USD/month"
+      },
+      "transformation": {
+        "title": "Digital Transformation",
+        "description": "Modernize your business with modern tools and automation.",
+        "features": [
+          "Digital strategy design",
+          "Cloud solutions configuration",
+          "Manual process automation",
+          "Data analysis for better decisions"
+        ],
+        "price": "Custom Quote"
+      },
+      "development": {
+        "title": "Web & App Development",
+        "description": "Professional websites and platforms that grow with your business.",
+        "features": [
+          "Modern and responsive design",
+          "Custom features and integrations",
+          "Fast performance and security",
+          "Continuous updates and scalability"
+        ],
+        "price": "From $xxx USD"
+      }
+    },
+    "cta": "Request Quote"
+  },
+  "process": {
+    "title": "How I Work",
+    "subtitle": "A proven methodology designed for predictable results and seamless collaboration",
+    "tagline": "Methodical Approach · Real-World Solutions",
+    "steps": {
+      "discovery": {
+        "title": "Discovery & Analysis",
+        "description": "Understanding your business challenges and technical requirements",
+        "items": [
+          "Requirements gathering",
+          "Technical audit (if applicable)",
+          "Solution proposal & roadmap"
+        ]
+      },
+      "architecture": {
+        "title": "Architecture Design",
+        "description": "Planning scalable and maintainable solutions",
+        "items": [
+          "System architecture diagram",
+          "Technology stack selection",
+          "Implementation timeline"
+        ]
+      },
+      "development": {
+        "title": "Agile Development",
+        "description": "Iterative development with continuous feedback",
+        "items": [
+          "2-week sprints",
+          "Progressive demos",
+          "Continuous testing & QA"
+        ]
+      },
+      "deployment": {
+        "title": "Deployment & Support",
+        "description": "Controlled launch with ongoing assistance",
+        "items": [
+          "Staged rollout",
+          "Technical documentation",
+          "30-day post-launch support"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Experience the power of modern UI components that bring your ideas to life."
+  },
+  "results": {
+    "title": "Results that speak",
+    "subtitle": "Every project is measured by the impact it creates. These aren't just numbers, they're real results clients achieve when working with me.",
+    "stats": {
+      "visits": {
+        "label": "Website Visits",
+        "period": "in 20 Days"
+      },
+      "performance": {
+        "label": "Faster Load Times",
+        "period": "After Optimization"
+      },
+      "projects": {
+        "label": "Successful Projects",
+        "period": "Delivered"
+      },
+      "uptime": {
+        "label": "Average",
+        "period": "Uptime"
+      }
+    },
+    "cta": {
+      "text": "Ready to see similar results in your project?",
+      "link": "Let's talk"
+    }
+  },
+  "contact": {
+    "heading": {
+      "line1": "Let's",
+      "line2": "Collaborate"
+    },
+    "description": "Share your vision and let's make it happen.",
+    "info": {
+      "directContact": "Direct Contact",
+      "basedIn": "Based In"
+    },
+    "form": {
+      "name": {
+        "label": "Your Name",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "your@email.com"
+      },
+      "company": {
+        "label": "Company",
+        "optional": "(Optional)",
+        "placeholder": "Your company name"
+      },
+      "message": {
+        "label": "Project Details",
+        "placeholder": "Tell me about your project, goals, and timeline..."
+      },
+      "submit": "Send Message",
+      "privacy": "Your information is confidential and will only be used to respond to your inquiry. We respect your privacy and never share data with third parties."
+    },
+    "availability": "AVAILABLE FOR SELECT PROJECTS"
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "subtitle": "Testimonials from satisfied clients",
+    "items": {
+      "client1": {
+        "name": "Juan Pérez",
+        "role": "CEO, Tech Solutions",
+        "content": "Excellent work on our company website. Professional, timely, and exceeded expectations."
+      },
+      "client2": {
+        "name": "María González",
+        "role": "Product Manager, StartupXYZ",
+        "content": "The automation tools developed have saved us countless hours. Highly recommended."
+      },
+      "client3": {
+        "name": "Carlos Rodríguez",
+        "role": "CTO, Innovation Labs",
+        "content": "Outstanding technical expertise and problem-solving skills. A pleasure to work with."
+      }
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  },
+  "meta": {
+    "home": {
+      "title": "geroserial.com",
+      "description": "Providing technological solutions that simplify and enhance projects."
+    },
+    "portfolio": {
+      "title": "Portfolio | Geronimo Serial",
+      "description": "Complete portfolio and resume for Geronimo Serial - Full-stack Developer & Technical Consultant specializing in Next.js, React, and modern web technologies."
+    }
+  }
+}

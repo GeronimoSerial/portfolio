@@ -1,11 +1,34 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { Lightbulb, Wrench, TrendingUp, Code } from "lucide-react";
 import { useServicesAnimations } from "@/hooks/useServicesAnimations";
-import { services } from "@/lib/constants";
 import { Button } from "@/components/ui/moving-border";
 
 export default function ServicesStatic() {
+  const t = useTranslations('services');
   const { containerRef, headerRef } = useServicesAnimations();
+  
+  // Mapear servicios con sus iconos y traduciones
+  const services = [
+    {
+      icon: Lightbulb,
+      key: 'consulting'
+    },
+    {
+      icon: Wrench,
+      key: 'support'
+    },
+    {
+      icon: TrendingUp,
+      key: 'transformation'
+    },
+    {
+      icon: Code,
+      key: 'development'
+    }
+  ];
+
   return (
     <section
       ref={containerRef}
@@ -16,11 +39,11 @@ export default function ServicesStatic() {
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-display text-zinc-950 dark:text-white mb-4">
-            Services
+            {t('title')}
           </h2>
 
           <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
-            Comprehensive IT solutions tailored to your business needs
+            {t('subtitle')}
           </p>
         </div>
 
@@ -28,9 +51,15 @@ export default function ServicesStatic() {
         <div className="services-grid grid md:grid-cols-2 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
+            const title = t(`items.${service.key}.title`);
+            const description = t(`items.${service.key}.description`);
+            const price = t(`items.${service.key}.price`);
+            const cta = t('cta');
+            const features = [0, 1, 2, 3].map(i => t(`items.${service.key}.features.${i}`));
+            
             return (
               <article
-                key={service.title}
+                key={service.key}
                 className="service-card group p-6 bg-gradient-to-b from-zinc-50/30 to-zinc-100/30 dark:from-zinc-900/50 dark:to-zinc-800/30 hover:opacity-100 border-2 border-zinc-200 dark:border-zinc-800 rounded-2xl pointer-events-auto relative overflow-hidden shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50"
               >
                 <svg
@@ -70,18 +99,18 @@ export default function ServicesStatic() {
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl text-zinc-950 dark:text-zinc-50 mb-2">
-                      {service.title}
+                      {title}
                     </h3>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                      {service.description}
+                      {description}
                     </p>
                   </div>
                 </div>
 
                 <ul className="space-y-2 mb-6 relative z-10">
-                  {service.features.map((feature) => (
+                  {features.map((feature, featureIndex) => (
                     <li
-                      key={feature}
+                      key={featureIndex}
                       className="feature-item flex items-center gap-2 text-sm 
                                text-zinc-700 dark:text-zinc-300"
                     >
@@ -107,7 +136,7 @@ export default function ServicesStatic() {
                               relative z-10"
                 >
                   <span className="text-lg font-display text-zinc-900 dark:text-zinc-100">
-                    {service.price}
+                    {price}
                   </span>
 
                   <Button
@@ -117,7 +146,7 @@ export default function ServicesStatic() {
                     as="button"
                     className="bg-white dark:bg-zinc-900/70 text-black dark:text-zinc-300 border-neutral-200 dark:border-slate-800 text-xs font-medium py-2"
                   >
-                    Request Quote
+                    {cta}
                   </Button>
                 </div>
 

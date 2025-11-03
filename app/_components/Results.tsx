@@ -1,10 +1,12 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { useResultsAnimations } from "@/hooks/useResultsAnimations";
 import { TrendingUp, Zap, Target, Shield } from "lucide-react";
 
 export default function Results() {
+  const t = useTranslations('results');
   const containerRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -36,25 +38,14 @@ export default function Results() {
         <div ref={headerRef} className="text-center mb-16">
           <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
             <h2 className="result-word text-5xl md:text-6xl lg:text-7xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              Results
-            </h2>
-            <h2 className="result-word text-5xl md:text-6xl lg:text-7xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              that
-            </h2>
-            <h2 className="result-word text-5xl md:text-6xl lg:text-7xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              speak
+              {t('title')}
             </h2>
           </div>
 
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mb-6" />
 
           <p className="result-subtitle text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            Every project is measured by the impact it creates. These aren't
-            just numbers, they're{" "}
-            <strong className="font-medium text-zinc-900 dark:text-zinc-50 whitespace-nowrap">
-              real results
-            </strong>{" "}
-            clients achieve when working with me.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -96,9 +87,9 @@ export default function Results() {
                 </div>
 
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  Website Visits
+                  {t('stats.visits.label')}
                   <br />
-                  in 20 Days
+                  {t('stats.visits.period')}
                 </p>
               </div>
 
@@ -155,9 +146,9 @@ export default function Results() {
                 </div>
 
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  Faster Load Times
+                  {t('stats.performance.label')}
                   <br />
-                  After Optimization
+                  {t('stats.performance.period')}
                 </p>
               </div>
 
@@ -199,9 +190,9 @@ export default function Results() {
                 </div>
 
                 <p className="result-label text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  Successful Projects
+                  {t('stats.projects.label')}
                   <br />
-                  Delivered
+                  {t('stats.projects.period')}
                 </p>
               </div>
 
@@ -285,9 +276,9 @@ export default function Results() {
                 </div>
 
                 <p className="result-label text-sm font-medium text-zinc-600 dark:text-zinc-400 text-center">
-                  Average
+                  {t('stats.uptime.label')}
                   <br />
-                  Uptime
+                  {t('stats.uptime.period')}
                 </p>
               </div>
             </div>
@@ -297,12 +288,12 @@ export default function Results() {
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-            Ready to see similar results in your project?{" "}
+            {t('cta.text')}{" "}
             <a
               href="#contact"
               className="font-medium text-zinc-900 dark:text-zinc-50 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-50 transition-colors"
             >
-              Let's talk
+              {t('cta.link')}
             </a>
           </p>
         </div>
