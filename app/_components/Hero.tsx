@@ -7,7 +7,7 @@ import { GradientHeading } from "@/components/ui/gradient-heading";
 import { Button } from "@/components/ui/moving-border";
 
 export default function HeroStatic() {
-  const t = useTranslations('hero');
+  const t = useTranslations("hero");
   const container = useRef<HTMLElement>(null);
   const { heroEntrance } = useGSAPOnly();
   const { parallaxScroll, fadeOnScroll } = useGSAPScroll();
@@ -47,7 +47,7 @@ export default function HeroStatic() {
             weight="bold"
             className="hero-title gsap-element "
           >
-            {t('title')}
+            {t("title")}
           </GradientHeading>
         </div>
 
@@ -56,7 +56,7 @@ export default function HeroStatic() {
                      text-zinc-700 dark:text-zinc-300 
                      max-w-3xl"
         >
-          {t('subtitle')}
+          {t("subtitle")}
         </h2>
 
         <p
@@ -64,7 +64,7 @@ export default function HeroStatic() {
                     text-zinc-500 dark:text-zinc-500 
                     max-w-xl leading-relaxed"
         >
-          {t('description')}
+          {t("description")}
         </p>
 
         {/* Botones simples */}
@@ -80,7 +80,7 @@ export default function HeroStatic() {
                 ?.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            {t('cta')}
+            {t("cta")}
           </Button>
         </div>
       </div>

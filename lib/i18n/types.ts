@@ -1,10 +1,10 @@
 /**
  * TypeScript types para i18n
- * 
+ *
  * Esto provee type-safety completo para las traducciones
  */
 
-import type en from '@/messages/en.json';
+import type en from "@/messages/en.json";
 
 export type Messages = typeof en;
 

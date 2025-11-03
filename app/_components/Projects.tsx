@@ -17,7 +17,7 @@ type Project = {
 };
 
 export default function Projects() {
-  const t = useTranslations('projects');
+  const t = useTranslations("projects");
   const { containerRef, headlineRef } = useProjectsAnimations();
 
   const projects = (projectsData as Project[])
@@ -88,11 +88,11 @@ export default function Projects() {
         <div ref={headlineRef} className="mb-16">
           <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
             <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              {t('title')}
+              {t("title")}
             </span>
           </div>
           <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
-            {t('subtitle')}
+            {t("subtitle")}
           </p>
         </div>
         {/* Grid de proyectos */}

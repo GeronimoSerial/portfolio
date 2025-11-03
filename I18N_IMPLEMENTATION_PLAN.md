@@ -1,4 +1,5 @@
 # Plan de Implementación de Internacionalización (i18n)
+
 ## geroserial.com - Sistema de Traducción Español/Inglés
 
 ---
@@ -19,6 +20,7 @@
 ### 1.1 Contexto del Proyecto
 
 **Stack técnico actual:**
+
 - **Framework:** Next.js 16.0.1 (App Router)
 - **React:** 19.2.0
 - **Animaciones:** GSAP 3.13.0 + Motion 12.23.24
@@ -27,6 +29,7 @@
 - **Package Manager:** pnpm
 
 **Estructura del sitio:**
+
 ```
 ├── / (página principal - SPA con 6 secciones)
 │   ├── Hero
@@ -47,6 +50,7 @@
 ```
 
 **Contenido a traducir:**
+
 - ~15-20 componentes React
 - ~20 proyectos en `data/projects.json` (NO usa MDX)
 - Metadata SEO (títulos, descripciones)
@@ -55,15 +59,15 @@
 
 ### 1.2 Requerimientos Clave
 
-| Requerimiento | Descripción | Prioridad |
-|--------------|-------------|-----------|
-| **Sin geolocalización** | Toggle manual usuario-controlado | 🔴 Crítica |
-| **Idioma por defecto** | Inglés como principal | 🔴 Crítica |
-| **Persistencia** | Guardar preferencia del usuario | 🟡 Alta |
-| **SEO bilingüe** | Meta tags y URLs alternativas | 🟡 Alta |
-| **Accesibilidad** | ARIA labels, lang attributes | 🟡 Alta |
-| **Performance** | Zero bundle size increase inicial | 🟢 Media |
-| **Escalabilidad** | Fácil agregar más idiomas | 🟢 Media |
+| Requerimiento           | Descripción                       | Prioridad  |
+| ----------------------- | --------------------------------- | ---------- |
+| **Sin geolocalización** | Toggle manual usuario-controlado  | 🔴 Crítica |
+| **Idioma por defecto**  | Inglés como principal             | 🔴 Crítica |
+| **Persistencia**        | Guardar preferencia del usuario   | 🟡 Alta    |
+| **SEO bilingüe**        | Meta tags y URLs alternativas     | 🟡 Alta    |
+| **Accesibilidad**       | ARIA labels, lang attributes      | 🟡 Alta    |
+| **Performance**         | Zero bundle size increase inicial | 🟢 Media   |
+| **Escalabilidad**       | Fácil agregar más idiomas         | 🟢 Media   |
 
 ### 1.3 Desafíos Identificados
 
@@ -84,6 +88,7 @@
 #### Opción A: next-intl (Recomendada ⭐)
 
 **Características:**
+
 - Diseñado específicamente para Next.js 13+ App Router
 - Soporte nativo para Server Components
 - Type-safe con TypeScript
@@ -91,6 +96,7 @@
 - ~7KB gzipped
 
 **Pros:**
+
 - ✅ Integración perfecta con App Router
 - ✅ No requiere rutas `/[locale]` (configurable)
 - ✅ Excelente DX con TypeScript
@@ -100,27 +106,30 @@
 - ✅ SEO-friendly con `NextIntlClientProvider`
 
 **Contras:**
+
 - ⚠️ Curva de aprendizaje media
 - ⚠️ Requiere reestructuración de archivos si usas locale routing
 
 **Instalación:**
+
 ```bash
 pnpm add next-intl
 ```
 
 **Configuración básica (sin rutas):**
+
 ```typescript
 // middleware.ts
-import createMiddleware from 'next-intl/middleware';
- 
+import createMiddleware from "next-intl/middleware";
+
 export default createMiddleware({
-  locales: ['en', 'es'],
-  defaultLocale: 'en',
-  localePrefix: 'never' // NO agrega /en o /es a las URLs
+  locales: ["en", "es"],
+  defaultLocale: "en",
+  localePrefix: "never", // NO agrega /en o /es a las URLs
 });
- 
+
 export const config = {
-  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };
 ```
 
@@ -129,15 +138,18 @@ export const config = {
 #### Opción B: next-i18next
 
 **Características:**
+
 - Basado en react-i18next
 - Popular en Next.js Pages Router
 - ~20KB gzipped
 
 **Pros:**
+
 - ✅ Ecosistema maduro
 - ✅ Muchos plugins y herramientas
 
 **Contras:**
+
 - ❌ Principalmente diseñado para Pages Router
 - ❌ Soporte limitado para Server Components
 - ❌ Configuración más compleja
@@ -150,15 +162,18 @@ export const config = {
 #### Opción C: react-intl (Formatjs)
 
 **Características:**
+
 - Solución agnóstica de framework
 - Poderoso sistema de formateo
 - ~15KB gzipped
 
 **Pros:**
+
 - ✅ Altamente flexible
 - ✅ Formateo avanzado de fechas/números
 
 **Contras:**
+
 - ❌ No optimizado para Next.js
 - ❌ Requiere Context manual
 - ❌ No aprovecha Server Components
@@ -171,17 +186,18 @@ export const config = {
 #### Opción D: Solución Custom (i18n Nativo)
 
 **Implementación manual:**
+
 ```typescript
 // lib/i18n.ts
 export const translations = {
   en: {
-    'hero.title': 'IT Specialist',
+    "hero.title": "IT Specialist",
     // ...
   },
   es: {
-    'hero.title': 'Especialista en TI',
+    "hero.title": "Especialista en TI",
     // ...
-  }
+  },
 };
 
 export function t(key: string, locale: string) {
@@ -190,11 +206,13 @@ export function t(key: string, locale: string) {
 ```
 
 **Pros:**
+
 - ✅ Control total
 - ✅ Zero dependencies
 - ✅ Bundle size mínimo
 
 **Contras:**
+
 - ❌ Falta de type-safety
 - ❌ Sin formateo avanzado
 - ❌ Mantenimiento manual
@@ -206,21 +224,22 @@ export function t(key: string, locale: string) {
 
 ### 2.2 Tabla Comparativa Final
 
-| Criterio | next-intl | next-i18next | react-intl | Custom |
-|----------|-----------|--------------|------------|--------|
-| **App Router** | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Type Safety** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
-| **Bundle Size** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **DX** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
-| **Escalabilidad** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
-| **SEO** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
-| **Documentación** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | N/A |
+| Criterio          | next-intl  | next-i18next | react-intl | Custom     |
+| ----------------- | ---------- | ------------ | ---------- | ---------- |
+| **App Router**    | ⭐⭐⭐⭐⭐ | ⭐⭐         | ⭐⭐⭐     | ⭐⭐⭐⭐   |
+| **Type Safety**   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐       | ⭐⭐⭐⭐   | ⭐⭐       |
+| **Bundle Size**   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐       | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ |
+| **DX**            | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐       |
+| **Escalabilidad** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐     | ⭐⭐⭐⭐   | ⭐⭐       |
+| **SEO**           | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐     | ⭐⭐⭐     | ⭐⭐⭐     |
+| **Documentación** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐     | ⭐⭐⭐⭐   | N/A        |
 
 ### 2.3 Decisión Técnica
 
 **✅ SOLUCIÓN RECOMENDADA: next-intl**
 
 **Justificación:**
+
 1. Diseño nativo para Next.js 13+ App Router
 2. Configuración `localePrefix: 'never'` elimina rutas con locale
 3. Type-safe con autocomplete
@@ -304,21 +323,18 @@ graph TD
 
 ```typescript
 // middleware.ts
-import createMiddleware from 'next-intl/middleware';
-import { locales, defaultLocale } from './lib/i18n/config';
+import createMiddleware from "next-intl/middleware";
+import { locales, defaultLocale } from "./lib/i18n/config";
 
 export default createMiddleware({
   locales,
   defaultLocale,
-  localePrefix: 'never', // URLs sin /en o /es
-  localeDetection: false // Deshabilitar auto-detección
+  localePrefix: "never", // URLs sin /en o /es
+  localeDetection: false, // Deshabilitar auto-detección
 });
 
 export const config = {
-  matcher: [
-    '/((?!api|_next|_vercel|.*\\..*).*)',
-    '/portfolio/:path*'
-  ]
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)", "/portfolio/:path*"],
 };
 ```
 
@@ -326,16 +342,16 @@ export const config = {
 
 ```typescript
 // i18n.ts
-import { notFound } from 'next/navigation';
-import { getRequestConfig } from 'next-intl/server';
-import { locales } from './lib/i18n/config';
+import { notFound } from "next/navigation";
+import { getRequestConfig } from "next-intl/server";
+import { locales } from "./lib/i18n/config";
 
 export default getRequestConfig(async ({ locale }) => {
   // Validar locale
   if (!locales.includes(locale as any)) notFound();
 
   return {
-    messages: (await import(`./messages/${locale}.json`)).default
+    messages: (await import(`./messages/${locale}.json`)).default,
   };
 });
 ```
@@ -344,8 +360,8 @@ export default getRequestConfig(async ({ locale }) => {
 
 ```typescript
 // app/layout.tsx
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, getLocale } from "next-intl/server";
 
 export default async function RootLayout({
   children,
@@ -374,15 +390,15 @@ export default async function RootLayout({
 
 ```typescript
 // components/layout/LocaleSwitcher.tsx
-'use client';
+"use client";
 
-import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
-import { Languages } from 'lucide-react';
+import { useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+import { Languages } from "lucide-react";
 
 const LOCALES = {
-  en: { label: 'English', flag: '🇺🇸' },
-  es: { label: 'Español', flag: '🇪🇸' }
+  en: { label: "English", flag: "🇺🇸" },
+  es: { label: "Español", flag: "🇪🇸" },
 } as const;
 
 export function LocaleSwitcher() {
@@ -391,11 +407,11 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   const toggleLocale = () => {
-    const newLocale = locale === 'en' ? 'es' : 'en';
-    
+    const newLocale = locale === "en" ? "es" : "en";
+
     // Guardar en cookie
     document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
-    
+
     // Refresh para aplicar cambio
     router.refresh();
   };
@@ -405,12 +421,12 @@ export function LocaleSwitcher() {
       onClick={toggleLocale}
       className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 
                  transition-colors duration-200 group"
-      aria-label={`Switch to ${locale === 'en' ? 'Spanish' : 'English'}`}
+      aria-label={`Switch to ${locale === "en" ? "Spanish" : "English"}`}
     >
       <div className="flex items-center gap-2">
         <Languages className="w-5 h-5" />
         <span className="text-sm font-medium">
-          {LOCALES[locale === 'en' ? 'es' : 'en'].flag}
+          {LOCALES[locale === "en" ? "es" : "en"].flag}
         </span>
       </div>
     </button>
@@ -479,7 +495,7 @@ export function LocaleSwitcher() {
     "subtitle": "Especialista en TI · Infraestructura, Automatización y Gestión de Sistemas Web",
     "description": "Enfoque Metódico. Soluciones del Mundo Real.",
     "cta": "Ver Servicios"
-  },
+  }
   // ... resto de traducciones
 }
 ```
@@ -493,12 +509,14 @@ export function LocaleSwitcher() {
 #### 4.1.1 Instalación y Setup Inicial
 
 **Tareas:**
+
 1. Instalar dependencias
 2. Crear estructura de archivos
 3. Configurar middleware
 4. Setup TypeScript types
 
 **Comandos:**
+
 ```bash
 # 1. Instalar next-intl
 pnpm add next-intl
@@ -516,19 +534,19 @@ touch messages/en.json messages/es.json
 
 ```typescript
 // lib/i18n/config.ts
-export const locales = ['en', 'es'] as const;
-export const defaultLocale = 'en';
+export const locales = ["en", "es"] as const;
+export const defaultLocale = "en";
 export type Locale = (typeof locales)[number];
 
 export const localeNames: Record<Locale, string> = {
-  en: 'English',
-  es: 'Español'
+  en: "English",
+  es: "Español",
 };
 ```
 
 ```typescript
 // lib/i18n/types.ts
-import type en from '@/messages/en.json';
+import type en from "@/messages/en.json";
 
 export type Messages = typeof en;
 export type IntlMessages = Messages;
@@ -539,10 +557,11 @@ declare global {
 ```
 
 **Actualizar next.config.mjs:**
-```javascript
-import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntl = createNextIntlPlugin('./i18n.ts');
+```javascript
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -553,6 +572,7 @@ export default withNextIntl(nextConfig);
 ```
 
 **Actualizar tsconfig.json:**
+
 ```json
 {
   "compilerOptions": {
@@ -576,6 +596,7 @@ pnpm dev
 ```
 
 **Checklist:**
+
 - [ ] No hay errores de TypeScript
 - [ ] Middleware se ejecuta correctamente
 - [ ] Cookies se establecen
@@ -588,29 +609,30 @@ pnpm dev
 #### 4.2.1 Navegación
 
 **Actualizar AnimatedNav.tsx:**
+
 ```typescript
 // components/layout/AnimatedNav.tsx
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { LocaleSwitcher } from './LocaleSwitcher';
+import { useTranslations } from "next-intl";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export default function AnimatedNav() {
-  const t = useTranslations('nav');
-  
+  const t = useTranslations("nav");
+
   // Obtener items de navegación con traducciones
   const navItems = [
-    { id: 'services', label: t('services') },
-    { id: 'process', label: t('process') },
-    { id: 'projects', label: t('projects') },
-    { id: 'results', label: t('results') },
-    { id: 'contact', label: t('contact') },
+    { id: "services", label: t("services") },
+    { id: "process", label: t("process") },
+    { id: "projects", label: t("projects") },
+    { id: "results", label: t("results") },
+    { id: "contact", label: t("contact") },
   ];
 
   return (
     <nav className="...">
       {/* ... código existente ... */}
-      
+
       {/* Agregar LocaleSwitcher */}
       <div className="flex items-center gap-3">
         <LocaleSwitcher />
@@ -627,26 +649,25 @@ export default function AnimatedNav() {
 #### 4.2.2 Sección Hero
 
 **Actualizar Hero.tsx:**
+
 ```typescript
 // app/_components/Hero.tsx
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export default function Hero() {
-  const t = useTranslations('hero');
+  const t = useTranslations("hero");
 
   return (
     <section id="hero" className="...">
-      <GradientHeading>{t('title')}</GradientHeading>
-      
-      <h2 className="...">{t('subtitle')}</h2>
-      
-      <p className="...">{t('description')}</p>
-      
-      <Button onClick={() => scrollTo('services')}>
-        {t('cta')}
-      </Button>
+      <GradientHeading>{t("title")}</GradientHeading>
+
+      <h2 className="...">{t("subtitle")}</h2>
+
+      <p className="...">{t("description")}</p>
+
+      <Button onClick={() => scrollTo("services")}>{t("cta")}</Button>
     </section>
   );
 }
@@ -655,33 +676,35 @@ export default function Hero() {
 #### 4.2.3 Secciones Restantes
 
 **Patrón a seguir:**
+
 1. Importar `useTranslations` en cada componente
 2. Definir namespace (`'services'`, `'process'`, etc.)
 3. Reemplazar strings hardcodeados con `t('key')`
 4. Agregar keys al JSON
 
 **Ejemplo Services.tsx:**
-```typescript
-'use client';
 
-import { useTranslations } from 'next-intl';
+```typescript
+"use client";
+
+import { useTranslations } from "next-intl";
 
 export default function Services() {
-  const t = useTranslations('services');
+  const t = useTranslations("services");
 
   const services = [
     {
       icon: <Code className="w-8 h-8" />,
-      title: t('items.web.title'),
-      description: t('items.web.description')
+      title: t("items.web.title"),
+      description: t("items.web.description"),
     },
     // ... más servicios
   ];
 
   return (
     <section id="services">
-      <h2>{t('title')}</h2>
-      <p>{t('subtitle')}</p>
+      <h2>{t("title")}</h2>
+      <p>{t("subtitle")}</p>
       {/* ... */}
     </section>
   );
@@ -691,24 +714,25 @@ export default function Services() {
 #### 4.2.4 Metadata SEO
 
 **Actualizar app/layout.tsx:**
+
 ```typescript
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
-  const t = await getTranslations('meta.home');
+  const t = await getTranslations("meta.home");
 
   return {
     title: {
-      default: t('title'),
-      template: `%s | ${t('title')}`
+      default: t("title"),
+      template: `%s | ${t("title")}`,
     },
-    description: t('description'),
+    description: t("description"),
     openGraph: {
-      title: t('title'),
-      description: t('description'),
-      locale: 'en_US', // o dinámico
-      alternateLocale: 'es_ES'
-    }
+      title: t("title"),
+      description: t("description"),
+      locale: "en_US", // o dinámico
+      alternateLocale: "es_ES",
+    },
   };
 }
 ```
@@ -771,8 +795,8 @@ data/
 
 ```typescript
 // lib/projects.ts
-import { Locale } from './i18n/config';
-import projectsData from '@/data/projects.json';
+import { Locale } from "./i18n/config";
+import projectsData from "@/data/projects.json";
 
 export interface Project {
   title: string;
@@ -796,15 +820,15 @@ interface ProjectData {
 
 export function getLocalizedProjects(locale: Locale): Project[] {
   return (projectsData as ProjectData[])
-    .filter(p => p.published)
-    .map(p => ({
+    .filter((p) => p.published)
+    .map((p) => ({
       title: p.title[locale],
       description: p.description[locale],
       repository: p.repository,
       url: p.url,
       date: p.date,
       published: p.published,
-      slug: p.slug
+      slug: p.slug,
     }))
     .sort((a, b) => {
       if (!a.date || !b.date) return 0;
@@ -817,29 +841,26 @@ export function getLocalizedProjects(locale: Locale): Project[] {
 
 ```typescript
 // app/_components/Projects.tsx
-'use client';
+"use client";
 
-import { useLocale, useTranslations } from 'next-intl';
-import { getLocalizedProjects } from '@/lib/projects';
+import { useLocale, useTranslations } from "next-intl";
+import { getLocalizedProjects } from "@/lib/projects";
 
 export default function Projects() {
   const locale = useLocale();
-  const t = useTranslations('projects');
-  
+  const t = useTranslations("projects");
+
   // Obtener proyectos en el idioma actual
   const projects = getLocalizedProjects(locale);
 
   return (
     <section id="projects" className="...">
-      <h2>{t('title')}</h2>
-      <p>{t('subtitle')}</p>
-      
+      <h2>{t("title")}</h2>
+      <p>{t("subtitle")}</p>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map(project => (
-          <ProjectCard 
-            key={project.slug} 
-            project={project}
-          />
+        {projects.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
         ))}
       </div>
     </section>
@@ -851,42 +872,40 @@ export default function Projects() {
 
 ```javascript
 // scripts/convert-projects-to-i18n.js
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const projectsPath = path.join(__dirname, '../data/projects.json');
-const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf-8'));
+const projectsPath = path.join(__dirname, "../data/projects.json");
+const projects = JSON.parse(fs.readFileSync(projectsPath, "utf-8"));
 
-const i18nProjects = projects.map(project => ({
+const i18nProjects = projects.map((project) => ({
   ...project,
   title: {
     en: project.title,
-    es: project.title // Placeholder - traducir manualmente después
+    es: project.title, // Placeholder - traducir manualmente después
   },
   description: {
     en: project.description,
-    es: project.description // Placeholder - traducir manualmente después
-  }
+    es: project.description, // Placeholder - traducir manualmente después
+  },
 }));
 
 // Crear backup
 fs.writeFileSync(
-  path.join(__dirname, '../data/projects.backup.json'),
+  path.join(__dirname, "../data/projects.backup.json"),
   JSON.stringify(projects, null, 2)
 );
 
 // Escribir versión i18n
-fs.writeFileSync(
-  projectsPath,
-  JSON.stringify(i18nProjects, null, 2)
-);
+fs.writeFileSync(projectsPath, JSON.stringify(i18nProjects, null, 2));
 
-console.log('✅ Converted projects.json to i18n structure');
-console.log('⚠️  Backup saved as projects.backup.json');
-console.log('📝 Now translate Spanish descriptions manually');
+console.log("✅ Converted projects.json to i18n structure");
+console.log("⚠️  Backup saved as projects.backup.json");
+console.log("📝 Now translate Spanish descriptions manually");
 ```
 
 **Ejecutar:**
+
 ```bash
 node scripts/convert-projects-to-i18n.js
 ```
@@ -917,22 +936,23 @@ Después de ejecutar el script, editar `data/projects.json` para agregar traducc
 #### 4.4.1 Componentes Portfolio
 
 **Actualizar About.tsx:**
-```typescript
-'use client';
 
-import { useTranslations } from 'next-intl';
+```typescript
+"use client";
+
+import { useTranslations } from "next-intl";
 
 export default function About() {
-  const t = useTranslations('portfolio.about');
+  const t = useTranslations("portfolio.about");
 
   return (
     <section>
-      <h2>{t('title')}</h2>
-      <p>{t('description')}</p>
-      
+      <h2>{t("title")}</h2>
+      <p>{t("description")}</p>
+
       <div>
-        <h3>{t('experience.title')}</h3>
-        <p>{t('experience.years', { years: 5 })}</p>
+        <h3>{t("experience.title")}</h3>
+        <p>{t("experience.years", { years: 5 })}</p>
       </div>
     </section>
   );
@@ -940,6 +960,7 @@ export default function About() {
 ```
 
 **Messages JSON:**
+
 ```json
 {
   "portfolio": {
@@ -966,14 +987,14 @@ export default function About() {
 
 ```typescript
 // app/portfolio/page.tsx
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
-  const t = await getTranslations('meta.portfolio');
+  const t = await getTranslations("meta.portfolio");
 
   return {
-    title: t('title'),
-    description: t('description')
+    title: t("title"),
+    description: t("description"),
   };
 }
 ```
@@ -985,6 +1006,7 @@ export async function generateMetadata() {
 #### 4.5.1 Type Safety
 
 **Configurar ESLint para next-intl:**
+
 ```json
 // .eslintrc.json
 {
@@ -1009,15 +1031,16 @@ export async function generateMetadata() {
 #### 4.5.2 Testing de Traducciones
 
 **Verificar keys faltantes:**
+
 ```typescript
 // scripts/validate-translations.ts
-import en from '../messages/en.json';
-import es from '../messages/es.json';
+import en from "../messages/en.json";
+import es from "../messages/es.json";
 
-function flattenObject(obj: any, prefix = ''): Record<string, any> {
+function flattenObject(obj: any, prefix = ""): Record<string, any> {
   return Object.keys(obj).reduce((acc, k) => {
-    const pre = prefix.length ? `${prefix}.` : '';
-    if (typeof obj[k] === 'object' && obj[k] !== null) {
+    const pre = prefix.length ? `${prefix}.` : "";
+    if (typeof obj[k] === "object" && obj[k] !== null) {
       Object.assign(acc, flattenObject(obj[k], pre + k));
     } else {
       acc[pre + k] = obj[k];
@@ -1032,27 +1055,28 @@ const esFlat = flattenObject(es);
 const enKeys = Object.keys(enFlat);
 const esKeys = Object.keys(esFlat);
 
-const missingInEs = enKeys.filter(k => !esKeys.includes(k));
-const missingInEn = esKeys.filter(k => !enKeys.includes(k));
+const missingInEs = enKeys.filter((k) => !esKeys.includes(k));
+const missingInEn = esKeys.filter((k) => !enKeys.includes(k));
 
-console.log('🔍 Translation validation:');
+console.log("🔍 Translation validation:");
 console.log(`✅ EN keys: ${enKeys.length}`);
 console.log(`✅ ES keys: ${esKeys.length}`);
 
 if (missingInEs.length) {
   console.log(`\n❌ Missing in ES (${missingInEs.length}):`);
-  missingInEs.forEach(k => console.log(`  - ${k}`));
+  missingInEs.forEach((k) => console.log(`  - ${k}`));
 }
 
 if (missingInEn.length) {
   console.log(`\n❌ Missing in EN (${missingInEn.length}):`);
-  missingInEn.forEach(k => console.log(`  - ${k}`));
+  missingInEn.forEach((k) => console.log(`  - ${k}`));
 }
 
 process.exit(missingInEs.length + missingInEn.length);
 ```
 
 **Agregar a package.json:**
+
 ```json
 {
   "scripts": {
@@ -1065,58 +1089,59 @@ process.exit(missingInEs.length + missingInEn.length);
 
 ```typescript
 // tests/i18n-performance.spec.ts
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('locale switch should be fast', async ({ page }) => {
-  await page.goto('/');
-  
+test("locale switch should be fast", async ({ page }) => {
+  await page.goto("/");
+
   // Medir tiempo inicial
   const startTime = Date.now();
-  
+
   // Click en switcher
   await page.click('[aria-label*="Switch to"]');
-  
+
   // Esperar a que termine el refresh
-  await page.waitForLoadState('networkidle');
-  
+  await page.waitForLoadState("networkidle");
+
   const endTime = Date.now();
   const duration = endTime - startTime;
-  
+
   expect(duration).toBeLessThan(1000); // Menos de 1 segundo
 });
 
-test('translations should load without hydration errors', async ({ page }) => {
+test("translations should load without hydration errors", async ({ page }) => {
   // Capturar errores de consola
   const errors: string[] = [];
-  page.on('console', msg => {
-    if (msg.type() === 'error') errors.push(msg.text());
+  page.on("console", (msg) => {
+    if (msg.type() === "error") errors.push(msg.text());
   });
-  
-  await page.goto('/');
-  await page.goto('/portfolio');
-  
-  expect(errors.filter(e => e.includes('hydrat'))).toHaveLength(0);
+
+  await page.goto("/");
+  await page.goto("/portfolio");
+
+  expect(errors.filter((e) => e.includes("hydrat"))).toHaveLength(0);
 });
 ```
 
 #### 4.5.4 SEO Verification
 
 **Agregar hreflang tags:**
+
 ```typescript
 // app/layout.tsx
 export async function generateMetadata() {
   const locale = await getLocale();
-  
+
   return {
     // ... metadata existente
     alternates: {
-      canonical: 'https://geroserial.com',
+      canonical: "https://geroserial.com",
       languages: {
-        'en': 'https://geroserial.com',
-        'es': 'https://geroserial.com',
-        'x-default': 'https://geroserial.com'
-      }
-    }
+        en: "https://geroserial.com",
+        es: "https://geroserial.com",
+        "x-default": "https://geroserial.com",
+      },
+    },
   };
 }
 ```
@@ -1143,17 +1168,18 @@ export default function Hero() {
 
 // Hero.tsx - DESPUÉS (con i18n)
 export default function Hero() {
-  const t = useTranslations('hero');
-  
+  const t = useTranslations("hero");
+
   useEffect(() => {
     gsap.from(".hero-title", { opacity: 0, y: 50 }); // ✅ Mismo código
   }, []);
 
-  return <h1 className="hero-title">{t('title')}</h1>; // Solo cambia el texto
+  return <h1 className="hero-title">{t("title")}</h1>; // Solo cambia el texto
 }
 ```
 
 **Explicación:**
+
 - Los selectores GSAP apuntan a **clases CSS** (`.hero-title`, `.gsap-element`)
 - Las clases CSS **no cambian** con el idioma
 - Solo el **contenido textual** dentro del elemento cambia
@@ -1175,12 +1201,13 @@ export default function Hero() {
 ### 5.2 Tema Dual + i18n
 
 **Verificar contraste en ambos idiomas:**
+
 ```typescript
 // components/shared/LocalizedText.tsx
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
+import { useTranslations } from "next-intl";
+import { useTheme } from "next-themes";
 
 interface Props {
   translationKey: string;
@@ -1192,11 +1219,7 @@ export function LocalizedText({ translationKey, className }: Props) {
   const { theme } = useTheme();
 
   return (
-    <span
-      className={className}
-      data-theme={theme}
-      data-locale={locale}
-    >
+    <span className={className} data-theme={theme} data-locale={locale}>
       {t(translationKey)}
     </span>
   );
@@ -1206,19 +1229,20 @@ export function LocalizedText({ translationKey, className }: Props) {
 ### 5.3 Persistencia de Preferencia
 
 **Sincronizar con next-themes:**
+
 ```typescript
 // components/providers/LocaleProvider.tsx
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useLocale } from 'next-intl';
+import { useEffect } from "react";
+import { useLocale } from "next-intl";
 
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const locale = useLocale();
 
   useEffect(() => {
     // Guardar en localStorage para sincronizar con cookies
-    localStorage.setItem('preferred-locale', locale);
+    localStorage.setItem("preferred-locale", locale);
   }, [locale]);
 
   return <>{children}</>;
@@ -1229,7 +1253,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
 ```typescript
 // Usar built-in formatters de next-intl
-import { useFormatter } from 'next-intl';
+import { useFormatter } from "next-intl";
 
 export function ProjectDate({ date }: { date: string }) {
   const format = useFormatter();
@@ -1237,9 +1261,9 @@ export function ProjectDate({ date }: { date: string }) {
   return (
     <time dateTime={date}>
       {format.dateTime(new Date(date), {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       })}
     </time>
   );
@@ -1247,6 +1271,7 @@ export function ProjectDate({ date }: { date: string }) {
 ```
 
 **Output:**
+
 - EN: "October 15, 2023"
 - ES: "15 de octubre de 2023"
 
@@ -1256,18 +1281,22 @@ Si en el futuro agregas rutas como `/portfolio/[slug]`:
 
 ```typescript
 // app/portfolio/[slug]/page.tsx
-import { notFound } from 'next/navigation';
-import { getLocale } from 'next-intl/server';
-import { allProjects } from 'contentlayer/generated';
+import { notFound } from "next/navigation";
+import { getLocale } from "next-intl/server";
+import { allProjects } from "contentlayer/generated";
 
 export async function generateStaticParams() {
-  return allProjects.map(p => ({ slug: p.slug }));
+  return allProjects.map((p) => ({ slug: p.slug }));
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const locale = await getLocale();
   const project = allProjects.find(
-    p => p.slug === params.slug && p.locale === locale
+    (p) => p.slug === params.slug && p.locale === locale
   );
 
   if (!project) notFound();
@@ -1308,6 +1337,7 @@ Semana 4: Optimización y Lanzamiento
 ### 6.2 Checklist Pre-Deploy
 
 **Funcionalidad:**
+
 - [ ] Toggle EN/ES funciona sin errores
 - [ ] Preferencia persiste en cookies
 - [ ] Todas las páginas renderizan en ambos idiomas
@@ -1315,6 +1345,7 @@ Semana 4: Optimización y Lanzamiento
 - [ ] Navegación suave entre secciones
 
 **SEO:**
+
 - [ ] Meta tags traducidos
 - [ ] Hreflang implementado
 - [ ] Sitemap incluye ambos idiomas
@@ -1322,6 +1353,7 @@ Semana 4: Optimización y Lanzamiento
 - [ ] Open Graph images localizadas
 
 **Accesibilidad:**
+
 - [ ] `lang` attribute dinámico en `<html>`
 - [ ] ARIA labels traducidos
 - [ ] Keyboard navigation funciona
@@ -1329,6 +1361,7 @@ Semana 4: Optimización y Lanzamiento
 - [ ] Axe DevTools sin errores críticos
 
 **Performance:**
+
 - [ ] Bundle size < +10KB vs. baseline
 - [ ] Lighthouse score > 90 en todas las métricas
 - [ ] No hay hydration mismatches
@@ -1336,6 +1369,7 @@ Semana 4: Optimización y Lanzamiento
 - [ ] Imágenes tienen alt text en ambos idiomas
 
 **Testing:**
+
 - [ ] Tests E2E pasan en EN y ES
 - [ ] Script de validación de traducciones pasa
 - [ ] No hay keys faltantes
@@ -1344,10 +1378,11 @@ Semana 4: Optimización y Lanzamiento
 ### 6.3 Herramientas de Desarrollo
 
 **VSCode Extensions:**
+
 ```json
 {
   "recommendations": [
-    "lokalise.i18n-ally",          // Inline translations
+    "lokalise.i18n-ally", // Inline translations
     "streetsidesoftware.code-spell-checker",
     "streetsidesoftware.code-spell-checker-spanish"
   ]
@@ -1355,6 +1390,7 @@ Semana 4: Optimización y Lanzamiento
 ```
 
 **Configurar i18n Ally:**
+
 ```json
 // .vscode/settings.json
 {
@@ -1371,17 +1407,20 @@ Semana 4: Optimización y Lanzamiento
 Para escalar a más idiomas:
 
 **Opción 1: Lokalise** (Recomendado)
+
 - Integración con next-intl
 - API para CI/CD
 - Memory translation
 - ~$120/mes para equipo pequeño
 
 **Opción 2: Crowdin**
+
 - Más económico (~$50/mes)
 - CLI robusto
 - Menos features pro
 
 **Opción 3: Manual con Spreadsheets**
+
 - Exportar JSON → Google Sheets
 - Contratar freelancers en Upwork
 - Importar traducciones
@@ -1389,30 +1428,33 @@ Para escalar a más idiomas:
 ### 6.5 Monitoreo Post-Deploy
 
 **Métricas a trackear:**
+
 1. **Adopción de idioma:**
+
    ```typescript
    // lib/analytics.ts
    export function trackLocaleChange(locale: string) {
-     if (typeof window !== 'undefined') {
-       window.gtag?.('event', 'locale_change', {
+     if (typeof window !== "undefined") {
+       window.gtag?.("event", "locale_change", {
          locale,
-         page: window.location.pathname
+         page: window.location.pathname,
        });
      }
    }
    ```
 
 2. **Errores de traducción:**
+
    ```typescript
    // middleware.ts
-   import * as Sentry from '@sentry/nextjs';
+   import * as Sentry from "@sentry/nextjs";
 
    export default createMiddleware({
      onError: (error) => {
        Sentry.captureException(error, {
-         tags: { component: 'i18n-middleware' }
+         tags: { component: "i18n-middleware" },
        });
-     }
+     },
    });
    ```
 
@@ -1425,12 +1467,14 @@ Para escalar a más idiomas:
 **Para agregar más idiomas (Francés, Alemán, etc.):**
 
 1. **Agregar al config:**
+
    ```typescript
    // lib/i18n/config.ts
-   export const locales = ['en', 'es', 'fr', 'de'] as const;
+   export const locales = ["en", "es", "fr", "de"] as const;
    ```
 
 2. **Crear archivos JSON:**
+
    ```
    messages/
    ├── en.json
@@ -1440,11 +1484,14 @@ Para escalar a más idiomas:
    ```
 
 3. **Actualizar LocaleSwitcher:**
+
    ```typescript
    // Cambiar toggle por dropdown
    <Select value={locale} onChange={handleChange}>
-     {locales.map(l => (
-       <option key={l} value={l}>{localeNames[l]}</option>
+     {locales.map((l) => (
+       <option key={l} value={l}>
+         {localeNames[l]}
+       </option>
      ))}
    </Select>
    ```
@@ -1459,7 +1506,7 @@ Para escalar a más idiomas:
 
 **Crear guía de contribución:**
 
-```markdown
+````markdown
 # Guía de Internacionalización
 
 ## Agregar nueva traducción
@@ -1467,9 +1514,11 @@ Para escalar a más idiomas:
 1. Editar `messages/en.json` y `messages/es.json`
 2. Usar la key en el componente:
    ```tsx
-   const t = useTranslations('section');
-   return <p>{t('key')}</p>;
+   const t = useTranslations("section");
+   return <p>{t("key")}</p>;
    ```
+````
+
 3. Ejecutar `pnpm validate:i18n`
 4. Verificar en dev: cambiar idioma y revisar
 
@@ -1479,7 +1528,8 @@ Para escalar a más idiomas:
 - No usar snake_case: `hero_title` ❌
 - Agrupar por sección: `nav.home`, `hero.title`
 - Plurales: usar variables `{count}`
-```
+
+````
 
 ### 6.8 Recursos Adicionales
 
@@ -1572,21 +1622,24 @@ pnpm add next-intl
 
 # Testear en 1 componente
 # Si funciona bien → continuar con plan completo
-```
+````
 
 ### Acción 2: Preparar Traducciones
+
 - [ ] Revisar todo el contenido existente
 - [ ] Crear spreadsheet con strings a traducir
 - [ ] Contratar traductor o traducir manualmente
 - [ ] Revisar por nativo español
 
 ### Acción 3: Configurar Entorno
+
 - [ ] Instalar VSCode extension i18n Ally
 - [ ] Configurar linters
 - [ ] Setup Playwright tests
 - [ ] Crear PR template con checklist i18n
 
 ### Acción 4: Ejecutar Fase 1
+
 - [ ] Seguir sección 4.1 de este documento
 - [ ] Commit inicial: "feat(i18n): setup next-intl configuration"
 - [ ] PR de revisión antes de continuar
@@ -1602,7 +1655,7 @@ Este plan proporciona una **ruta técnica completa y moderna** para implementar 
 ✅ **Type-safe:** Full TypeScript support con autocomplete  
 ✅ **SEO-friendly:** Meta tags bilingües, hreflang correcto  
 ✅ **Accessible:** ARIA labels, lang attributes dinámicos  
-✅ **Modern:** Aprovecha App Router y Server Components  
+✅ **Modern:** Aprovecha App Router y Server Components
 
 **Tiempo total estimado:** 3-4 semanas para implementación completa  
 **Inversión técnica:** ~$0 (solo open-source)  

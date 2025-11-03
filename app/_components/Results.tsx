@@ -6,7 +6,7 @@ import { useResultsAnimations } from "@/hooks/useResultsAnimations";
 import { TrendingUp, Zap, Target, Shield } from "lucide-react";
 
 export default function Results() {
-  const t = useTranslations('results');
+  const t = useTranslations("results");
   const containerRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
@@ -38,14 +38,14 @@ export default function Results() {
         <div ref={headerRef} className="text-center mb-16">
           <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
             <h2 className="result-word text-5xl md:text-6xl lg:text-7xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              {t('title')}
+              {t("title")}
             </h2>
           </div>
 
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mb-6" />
 
           <p className="result-subtitle text-lg text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            {t('subtitle')}
+            {t("subtitle")}
           </p>
         </div>
 
@@ -87,9 +87,9 @@ export default function Results() {
                 </div>
 
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  {t('stats.visits.label')}
+                  {t("stats.visits.label")}
                   <br />
-                  {t('stats.visits.period')}
+                  {t("stats.visits.period")}
                 </p>
               </div>
 
@@ -146,9 +146,9 @@ export default function Results() {
                 </div>
 
                 <p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  {t('stats.performance.label')}
+                  {t("stats.performance.label")}
                   <br />
-                  {t('stats.performance.period')}
+                  {t("stats.performance.period")}
                 </p>
               </div>
 
@@ -190,9 +190,9 @@ export default function Results() {
                 </div>
 
                 <p className="result-label text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                  {t('stats.projects.label')}
+                  {t("stats.projects.label")}
                   <br />
-                  {t('stats.projects.period')}
+                  {t("stats.projects.period")}
                 </p>
               </div>
 
@@ -276,9 +276,9 @@ export default function Results() {
                 </div>
 
                 <p className="result-label text-sm font-medium text-zinc-600 dark:text-zinc-400 text-center">
-                  {t('stats.uptime.label')}
+                  {t("stats.uptime.label")}
                   <br />
-                  {t('stats.uptime.period')}
+                  {t("stats.uptime.period")}
                 </p>
               </div>
             </div>
@@ -288,12 +288,12 @@ export default function Results() {
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-            {t('cta.text')}{" "}
+            {t("cta.text")}{" "}
             <a
               href="#contact"
               className="font-medium text-zinc-900 dark:text-zinc-50 underline underline-offset-4 decoration-zinc-300 dark:decoration-zinc-700 hover:decoration-zinc-900 dark:hover:decoration-zinc-50 transition-colors"
             >
-              {t('cta.link')}
+              {t("cta.link")}
             </a>
           </p>
         </div>

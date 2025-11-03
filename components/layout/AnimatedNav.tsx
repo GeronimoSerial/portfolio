@@ -12,7 +12,7 @@ import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 export default function AnimatedNav() {
-  const t = useTranslations('nav');
+  const t = useTranslations("nav");
   const navRef = useRef<HTMLElement>(null!);
   const logoRef = useRef<HTMLAnchorElement>(null!);
   const navItemsRef = useRef<HTMLDivElement>(null!);
@@ -28,11 +28,11 @@ export default function AnimatedNav() {
 
   // Navigation items con traducciones
   const navItems = [
-    { id: 'services', label: t('services') },
-    { id: 'process', label: t('process') },
-    { id: 'projects', label: t('projects') },
-    { id: 'results', label: t('results') },
-    { id: 'contact', label: t('contact') },
+    { id: "services", label: t("services") },
+    { id: "process", label: t("process") },
+    { id: "projects", label: t("projects") },
+    { id: "results", label: t("results") },
+    { id: "contact", label: t("contact") },
   ];
 
   return (
@@ -95,11 +95,8 @@ export default function AnimatedNav() {
                 <Menu className="w-6 h-6" />
               </button>
             </SheetTrigger>
-            <MobileMenu 
-              navigationItems={[
-                { id: 'hero', label: t('home') },
-                ...navItems
-              ]} 
+            <MobileMenu
+              navigationItems={[{ id: "hero", label: t("home") }, ...navItems]}
             />
           </Sheet>
 
@@ -117,7 +114,7 @@ export default function AnimatedNav() {
                 relative overflow-hidden group
                 will-change-transform"
             >
-              <span className="relative z-10">{t('portfolio')}</span>
+              <span className="relative z-10">{t("portfolio")}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-900 dark:from-zinc-300 dark:to-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Link>
 

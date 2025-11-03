@@ -2,8 +2,8 @@ import "../global.css";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getLocale } from 'next-intl/server';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, getLocale } from "next-intl/server";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import { Background } from "@/components/layout/Background";
 import AnimatedNav from "@/components/layout/AnimatedNav";
@@ -110,7 +110,11 @@ export default async function RootLayout({
         <div id="smooth-wrapper">
           <div id="smooth-content">
             <NextIntlClientProvider messages={messages}>
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
                 <AnimatedNav />
                 {children}
               </ThemeProvider>

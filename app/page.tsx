@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 export default function Home() {
-  const t = useTranslations('footer');
+  const t = useTranslations("footer");
   return (
     <>
       {/* <AnimatedNav /> */}
@@ -38,7 +38,7 @@ export default function Home() {
               >
                 geroserial.com
               </Link>
-              . {t('rights')}
+              . {t("rights")}
             </p>
           </div>
         </footer>

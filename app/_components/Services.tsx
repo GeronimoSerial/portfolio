@@ -6,27 +6,27 @@ import { useServicesAnimations } from "@/hooks/useServicesAnimations";
 import { Button } from "@/components/ui/moving-border";
 
 export default function ServicesStatic() {
-  const t = useTranslations('services');
+  const t = useTranslations("services");
   const { containerRef, headerRef } = useServicesAnimations();
-  
+
   // Mapear servicios con sus iconos y traduciones
   const services = [
     {
       icon: Lightbulb,
-      key: 'consulting'
+      key: "consulting",
     },
     {
       icon: Wrench,
-      key: 'support'
+      key: "support",
     },
     {
       icon: TrendingUp,
-      key: 'transformation'
+      key: "transformation",
     },
     {
       icon: Code,
-      key: 'development'
-    }
+      key: "development",
+    },
   ];
 
   return (
@@ -39,11 +39,11 @@ export default function ServicesStatic() {
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-display text-zinc-950 dark:text-white mb-4">
-            {t('title')}
+            {t("title")}
           </h2>
 
           <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
-            {t('subtitle')}
+            {t("subtitle")}
           </p>
         </div>
 
@@ -54,9 +54,11 @@ export default function ServicesStatic() {
             const title = t(`items.${service.key}.title`);
             const description = t(`items.${service.key}.description`);
             const price = t(`items.${service.key}.price`);
-            const cta = t('cta');
-            const features = [0, 1, 2, 3].map(i => t(`items.${service.key}.features.${i}`));
-            
+            const cta = t("cta");
+            const features = [0, 1, 2, 3].map((i) =>
+              t(`items.${service.key}.features.${i}`)
+            );
+
             return (
               <article
                 key={service.key}

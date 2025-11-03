@@ -5,7 +5,7 @@ import { Search, Layers, Code, Rocket } from "lucide-react";
 import { useProcessAnimations } from "@/hooks/useProcessAnimations";
 
 export default function Process() {
-  const t = useTranslations('process');
+  const t = useTranslations("process");
   const containerRef = useProcessAnimations();
 
   const steps = [
@@ -41,11 +41,11 @@ export default function Process() {
         {/* Header */}
         <div className="text-center mb-20 process-header">
           <h2 className="text-5xl md:text-6xl font-display text-zinc-950 dark:text-zinc-50 mb-6">
-            {t('title')}
+            {t("title")}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-300 to-transparent mx-auto mb-6 process-divider" />
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
-            {t('subtitle')}
+            {t("subtitle")}
           </p>
         </div>
 
@@ -126,7 +126,9 @@ export default function Process() {
                             className="flex-shrink-0 w-1.5 h-1.5 rounded-full 
                                        bg-zinc-400 dark:bg-zinc-600 mt-1.5"
                           />
-                          <span className="leading-relaxed">{t(`steps.${step.key}.items.${itemIndex}`)}</span>
+                          <span className="leading-relaxed">
+                            {t(`steps.${step.key}.items.${itemIndex}`)}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -149,7 +151,7 @@ export default function Process() {
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800">
             <div className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 animate-pulse" />
             <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-              {t('tagline')}
+              {t("tagline")}
             </p>
           </div>
         </div>
