@@ -2,7 +2,7 @@
   {
     "title": "consejo.mec.gob.ar",
     "description": "Oficial website of the General Council of Education of Corrientes, created to connect schools, teachers, and the community through transparent information, educational programs, and digital resources that promote modernization and inclusion in the provincial education system.",
-    "repository": "geronimoserial/Pagina-CGE",
+    "repository": "https://github.com/geronimoserial/Pagina-CGE",
     "date": "2022-11-13",
     "url": "https://consejo.mec.gob.ar/",
     "published": true,
@@ -58,7 +58,7 @@
     "date": "2023-07-01",
     "url": "https://consejo.mec.gob.ar",
     "published": true,
-    "repository": "geronimoserial/Pagina-CGE",
+    "repository": "https://github.com/geronimoserial/Pagina-CGE",
     "slug": "consejo.mec.gob.ar"
   },
   {
