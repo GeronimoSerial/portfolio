@@ -61,7 +61,7 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
       {/* Portfolio CTA */}
       <div className="px-6 pt-2">
         <SheetClose asChild>
-          <Link
+          {/* <Link
             href="/portfolio"
             className="block w-full px-6 py-3 text-center text-base font-bold
                          bg-zinc-950 dark:bg-zinc-100
@@ -71,7 +71,7 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
                          "
           >
             About me
-          </Link>
+          </Link> */}
         </SheetClose>
       </div>
 

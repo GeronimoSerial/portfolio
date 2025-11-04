@@ -26,7 +26,7 @@ export default function AnimatedNav() {
     navRef,
     logoRef,
     navItemsRef,
-    actionsRef,
+    actionsRef
   );
 
   // Navigation items con traducciones
@@ -112,9 +112,9 @@ export default function AnimatedNav() {
 
           {/* Desktop Actions */}
           <div ref={actionsRef} className="hidden md:flex items-center gap-3">
-            <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
+            {/* <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
               {isHome ? t("portfolio") : t("home")}{" "}
-            </MirrorButton>
+            </MirrorButton> */}
 
             <LocaleSwitcher />
 

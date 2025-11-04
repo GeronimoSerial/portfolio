@@ -150,7 +150,7 @@ export default function Process() {
         <div className="text-center mt-16 process-footer">
           <Button
             borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
-            containerClassName="w-96 h-12 "
+            containerClassName="w-full max-w-96 h-12 mx-auto"
             className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium "
             type="primary"
             size="lg"
