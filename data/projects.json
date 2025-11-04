@@ -1,20 +1,21 @@
 [
   {
-    "title": "@chronark/access",
-    "description": "A minimal library for access control. It is designed to be used together with opaque access tokens by providing a simple interface to define roles with different access permissions and verifying requests to resources.",
-    "repository": "chronark/access",
+    "title": "consejo.mec.gob.ar",
+    "description": "Oficial website of the General Council of Education of Corrientes, created to connect schools, teachers, and the community through transparent information, educational programs, and digital resources that promote modernization and inclusion in the provincial education system.",
+    "repository": "geronimoserial/Pagina-CGE",
     "date": "2022-11-13",
+    "url": "https://consejo.mec.gob.ar/",
     "published": true,
-    "slug": "access"
+    "slug": "consejo.mec.gob.ar"
   },
   {
-    "title": "chronark.com",
+    "title": "geroserial.com",
     "description": "The website you're looking at",
-    "repository": "chronark/chronark.com",
-    "url": "https://chronark.com",
+    "repository": "geronimoserial/portfolio",
+    "url": "https://geroserial.com",
     "date": "2023-03-28",
     "published": true,
-    "slug": "chronark.com"
+    "slug": "geroserial.com"
   },
   {
     "title": "envshare.dev",
@@ -26,10 +27,10 @@
     "slug": "envshare"
   },
   {
-    "title": "highstorm.app",
-    "description": "Simple, fast, open source custom event tracking",
+    "title": "relevamiento",
+    "description": "A platform for collecting and managing data for governmental surveys and censuses, designed to streamline data collection processes and improve accuracy and efficiency in data handling for public sector projects.",
     "date": "2023-05-01",
-    "url": "https://highstorm.app",
+    "url": "https://relevamiento.consejo.mec.gob.ar",
     "published": true,
     "repository": "chronark/highstorm",
     "slug": "highstorm"
@@ -50,23 +51,15 @@
     "published": true,
     "slug": "qstash"
   },
+
   {
-    "title": "Vercel Terraform Provider",
-    "description": "A Terraform provider for Vercel. It has been deprecated it when Vercel rolled out their official provider.",
-    "date": "2021-03-16",
-    "repository": "chronark/terraform-provider-vercel",
-    "url": "https://registry.terraform.io/providers/chronark/vercel/latest",
-    "published": true,
-    "slug": "terraform-provider-vercel"
-  },
-  {
-    "title": "unkey.dev",
-    "description": "Unkey is an open source API Key management solution. It allows you to create, manage and validate API Keys for your users. It’s built with security and speed in mind.",
+    "title": "consejo.mec.gob.ar",
+    "description": "Oficial website of the General Council of Education of Corrientes, created to connect schools, teachers, and the community through transparent information, educational programs, and digital resources that promote modernization and inclusion in the provincial education system.",
     "date": "2023-07-01",
-    "url": "https://unkey.dev",
+    "url": "https://consejo.mec.gob.ar",
     "published": true,
-    "repository": "chronark/unkey",
-    "slug": "unkey"
+    "repository": "geronimoserial/Pagina-CGE",
+    "slug": "consejo.mec.gob.ar"
   },
   {
     "title": "Upstash Auth Analytics",

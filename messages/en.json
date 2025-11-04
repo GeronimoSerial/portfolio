@@ -10,7 +10,7 @@
   },
   "hero": {
     "title": "geroserial.com",
-    "subtitle": "IT Specialist · Infrastructure, Automation & Web Systems Management",
+    "subtitle": "IT Specialist · Infrastructure, Automation & Systems Management",
     "description": "Methodical Approach. Real-World Solutions.",
     "cta": "View Services"
   },
@@ -27,7 +27,7 @@
           "Workflow and efficiency improvements",
           "Practical guidance for decision-making"
         ],
-        "price": "From $xxx USD"
+        "price": "From $800 USD"
       },
       "support": {
         "title": "IT Support & Maintenance",
@@ -38,7 +38,7 @@
           "System monitoring and optimization",
           "Staff training and support"
         ],
-        "price": "From $xxx USD/month"
+        "price": "From $300 USD/month"
       },
       "transformation": {
         "title": "Digital Transformation",
@@ -60,7 +60,7 @@
           "Fast performance and security",
           "Continuous updates and scalability"
         ],
-        "price": "From $xxx USD"
+        "price": "From $1000 USD"
       }
     },
     "cta": "Request Quote"
