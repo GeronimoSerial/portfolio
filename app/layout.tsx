@@ -103,7 +103,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className={`gsap-element ${
+        className={`${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
         }`}
       >

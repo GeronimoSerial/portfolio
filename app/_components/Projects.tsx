@@ -1,10 +1,19 @@
 "use client";
 
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import projectsData from "@/data/projects.json";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, X } from "lucide-react";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+  DialogClose,
+  DialogPortal,
+} from "@/components/ui/dialog";
 
 type Project = {
   title: string;
@@ -21,7 +30,7 @@ export default function Projects() {
   const { containerRef, headlineRef } = useProjectsAnimations();
 
   const projects = (projectsData as Project[])
-    .filter((project) => project.published)
+    .filter((p) => p.published)
     .sort(
       (a, b) =>
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
@@ -35,7 +44,7 @@ export default function Projects() {
       ref={containerRef}
       className="relative min-h-screen py-20 px-4 overflow-hidden"
     >
-      {/* Decorative SVG Background Pattern */}
+      {/* ==== SVG decorativo de fondo ==== */}
       <svg
         className="decorative-svg absolute top-20 left-10 w-40 h-40 opacity-20 pointer-events-none"
         viewBox="0 0 200 200"
@@ -83,107 +92,162 @@ export default function Projects() {
         />
       </svg>
 
-      <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
-        <div ref={headlineRef} className="mb-16">
-          <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
-            <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              {t("title")}
-            </span>
-          </div>
-          <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
-            {t("subtitle")}
-          </p>
+      {/* ==== Header ==== */}
+      <div ref={headlineRef} className="mb-16">
+        <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
+          <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
+            {t("title")}
+          </span>
         </div>
-        {/* Grid de proyectos */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <article
-              key={project.slug}
-              className="project-card relative group will-change-transform"
-            >
-              {/* SVG Border decorativo */}
-              <svg
-                className="card-border absolute inset-0 w-full h-full pointer-events-none"
-                viewBox="0 0 300 400"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-              >
-                <rect
-                  x="2"
-                  y="2"
-                  width="296"
-                  height="396"
-                  rx="12"
-                  className="stroke-zinc-300 dark:stroke-zinc-700"
-                  strokeWidth="1.5"
+        <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
+          {t("subtitle")}
+        </p>
+      </div>
+
+      {/* ==== Grid de proyectos ==== */}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, index) => (
+          <Dialog key={project.slug}>
+            <DialogTrigger asChild>
+              <article className="project-card relative group cursor-pointer will-change-transform">
+                {/* SVG Border decorativo */}
+                <svg
+                  className="card-border absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 300 400"
                   fill="none"
-                />
-                <rect
-                  x="6"
-                  y="6"
-                  width="288"
-                  height="388"
-                  rx="10"
-                  className="stroke-zinc-200 dark:stroke-zinc-800"
-                  strokeWidth="1"
-                  fill="none"
-                />
-              </svg>
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <rect
+                    x="2"
+                    y="2"
+                    width="296"
+                    height="396"
+                    rx="12"
+                    className="stroke-zinc-300 dark:stroke-zinc-700"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <rect
+                    x="6"
+                    y="6"
+                    width="288"
+                    height="388"
+                    rx="10"
+                    className="stroke-zinc-200 dark:stroke-zinc-800"
+                    strokeWidth="1"
+                    fill="none"
+                  />
+                </svg>
 
-              {/* Contenido del card */}
-              <div className="card-content relative p-6 h-full bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800">
-                <div className="flex flex-col h-full">
-                  {/* Número del proyecto */}
-                  <div className="absolute top-4 right-4 text-6xl font-display font-bold text-zinc-200/60 dark:text-zinc-900 opacity-100 leading-none">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
+                {/* Contenido del card */}
+                <div className="card-content relative p-6 h-full bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-zinc-800">
+                  <div className="flex flex-col h-full">
+                    <div className="absolute top-4 right-4 text-6xl font-display font-bold text-zinc-200/60 dark:text-zinc-900 opacity-100 leading-none">
+                      {String(index + 1).padStart(2, "0")}
+                    </div>
 
-                  <h3 className="card-title relative text-xl md:text-2xl font-display font-bold text-zinc-900 dark:text-zinc-50 mb-3 pr-12 z-10">
-                    {project.title}
-                  </h3>
+                    <h3 className="card-title relative text-xl md:text-2xl font-display font-bold text-zinc-900 dark:text-zinc-50 mb-3 pr-12 z-10">
+                      {project.title}
+                    </h3>
 
-                  <p className="card-description relative text-sm text-zinc-600 dark:text-zinc-400 mb-4 grow line-clamp-3 z-10">
-                    {project.description}
-                  </p>
+                    <p className="card-description relative text-sm text-zinc-600 dark:text-zinc-400 mb-4 grow line-clamp-3 z-10">
+                      {project.description}
+                    </p>
 
-                  <div className="card-metadata relative flex items-center gap-3 mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800 z-10">
-                    {project.url && (
-                      <a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="card-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                        title="View project"
-                        aria-label="View project"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.repository && (
-                      <a
-                        href={project.repository}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="card-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                        title="View code"
-                        aria-label="View code"
-                      >
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.date && (
-                      <span className="ml-auto text-xs font-medium text-zinc-400 dark:text-zinc-600 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">
-                        {new Date(project.date).getFullYear()}
-                      </span>
-                    )}
+                    <div className="card-metadata relative flex items-center gap-3 mt-auto pt-4 border-t border-zinc-200 dark:border-zinc-800 z-10">
+                      {project.url && (
+                        <a
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="card-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                          title="View project"
+                          aria-label="View project"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.repository && (
+                        <a
+                          href={project.repository}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="card-icon inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                          title="View code"
+                          aria-label="View code"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Github className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.date && (
+                        <span className="ml-auto text-xs font-medium text-zinc-400 dark:text-zinc-600 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800">
+                          {new Date(project.date).getFullYear()}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
+              </article>
+            </DialogTrigger>
+
+            {/* ==== Modal centrado ==== */}
+            <DialogContent
+              className="
+ max-w-2xl w-[90%]
+    bg-white/95 dark:bg-black/95
+    backdrop-blur-md
+    shadow-2xl
+  "
+            >
+              <DialogHeader className="flex items-center justify-between">
+                <DialogTitle className="text-3xl font-display font-bold text-zinc-900 dark:text-zinc-50">
+                  {project.title}
+                </DialogTitle>
+                <DialogClose className="rounded-full p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
+                  <X className="h-5 w-5 text-zinc-900 dark:text-zinc-50" />
+                </DialogClose>
+              </DialogHeader>
+
+              {project.date && (
+                <span className="inline-block text-sm font-medium text-zinc-400 dark:text-zinc-600 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 mb-4">
+                  {new Date(project.date).getFullYear()}
+                </span>
+              )}
+
+              <DialogDescription className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {project.description}
+              </DialogDescription>
+
+              <div className="flex flex-wrap gap-3 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+                {project.url && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 dark:bg-zinc-50 text-zinc-50 dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors font-medium"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    View Project
+                  </a>
+                )}
+                {project.repository && (
+                  <a
+                    href={project.repository}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-50 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors font-medium"
+                  >
+                    <Github className="w-4 h-4" />
+                    View Code
+                  </a>
+                )}
               </div>
-            </article>
-          ))}
-        </div>
+            </DialogContent>
+          </Dialog>
+        ))}
       </div>
     </section>
   );

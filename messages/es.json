@@ -65,6 +65,24 @@
     },
     "cta": "Solicitar presupuesto"
   },
+  "skills": {
+    "title": "Habilidades Técnicas",
+    "subtitle": "Tecnologías y herramientas con las que trabajo para construir soluciones efectivas",
+    "categories": {
+      "frontend": {
+        "title": "Frontend"
+      },
+      "backend": {
+        "title": "Backend"
+      },
+      "data": {
+        "title": "Análisis de Datos"
+      },
+      "languages": {
+        "title": "Lenguajes de Programación"
+      }
+    }
+  },
   "process": {
     "title": "Metodología",
     "subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",

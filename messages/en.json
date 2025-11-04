@@ -65,6 +65,24 @@
     },
     "cta": "Request Quote"
   },
+  "skills": {
+    "title": "Technical Skills",
+    "subtitle": "Technologies and tools I use to build effective solutions",
+    "categories": {
+      "frontend": {
+        "title": "Frontend"
+      },
+      "backend": {
+        "title": "Backend"
+      },
+      "data": {
+        "title": "Data Analysis"
+      },
+      "languages": {
+        "title": "Programming Languages"
+      }
+    }
+  },
   "process": {
     "title": "Process",
     "subtitle": "A clear and collaborative way to build technology that works.",

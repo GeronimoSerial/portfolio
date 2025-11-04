@@ -12,37 +12,37 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 export default function Home() {
-  const t = useTranslations("footer");
-  return (
-    <>
-      {/* <AnimatedNav /> */}
+	const t = useTranslations("footer");
+	return (
+		<>
+			{/* <AnimatedNav /> */}
 
-      <Background>
-        <main className="relative">
-          <Hero />
-          <Services />
-          <Process />
-          <Projects />
-          <Results />
-          <Contact />
-        </main>
+			<Background>
+				<main className="relative">
+					<Hero />
+					<Services />
+					<Process />
+					<Projects />
+					<Results />
+					<Contact />
+				</main>
 
-        {/* Footer simple */}
-        <footer className="border-t border-zinc-800 py-8">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-sm text-zinc-500">
-              © {new Date().getFullYear()}{" "}
-              <Link
-                href="https://geroserial.com"
-                className="text-black hover:underline dark:text-white"
-              >
-                geroserial.com
-              </Link>
-              . {t("rights")}
-            </p>
-          </div>
-        </footer>
-      </Background>
-    </>
-  );
+				{/* Footer simple */}
+				<footer className="border-t border-zinc-800 py-8">
+					<div className="container mx-auto px-4 text-center">
+						<p className="text-sm text-zinc-500">
+							© {new Date().getFullYear()}{" "}
+							<Link
+								href="https://geroserial.com"
+								className="text-black hover:underline dark:text-white"
+							>
+								geroserial.com
+							</Link>
+							. {t("rights")}
+						</p>
+					</div>
+				</footer>
+			</Background>
+		</>
+	);
 }

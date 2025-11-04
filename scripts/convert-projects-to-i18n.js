@@ -24,8 +24,8 @@ const backupPath = path.join(dataDir, "projects.backup.json");
 
 // Verificar que existe projects.json
 if (!fs.existsSync(projectsPath)) {
-  console.error("❌ Error: No se encontró data/projects.json");
-  process.exit(1);
+	console.error("❌ Error: No se encontró data/projects.json");
+	process.exit(1);
 }
 
 // Leer proyectos actuales
@@ -35,26 +35,26 @@ console.log(`📦 Procesando ${projects.length} proyectos...\n`);
 
 // Convertir a estructura i18n
 const i18nProjects = projects.map((project, index) => {
-  console.log(`  ${index + 1}. ${project.title}`);
+	console.log(`  ${index + 1}. ${project.title}`);
 
-  return {
-    // Campos que NO necesitan traducción
-    repository: project.repository,
-    url: project.url,
-    date: project.date,
-    published: project.published,
-    slug: project.slug,
+	return {
+		// Campos que NO necesitan traducción
+		repository: project.repository,
+		url: project.url,
+		date: project.date,
+		published: project.published,
+		slug: project.slug,
 
-    // Campos traducibles (inicialmente en inglés)
-    title: {
-      en: project.title,
-      es: project.title, // Placeholder - la mayoría son nombres propios
-    },
-    description: {
-      en: project.description,
-      es: project.description, // ⚠️ TRADUCIR MANUALMENTE DESPUÉS
-    },
-  };
+		// Campos traducibles (inicialmente en inglés)
+		title: {
+			en: project.title,
+			es: project.title, // Placeholder - la mayoría son nombres propios
+		},
+		description: {
+			en: project.description,
+			es: project.description, // ⚠️ TRADUCIR MANUALMENTE DESPUÉS
+		},
+	};
 });
 
 // Crear backup del original
