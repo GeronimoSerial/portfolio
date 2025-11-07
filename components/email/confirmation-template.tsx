@@ -1,19 +1,26 @@
 import {
-  Html,
-  Head,
   Body,
   Container,
-  Heading,
-  Text,
-  Section,
+  Column,
+  Head,
   Hr,
+  Html,
   Link,
+  Preview,
+  Row,
+  Section,
+  Text,
+  Heading,
 } from "@react-email/components";
 
 interface ConfirmationTemplateProps {
   firstName: string;
-  locale?: string; // 'es' o 'en'
+  locale?: string;
 }
+
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
 export function ConfirmationTemplate({
   firstName,
@@ -21,32 +28,45 @@ export function ConfirmationTemplate({
 }: ConfirmationTemplateProps) {
   const content = {
     es: {
-      greeting: `¡Hola ${firstName}!`,
+      preview: "Confirmación de Contacto",
+      greeting: `Hola ${firstName}`,
       title: "Gracias por contactarme",
-      message1: "He recibido tu mensaje y lo estoy revisando.",
+      message1: "Recibí tu mensaje y lo voy a revisar cuidadosamente.",
       message2:
-        "Te responderé lo antes posible, generalmente en menos de 24 horas.",
+        "Te respondo a la brevedad posible, generalmente dentro de las próximas 24 horas.",
       message3:
-        "Mientras tanto, si necesitas contactarme urgentemente, puedes escribirme directamente a:",
+        "Si necesitas contactarme con urgencia, escríbeme directamente a:",
+      cta: "contact@geroserial.com",
       footer:
         "Este es un email automático. Por favor no respondas a este mensaje.",
-      regards: "Saludos,",
+      regards: "Saludos",
       signature: "Geronimo Serial",
-      role: "Full-stack Developer & Technical Consultant",
+      role: "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
+      location: "Corrientes, Argentina",
+      links: {
+        github: "GitHub",
+        linkedin: "LinkedIn",
+      },
     },
     en: {
-      greeting: `Hi ${firstName}!`,
+      preview: "Contact Confirmation",
+      greeting: `Hi ${firstName}`,
       title: "Thanks for reaching out",
-      message1: "I've received your message and I'm reviewing it.",
+      message1: "I've received your message and I'm reviewing it carefully.",
       message2:
-        "I'll get back to you as soon as possible, usually within 24 hours.",
-      message3:
-        "In the meantime, if you need to contact me urgently, you can email me directly at:",
+        "I'll get back to you as soon as possible, usually within the next 24 hours.",
+      message3: "If you need to contact me urgently, email me directly at:",
+      cta: "contact@geroserial.com",
       footer:
         "This is an automated email. Please do not reply to this message.",
-      regards: "Best regards,",
+      regards: "Best regards",
       signature: "Geronimo Serial",
-      role: "Full-stack Developer & Technical Consultant",
+      role: "IT Specialist · Infrastructure, Automation & Systems Management",
+      location: "Corrientes, Argentina",
+      links: {
+        github: "GitHub",
+        linkedin: "LinkedIn",
+      },
     },
   };
 
@@ -55,195 +75,78 @@ export function ConfirmationTemplate({
   return (
     <Html>
       <Head />
-      <Body
-        style={{
-          fontFamily: "Arial, sans-serif",
-          backgroundColor: "#fafafa",
-          padding: "20px",
-        }}
-      >
-        <Container
-          style={{
-            maxWidth: "600px",
-            margin: "0 auto",
-            backgroundColor: "#ffffff",
-            borderRadius: "8px",
-            overflow: "hidden",
-          }}
-        >
-          {/* Header con marca */}
-          <Section
-            style={{
-              backgroundColor: "#18181b",
-              padding: "30px 40px",
-              textAlign: "center",
-            }}
-          >
-            <Heading
-              style={{
-                color: "#ffffff",
-                fontSize: "28px",
-                fontWeight: "300",
-                margin: "0",
-                letterSpacing: "-0.5px",
-              }}
-            >
-              geroserial.com
-            </Heading>
+      <Preview>{t.preview}</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          {/* Accent line superior */}
+          <Section style={accentLine}></Section>
+
+          {/* Header minimalista */}
+          <Section style={header}>
+            <Text style={headerText}>geroserial.com</Text>
           </Section>
 
           {/* Contenido principal */}
-          <Section style={{ padding: "40px" }}>
-            <Text
-              style={{
-                fontSize: "20px",
-                color: "#18181b",
-                fontWeight: "600",
-                marginBottom: "10px",
-              }}
-            >
-              {t.greeting}
-            </Text>
+          <Section style={contentSection}>
+            <Heading style={title}>{t.title}</Heading>
+            <Text style={greeting}>{t.greeting}</Text>
 
-            <Heading
-              style={{
-                color: "#18181b",
-                fontSize: "24px",
-                fontWeight: "400",
-                marginTop: "0",
-                marginBottom: "24px",
-              }}
-            >
-              {t.title}
-            </Heading>
+            <Text style={paragraph}>{t.message1}</Text>
+            <Text style={paragraph}>{t.message2}</Text>
 
-            <Text
-              style={{
-                color: "#52525b",
-                fontSize: "16px",
-                lineHeight: "1.6",
-                margin: "16px 0",
-              }}
-            >
-              {t.message1}
-            </Text>
+            {/* Separator sutil */}
+            <Hr style={hr} />
 
-            <Text
-              style={{
-                color: "#52525b",
-                fontSize: "16px",
-                lineHeight: "1.6",
-                margin: "16px 0",
-              }}
-            >
-              {t.message2}
-            </Text>
+            <Text style={paragraph}>{t.message3}</Text>
 
-            <Hr
-              style={{
-                borderColor: "#e4e4e7",
-                margin: "30px 0",
-              }}
-            />
+            {/* CTA con estilo glass */}
+            <Section style={ctaSection}>
+              <Link href="mailto:contact@geroserial.com" style={button}>
+                {t.cta}
+              </Link>
+            </Section>
 
-            <Text
-              style={{
-                color: "#71717a",
-                fontSize: "14px",
-                lineHeight: "1.6",
-                margin: "16px 0",
-              }}
-            >
-              {t.message3}
-            </Text>
+            {/* Separator */}
+            <Hr style={hr} />
 
-            <Link
-              href="mailto:contact@geroserial.com"
-              style={{
-                color: "#18181b",
-                fontSize: "16px",
-                fontWeight: "500",
-                textDecoration: "none",
-                display: "inline-block",
-                padding: "12px 24px",
-                backgroundColor: "#f4f4f5",
-                borderRadius: "6px",
-                margin: "10px 0",
-              }}
-            >
-              contact@geroserial.com
-            </Link>
-
-            <Hr
-              style={{
-                borderColor: "#e4e4e7",
-                margin: "30px 0",
-              }}
-            />
-
-            {/* Firma */}
-            <Text
-              style={{
-                color: "#52525b",
-                fontSize: "16px",
-                lineHeight: "1.6",
-                marginBottom: "8px",
-              }}
-            >
-              {t.regards}
-            </Text>
-
-            <Text
-              style={{
-                color: "#18181b",
-                fontSize: "16px",
-                fontWeight: "600",
-                margin: "0",
-              }}
-            >
-              {t.signature}
-            </Text>
-
-            <Text
-              style={{
-                color: "#71717a",
-                fontSize: "14px",
-                margin: "4px 0 0 0",
-              }}
-            >
-              {t.role}
-            </Text>
+            {/* Firma elegante */}
+            <Section style={signatureSection}>
+              <Text style={regards}>{t.regards},</Text>
+              <Text style={signatureName}>{t.signature}</Text>
+              <Text style={signatureRole}>{t.role}</Text>
+              <Section style={locationSection}>
+                <Text style={locationText}>
+                  <span style={locationDot}>●</span> {t.location}
+                </Text>
+              </Section>
+            </Section>
           </Section>
 
-          {/* Footer */}
-          <Section
-            style={{
-              backgroundColor: "#fafafa",
-              padding: "20px 40px",
-              borderTop: "1px solid #e4e4e7",
-            }}
-          >
-            <Text
-              style={{
-                color: "#a1a1aa",
-                fontSize: "12px",
-                lineHeight: "1.5",
-                margin: "0",
-                textAlign: "center",
-              }}
-            >
-              {t.footer}
-            </Text>
+          {/* Footer premium */}
+          <Section style={footer}>
+            <Text style={footerText}>{t.footer}</Text>
 
-            <Text
-              style={{
-                color: "#d4d4d8",
-                fontSize: "11px",
-                margin: "12px 0 0 0",
-                textAlign: "center",
-              }}
-            >
-              © 2024 geroserial.com • Corrientes, Argentina
+            {/* Enlaces sociales con separador */}
+            <Row style={linksRow}>
+              <Column align="center">
+                <Link
+                  href="https://github.com/GeronimoSerial"
+                  style={footerLink}
+                >
+                  {t.links.github}
+                </Link>
+                <Text style={linkSeparator}>•</Text>
+                <Link
+                  href="https://linkedin.com/in/geroserial"
+                  style={footerLink}
+                >
+                  {t.links.linkedin}
+                </Link>
+              </Column>
+            </Row>
+
+            <Text style={footerCopyright}>
+              geroserial.com — Methodical Approach. Real-World Solutions.
             </Text>
           </Section>
         </Container>
@@ -251,3 +154,180 @@ export function ConfirmationTemplate({
     </Html>
   );
 }
+
+export default ConfirmationTemplate;
+
+// Estilos modernos dark-oriented
+const main = {
+  backgroundColor: "#0a0a0a",
+  fontFamily:
+    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+  padding: "20px 0",
+  WebkitFontSmoothing: "antialiased" as const,
+  MozOsxFontSmoothing: "grayscale" as const,
+};
+
+const container = {
+  maxWidth: "560px",
+  margin: "0 auto",
+  backgroundColor: "#111111",
+  borderRadius: "8px",
+  overflow: "hidden",
+  border: "1px solid #1a1a1a",
+};
+
+const accentLine = {
+  height: "2px",
+  background: "linear-gradient(90deg, #6b7280 0%, #9ca3af 100%)",
+};
+
+const header = {
+  padding: "32px 40px 0 40px",
+};
+
+const headerText = {
+  margin: "0",
+  color: "#ffffff",
+  fontSize: "13px",
+  fontWeight: "500" as const,
+  letterSpacing: "0.5px",
+};
+
+const contentSection = {
+  padding: "24px 40px 40px 40px",
+};
+
+const title = {
+  color: "#f9fafb",
+  fontSize: "32px",
+  fontWeight: "700" as const,
+  margin: "0 0 8px 0",
+  lineHeight: "1.2",
+  letterSpacing: "-0.5px",
+};
+
+const greeting = {
+  fontSize: "18px",
+  color: "#d1d5db",
+  fontWeight: "400" as const,
+  margin: "0 0 28px 0",
+  lineHeight: "1.4",
+};
+
+const paragraph = {
+  color: "#9ca3af",
+  fontSize: "15px",
+  lineHeight: "1.7",
+  margin: "0 0 18px 0",
+};
+
+const hr = {
+  borderColor: "#1f1f1f",
+  borderWidth: "1px",
+  margin: "32px 0",
+};
+
+const ctaSection = {
+  textAlign: "left" as const,
+  margin: "28px 0",
+};
+
+const button = {
+  color: "#ffffff",
+  fontSize: "15px",
+  textDecoration: "none",
+  fontWeight: "500" as const,
+  display: "inline-block",
+  padding: "12px 24px",
+  backgroundColor: "rgba(107, 114, 128, 0.1)",
+  border: "1px solid rgba(107, 114, 128, 0.2)",
+  borderRadius: "6px",
+  transition: "all 0.2s ease",
+};
+
+const signatureSection = {
+  marginTop: "32px",
+};
+
+const regards = {
+  color: "#9ca3af",
+  fontSize: "14px",
+  margin: "0 0 12px 0",
+  fontWeight: "400" as const,
+};
+
+const signatureName = {
+  color: "#f9fafb",
+  fontSize: "17px",
+  fontWeight: "600" as const,
+  margin: "0 0 6px 0",
+  letterSpacing: "-0.2px",
+};
+
+const signatureRole = {
+  color: "#6b7280",
+  fontSize: "13px",
+  margin: "0 0 8px 0",
+  lineHeight: "1.5",
+};
+
+const locationSection = {
+  marginTop: "12px",
+};
+
+const locationText = {
+  color: "#6b7280",
+  fontSize: "13px",
+  margin: "0",
+  display: "flex",
+  alignItems: "center",
+};
+
+const locationDot = {
+  color: "#6b7280",
+  fontSize: "8px",
+  marginRight: "8px",
+  display: "inline-block",
+};
+
+const footer = {
+  backgroundColor: "#0a0a0a",
+  padding: "32px 40px",
+  borderTop: "1px solid #1f1f1f",
+};
+
+const footerText = {
+  color: "#4b5563",
+  fontSize: "12px",
+  lineHeight: "1.6",
+  margin: "0 0 20px 0",
+  textAlign: "center" as const,
+};
+
+const linksRow = {
+  margin: "0 0 16px 0",
+};
+
+const footerLink = {
+  color: "#6b7280",
+  textDecoration: "none",
+  fontSize: "12px",
+  padding: "0 8px",
+  fontWeight: "500" as const,
+  transition: "color 0.2s ease",
+};
+
+const linkSeparator = {
+  color: "#374151",
+  fontSize: "12px",
+  margin: "0 4px",
+  display: "inline",
+};
+
+const footerCopyright = {
+  color: "#4b5563",
+  fontSize: "11px",
+  margin: "0",
+  textAlign: "center" as const,
+  letterSpacing: "0.3px",
+};

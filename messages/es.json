@@ -184,6 +184,8 @@
         "label": "Detalles del proyecto",
         "placeholder": "Contame sobre tu proyecto, objetivos y plazos..."
       },
+      "success": "¡Gracias por contactarme! Te responderé lo antes posible.",
+      "error": "¡Ups! Algo salió mal. Por favor, intentá nuevamente más tarde.",
       "submit": "Enviar mensaje",
       "privacy": "Tu información es confidencial y será utilizada solo para responder a tu consulta. No compartimos datos con terceros."
     },

@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
     // 4. Rate limiting básico (opcional - requiere Redis)
     // const ip = request.headers.get("x-forwarded-for") || "unknown";
-    // Implementar lógica de rate limiting aquí
+    // Implementar lógica de rate limiting 
 
     // 5. Enviar email principal (a mí) con Resend
     const { data: mainEmailData, error: mainEmailError } =

@@ -185,7 +185,9 @@
         "placeholder": "Tell me about your project, goals, and timeline..."
       },
       "submit": "Send Message",
-      "privacy": "Your information is confidential and will only be used to respond to your inquiry. We respect your privacy and never share data with third parties."
+      "privacy": "Your information is confidential and will only be used to respond to your inquiry. We respect your privacy and never share data with third parties.",
+      "success": "Thank you for reaching out! I'll get back to you as soon as possible.",
+      "error": "Oops! Something went wrong. Please try again later."
     },
     "availability": "AVAILABLE FOR SELECT PROJECTS"
   },
