@@ -11,6 +11,7 @@ import {
   Section,
   Text,
   Heading,
+  Tailwind,
 } from "@react-email/components";
 
 interface ConfirmationTemplateProps {
@@ -28,25 +29,20 @@ export function ConfirmationTemplate({
 }: ConfirmationTemplateProps) {
   const content = {
     es: {
-      preview: "Confirmación de Contacto",
+      preview: "Mensaje recibido: Revisando tu solicitud",
       greeting: `Hola ${firstName}`,
       title: "Gracias por contactarme",
       message1: "Recibí tu mensaje y lo voy a revisar cuidadosamente.",
       message2:
         "Te respondo a la brevedad posible, generalmente dentro de las próximas 24 horas.",
       message3:
-        "Si necesitas contactarme con urgencia, escríbeme directamente a:",
+        "Si tu consulta es urgente y requiere atención inmediata, por favor, enviame un correo directamente acá:",
       cta: "contact@geroserial.com",
-      footer:
-        "Este es un email automático. Por favor no respondas a este mensaje.",
+
       regards: "Saludos",
       signature: "Geronimo Serial",
       role: "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
       location: "Corrientes, Argentina",
-      links: {
-        github: "GitHub",
-        linkedin: "LinkedIn",
-      },
     },
     en: {
       preview: "Contact Confirmation",
@@ -57,277 +53,109 @@ export function ConfirmationTemplate({
         "I'll get back to you as soon as possible, usually within the next 24 hours.",
       message3: "If you need to contact me urgently, email me directly at:",
       cta: "contact@geroserial.com",
-      footer:
-        "This is an automated email. Please do not reply to this message.",
       regards: "Best regards",
       signature: "Geronimo Serial",
       role: "IT Specialist · Infrastructure, Automation & Systems Management",
       location: "Corrientes, Argentina",
-      links: {
-        github: "GitHub",
-        linkedin: "LinkedIn",
-      },
     },
   };
 
   const t = content[locale as keyof typeof content] || content.es;
 
+  const locationDotStyle = {
+    color: "#6b7280",
+    fontSize: "8px",
+    marginRight: "8px",
+    paddingTop: "1px",
+    lineHeight: "0",
+  };
+
   return (
-    <Html>
-      <Head />
-      <Preview>{t.preview}</Preview>
-      <Body style={main}>
-        <Container style={container}>
-          {/* Accent line superior */}
-          <Section style={accentLine}></Section>
-
-          {/* Header minimalista */}
-          <Section style={header}>
-            <Text style={headerText}>geroserial.com</Text>
-          </Section>
-
-          {/* Contenido principal */}
-          <Section style={contentSection}>
-            <Heading style={title}>{t.title}</Heading>
-            <Text style={greeting}>{t.greeting}</Text>
-
-            <Text style={paragraph}>{t.message1}</Text>
-            <Text style={paragraph}>{t.message2}</Text>
-
-            {/* Separator sutil */}
-            <Hr style={hr} />
-
-            <Text style={paragraph}>{t.message3}</Text>
-
-            {/* CTA con estilo glass */}
-            <Section style={ctaSection}>
-              <Link href="mailto:contact@geroserial.com" style={button}>
-                {t.cta}
-              </Link>
+    <Tailwind>
+      <Html>
+        <Head />
+        <Preview>{t.preview}</Preview>
+        <Body
+          className="bg-zinc-100 dark:bg-zinc-800 text-gray-400 p-3 font-sans antialiased"
+          style={{
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale",
+          }}
+        >
+          {/* Corrección 2: Eliminamos overflow-hidden del Tailwind en Container */}
+          <Container className="max-w-xl mx-auto bg-[#111111] rounded-xl border border-[#1a1a1a]">
+            {/* Header minimalista */}
+            <Section className="px-8 pt-6 pb-0">
+              <Text className="m-0 text-gray-200 text-sm font-medium tracking-wider text-center">
+                geroserial.com
+              </Text>
             </Section>
 
-            {/* Separator */}
-            <Hr style={hr} />
+            {/* Contenido principal */}
+            <Section className="p-8 pt-4">
+              <Heading className="text-gray-50 text-3xl font-bold m-0 mb-2 leading-tight tracking-tighter">
+                {t.title}
+              </Heading>
+              <Text className="text-gray-300 text-lg font-normal m-0 mb-7 leading-snug">
+                {t.greeting}
+              </Text>
 
-            {/* Firma elegante */}
-            <Section style={signatureSection}>
-              <Text style={regards}>{t.regards},</Text>
-              <Text style={signatureName}>{t.signature}</Text>
-              <Text style={signatureRole}>{t.role}</Text>
-              <Section style={locationSection}>
-                <Text style={locationText}>
-                  <span style={locationDot}>●</span> {t.location}
+              <Text className="text-gray-400 text-base leading-relaxed m-0 mb-4">
+                {t.message1}
+              </Text>
+              <Text className="text-gray-400 text-base leading-relaxed m-0 mb-4">
+                {t.message2}
+              </Text>
+
+              {/* Separator sutil */}
+              <Hr className="border-t border-[#1f1f1f] my-6" />
+
+              <Text className="text-gray-400 text-base leading-relaxed m-0 mb-4">
+                {t.message3}
+              </Text>
+
+              {/* CTA con estilo "glass" */}
+              <Section className="text-left my-5">
+                <Link
+                  href="mailto:contact@geroserial.com"
+                  className="bg-gray-700 text-white px-4 py-2 rounded-md inline-block"
+                >
+                  {t.cta}
+                </Link>
+              </Section>
+              {/* Separator */}
+              <Hr className="border-t border-[#1f1f1f] my-6" />
+
+              {/* Firma elegante */}
+              <Section className="mt-6">
+                <Text className="text-gray-400 text-sm m-0 mb-3 font-normal">
+                  {t.regards},
                 </Text>
+                <Text className="text-gray-50 text-lg font-semibold m-0 mb-1 tracking-tighter">
+                  {t.signature}
+                </Text>
+                <Text className="text-gray-500 text-sm m-0 mb-2 leading-snug">
+                  {t.role}
+                </Text>
+
+                {/* Corrección 1: Reemplazamos display:flex/align-items por Row/Column */}
+                <Row className="mt-3">
+                  <Column className="w-auto">
+                    <Text style={locationDotStyle}>●</Text>
+                  </Column>
+                  <Column>
+                    <Text className="text-gray-500 text-sm m-0 leading-none">
+                      {t.location}
+                    </Text>
+                  </Column>
+                </Row>
               </Section>
             </Section>
-          </Section>
-
-          {/* Footer premium */}
-          <Section style={footer}>
-            <Text style={footerText}>{t.footer}</Text>
-
-            {/* Enlaces sociales con separador */}
-            <Row style={linksRow}>
-              <Column align="center">
-                <Link
-                  href="https://github.com/GeronimoSerial"
-                  style={footerLink}
-                >
-                  {t.links.github}
-                </Link>
-                <Text style={linkSeparator}>•</Text>
-                <Link
-                  href="https://linkedin.com/in/geroserial"
-                  style={footerLink}
-                >
-                  {t.links.linkedin}
-                </Link>
-              </Column>
-            </Row>
-
-            <Text style={footerCopyright}>
-              geroserial.com — Methodical Approach. Real-World Solutions.
-            </Text>
-          </Section>
-        </Container>
-      </Body>
-    </Html>
+          </Container>
+        </Body>
+      </Html>
+    </Tailwind>
   );
 }
 
 export default ConfirmationTemplate;
-
-// Estilos modernos dark-oriented
-const main = {
-  backgroundColor: "#0a0a0a",
-  fontFamily:
-    "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-  padding: "20px 0",
-  WebkitFontSmoothing: "antialiased" as const,
-  MozOsxFontSmoothing: "grayscale" as const,
-};
-
-const container = {
-  maxWidth: "560px",
-  margin: "0 auto",
-  backgroundColor: "#111111",
-  borderRadius: "8px",
-  overflow: "hidden",
-  border: "1px solid #1a1a1a",
-};
-
-const accentLine = {
-  height: "2px",
-  background: "linear-gradient(90deg, #6b7280 0%, #9ca3af 100%)",
-};
-
-const header = {
-  padding: "32px 40px 0 40px",
-};
-
-const headerText = {
-  margin: "0",
-  color: "#ffffff",
-  fontSize: "13px",
-  fontWeight: "500" as const,
-  letterSpacing: "0.5px",
-};
-
-const contentSection = {
-  padding: "24px 40px 40px 40px",
-};
-
-const title = {
-  color: "#f9fafb",
-  fontSize: "32px",
-  fontWeight: "700" as const,
-  margin: "0 0 8px 0",
-  lineHeight: "1.2",
-  letterSpacing: "-0.5px",
-};
-
-const greeting = {
-  fontSize: "18px",
-  color: "#d1d5db",
-  fontWeight: "400" as const,
-  margin: "0 0 28px 0",
-  lineHeight: "1.4",
-};
-
-const paragraph = {
-  color: "#9ca3af",
-  fontSize: "15px",
-  lineHeight: "1.7",
-  margin: "0 0 18px 0",
-};
-
-const hr = {
-  borderColor: "#1f1f1f",
-  borderWidth: "1px",
-  margin: "32px 0",
-};
-
-const ctaSection = {
-  textAlign: "left" as const,
-  margin: "28px 0",
-};
-
-const button = {
-  color: "#ffffff",
-  fontSize: "15px",
-  textDecoration: "none",
-  fontWeight: "500" as const,
-  display: "inline-block",
-  padding: "12px 24px",
-  backgroundColor: "rgba(107, 114, 128, 0.1)",
-  border: "1px solid rgba(107, 114, 128, 0.2)",
-  borderRadius: "6px",
-  transition: "all 0.2s ease",
-};
-
-const signatureSection = {
-  marginTop: "32px",
-};
-
-const regards = {
-  color: "#9ca3af",
-  fontSize: "14px",
-  margin: "0 0 12px 0",
-  fontWeight: "400" as const,
-};
-
-const signatureName = {
-  color: "#f9fafb",
-  fontSize: "17px",
-  fontWeight: "600" as const,
-  margin: "0 0 6px 0",
-  letterSpacing: "-0.2px",
-};
-
-const signatureRole = {
-  color: "#6b7280",
-  fontSize: "13px",
-  margin: "0 0 8px 0",
-  lineHeight: "1.5",
-};
-
-const locationSection = {
-  marginTop: "12px",
-};
-
-const locationText = {
-  color: "#6b7280",
-  fontSize: "13px",
-  margin: "0",
-  display: "flex",
-  alignItems: "center",
-};
-
-const locationDot = {
-  color: "#6b7280",
-  fontSize: "8px",
-  marginRight: "8px",
-  display: "inline-block",
-};
-
-const footer = {
-  backgroundColor: "#0a0a0a",
-  padding: "32px 40px",
-  borderTop: "1px solid #1f1f1f",
-};
-
-const footerText = {
-  color: "#4b5563",
-  fontSize: "12px",
-  lineHeight: "1.6",
-  margin: "0 0 20px 0",
-  textAlign: "center" as const,
-};
-
-const linksRow = {
-  margin: "0 0 16px 0",
-};
-
-const footerLink = {
-  color: "#6b7280",
-  textDecoration: "none",
-  fontSize: "12px",
-  padding: "0 8px",
-  fontWeight: "500" as const,
-  transition: "color 0.2s ease",
-};
-
-const linkSeparator = {
-  color: "#374151",
-  fontSize: "12px",
-  margin: "0 4px",
-  display: "inline",
-};
-
-const footerCopyright = {
-  color: "#4b5563",
-  fontSize: "11px",
-  margin: "0",
-  textAlign: "center" as const,
-  letterSpacing: "0.3px",
-};
