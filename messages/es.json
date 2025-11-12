@@ -19,46 +19,46 @@
     "subtitle": "Soluciones inteligentes para crecer en digital",
     "items": {
       "consulting": {
-        "title": "Consultoría Tecnológica",
-        "description": "Transformo desafíos en estrategias claras y aplicables.",
+        "title": "Estrategia y dirección tecnologica",
+        "description": "Acompañamiento estratégico para definir, planificar y ejecutar decisiones tecnológicas de alto impacto.",
         "features": [
-          "Revisión completa de sistemas y procesos",
-          "Planes personalizados para optimizar y escalar",
-          "Orientación precisa para decisiones tecnológicas",
-          "Soluciones prácticas alineadas a tus objetivos"
+          "Diagnóstico integral de madurez tecnológica",
+          "Diseño de hoja de ruta digital personalizada",
+          "Análisis de inversión y retorno (ROI tecnológico)",
+          "Acompañamiento ejecutivo en decisiones críticas"
         ],
-        "price": "Desde $800 USD"
+        "price": "Desde $2000 USD"
       },
       "support": {
-        "title": "Soporte y Optimización IT",
-        "description": "Mantené tus sistemas estables con asistencia y monitoreo continuo.",
+        "title": "Modernización y automatización",
+        "description": "Optimización de procesos mediante automatización, integraciones y análisis de reglas de negocio.",
         "features": [
-          "Mantenimiento preventivo y actualizaciones",
-          "Atención y resolución de incidencias",
-          "Optimización de rendimiento y disponibilidad",
-          "Recomendaciones de mejora continua"
-        ],
-        "price": "Desde $300 USD/mes"
-      },
-      "transformation": {
-        "title": "Transformación Digital",
-        "description": "Actualizá tu operación con automatización, nube y flujos más inteligentes.",
-        "features": [
-          "Estrategia de automatización de procesos",
-          "Migración y configuración en la nube",
-          "Integración de sistemas y capacitación",
-          "Análisis de datos para decisiones efectivas"
+          "Mapeo y modelado de procesos clave",
+          "Análisis y formalización de reglas de negocio",
+          "Implementación de flujos automatizados y conectores",
+          "Dashboards y reportes en tiempo real"
         ],
         "price": "Presupuesto personalizado"
       },
-      "development": {
-        "title": "Desarrollo Web y Plataformas",
-        "description": "Diseño experiencias digitales seguras, rápidas y escalables.",
+      "transformation": {
+        "title": "Mantenimiento y soporte evolutivo",
+        "description": "Cuidado continuo de sistemas para mantener rendimiento, estabilidad y mejora constante.",
         "features": [
-          "Diseño moderno enfocado en conversión",
-          "Funcionalidades e integraciones a medida",
-          "SEO y analítica desde el inicio",
-          "Soporte y evolución constante"
+          "Monitoreo proactivo y resolución de incidencias",
+          "Actualizaciones y optimización de rendimiento",
+          "Copias de seguridad y mantenimiento preventivo",
+          "Reportes periódicos y sugerencias de mejora"
+        ],
+        "price": "Desde $500 USD"
+      },
+      "development": {
+        "title": "Desarrollo web y plataformas",
+        "description": "Diseño y desarrollo de sitios y plataformas centrados en experiencia, velocidad y escalabilidad.",
+        "features": [
+          "Diseño moderno y responsive enfocado en conversión",
+          "Integraciones y funcionalidades a medida",
+          "SEO técnico, analítica y seguridad integradas",
+          "Panel de gestión y soporte de evolución continua"
         ],
         "price": "Desde $1000 USD"
       }

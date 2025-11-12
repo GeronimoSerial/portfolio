@@ -16,72 +16,54 @@
   },
   "services": {
     "title": "Services",
-    "subtitle": "Specialized technical solutions",
+    "subtitle": "Smart solutions for digital growth",
     "items": {
       "consulting": {
-        "title": "Technology Consulting",
-        "description": "I transform ideas into effective digital solutions.",
+        "title": "Technology Strategy and Direction",
+        "description": "Strategic guidance to define, plan, and execute high-impact technological decisions.",
         "features": [
-          "Current systems and tools evaluation",
-          "Customized technology strategies",
-          "Workflow and efficiency improvements",
-          "Practical guidance for decision-making"
+          "Comprehensive technological maturity diagnosis",
+          "Design of a customized digital roadmap",
+          "Investment and return analysis (Technological ROI)",
+          "Executive accompaniment in critical decisions"
         ],
-        "price": "From $800 USD"
+        "price": "Starting at $2000 USD"
       },
       "support": {
-        "title": "IT Support & Maintenance",
-        "description": "Reliable assistance to keep your systems running smoothly.",
+        "title": "Modernization and Automation",
+        "description": "Process optimization through automation, integrations, and business rule analysis.",
         "features": [
-          "Preventive maintenance and updates",
-          "Problem solving and incident response",
-          "System monitoring and optimization",
-          "Staff training and support"
+          "Mapping and modeling of key processes",
+          "Analysis and formalization of business rules",
+          "Implementation of automated flows and connectors",
+          "Real-time dashboards and reports"
         ],
-        "price": "From $300 USD/month"
+        "price": "Custom quote"
       },
       "transformation": {
-        "title": "Digital Transformation",
-        "description": "Modernize your business with modern tools and automation.",
+        "title": "Maintenance and Evolutionary Support",
+        "description": "Continuous system care to maintain performance, stability, and constant improvement.",
         "features": [
-          "Digital strategy design",
-          "Cloud solutions configuration",
-          "Manual process automation",
-          "Data analysis for better decisions"
+          "Proactive monitoring and incident resolution",
+          "Updates and performance optimization",
+          "Backups and preventive maintenance",
+          "Periodic reports and improvement suggestions"
         ],
-        "price": "Custom Quote"
+        "price": "Starting at $500 USD"
       },
       "development": {
-        "title": "Web & App Development",
-        "description": "Professional websites and platforms that grow with your business.",
+        "title": "Web Development and Platforms",
+        "description": "Design and development of sites and platforms focused on experience, speed, and scalability.",
         "features": [
-          "Modern and responsive design",
-          "Custom features and integrations",
-          "Fast performance and security",
-          "Continuous updates and scalability"
+          "Modern and responsive design focused on conversion",
+          "Custom integrations and functionalities",
+          "Technical SEO, analytics, and integrated security",
+          "Management panel and continuous evolution support"
         ],
-        "price": "From $1000 USD"
+        "price": "Starting at $1000 USD"
       }
     },
-    "cta": "Request Quote"
-  },
-  "skills": {
-    "title": "Technical Skills",
-    "subtitle": "Technologies and tools I use to build effective solutions",
-    "categories": {
-      "frontend": {
-        "title": "Frontend"
-      },
-      "backend": {
-        "title": "Backend"
-      },
-      "data": {
-        "title": "Data Analysis"
-      },
-      "languages": {
-        "title": "Programming Languages"
-      }
-    }
+    "cta": "Request a quote"
   },
   "process": {
     "title": "Process",
