@@ -5,11 +5,7 @@ import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { ThemeProvider } from "./providers/ThemeProvider";
-import { Background } from "@/components/layout/Background";
 import AnimatedNav from "@/components/layout/AnimatedNav";
-
-// import { Analytics } from "@/components/shared/analytics";
-// import StickyNav from "@/components/navigation/StickyNav";
 
 export const metadata: Metadata = {
   title: {
@@ -95,13 +91,6 @@ export default async function RootLayout({
       ].join(" ")}
       suppressHydrationWarning
     >
-      <head>
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-        />
-      </head>
       <body
         className={`${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined
