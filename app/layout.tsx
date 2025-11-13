@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import AnimatedNav from "@/components/layout/AnimatedNav";
+import { Contact } from "lucide-react";
 
 export const metadata: Metadata = {
   title: {
@@ -106,6 +107,7 @@ export default async function RootLayout({
               >
                 <AnimatedNav />
                 {children}
+                <Contact />
               </ThemeProvider>
             </NextIntlClientProvider>
           </div>

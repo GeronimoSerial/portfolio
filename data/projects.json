@@ -1,14 +1,5 @@
 [
   {
-    "title": "consejo.mec.gob.ar",
-    "description": "Oficial website of the General Council of Education of Corrientes, created to connect schools, teachers, and the community through transparent information, educational programs, and digital resources that promote modernization and inclusion in the provincial education system.",
-    "repository": "https://github.com/geronimoserial/Pagina-CGE",
-    "date": "2022-11-13",
-    "url": "https://consejo.mec.gob.ar/",
-    "published": true,
-    "slug": "consejo.mec.gob.ar"
-  },
-  {
     "title": "geroserial.com",
     "description": "The website you're looking at",
     "repository": "https://github.com/geronimoserial/portfolio",
@@ -28,12 +19,12 @@
   },
   {
     "title": "relevamiento",
-    "description": "A platform for collecting and managing data for governmental surveys and censuses, designed to streamline data collection processes and improve accuracy and efficiency in data handling for public sector projects.",
+    "description": "A specialized data management platform for governmental surveys (e.g., educational establishments data collection). It is designed to streamline data processes, significantly improving the accuracy and efficiency of public sector censuses.",
     "date": "2023-05-01",
     "url": "https://relevamiento.consejo.mec.gob.ar",
     "published": true,
-    "repository": "chronark/highstorm",
-    "slug": "highstorm"
+    "repository": "geronimoserial/relevamiento",
+    "slug": ""
   },
   {
     "title": "planetfall.io",
@@ -42,14 +33,6 @@
     "url": "https://planetfall.io",
     "published": true,
     "slug": "planetfall"
-  },
-  {
-    "title": "QStash",
-    "description": "QStash is a fully managed serverless queue and messaging service designed for the serverless era.",
-    "date": "2022-07-18",
-    "url": "https://upstash.com/qstash",
-    "published": true,
-    "slug": "qstash"
   },
 
   {
@@ -60,106 +43,5 @@
     "published": true,
     "repository": "https://github.com/geronimoserial/Pagina-CGE",
     "slug": "consejo.mec.gob.ar"
-  },
-  {
-    "title": "Upstash Auth Analytics",
-    "description": "A library to record and analyse Auth.js user behaviour",
-    "url": "https://console.upstash.com/ratelimit",
-    "repository": "upstash/auth-analytics",
-    "slug": "upstash-auth-analytics"
-  },
-  {
-    "title": "@upstash/cli",
-    "description": "A CLI to provision and manage Upstash resources, including Redis and Kafka databases.",
-    "date": "2022-05-16",
-    "repository": "upstash/cli",
-    "published": true,
-    "slug": "upstash-cli"
-  },
-  {
-    "title": "Upstash Core Analytics",
-    "description": "Low level utilities to build analytics tools on top of Redis.",
-    "date": "2023-02-13",
-    "url": "https://console.upstash.com/ratelimit",
-    "repository": "upstash/core-analytics",
-    "published": true,
-    "slug": "upstash-core-analytics"
-  },
-  {
-    "title": "@upstash/edge-flags",
-    "description": "Feature flags for your edge functions.",
-    "date": "2022-12-12",
-    "url": "https://upstash.com/blog/edge-flags-beta",
-    "repository": "upstash/edge-flags",
-    "published": true,
-    "slug": "upstash-edge-flags"
-  },
-  {
-    "title": "@upstash/kafka",
-    "description": "A fully typed Kafka client built for Upstash Kafka and HTTP, perfect for serverless and edge runtimes",
-    "date": "2022-01-08",
-    "url": "https://upstash.com/kafka",
-    "repository": "upstash/upstash-kafka",
-    "published": true,
-    "slug": "upstash-kafka"
-  },
-  {
-    "title": "@upstash/qstash",
-    "description": "A typescript client and consumer for QStash.",
-    "date": "2022-07-18",
-    "url": "https://upstash.com/qstash",
-    "repository": "upstash/sdk-qstash-ts",
-    "published": true,
-    "slug": "upstash-qstash-sdk"
-  },
-  {
-    "title": "Upstash Ratelimit Analytics",
-    "description": "Near realtime analytics for your ratelimits. Integrated into the @upstash/ratelimit library.",
-    "repository": "upstash/ratelimit\"",
-    "url": "https://console.upstash.com/ratelimit",
-    "published": true,
-    "slug": "upstash-ratelimit-analytics"
-  },
-  {
-    "title": "@upstash/ratelimit",
-    "description": "Ratelimiting library for serverless and edge runtimes. Built on top of Upstash Redis.",
-    "date": "2022-06-06",
-    "url": "https://upstash.com/blog/upstash-ratelimit",
-    "repository": "upstash/ratelimit",
-    "published": true,
-    "slug": "upstash-ratelimit"
-  },
-  {
-    "title": "React.js CLI",
-    "description": "A CLI React component to interact with Upstash Redis databases.",
-    "date": "2023-02-05",
-    "url": "https://upstash.com",
-    "repository": "upstash/react-ui",
-    "published": true,
-    "slug": "upstash-react-ui"
-  },
-  {
-    "title": "@upstash/redis",
-    "description": "A fully typed Redis client built for Upstash Redis and HTTP, perfect for serverless and edge runtimes.",
-    "date": "2022-03-14",
-    "url": "https://upstash.com/redis",
-    "repository": "upstash/upstash-redis",
-    "published": true,
-    "slug": "upstash-redis"
-  },
-  {
-    "title": "Upstash Web Analytics",
-    "description": "A library to record and analyse web page traffic and user behaviour",
-    "# repository": "upstash/web-analytics",
-    "published": true,
-    "slug": "upstash-web-analytics"
-  },
-  {
-    "title": "Zod Bird",
-    "description": "Zodbird is an e2e typed tinybird.co client library for typescript, leveraging zod for type safety and transformations",
-    "repository": "chronark/zod-bird",
-    "date": "2023-05-21",
-    "published": true,
-    "slug": "zod-bird"
   }
 ]

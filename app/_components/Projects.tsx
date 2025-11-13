@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import projectsData from "@/data/projects.json";
-import { ExternalLink, Github, X, Maximize2 } from "lucide-react";
+import { ExternalLink, Github, Maximize2 } from "lucide-react";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
 import {
   Dialog,
@@ -11,8 +11,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
-  DialogClose,
-  DialogPortal,
 } from "@/components/ui/dialog";
 import Link from "next/link";
 
@@ -35,7 +33,7 @@ export default function Projects() {
     .sort(
       (a, b) =>
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime()
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
     )
     .slice(0, 6);
 
@@ -45,7 +43,6 @@ export default function Projects() {
       ref={containerRef}
       className="relative min-h-screen py-20 px-4 overflow-hidden"
     >
-      {/* ==== SVG decorativo de fondo ==== */}
       <svg
         className="decorative-svg absolute top-20 left-10 w-40 h-40 opacity-20 pointer-events-none"
         viewBox="0 0 200 200"
