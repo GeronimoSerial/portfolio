@@ -1,14 +1,14 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import createMDX from "@next/mdx";
-//1
+
 const withNextIntl = createNextIntlPlugin("./i18n.ts");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {},
+  // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  experimental: {
-    mdxRs: true,
-  },
+  // Optionally, add any other Next.js config below
   async redirects() {
     return [
       {
@@ -24,16 +24,11 @@ const nextConfig = {
     ];
   },
 };
+
+// MDX configuration
 const withMDX = createMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [
-      //
-    ],
-    rehypePlugins: [
-      //
-    ],
-  },
+  // Add markdown plugins here, as desired
 });
 
+// Merge MDX config with Next.js config
 export default withNextIntl(withMDX(nextConfig));

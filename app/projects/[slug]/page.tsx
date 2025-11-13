@@ -4,6 +4,10 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import fs from "fs/promises";
+import path from "path";
+import matter from "gray-matter";
+import { compileMDX } from "next-mdx-remote/rsc";
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -48,7 +52,18 @@ export default async function Page({
     notFound();
   }
 
-  const { default: Post } = await import(`@/content/projects/${slug}.mdx`);
+  // Read and process MDX file
+  const filePath = path.join(process.cwd(), "content/projects", `${slug}.mdx`);
+  const fileContents = await fs.readFile(filePath, "utf8");
+  const { content } = matter(fileContents);
+
+  // Compile MDX without frontmatter
+  const { content: MDXContent } = await compileMDX({
+    source: content,
+    options: {
+      parseFrontmatter: false,
+    },
+  });
 
   return (
     <Background>
@@ -80,6 +95,7 @@ export default async function Page({
                 })}
               </p>
             )}
+            <hr className="mt-8 border-zinc-200 dark:border-zinc-800" />
           </header>
 
           {/* MDX Content */}
@@ -94,7 +110,7 @@ export default async function Page({
             prose-ul:text-zinc-600 dark:prose-ul:text-zinc-400
             prose-li:marker:text-zinc-500 dark:prose-li:marker:text-zinc-500"
           >
-            <Post />
+            {MDXContent}
           </article>
         </div>
       </div>

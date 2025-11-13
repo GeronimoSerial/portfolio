@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 export default async function ProjectsPage() {
   const allProjects = await getProjects();
+
   const publishedProjects = allProjects.filter((p) => p.published);
 
   return (
