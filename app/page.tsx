@@ -1,5 +1,3 @@
-"use client";
-
 import { Background } from "@/components/layout/Background";
 import Hero from "@/app/_components/Hero";
 import Services from "@/app/_components/Services";
@@ -7,10 +5,13 @@ import Process from "@/app/_components/Process";
 import Projects from "@/app/_components/Projects";
 import Results from "@/app/_components/Results";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { getProjects } from "@/lib/get-projects";
 
-export default function Home() {
-  const t = useTranslations("footer");
+export default async function Home() {
+  const t = await getTranslations("footer");
+  const projects = await getProjects();
+
   return (
     <>
       <Background>
@@ -18,7 +19,7 @@ export default function Home() {
           <Hero />
           <Services />
           <Process />
-          <Projects />
+          <Projects projectsData={projects} />
           <Results />
         </main>
 

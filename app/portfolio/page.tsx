@@ -8,45 +8,48 @@ import EducationSection from "./_components/EducationSection";
 import Projects from "../_components/Projects";
 import ResumeDownload from "./_components/ResumeDownload";
 import ContactOpportunities from "./_components/ContactOpportunities";
+import { getProjects } from "@/lib/get-projects";
 
 export const metadata: Metadata = {
-	title: "Portfolio | Geronimo Serial",
-	description:
-		"Complete portfolio and resume for Geronimo Serial - Full-stack Developer & Technical Consultant specializing in Next.js, React, and modern web technologies.",
-	openGraph: {
-		title: "Portfolio | Geronimo Serial",
-		description:
-			"Complete portfolio and resume for Geronimo Serial - Full-stack Developer & Technical Consultant",
-		type: "profile",
-	},
+  title: "Portfolio | Geronimo Serial",
+  description:
+    "Complete portfolio and resume for Geronimo Serial - Full-stack Developer & Technical Consultant specializing in Next.js, React, and modern web technologies.",
+  openGraph: {
+    title: "Portfolio | Geronimo Serial",
+    description:
+      "Complete portfolio and resume for Geronimo Serial - Full-stack Developer & Technical Consultant",
+    type: "profile",
+  },
 };
 
-export default function PortfolioPage() {
-	return (
-		<>
-			<main className="relative">
-				<Background>
-					<About />
-					<Skills />
-					<ExperienceTimeline />
-					<EducationSection />
-					<Projects />
-					<ResumeDownload />
-					<ContactOpportunities />
-				</Background>
-			</main>
+export default async function PortfolioPage() {
+  const projects = await getProjects();
 
-			<footer
-				className="border-t
+  return (
+    <>
+      <main className="relative">
+        <Background>
+          <About />
+          <Skills />
+          <ExperienceTimeline />
+          <EducationSection />
+          <Projects projectsData={projects} />
+          <ResumeDownload />
+          <ContactOpportunities />
+        </Background>
+      </main>
+
+      <footer
+        className="border-t
         border-zinc-200 dark:border-zinc-800
         py-8 gsap-element"
-			>
-				<div className="container mx-auto px-4 text-center">
-					<p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
-						© {new Date().getFullYear()} Geronimo Serial.
-					</p>
-				</div>
-			</footer>
-		</>
-	);
+      >
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
+            © {new Date().getFullYear()} Geronimo Serial.
+          </p>
+        </div>
+      </footer>
+    </>
+  );
 }

@@ -1,16 +1,105 @@
+import { getProjects } from "@/lib/get-projects";
+import { Background } from "@/components/layout/Background";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const projects = await getProjects();
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+  };
+}
+
 export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  // Verify project exists
+  const projects = await getProjects();
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) {
+    notFound();
+  }
+
   const { default: Post } = await import(`@/content/projects/${slug}.mdx`);
 
-  return <Post />;
-}
+  return (
+    <Background>
+      <div className="relative min-h-screen py-20 px-4">
+        <div className="container mx-auto max-w-4xl">
+          {/* Back button */}
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 mb-8 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Projects
+          </Link>
 
-export function generateStaticParams() {
-  return [{ slug: "consejo" }, { slug: "about" }];
+          {/* Project header */}
+          <header className="mb-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+              {project.title}
+            </h1>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400">
+              {project.description}
+            </p>
+            {project.date && (
+              <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
+                {new Date(project.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            )}
+          </header>
+
+          {/* MDX Content */}
+          <article
+            className="prose prose-zinc dark:prose-invert prose-lg max-w-none
+            prose-headings:font-display prose-headings:font-bold
+            prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
+            prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+            prose-p:text-zinc-600 dark:prose-p:text-zinc-400
+            prose-a:text-zinc-900 dark:prose-a:text-zinc-50
+            prose-strong:text-zinc-900 dark:prose-strong:text-zinc-50
+            prose-ul:text-zinc-600 dark:prose-ul:text-zinc-400
+            prose-li:marker:text-zinc-500 dark:prose-li:marker:text-zinc-500"
+          >
+            <Post />
+          </article>
+        </div>
+      </div>
+    </Background>
+  );
 }
 
 export const dynamicParams = false;

@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
-import { useAnimatedNav } from "@/hooks/useAnimatedNav";
+// import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
@@ -19,12 +19,12 @@ export default function AnimatedNav() {
   const navItemsRef = useRef<HTMLDivElement>(null!);
   const actionsRef = useRef<HTMLDivElement>(null!);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  //   const { isExpanded } = useAnimatedNav(
-  //     navRef,
-  //     logoRef,
-  //     navItemsRef,
-  //     actionsRef
-  //   );
+  // const { isExpanded } = useAnimatedNav(
+  //   navRef,
+  //   logoRef,
+  //   navItemsRef,
+  //   actionsRef
+  // );
   const router = useRouter();
 
   const navItems = [
