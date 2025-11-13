@@ -1,0 +1,48 @@
+---
+title: "QStash"
+description: "Servicio de cola y mensajería serverless totalmente administrado diseñado para la era serverless. Mensajería basada en HTTP para entornos serverless y edge."
+date: "2022-07-18"
+url: "https://upstash.com/qstash"
+published: true
+---
+
+## Plataforma de Mensajería Serverless
+
+QStash es una solución de mensajería y programación basada en HTTP diseñada específicamente para entornos serverless y edge. Proporciona una infraestructura robusta para comunicación asíncrona entre servicios sin requerir configuración o mantenimiento complejos.
+
+La plataforma aborda los desafíos únicos de las arquitecturas serverless donde las soluciones tradicionales de colas de mensajes no encajan bien debido a su naturaleza con estado y complejidad.
+
+## Características Principales
+
+- 100% serverless, no requiere conexiones con estado. Los mensajes se envían a tu API.
+- Entrega garantizada al menos una vez a cualquier API pública
+- Publicación-suscripción mediante topics
+- Entrega de mensajes con retraso
+- Deduplicación de mensajes
+- Programación mediante expresiones CRON
+
+## Casos de Uso
+
+QStash actúa como el pegamento para funciones serverless, permitiendo a los desarrolladores construir sistemas distribuidos potentes sin gestionar infraestructura. Desacopla servicios y proporciona entrega confiable de mensajes con reintentos automáticos.
+
+### Ejemplo del Mundo Real
+
+Considera una aplicación de e-commerce donde necesitas enviar un email de notificación después de cada compra. En lugar de llamar directamente al servicio de email desde tu manejador de compras (lo que crea acoplamiento fuerte y puntos potenciales de falla), puedes:
+
+1. Enviar un mensaje a QStash desde tu servicio de compras
+2. QStash encola la solicitud y llama a tu servicio de email
+3. Si el servicio no responde, QStash reintenta automáticamente con backoff
+4. El servicio de compras no se ve afectado por la latencia del servicio de email
+
+Esta arquitectura proporciona mejor confiabilidad, escalabilidad y mantenibilidad.
+
+## Capacidades Avanzadas
+
+QStash soporta entrega de mensajes con retraso y programación basada en CRON, habilitando casos de uso como:
+
+- Enviar un recordatorio de reseña 3 días después del envío
+- Programar tareas periódicas de limpieza
+- Implementar limitación de tasa y throttling
+- Construir flujos de trabajo complejos con etapas retrasadas
+
+Para aprender más sobre QStash, visita [upstash.com/qstash](https://upstash.com/qstash).

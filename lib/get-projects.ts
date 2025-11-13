@@ -3,8 +3,12 @@ import path from "path";
 import matter from "gray-matter";
 import { Project } from "@/types";
 
-export async function getProjects(): Promise<Project[]> {
-  const projectsDirectory = path.join(process.cwd(), "content/projects");
+export async function getProjects(locale: string = "en"): Promise<Project[]> {
+  const projectsDirectory = path.join(
+    process.cwd(),
+    "content/projects",
+    locale
+  );
 
   try {
     const files = await fs.readdir(projectsDirectory);

@@ -8,12 +8,30 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
+import { cookies } from "next/headers";
+import { defaultLocale, locales } from "@/lib/i18n/config";
+
+async function getLocale() {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
+  return locales.includes(localeCookie as any) ? localeCookie : defaultLocale;
+}
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
+  // Generate static params for all locales
+  const allParams = [];
+  for (const locale of locales) {
+    const projects = await getProjects(locale);
+    const params = projects.map((project) => ({
+      slug: project.slug,
+    }));
+    allParams.push(...params);
+  }
+  // Remove duplicates based on slug
+  const uniqueParams = Array.from(
+    new Map(allParams.map((p) => [p.slug, p])).values()
+  );
+  return uniqueParams;
 }
 
 export async function generateMetadata({
@@ -22,7 +40,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const projects = await getProjects();
+  const locale = await getLocale();
+  const projects = await getProjects(locale as string);
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
@@ -43,9 +62,10 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const locale = await getLocale();
 
   // Verify project exists
-  const projects = await getProjects();
+  const projects = await getProjects(locale as string);
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
@@ -53,7 +73,12 @@ export default async function Page({
   }
 
   // Read and process MDX file
-  const filePath = path.join(process.cwd(), "content/projects", `${slug}.mdx`);
+  const filePath = path.join(
+    process.cwd(),
+    "content/projects",
+    locale as string,
+    `${slug}.mdx`
+  );
   const fileContents = await fs.readFile(filePath, "utf8");
   const { content } = matter(fileContents);
 

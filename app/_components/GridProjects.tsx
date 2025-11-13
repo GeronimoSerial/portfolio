@@ -10,8 +10,8 @@ interface ProjectsProps {
   projectsData: Project[];
 }
 
-export default function Projects({ projectsData }: ProjectsProps) {
-  const t = useTranslations("projects");
+export default function FeaturedProjects({ projectsData }: ProjectsProps) {
+  const t = useTranslations("featuredProjects");
   const { containerRef, headlineRef } = useProjectsAnimations();
 
   const projects = projectsData.filter((p) => p.published).slice(0, 6);
@@ -95,7 +95,7 @@ export default function Projects({ projectsData }: ProjectsProps) {
             href="/projects"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-50 hover:bg-white/70 dark:hover:bg-black/50 transition-all duration-300 font-medium group"
           >
-            View All Projects
+            {t("cta")}
             <svg
               className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"

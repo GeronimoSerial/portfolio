@@ -108,9 +108,14 @@
       }
     }
   },
-  "projects": {
+  "featuredProjects": {
     "title": "Featured Projects",
-    "subtitle": "Experience the power of modern UI components that bring your ideas to life."
+    "subtitle": "Modern interfaces and dynamic components that bring your ideas to life.",
+    "cta": "View all projects"
+  },
+  "projectsPage": {
+    "title": "All Projects",
+    "subtitle": "Explore my complete portfolio of projects that demonstrate technical skills and creativity."
   },
   "results": {
     "title": "Results that speak",

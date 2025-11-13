@@ -2,15 +2,24 @@ import { getProjects } from "@/lib/get-projects";
 import { Background } from "@/components/layout/Background";
 import ProjectCard from "./_components/ProjectCard";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
+import { defaultLocale, locales } from "@/lib/i18n/config";
+import Header from "./_components/Header";
 
+async function getLocale() {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
+  return locales.includes(localeCookie as any) ? localeCookie : defaultLocale;
+}
 export const metadata: Metadata = {
-  title: "All Projects",
+  title: "Projects - My Portfolio",
   description:
-    "Explore all projects showcasing modern web development and innovative solutions.",
+    "Explore my complete portfolio of projects showcasing modern web development, innovative solutions, and attention to detail.",
 };
 
 export default async function ProjectsPage() {
-  const allProjects = await getProjects();
+  const locale = await getLocale();
+  const allProjects = await getProjects(locale as string);
 
   const publishedProjects = allProjects.filter((p) => p.published);
 
@@ -65,18 +74,7 @@ export default async function ProjectsPage() {
           />
         </svg>
 
-        {/* Header */}
-        <div className="mb-16">
-          <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-              All Projects
-            </h1>
-            <p className="mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400 max-w-2xl">
-              Explore my complete portfolio of projects showcasing modern web
-              development, innovative solutions, and attention to detail.
-            </p>
-          </div>
-        </div>
+        <Header />
 
         {/* Projects Grid */}
         <div className="container mx-auto max-w-7xl relative z-10">

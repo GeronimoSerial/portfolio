@@ -1,0 +1,35 @@
+---
+title: "envshare.dev"
+description: "A simple tool to share environment variables securely using AES-GCM encryption. The encryption key never leaves your browser."
+date: "2023-01-16"
+url: "https://envshare.dev"
+repository: "chronark/envshare"
+published: true
+---
+
+## Project Overview
+
+EnvShare is a secure platform designed to share sensitive environment variables and configuration data with team members without compromising security. Built with privacy and security as core principles, it ensures that your sensitive data remains encrypted end-to-end.
+
+The tool addresses a common challenge in development teams: safely sharing API keys, database credentials, and other sensitive configuration data without exposing them through insecure channels like email or messaging apps.
+
+## Security Features
+
+EnvShare implements industry-standard encryption practices to protect your data. All encryption happens client-side in your browser, meaning the server never has access to your unencrypted data or encryption keys.
+
+### Encryption Implementation
+
+The platform uses AES-GCM (Advanced Encryption Standard with Galois/Counter Mode) for encrypting data before transmission. This ensures that even if the server is compromised, your data remains secure.
+
+- End-to-end encryption
+- Zero-knowledge architecture
+- Client-side encryption only
+- Automatic expiration
+- One-time access links
+- No server-side decryption
+
+## Technical Architecture
+
+Built with modern web technologies, EnvShare leverages the Web Crypto API for secure encryption operations directly in the browser. The architecture ensures minimal attack surface and maximum security for your sensitive data.
+
+The application follows a zero-trust security model where the server acts merely as a storage layer for encrypted data, never having access to plaintext information or encryption keys.

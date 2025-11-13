@@ -14,6 +14,7 @@
     "description": "Enfoque metódico. Soluciones reales.",
     "cta": "Ver servicios"
   },
+
   "services": {
     "title": "Servicios",
     "subtitle": "Soluciones inteligentes para crecer en digital",
@@ -126,9 +127,14 @@
       }
     }
   },
-  "projects": {
+  "featuredProjects": {
     "title": "Proyectos destacados",
-    "subtitle": "Interfaces modernas y componentes dinámicos que dan vida a tus ideas."
+    "subtitle": "Interfaces modernas y componentes dinámicos que dan vida a tus ideas.",
+    "cta": "Ver todos los proyectos"
+  },
+  "projectsPage": {
+    "title": "Todos los proyectos",
+    "subtitle": "Explorá mi portfolio completo de proyectos que demuestran habilidades técnicas y creatividad."
   },
   "results": {
     "title": "Resultados que hablan",
