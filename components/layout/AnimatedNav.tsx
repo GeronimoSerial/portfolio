@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Github, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -19,16 +19,14 @@ export default function AnimatedNav() {
   const navItemsRef = useRef<HTMLDivElement>(null!);
   const actionsRef = useRef<HTMLDivElement>(null!);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-  const { isExpanded } = useAnimatedNav(
-    navRef,
-    logoRef,
-    navItemsRef,
-    actionsRef
-  );
+  //   const { isExpanded } = useAnimatedNav(
+  //     navRef,
+  //     logoRef,
+  //     navItemsRef,
+  //     actionsRef
+  //   );
+  const router = useRouter();
 
-  // Navigation items con traducciones
   const navItems = [
     { id: "services", label: t("services") },
     { id: "process", label: t("process") },
@@ -36,7 +34,6 @@ export default function AnimatedNav() {
     { id: "results", label: t("results") },
     { id: "contact", label: t("contact") },
   ];
-
   return (
     <nav
       ref={navRef}
@@ -65,9 +62,12 @@ export default function AnimatedNav() {
             {navItems.map((item, index) => (
               <button
                 onClick={() => {
-                  document
-                    .getElementById(item.id)
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  const element = document.getElementById(item.id);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    router.push(`/#${item.id}`);
+                  }
                 }}
                 key={item.id}
                 className="px-4 py-2 text-sm font-medium
@@ -123,7 +123,7 @@ export default function AnimatedNav() {
 
             <ThemeToggle />
 
-            <a
+            <Link
               href={SITE_CONFIG.links.github}
               target="_blank"
               rel="noopener noreferrer"
@@ -136,7 +136,7 @@ export default function AnimatedNav() {
               aria-label="GitHub"
             >
               <Github className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
