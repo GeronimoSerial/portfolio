@@ -6,8 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import AnimatedNav from "@/components/layout/AnimatedNav";
-import { Contact } from "lucide-react";
-
+import Contact from "./_components/Contact";
 export const metadata: Metadata = {
   title: {
     default: "geroserial.com",

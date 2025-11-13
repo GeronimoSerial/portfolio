@@ -55,7 +55,7 @@ export default function ServicesStatic() {
             const price = t(`items.${service.key}.price`);
             const cta = t("cta");
             const features = [0, 1, 2, 3].map((i) =>
-              t(`items.${service.key}.features.${i}`),
+              t(`items.${service.key}.features.${i}`)
             );
 
             return (
