@@ -136,10 +136,14 @@ export default function ServicesStatic() {
                               border-t border-zinc-200 dark:border-zinc-800
                               relative z-10"
                 >
-                  <span className="text-lg font-display text-zinc-900 dark:text-zinc-100">
+                  <span className="text-sm md:text-lg font-display text-zinc-900 dark:text-zinc-100">
                     {price}
                   </span>
-                  <MirrorButton href="/#contact" size="sm">
+                  <MirrorButton
+                    className="whitespace-nowrap "
+                    href="/#contact"
+                    size="sm"
+                  >
                     {cta}
                   </MirrorButton>
                 </div>
