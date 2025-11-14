@@ -2,9 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
-import Link from "next/link";
 import { Project } from "@/types";
 import ProjectCard from "../projects/_components/ProjectCard";
+import { Button } from "@/components/ui/moving-border";
 
 interface ProjectsProps {
   projectsData: Project[];
@@ -91,7 +91,16 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
 
         {/* View All Projects Button */}
         <div className="flex justify-center mt-12">
-          <Link
+          <Button
+            borderRadius="0.75rem"
+            borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
+            as="a"
+            href="/projects"
+            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium"
+          >
+            {t("cta")}
+          </Button>
+          {/* <Link
             href="/projects"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-50 hover:bg-white/70 dark:hover:bg-black/50 transition-all duration-300 font-medium group"
           >
@@ -109,7 +118,7 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>
