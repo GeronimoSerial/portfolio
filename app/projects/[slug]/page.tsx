@@ -11,15 +11,8 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { cookies } from "next/headers";
 import { defaultLocale, locales } from "@/lib/i18n/config";
 import { Separator } from "@/components/ui/separator";
-import {
-  KPIGrid,
-  ProjectTimeline,
-  ImpactGrid,
-  TechStackSection,
-  BeforeAfter,
-  MetricsOverview,
-  FeatureHighlights,
-} from "@/lib/consejo-mec-data";
+import { ImpactGrid } from "@/components/projects/consejo-mec/impact";
+import { TechStackSection } from "@/components/projects/consejo-mec/stack";
 
 async function getLocale() {
   const cookieStore = await cookies();
@@ -100,13 +93,8 @@ export default async function Page({
     },
     components: {
       Separator,
-      KPIGrid,
-      ProjectTimeline,
       ImpactGrid,
       TechStackSection,
-      BeforeAfter,
-      MetricsOverview,
-      FeatureHighlights,
     },
   });
 

@@ -7,21 +7,28 @@ repository: "https://github.com/geronimoserial/Pagina-CGE"
 published: true
 ---
 
+import { ImpactGrid } from "@/components/projects/consejo-mec/impact";
+import { TechStackSection } from "@/components/projects/consejo-mec/stack";
+
 ## Portal Web Institucional del Consejo General de Educación
 
 **Problema · Solución · Impacto**  
 **Fecha:** Julio 2023 - Actualidad  
 **Cliente:** Consejo General de Educación de Corrientes
 
+---
+
 ## Problema
 
-- Dispersión de información institucional en múltiples canales, sin trazabilidad ni versión única de la verdad
-- Dificultad de acceso para directivos, docentes y ciudadanía a normativa, documentos oficiales y guías operativas
-- Procesos administrativos manuales con alta carga operativa y tiempos de respuesta variables
-- Comunicación institucional fragmentada, sin un punto de referencia oficial y público consolidado
-- Ausencia de métricas para evaluar eficiencia y satisfacción en servicios educativos
+El Consejo General de Educación enfrentaba desafíos críticos en la gestión y comunicación de información institucional:
 
-<Separator className="my-8" />
+- **Dispersión de información** en múltiples canales sin trazabilidad ni versión única de la verdad
+- **Dificultad de acceso** para directivos, docentes y ciudadanía a normativa, documentos oficiales y guías operativas
+- **Procesos administrativos manuales** con alta carga operativa y tiempos de respuesta variables
+- **Comunicación institucional fragmentada** sin un punto de referencia oficial y público consolidado
+- **Ausencia de métricas** para evaluar eficiencia y satisfacción en servicios educativos
+
+---
 
 ## Solución
 
@@ -29,62 +36,80 @@ Implementación del portal **[consejo.mec.gob.ar](https://consejo.mec.gob.ar)** 
 
 ### Módulos Principales
 
-- **Noticias y Comunicados:** Centro oficial de difusión institucional
-- **Trámites Digitalizados:** Guías paso a paso para 45+ procedimientos administrativos
-- **Documentos Oficiales:** Repositorio de normativa, resoluciones e instructivos
-- **Base de Escuelas:** Directorio completo de establecimientos educativos por departamento
-- **Chat Normativo:** Asistente automatizado para consultas frecuentes
-- **Contacto Institucional:** Sistema de gestión de consultas con SLA definido
+**Noticias y Comunicados**  
+Centro oficial de difusión institucional con categorización automática y búsqueda semántica.
 
-### Stack Tecnológico
+**Trámites Digitalizados**  
+Guías paso a paso para 45+ procedimientos administrativos que reducen errores y demoras en gestiones.
 
-- **Framework:** Next.js 15 (App Router, ISR)
-- **Lenguaje:** TypeScript
-- **UI:** React 19 + Tailwind CSS + shadcn/ui
-- **Contenido:** MDX/Markdown + JSON estructurado
-- **Infraestructura:** Linux (Nginx, PM2), CI/CD con GitHub
-- **Analítica:** Google Analytics 4 y métricas internas por sección
-- **Accesibilidad:** WCAG 2.1 AA + diseño responsive
+**Documentos Oficiales**  
+Repositorio centralizado de normativa, resoluciones e instructivos con versionado completo.
 
-**Hoja de Ruta:** Integración con CMS headless (Strapi/Directus) y sistemas internos del CGE (gestión de planillas, vacantes docentes, liquidación de salarios).
+**Base de Escuelas**  
+Directorio completo de establecimientos educativos por departamento con datos actualizados en tiempo real.
 
-<Separator className="my-8" />
+**Chat Normativo**  
+Asistente automatizado para consultas frecuentes con precisión del 72% sin intervención humana.
 
-## Impacto
+**Contacto Institucional**  
+Sistema de gestión de consultas con SLA de 3 días hábiles y seguimiento completo de casos.
 
-<KPIGrid />
-
-<Separator className="my-8" />
-
-## Evolución del Proyecto
-
-<ProjectTimeline />
-
-<Separator className="my-8" />
-
-## Transformación Digital
-
-<BeforeAfter />
-
-<Separator className="my-8" />
-
-## Módulos Principales
-
-<FeatureHighlights />
-
-<Separator className="my-8" />
-
-## Métricas de Alcance
-
-<MetricsOverview />
-
-<Separator className="my-8" />
+---
 
 ## Stack Tecnológico
 
 <TechStackSection />
 
-<Separator className="my-12" />
+**Hoja de Ruta:** Integración con CMS headless (Strapi/Directus) y sistemas internos del CGE (gestión de planillas, vacantes docentes, liquidación de salarios).
+
+---
+
+## Impacto
+
+<ImpactGrid />
+
+### Métricas Clave
+
+- **28,500+ usuarios mensuales activos** (+42% vs año anterior)
+- **1,200+ publicaciones y recursos** actualizados continuamente
+- **45 trámites digitalizados** con guías paso a paso
+- **2.8 días de tiempo de respuesta promedio** (-35% vs proceso manual)
+
+---
+
+## Evolución del Proyecto
+
+**Julio 2023: Lanzamiento del portal unificado**  
+Consolidación de información institucional dispersa en un único punto de acceso oficial.
+
+**Septiembre 2023: Integración de Chat Normativo**  
+Sistema automatizado para resolver consultas frecuentes sobre normativa educativa.
+
+**Enero 2024: Optimización Mobile First**  
+Rediseño responsive y cumplimiento de estándares WCAG 2.1 AA para accesibilidad.
+
+**Junio 2024: Integración de Sistemas**  
+Conexión con bases de datos internas del CGE para consultas en tiempo real.
+
+---
+
+## Transformación Digital
+
+### Antes
+
+- Información dispersa en múltiples canales sin trazabilidad
+- Consultas telefónicas repetitivas sobrecargando al personal
+- Sin métricas de satisfacción ni tiempos de respuesta
+- Acceso limitado a horarios administrativos
+
+### Después
+
+- Portal unificado con SSR y contenido centralizado
+- Chat automatizado 24/7 resolviendo el 72% de consultas
+- Dashboard analítico con métricas en tiempo real
+- Disponibilidad permanente desde cualquier dispositivo
+
+---
 
 ## Resultados Clave
 
@@ -104,30 +129,34 @@ Implementación del portal **[consejo.mec.gob.ar](https://consejo.mec.gob.ar)** 
 
 - **Arquitectura preparada:** Diseño modular que permite integración con sistemas internos del CGE
 - **Métricas para decisiones:** Dashboard analítico que guía priorización de contenidos y funcionalidades
-- **Base para transformación digital:** Plataforma fundacional para futuros servicios digitales (gestión de vacantes, trámites online, etc.)
+- **Base para transformación digital:** Plataforma fundacional para futuros servicios digitales
 
 ### Impacto en la Comunidad Educativa
 
 El portal se consolidó como el canal oficial de referencia para:
+
 - **Directivos escolares:** Acceso inmediato a normativa y guías operativas
 - **Docentes:** Información sobre capacitaciones, convocatorias y procedimientos administrativos
 - **Ciudadanía:** Transparencia en la gestión educativa provincial y acceso a datos públicos
 
-<Separator className="my-8" />
+---
 
 ## Aprendizajes y Próximos Pasos
 
-**Lo que funcionó:**
+### Lo que funcionó
+
 - Diseño centrado en usuario con navegación intuitiva
 - Priorización de contenido crítico (trámites, normativa)
 - Integración gradual de funcionalidades complejas (chat normativo)
 
-**Desafíos superados:**
+### Desafíos superados
+
 - Migración de contenido histórico de múltiples fuentes
 - Capacitación interna para gestión autónoma del portal
 - Optimización de rendimiento para conexiones lentas en zonas rurales
 
-**Roadmap 2025-2026:**
+### Roadmap 2025-2026
+
 - Integración con sistema de gestión de vacantes docentes
 - Portal de autogestión para docentes (consulta de recibos, trámites online)
 - App móvil para notificaciones push de convocatorias urgentes
