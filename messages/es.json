@@ -9,8 +9,9 @@
     "portfolio": "Portfolio"
   },
   "hero": {
-    "title": "geroserial.com",
-    "subtitle": "Especialista en IT · Infraestructura, automatización y gestión de sistemas",
+    "title": "Soluciones tecnológicas empresariales que",
+    "midtitle": "escalan tu negocio",
+    "subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
     "description": "Enfoque metódico. Soluciones reales.",
     "cta": "Ver servicios"
   },

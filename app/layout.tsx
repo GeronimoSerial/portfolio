@@ -1,5 +1,5 @@
 import "../global.css";
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono, Crimson_Text } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -73,6 +73,12 @@ const geist_mono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
+const crimson_text = Crimson_Text({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-crimson-text",
+});
+
 export default async function RootLayout({
   children,
 }: {
@@ -89,6 +95,7 @@ export default async function RootLayout({
         calSans.variable,
         dm_sans.variable,
         geist_mono.variable,
+        crimson_text.variable,
       ].join(" ")}
       suppressHydrationWarning
     >
