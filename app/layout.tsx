@@ -8,27 +8,63 @@ import AnimatedNav from "@/components/layout/AnimatedNav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
 export const metadata: Metadata = {
+  metadataBase: new URL("https://geroserial.com"),
   title: {
-    default: "geroserial.com",
-    template: "%s | geroserial.com",
+    default: "Geronimo serial | Soluciones tecnológicas",
+    template: "%s | Geroserial",
   },
   description:
-    "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
+    "Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas. Transformo ideas en productos digitales escalables.",
+  keywords: [
+    "desarrollo web",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "soluciones tecnológicas",
+    "programación",
+    "full stack developer",
+    "diseño web",
+    "aplicaciones web",
+    "consultoría tecnológica",
+    "corrientes",
+    "argentina",
+    "freelance",
+  ],
+  authors: [{ name: "Geroserial", url: "https://geroserial.com" }],
+  creator: "geroserial",
+  publisher: "geroserial",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "geroserial.com",
-    description:
-      "Brindando soluciones tecnológicas que simplifican y potencian proyectos.",
+    type: "website",
+    locale: "es_ES",
+    alternateLocale: ["en_US"],
     url: "https://geroserial.com",
-    siteName: "geroserial.com",
+    siteName: "Geroserial",
+    title: "Geronimo serial | Soluciones tecnológicas",
+    description:
+      "Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas.",
     images: [
       {
-        url: "https://geroserial.com/assets/images/og.png",
-        width: 1920,
-        height: 1080,
+        url: "/assets/icons/portrait.png",
+        width: 1200,
+        height: 630,
+        alt: "Geroserial - Soluciones Tecnológicas",
+        type: "image/webp",
       },
     ],
-    locale: "en-US",
-    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Geronimo Serial | Soluciones tecnológicas",
+    description:
+      "Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas.",
+    images: ["/assets/icons/portrait.png"],
+    creator: "@geroserial",
+    site: "@geroserial",
   },
   robots: {
     index: true,
@@ -41,12 +77,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  twitter: {
-    title: "Geroserial",
-    card: "summary_large_image",
-  },
   icons: {
+    icon: "/assets/icons/favicon.png",
     shortcut: "/assets/icons/favicon.png",
+    apple: "/assets/icons/favicon.png",
+  },
+  manifest: "/site.webmanifest",
+  alternates: {
+    canonical: "https://geroserial.com",
+    languages: {
+      "es-ES": "https://geroserial.com/es",
+      "en-US": "https://geroserial.com/en",
+    },
   },
 };
 const geist = Geist({
