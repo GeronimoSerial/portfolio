@@ -24,11 +24,11 @@ export default function HeroStatic() {
         dark:bg-gradient-to-b dark:from-black/40 dark:via-black/20 dark:to-black/10 
         backdrop-saturate-150 pointer-events-none"
       >
-        <div className="mb-6 w-full sm:max-w-full lg:max-w-4xl">
-          <h1 className="font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-800 lg:text-pretty to-neutral-900 dark:from-stone-200 dark:to-neutral-200 text-3xl sm:text-4xl lg:text-6xl ">
+        <div className="mb-6 w-full sm:max-w-full md:max-w-xl  lg:max-w-3xl">
+          <h1 className="font-extrabold font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-800 lg:text-pretty to-neutral-900 dark:from-stone-200 dark:to-neutral-200 text-xl sm:text-3xl lg:text-5xl ">
             {t("title")}{" "}
             <span
-              className="relative z-10 bg-none text-slate-900 text-4xl sm:text-5xl lg:text-7xl dark:text-slate-50 font-normal undernli"
+              className="relative z-10 bg-none text-slate-900 text-2xl sm:text-4xl lg:text-6xl dark:text-slate-50 font-normal italic "
               style={{ fontFamily: "var(--font-crimson-text)" }}
             >
               {t("midtitle")}

@@ -1,6 +1,5 @@
 import "../global.css";
-import { DM_Sans, Geist, Geist_Mono, Crimson_Text } from "next/font/google";
-import LocalFont from "next/font/local";
+import { Geist, Crimson_Text } from "next/font/google";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
@@ -56,23 +55,6 @@ const geist = Geist({
   variable: "--font-geist",
 });
 
-const calSans = LocalFont({
-  src: "../public/fonts/CalSans-SemiBold.ttf",
-  variable: "--font-calsans",
-});
-
-const dm_sans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700"],
-  variable: "--font-dm_sans",
-});
-
-const geist_mono = Geist_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-geist-mono",
-});
-
 const crimson_text = Crimson_Text({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
@@ -90,13 +72,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={[
-        geist.variable,
-        calSans.variable,
-        dm_sans.variable,
-        geist_mono.variable,
-        crimson_text.variable,
-      ].join(" ")}
+      className={[geist.variable, crimson_text.variable].join(" ")}
       suppressHydrationWarning
     >
       <body

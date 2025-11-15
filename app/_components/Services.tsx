@@ -139,13 +139,6 @@ export default function ServicesStatic() {
                   <span className="text-sm md:text-lg font-display text-zinc-900 dark:text-zinc-100">
                     {price}
                   </span>
-                  <MirrorButton
-                    className="whitespace-nowrap "
-                    href="/#contact"
-                    size="sm"
-                  >
-                    {cta}
-                  </MirrorButton>
                 </div>
 
                 {/* Decorative corner accent */}
