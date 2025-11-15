@@ -13,6 +13,7 @@ import { defaultLocale, locales } from "@/lib/i18n/config";
 import { Separator } from "@/components/ui/separator";
 import { ImpactGrid } from "@/components/projects/consejo-mec/impact";
 import { TechStackSection } from "@/components/projects/consejo-mec/stack";
+import Image from "next/image";
 
 async function getLocale() {
   const cookieStore = await cookies();
@@ -95,6 +96,7 @@ export default async function Page({
       Separator,
       ImpactGrid,
       TechStackSection,
+      Image,
     },
   });
 
