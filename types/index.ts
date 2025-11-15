@@ -20,4 +20,5 @@ export interface Project {
   repository?: string;
   published: boolean;
   slug: string;
+  index?: number;
 }

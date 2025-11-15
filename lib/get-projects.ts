@@ -29,6 +29,7 @@ export async function getProjects(locale: string = "en"): Promise<Project[]> {
           url: data.url,
           repository: data.repository,
           published: data.published ?? false,
+          index: data.index,
           slug,
         } as Project;
       })

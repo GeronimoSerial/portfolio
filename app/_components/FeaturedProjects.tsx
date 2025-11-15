@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useProjectsAnimations } from "@/hooks/useProjectsAnimations";
 import { Project } from "@/types";
 import ProjectCard from "../projects/_components/ProjectCard";
-import { Button } from "@/components/ui/moving-border";
+// import { Button } from "@/components/ui/moving-border";
 
 interface ProjectsProps {
   projectsData: Project[];
@@ -14,7 +14,15 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
   const t = useTranslations("featuredProjects");
   const { containerRef, headlineRef } = useProjectsAnimations();
 
-  const projects = projectsData.filter((p) => p.published).slice(0, 6);
+  const getIndexValue = (p: Project) => {
+    const typed = p as Project & { index?: number };
+    return typed.index ?? Number.MAX_SAFE_INTEGER;
+  };
+
+  const projects = projectsData
+    .filter((p) => p.published)
+    .sort((a, b) => getIndexValue(a) - getIndexValue(b))
+    .slice(0, 6);
 
   return (
     <section
@@ -85,13 +93,13 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} index={index} />
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
 
         {/* View All Projects Button */}
-        <div className="flex justify-center mt-12">
+        {/* <div className="flex justify-center mt-12">
           <Button
             borderRadius="0.75rem"
             borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
@@ -101,7 +109,7 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
           >
             {t("cta")}
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
