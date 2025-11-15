@@ -32,7 +32,6 @@ export default async function Home() {
           <FeaturedProjects projectsData={projects} />
           <Results />
         </main>
-
       </Background>
     </>
   );

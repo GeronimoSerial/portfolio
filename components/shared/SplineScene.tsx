@@ -23,7 +23,7 @@ export default function Robot() {
 
   return (
     <>
-      <div className="absolute inset-0 z-0 opacity-60">
+      <div className="absolute inset-0 z-0 opacity-60 lg:translate-x-12 -translate-y-16 lg:-translate-y-24">
         {delayedLoad && (
           <Spline
             scene="/assets/spline/scene.splinecode"
