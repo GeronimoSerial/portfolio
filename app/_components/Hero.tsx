@@ -10,7 +10,7 @@ export default function HeroStatic() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
+      className="relative flex flex-col items-center min-h-screen justify-center w-full min-h-screen px-4 overflow-hidden"
     >
       <Robot />
       <div
