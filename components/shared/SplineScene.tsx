@@ -7,19 +7,68 @@ import { Application } from "@splinetool/runtime";
 export default function Robot() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const appRef = useRef<Application | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const targetRotationRef = useRef({ x: 0, y: 0 });
-  const currentRotationRef = useRef({ x: 0, y: 0 });
-  const animationFrameRef = useRef<number | null>(null);
 
-  const { ref, inView } = useInView({
+  const mainObjRef = useRef<any>(null);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const pointer = useRef({ x: 0, y: 0 });
+  const targetRot = useRef({ x: 0, y: 0 });
+  const currentRot = useRef({ x: 0, y: 0 });
+
+  const animationFrame = useRef<number | null>(null);
+
+  // Observa si el robot está en viewport
+  const { ref: inViewRef, inView } = useInView({
     threshold: 0.1,
-    triggerOnce: true,
   });
 
+  // --- Pointer tracking optimizado ---
   useEffect(() => {
-    if (!canvasRef.current || !inView) return;
+    const handlePointer = (e: PointerEvent) => {
+      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
+      pointer.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      // sensibilidad del robot (ajustable)
+      targetRot.current.y = pointer.current.x * 0.28;
+      targetRot.current.x = pointer.current.y * 0.18;
+    };
+
+    window.addEventListener("pointermove", handlePointer, { passive: true });
+    return () => window.removeEventListener("pointermove", handlePointer);
+  }, []);
+
+  // --- Main animation loop ---
+  const loop = () => {
+    const obj = mainObjRef.current;
+    if (obj) {
+      const ease = 0.06; // easing suave real
+
+      currentRot.current.x +=
+        (targetRot.current.x - currentRot.current.x) * ease;
+      currentRot.current.y +=
+        (targetRot.current.y - currentRot.current.y) * ease;
+
+      // clamp para evitar jitter
+      currentRot.current.x = Math.max(
+        -0.3,
+        Math.min(0.3, currentRot.current.x)
+      );
+      currentRot.current.y = Math.max(
+        -0.5,
+        Math.min(0.5, currentRot.current.y)
+      );
+
+      obj.rotation.x = currentRot.current.x;
+      obj.rotation.y = currentRot.current.y;
+    }
+
+    animationFrame.current = requestAnimationFrame(loop);
+  };
+
+  // --- Loading de la escena + setup inicial ---
+  useEffect(() => {
+    if (!canvasRef.current) return;
 
     const app = new Application(canvasRef.current, {
       renderMode: "continuous",
@@ -31,106 +80,60 @@ export default function Robot() {
       .then(() => {
         setIsLoading(false);
 
-        let mainObject: any = null;
-        mainObject =
+        // Cache principal
+        mainObjRef.current =
           app.findObjectByName("Bot") || app.findObjectByName("Scene 1");
 
-        // Throttle mouse events for better performance
-        let ticking = false;
-        const handleMouseMove = (e: MouseEvent) => {
-          if (!ticking) {
-            window.requestAnimationFrame(() => {
-              mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-              mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-              targetRotationRef.current.y = mouseRef.current.x * 0.3;
-              targetRotationRef.current.x = mouseRef.current.y * 0.2;
-              ticking = false;
-            });
-            ticking = true;
-          }
-        };
-
-        window.addEventListener("mousemove", handleMouseMove, {
-          passive: true,
-        });
-
-        // Animation loop for smooth rotation
-        const animate = () => {
-          if (!mainObject) return;
-
-          const lerpFactor = 0.05;
-          currentRotationRef.current.x +=
-            (targetRotationRef.current.x - currentRotationRef.current.x) *
-            lerpFactor;
-          currentRotationRef.current.y +=
-            (targetRotationRef.current.y - currentRotationRef.current.y) *
-            lerpFactor;
-
-          // Apply rotation only if there's a meaningful change
-          const threshold = 0.0001;
-          if (
-            Math.abs(mainObject.rotation.y - currentRotationRef.current.y) >
-              threshold ||
-            Math.abs(mainObject.rotation.x - currentRotationRef.current.x) >
-              threshold
-          ) {
-            mainObject.rotation.y = currentRotationRef.current.y;
-            mainObject.rotation.x = currentRotationRef.current.x;
-          }
-
-          animationFrameRef.current = requestAnimationFrame(animate);
-        };
-
-        animate();
-
-        // Cleanup
-        return () => {
-          window.removeEventListener("mousemove", handleMouseMove);
-          if (animationFrameRef.current) {
-            cancelAnimationFrame(animationFrameRef.current);
-          }
-        };
+        // Inicia el loop sólo si está visible
+        if (inView && !animationFrame.current) loop();
       })
-      .catch((error) => {
-        console.error("Error loading Spline scene:", error);
+      .catch((err) => {
+        console.error("Spline load error:", err);
         setIsLoading(false);
       });
 
-    // Cleanup on unmount
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-      if (appRef.current) {
-        appRef.current.dispose();
-      }
-    };
-  }, [inView]);
-
-  // Handle visibility change to pause/resume animation
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden && animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+      appRef.current?.dispose();
     };
   }, []);
 
+  // --- Pausa / resume cuando entra o sale del viewport ---
+  useEffect(() => {
+    if (inView) {
+      if (!animationFrame.current) loop();
+    } else {
+      if (animationFrame.current) cancelAnimationFrame(animationFrame.current);
+      animationFrame.current = null;
+    }
+  }, [inView]);
+
+  // --- Pausar si la pestaña no está visible ---
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (animationFrame.current) {
+          cancelAnimationFrame(animationFrame.current);
+          animationFrame.current = null;
+        }
+      } else if (inView && !animationFrame.current) {
+        loop();
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, [inView]);
+
   return (
     <div
-      ref={ref}
+      ref={inViewRef}
       className="absolute inset-0 z-0 opacity-60 -translate-y-16 lg:-translate-y-24"
     >
       {isLoading && (
-        <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/20 z-10">
-          <div className="animate-pulse text-zinc-500 text-sm">
-            Cargando escena 3D...
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10">
+          <span className="animate-pulse text-zinc-400">Cargando escena…</span>
         </div>
       )}
       <canvas
