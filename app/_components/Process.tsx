@@ -40,7 +40,7 @@ export default function Process() {
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-20 process-header">
-          <h2 className="text-5xl md:text-6xl font-semibold text-zinc-950 dark:text-zinc-300 mb-6">
+          <h2 className="text-5xl md:text-6xl font-semibold text-zinc-950 dark:text-white mb-6">
             {t("title")}
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mb-6 process-divider" />

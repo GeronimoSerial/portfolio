@@ -2,6 +2,7 @@ import { request } from "http";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
   loading: () => (
@@ -12,13 +13,11 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
     </div>
   ),
 });
+
 export default function Robot() {
   const splineRef = useRef<any>(null);
   const [isReady, setIsReady] = useState(false);
 
-  // const [mounted, setMounted] = useState(false);
-
-  // ejecutar carga 50ms después de montar el componente
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -28,7 +27,11 @@ export default function Robot() {
     if (!isReady || !splineRef.current) return;
 
     if (inView) {
-      splineRef.current.start();
+      try {
+        splineRef.current.start();
+      } catch (error) {
+        console.error("Error starting Spline animation:", error);
+      }
     } else {
       splineRef.current.stop();
     }

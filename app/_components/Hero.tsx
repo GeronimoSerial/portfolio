@@ -29,7 +29,7 @@ export default function HeroStatic() {
           <h1 className="font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-800 lg:text-pretty to-neutral-900 dark:from-stone-200 dark:to-neutral-200 text-3xl sm:text-4xl lg:text-6xl ">
             {t("title")}{" "}
             <span
-              className="bg-none text-slate-900 text-4xl sm:text-5xl lg:text-7xl dark:text-slate-50 font-normal"
+              className="bg-none text-slate-900 text-4xl sm:text-5xl lg:text-7xl dark:text-slate-50 font-normal undernli"
               style={{ fontFamily: "var(--font-crimson-text)" }}
             >
               {t("midtitle")}
@@ -40,7 +40,7 @@ export default function HeroStatic() {
         <h2
           className="text-sm md:text-lg 
           text-zinc-700 dark:text-zinc-300 
-          max-w-3xl"
+          max-w-3xl font-sans"
         >
           {t("subtitle")}
         </h2>
