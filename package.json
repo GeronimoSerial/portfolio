@@ -20,7 +20,10 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@react-email/components": "^0.5.7",
     "@react-email/render": "^1.4.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.0",
     "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.11.4",
     "@types/mdx": "^2.0.13",
     "@upstash/redis": "^1.23.3",
     "@vercel/functions": "^3.1.4",
@@ -42,6 +45,7 @@
     "resend": "^6.4.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
+    "three": "0.181.1",
     "typescript": "^5.2.2"
   },
   "devDependencies": {
@@ -53,6 +57,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@types/react-scroll": "^1.8.10",
+    "@types/three": "^0.181.0",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.11.0",
     "axe-playwright": "^2.2.2",
