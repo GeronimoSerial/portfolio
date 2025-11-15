@@ -1,9 +1,8 @@
 "use client";
 
-import React, { Suspense } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/moving-border";
-import { SplineScene } from "@/components/shared/SplineScene";
+import Robot from "@/components/shared/SplineScene";
 
 export default function HeroStatic() {
   const t = useTranslations("hero");
@@ -13,24 +12,17 @@ export default function HeroStatic() {
       id="hero"
       className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
     >
-      {/* Spline 3D Scene Background with Suspense */}
-      <div className="absolute inset-0 z-0 opacity-60">
-        <Suspense
-          fallback={
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-zinc-900 to-black">
-              <div className="animate-pulse text-zinc-500">Loading 3D Scene...</div>
-            </div>
-          }
-        >
-          <SplineScene
-            scene="https://prod.spline.design/UbM7F-HZcyTbZ4y3/scene.splinecode"
-            className="w-full h-full"
-          />
-        </Suspense>
-      </div>
+      <Robot />
 
-      <div className="hero-content z-10 flex flex-col items-center text-center backdrop-blur-sm bg-black/5 dark:bg-white/5 rounded-2xl p-8 pointer-events-auto">
+      <div
+        className="hero-content z-10 flex flex-col items-center text-center 
+  rounded-2xl p-8 
+  bg-gradient-to-b from-white/40 via-white/20 to-white/10 
+  dark:bg-gradient-to-b dark:from-black/40 dark:via-black/20 dark:to-black/10 
+  backdrop-saturate-150 pointer-events-none"
+      >
         {/* Título principal */}
+
         <div className="mb-6 max-w-4xl">
           <h1 className="font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-700 to-neutral-800 dark:from-stone-200 dark:to-neutral-200 leading-relaxed text-4xl sm:text-5xl lg:text-6xl">
             {t("title")}{" "}
@@ -65,7 +57,7 @@ export default function HeroStatic() {
             borderRadius="0.75rem"
             borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
             as="button"
-            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium"
+            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium pointer-events-auto cursor-pointer"
             onClick={() => {
               document
                 .getElementById("services")
