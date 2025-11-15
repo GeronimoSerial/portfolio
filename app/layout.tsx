@@ -10,7 +10,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
   title: {
-    default: "Geronimo serial | Soluciones tecnológicas",
+    default: "Geronimo Serial | Soluciones tecnológicas",
     template: "%s | Geroserial",
   },
   description:
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     url: "https://geroserial.com",
     siteName: "Geroserial",
-    title: "Geronimo serial | Soluciones tecnológicas",
+    title: "Geronimo Serial | Soluciones tecnológicas",
     description:
       "Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas.",
     images: [
