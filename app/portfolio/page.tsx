@@ -5,7 +5,7 @@ import About from "./_components/About";
 import Skills from "./_components/Skills";
 import ExperienceTimeline from "./_components/ExperienceTimeline";
 import EducationSection from "./_components/EducationSection";
-import Projects from "../_components/GridProjects";
+import Projects from "../_components/FeaturedProjects";
 import ResumeDownload from "./_components/ResumeDownload";
 import ContactOpportunities from "./_components/ContactOpportunities";
 import { getProjects } from "@/lib/get-projects";

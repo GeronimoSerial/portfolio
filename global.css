@@ -39,6 +39,10 @@
     font-family: var(--font-geist), serif;
   }
 
+  h2 {
+    font-family: var(--font-crimson-text), serif;
+  }
+
   /* Ocultar scrollbar pero mantener funcionalidad */
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE and Edge */

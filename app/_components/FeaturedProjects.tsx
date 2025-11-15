@@ -72,17 +72,18 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
       {/* ==== Header ==== */}
       <div ref={headlineRef} className="mb-16">
         <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
-          <span className="word text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50">
+          <h2 className="word text-4xl md:text-5xl lg:text-6xl font-semibold text-zinc-900 dark:text-zinc-50">
             {t("title")}
-          </span>
+          </h2>
         </div>
+        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mt-3 mb-6 process-divider" />
+
         <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
           {t("subtitle")}
         </p>
       </div>
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        {/* ==== Grid de proyectos ==== */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={project.slug} project={project} index={index} />
@@ -96,29 +97,10 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
             borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
             as="a"
             href="/projects"
-            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium"
+            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-xs"
           >
             {t("cta")}
           </Button>
-          {/* <Link
-            href="/projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/50 dark:bg-black/30 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-50 hover:bg-white/70 dark:hover:bg-black/50 transition-all duration-300 font-medium group"
-          >
-            {t("cta")}
-            <svg
-              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link> */}
         </div>
       </div>
     </section>

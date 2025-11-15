@@ -88,7 +88,7 @@ export default function Contact() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -167,7 +167,7 @@ export default function Contact() {
           <div className="space-y-10 gsap-fade-left">
             <div className="space-y-5">
               <div className="overflow-hidden">
-                <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-light tracking-tight text-zinc-950 dark:text-zinc-50 leading-[0.9] gsap-title">
+                <h2 className="text-5xl md:text-6xl lg:text-7xl  font-light tracking-tight text-zinc-950 dark:text-zinc-50 leading-[0.9] gsap-title">
                   {t("heading.line1")}
                   <br />
                   <span className="font-normal italic">
@@ -341,7 +341,7 @@ export default function Contact() {
                     "mt-4 p-4 rounded-lg border text-sm animate-in fade-in slide-in-from-top-2 duration-300",
                     submitStatus.type === "success"
                       ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
-                      : "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200",
+                      : "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200"
                   )}
                   role="alert"
                 >
