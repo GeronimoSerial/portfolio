@@ -1,0 +1,106 @@
+---
+title: "WhatsApp Chatbot: AI Assistant"
+description: "Implementation of an AI chatbot (GPT/Gemini) on WhatsApp to provide an official communication channel and 24/7 support to over 10,000 users."
+date: "2024-08-11"
+url: "https://upstash.com/qstash"
+published: true
+index: 4
+---
+
+## AI WhatsApp Assistant for +10,000 Users
+
+**The Challenge · The Solution · The Impact**
+
+**Period:** 2024 – Present
+
+**Role:** AI Solution Developer and Architect
+
+<Image src="/assets/images/projects/wppbot/bot.png" alt="WhatsApp AI Assistant Dashboard" width={1200} height={600} className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800" />
+
+---
+
+## The Challenge
+
+More than 10,000 educational system agents (teachers, principals, administrative staff) **lacked an official**, instant, and automated communication channel for inquiries.
+
+This generated an unsustainable operational load in administrative offices, which had to answer thousands of repetitive queries via phone or email, leaving users without support outside of office hours.
+
+The challenge was to create a massive, scalable, and reliable channel on the platform everyone uses (WhatsApp) that was intelligent enough to manage the complexity and volume of inquiries.
+
+---
+
+## The Solution: A Hybrid AI Agent
+
+A chatbot system was developed using `Node.js` and `whatsapp-web.js` acting as a "hybrid AI agent", serving two types of users with two different AI engines:
+
+### 1. AI Assistant for Users (Google Gemini)
+
+This is the public face of the system. An AI instance (Google Gemini via API) trained with the specific context of the CGE.
+
+- **24/7 Support:** Automatically answers most frequent queries (e.g., procedure status, payment dates, procedural guides).
+- **Context Management:** Maintains a conversation history to allow for natural and coherent dialogue, understanding the flow of the user's inquiry.
+- **Operational Filter:** Acts as the first line of defense, resolving 80-90% of inquiries without human intervention.
+
+### 2. AI Assistant for Administrators (GPT)
+
+A productivity "backdoor" for the management team, accessible only with administrator permissions.
+
+- **General Purpose AI (GPT):** Integrated via *Magic Loops*, allows an administrator to use advanced AI (GPT) for internal tasks, such as drafting statements, analyzing data, or debugging code, all from the same WhatsApp interface.
+
+- **Flexible Context Management:** Allows "breaking out of context" from the CGE to use the AI as a general productivity tool without contaminating the user bot's history.
+
+---
+
+## Tech Stack
+
+<TechStackSection />
+
+- **Platform:** Node.js (v20+)
+- **WhatsApp Integration:** `whatsapp-web.js`
+- **User AI:** Google Gemini (via API and `getGeminiResponse.js`)
+- **Admin AI:** GPT (via *Magic Loops*)
+- **Environment Management:** `dotenv`
+
+---
+
+## Digital Transformation
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h3 className="font-bold mb-2">Before</h3>
+    <ul className="list-disc list-inside">
+      <li>+10,000 users without an official channel</li>
+      <li>Repetitive inquiries via phone and email</li>
+      <li>Support limited to office hours</li>
+      <li>Fragmented and informal communication</li>
+      <li>High manual operational load</li>
+    </ul>
+  </div>
+  <div>
+    <h3 className="font-bold mb-2">After</h3>
+    <ul className="list-disc list-inside">
+      <li>Official 24/7 WhatsApp channel</li>
+      <li>Instant, automated AI responses</li>
+      <li>Continuous and coherent support (with history)</li>
+      <li>Unified and auditable channel</li>
+      <li>Drastic reduction in operational load</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## The Impact
+
+- **Creation of the First Official Channel:** Established the CGE's first massive, automated, and official communication medium, serving thousands of users instantly.
+- **Operational Load Reduction:** Estimated reduction of over 80% in phone and email inquiries regarding frequent topics, freeing up administrative staff for higher-value tasks.
+- **24/7 Support:** Teachers and principals now have access to critical information anytime, anywhere.
+- **Productivity Platform:** The administrator module became an internal AI tool for the management team, improving their efficiency.
+
+---
+
+## Future Roadmap
+
+- Integration with internal databases to provide personalized responses.
+- Implementation of *push* notifications for urgent announcements.
+- Expand AI training (Gemini) with a deeper regulatory corpus.

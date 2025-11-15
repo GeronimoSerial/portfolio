@@ -1,0 +1,103 @@
+---
+title: "Whatsapp Chatbot: Asistente AI" 
+description: "Implementación de un chatbot con IA (GPT/Gemini) en WhatsApp para proveer un canal de comunicación oficial y soporte 24/7 a más de 10.000 usuarios."
+date: "2024-08-11"
+published: true
+index: 4
+---
+<Image src="/assets/images/projects/wppbot/bot.png" alt="WhatsApp AI Assistant Dashboard" width={1200} height={600} className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800" />
+
+## Asistente IA por WhatsApp para +10.000 usuarios
+
+**El Desafío · La Solución · El Impacto**
+
+**Periodo:** 2024 – Presente
+
+**Rol:** Desarrollador y Arquitecto de la Solución de IA
+
+---
+
+## El Desafío
+
+Más de 10.000 agentes del sistema educativo (docentes, directivos, administrativos) **no tenían un medio de comunicación oficial**, instantáneo y automatizado para realizar consultas.
+
+Esto generaba una carga operativa insostenible en las oficinas administrativas, que debían responder miles de consultas repetitivas por teléfono o email, y dejaba a los usuarios sin soporte fuera del horario de oficina.
+
+El desafío era crear un canal masivo, escalable y confiable en la plataforma que todos usan (WhatsApp) y que fuera lo suficientemente inteligente para gestionar la complejidad y el volumen de las consultas.
+
+---
+
+## La Solución: Un agente de IA híbrido
+
+Se desarrolló un sistema de chatbot sobre `Node.js` y `whatsapp-web.js` que funciona como un "agente de IA híbrido", atendiendo a dos tipos de usuarios con dos motores de IA distintos:
+
+### 1. Asistente de IA para Usuarios (Google Gemini)
+
+Es la cara pública del sistema. Una instancia de IA (Google Gemini vía API) entrenada con el contexto específico del CGE.
+
+- **Atención 24/7:** Responde automáticamente la mayoría de las consultas frecuentes (ej. estado de trámites, fechas de pago, guías de procedimientos).
+- **Manejo de Contexto:** Mantiene un historial de conversación para permitir un diálogo natural y coherente, entendiendo el flujo de la consulta del usuario.
+- **Filtro Operativo:** Actúa como la primera línea de defensa, resolviendo el 80-90% de las consultas sin intervención humana.
+
+### 2. Asistente de IA para Administradores (GPT)
+
+Una "puerta trasera" de productividad para el equipo de gestión, accesible solo con permisos de administrador.
+
+- **IA de Propósito General (GPT):** Integrado vía *Magic Loops*, permite a un administrador usar una IA avanzada (GPT) para tareas internas, como redactar comunicados, analizar datos o depurar código, todo desde la misma interfaz de WhatsApp.
+
+- **Gestión de Contexto Flexible:** Permite "salir del contexto" del CGE para usar la IA como una herramienta de productividad general, sin contaminar el historial del bot de usuario.
+---
+
+## Tech Stack
+
+<TechStackSection />
+
+- **Plataforma:** Node.js (v20+)
+- **Integración WhatsApp:** `whatsapp-web.js`
+- **IA de Usuario:** Google Gemini (vía API y `getGeminiResponse.js`)
+- **IA de Administrador:** GPT (vía *Magic Loops*)
+- **Gestión de Entorno:** `dotenv`
+
+---
+
+## Transformación digital
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h3 className="font-bold mb-2">Antes</h3>
+    <ul className="list-disc list-inside">
+      <li>+10.000 usuarios sin canal oficial</li>
+      <li>Consultas repetitivas por teléfono y email</li>
+      <li>Soporte limitado a horario administrativo</li>
+      <li>Comunicación fragmentada e informal</li>
+      <li>Alta carga operativa manual</li>
+    </ul>
+  </div>
+  <div>
+    <h3 className="font-bold mb-2">Después</h3>
+    <ul className="list-disc list-inside">
+      <li>Canal oficial de WhatsApp 24/7</li>
+      <li>Respuestas instantáneas y automáticas con IA</li>
+      <li>Soporte continuo y coherente (con historial)</li>
+      <li>Canal unificado y auditable</li>
+      <li>Reducción drástica de la carga operativa</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## El impacto
+
+- **Creación del primer canal oficial:** Se estableció el primer medio de comunicación masivo, automatizado y oficial del CGE, dando servicio a miles de usuarios al instante.
+- **Reducción de carga operativa:** Se estima una reducción de más del 80% en consultas telefónicas y por correo electrónico sobre temas frecuentes, liberando al personal administrativo para tareas de mayor valor.
+- **Soporte 24/7:** Los docentes y directivos ahora tienen acceso a información crítica en cualquier momento y desde cualquier lugar.
+- **Plataforma de productividad:** El módulo de administrador se convirtió en una herramienta de IA interna para el equipo de gestión, mejorando su eficiencia.
+
+---
+
+## Roadmap futuro
+
+- Integración con las bases de datos internas para dar respuestas personalizadas.
+- Implementación de notificaciones *push* para comunicados urgentes.
+- Expandir el entrenamiento de la IA (Gemini) con un corpus de normativas más profundo.

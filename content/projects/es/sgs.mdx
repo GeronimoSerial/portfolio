@@ -1,0 +1,94 @@
+---
+title: "SGS (Solución empresarial)"
+description: "Análisis crítico y diseño de un sistema interministerial para automatizar y auditar el proceso de Salario Familiar, eliminando décadas de trabajo manual."
+date: "2025-09-21"
+published: true
+index: 3
+---
+## Sistema de gestión de salarios
+
+**El Desafío · La Solución · El Impacto**
+
+**Periodo:** 2024 – 2025
+
+**Rol:** Analista de reglas de negocio y arquitecto de la solución
+
+**Clientes:** Ministerio de Hacienda y Finanzas, Consejo General de Educación, Dir. de Sistemas de Información.
+
+
+---
+
+## El Desafío: análisis crítico del problema
+
+El proceso de pago de Asignaciones Familiares (Salario Familiar) era un sistema arcaico, 100% manual y basado en papel, generando una carga operativa insostenible y una alta propensión a errores.
+
+Mi rol fue analizar críticamente las reglas de negocio para identificar las fallas fundamentales:
+
+- **Falta de trazabilidad y exceso de papel:** Miles de constancias físicas se movían mensualmente entre escuelas, el CGE y el Ministerio de Hacienda. No existía una auditoría, un estado centralizado, y generaba un problema masivo de almacenamiento.
+- **Alta carga operativa manual:** Los directivos dedicaban semanas a recolectar, firmar, fotocopiar y trasladar esta documentación, distrayendo recursos valiosos de tareas pedagógicas.
+- **Datos no confiables y reprocesos:** La validación era visual. Una constancia vencida, un CUIT erróneo o una fotocopia ilegible causaba el rechazo de la liquidación, generando demoras en el pago al docente y un enorme esfuerzo de reproceso manual.
+- **Inescalabilidad:** El sistema era incapaz de crecer. Cada nuevo agente o alumno añadía más papel y más carga manual a un proceso ya colapsado.
+
+---
+
+## La Solución: un sistema digital integrado
+
+Mi responsabilidad fue diseñar un **flujo digital integrado** que reemplazara el proceso manual de punta a punta. La solución no era un simple formulario, sino un **sistema interministerial** que unifica las bases de datos y valida la información automáticamente.
+
+El proyecto se desarrolló bajo un convenio interministerial que permitió la interoperabilidad de datos entre el CGE, la Dirección de Sistemas y el Ministerio de Hacienda.
+
+### Pilares de la solución
+
+* **1. Fuente única de verdad:** Se unificaron las bases de datos. El sistema cruza y valida automáticamente la información personal (Hacienda), escolar (CGE - Alumnos) y familiar (Registro Civil/ANSES) sin intervención humana.
+* **2. Proceso cero papel:** Las instituciones ya no acumulan constancias físicas. La validación se convirtió en un *flag* digital. Los directivos solo deben validar o reportar excepciones en la plataforma.
+* **3. Flujo auditable y transparente:** Cada cambio de estado del agente (Ej. 'Validado', 'Enviado a Liquidación', 'Pagado') queda registrado en un log, proveyendo una transparencia y trazabilidad completas.
+* **4. Estandarización de salida:** El sistema genera un lote digital único, depurado y confiable que es consumido directamente por el centro de liquidaciones de Hacienda, eliminando la dispersión.
+
+{/* <Image src="/assets/images/projects/salario/flujo-sistema.png" alt="Diagrama de flujo del sistema de salario familiar" width={1200} height={450} className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800" /> */}
+
+---
+
+## Tech Stack
+
+<TechStackSection />
+
+**Arquitectura Clave:** La arquitectura se basó en la **interoperabilidad** entre sistemas de distintos ministerios, utilizando APIs seguras para el cruce y validación de datos sensibles. Se diseñó un motor de reglas de negocio que automatiza las validaciones que antes tomaban semanas.
+
+---
+
+## Transformación digital 
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h3 className="font-bold mb-2">Antes</h3>
+    <ul className="list-disc list-inside">
+      <li>Proceso manual basado en fotocopias</li>
+      <li>Validación visual propensa a errores</li>
+      <li>Demoras y rechazos en pagos</li>
+      <li>Carga operativa extrema para directivos</li>
+      <li>Cero auditoría o trazabilidad</li>
+    </ul>
+  </div>
+  <div>
+    <h3 className="font-bold mb-2">Después</h3>
+    <ul className="list-disc list-inside">
+      <li>Proceso 100% digital y sin papeles</li>
+      <li>Validación automática contra BBDD unificadas</li>
+      <li>Continuidad de pago garantizada</li>
+      <li>Carga operativa cero para directivos</li>
+      <li>Trazabilidad y auditoría total del proceso</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## El Impacto
+
+El resultado fue la transformación completa de un proceso administrativo central, logrando:
+
+- **Reducción total de papel:** Las instituciones dejaron de acumular constancias físicas. Se eliminó el 100% del traslado, fotocopiado y almacenamiento de papeles.
+- **Liberación de carga operativa:** Los directivos ya no reúnen ni presentan decenas de fotocopias por semestre, liberando ese tiempo para la gestión pedagógica.
+- **Continuidad de pago garantizada:** Se eliminaron las demoras y rechazos por inconsistencias. Los docentes perciben sus haberes sin interrupciones.
+- **Agilidad en liquidaciones:** El centro de liquidaciones trabaja sobre un único lote digital, estandarizado y confiable, reduciendo drásticamente el tiempo de procesamiento.
+- **Escalabilidad real:** La plataforma soporta el ingreso de miles de agentes sin incrementar la carga manual en las áreas administrativas.
