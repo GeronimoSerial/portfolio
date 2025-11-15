@@ -10,7 +10,7 @@ export default function HeroStatic() {
   return (
     <section
       id="hero"
-      className="relative flex flex-col items-center min-h-screen justify-center w-full min-h-screen px-4 overflow-hidden"
+      className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
     >
       <Robot />
       <div
@@ -26,10 +26,10 @@ export default function HeroStatic() {
         backdrop-saturate-150 pointer-events-none"
       >
         <div className="mb-6 w-full sm:max-w-full lg:max-w-4xl">
-          <h1 className="font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-700 lg:text-pretty to-neutral-800 dark:from-stone-200 dark:to-neutral-200 text-3xl sm:text-4xl lg:text-6xl ">
+          <h1 className="font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-800 lg:text-pretty to-neutral-900 dark:from-stone-200 dark:to-neutral-200 text-3xl sm:text-4xl lg:text-6xl ">
             {t("title")}{" "}
             <span
-              className="bg-none text-slate-700 text-4xl sm:text-5xl lg:text-7xl dark:text-slate-50 font-normal"
+              className="bg-none text-slate-900 text-4xl sm:text-5xl lg:text-7xl dark:text-slate-50 font-normal"
               style={{ fontFamily: "var(--font-crimson-text)" }}
             >
               {t("midtitle")}

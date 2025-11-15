@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
   loading: () => (
@@ -11,20 +12,32 @@ const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ),
 });
 export default function Robot() {
-  const [delayedLoad, setDelayedLoad] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // ejecutar carga 50ms después de montar el componente
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
   useEffect(() => {
-    const id = setTimeout(() => {
-      setDelayedLoad(true);
-    }, 50);
-    return () => clearTimeout(id);
-  }, []);
+    if (inView) {
+      const id = setTimeout(() => {
+        setMounted(true), 50;
+      }, 50);
+      return () => clearTimeout(id);
+    } else {
+      setMounted(false);
+    }
+  }, [inView]);
 
   return (
     <>
-      <div className="absolute inset-0 z-0 opacity-60 lg:translate-x-12 -translate-y-16 lg:-translate-y-24">
-        {delayedLoad && (
+      <div
+        ref={ref}
+        className="absolute inset-0 z-0 opacity-60  -translate-y-16 lg:-translate-y-24"
+      >
+        {mounted && (
           <Spline
             scene="/assets/spline/scene.splinecode"
             className="w-full h-full"
