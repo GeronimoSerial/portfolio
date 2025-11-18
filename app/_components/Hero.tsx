@@ -2,7 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/moving-border";
-import Robot from "@/components/shared/SplineScene";
+import dynamic from "next/dynamic";
+
+const Robot = dynamic(() => import("@/components/shared/SplineScene"), {
+  ssr: false,
+});
+
 export default function HeroStatic() {
   const t = useTranslations("hero");
 
@@ -13,15 +18,15 @@ export default function HeroStatic() {
     >
       <Robot />
       <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 
+        className="pointer-events-none absolute bottom-0 left-0 right-0 h-24
         bg-gradient-to-t from-background/60 to-transparent"
       />
 
       <div
-        className="hero-content z-10 flex flex-col items-center text-center 
-        rounded-2xl p-8 
-        bg-gradient-to-b from-white/40 via-white/20 to-white/10 
-        dark:bg-gradient-to-b dark:from-black/40 dark:via-black/20 dark:to-black/10 
+        className="hero-content z-10 flex flex-col items-center text-center
+        rounded-2xl p-8
+        bg-gradient-to-b from-white/40 via-white/20 to-white/10
+        dark:bg-gradient-to-b dark:from-black/40 dark:via-black/20 dark:to-black/10
         backdrop-saturate-150 pointer-events-none"
       >
         <div className="mb-6 w-full sm:max-w-full md:max-w-xl  lg:max-w-3xl">
@@ -37,16 +42,16 @@ export default function HeroStatic() {
         </div>
 
         <h2
-          className="text-sm md:text-lg 
-          text-zinc-700 dark:text-zinc-300 
+          className="text-sm md:text-lg
+          text-zinc-700 dark:text-zinc-300
           max-w-3xl font-sans"
         >
           {t("subtitle")}
         </h2>
 
         <p
-          className="mt-4 text-sm md:text-base 
-          text-zinc-500 dark:text-zinc-500 
+          className="mt-4 text-sm md:text-base
+          text-zinc-500 dark:text-zinc-500
           max-w-xl leading-relaxed"
         >
           {t("description")}
@@ -70,15 +75,15 @@ export default function HeroStatic() {
         </div>
       </div>
       <div
-        className="absolute top-0 w-screen h-px 
-        bg-linear-to-r 
+        className="absolute top-0 w-screen h-px
+        bg-linear-to-r
         from-zinc-700/0 via-zinc-700/50 to-zinc-700/0
                     dark:from-zinc-300/0 dark:via-zinc-300/50 dark:to-zinc-300/0
                     origin-center"
       />
       <div
-        className="absolute bottom-0 w-screen h-px 
-        bg-linear-to-r 
+        className="absolute bottom-0 w-screen h-px
+        bg-linear-to-r
         from-zinc-700/0 via-zinc-700/50 to-zinc-700/0
         dark:from-zinc-300/0 dark:via-zinc-300/50 dark:to-zinc-300/0
         origin-center"
