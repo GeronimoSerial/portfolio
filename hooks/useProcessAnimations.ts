@@ -8,80 +8,86 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 export const useProcessAnimations = () => {
-	const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-	useGSAP(
-		() => {
-			const cards = gsap.utils.toArray<HTMLDivElement>(".process-card");
+  useGSAP(
+    () => {
+      // Optimización 60fps: force3D para aceleración GPU
+      gsap.config({ force3D: true });
 
-			// Set initial state with lighter transforms
-			gsap.set(cards, {
-				xPercent: (i: number) => (i % 2 === 0 ? -50 : 50),
-				rotation: (i: number) => (i % 2 === 0 ? -4 : 4),
-				opacity: 0,
-				scale: 0.98,
-				willChange: "transform, opacity", // Hint to browser for optimization
-			});
+      const cards = gsap.utils.toArray<HTMLDivElement>(".process-card");
 
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 40%",
-					end: "bottom bottom",
-					toggleActions: "play none none reverse",
-				},
-			});
+      // Set initial state with GPU-accelerated transforms
+      gsap.set(cards, {
+        xPercent: (i: number) => (i % 2 === 0 ? -50 : 50),
+        rotation: (i: number) => (i % 2 === 0 ? -4 : 4),
+        opacity: 0,
+        scale: 0.98,
+        force3D: true,
+        willChange: "transform, opacity",
+      });
 
-			// Animate header
-			tl.fromTo(
-				".process-header",
-				{ opacity: 0, y: 60 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 0.8,
-					ease: "power3.out",
-				},
-			).fromTo(
-				".process-divider",
-				{ width: 0 },
-				{ width: "6rem", duration: 1, ease: "power3.out" },
-				"-=0.6",
-			);
+      const tl = gsap.timeline({
+        defaults: { force3D: true, ease: "power3.out" },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 40%",
+          end: "bottom bottom",
+          toggleActions: "play none none reverse",
+        },
+      });
 
-			// Animate all cards with stagger for sequential entrance
-			tl.to(
-				cards,
-				{
-					xPercent: 0,
-					rotation: 0,
-					opacity: 1,
-					scale: 1,
-					duration: 0.5,
-					ease: "expo.out",
-					stagger: 0.15,
-				},
-				"-=0.6",
-			);
+      // Animate header with GPU acceleration
+      tl.fromTo(
+        ".process-header",
+        { opacity: 0, y: 60, willChange: "transform, opacity" },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          clearProps: "willChange",
+        }
+      ).fromTo(
+        ".process-divider",
+        { width: 0, willChange: "width" },
+        { width: "6rem", duration: 1, clearProps: "willChange" },
+        "-=0.6"
+      );
 
-			// Animate footer
-			tl.fromTo(
-				".process-footer",
-				{ opacity: 0, y: 40 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 0.8,
-					ease: "power3.out",
-				},
-				"-=0.4",
-			);
+      // Animate all cards with GPU-accelerated stagger
+      tl.to(
+        cards,
+        {
+          xPercent: 0,
+          rotation: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "expo.out",
+          stagger: 0.15,
+          clearProps: "willChange",
+        },
+        "-=0.6"
+      );
 
-			// Optional: refresh ScrollTrigger if layout changes
-			ScrollTrigger.refresh();
-		},
-		{ scope: containerRef },
-	);
+      // Animate footer
+      tl.fromTo(
+        ".process-footer",
+        { opacity: 0, y: 40, willChange: "transform, opacity" },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          clearProps: "willChange",
+        },
+        "-=0.4"
+      );
 
-	return containerRef;
+      // Optional: refresh ScrollTrigger if layout changes
+      ScrollTrigger.refresh();
+    },
+    { scope: containerRef }
+  );
+
+  return containerRef;
 };

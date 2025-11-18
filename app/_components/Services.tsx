@@ -62,6 +62,11 @@ export default function ServicesStatic() {
               <article
                 key={service.key}
                 className="service-card group p-6 bg-gradient-to-b from-zinc-50/30 to-zinc-100/30 dark:from-zinc-900/50 dark:to-zinc-800/30 hover:opacity-100 border-2 border-zinc-200 dark:border-zinc-800 rounded-2xl pointer-events-auto relative overflow-hidden shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50"
+                style={{
+                  willChange: "auto",
+                  transform: "translateZ(0)",
+                  backfaceVisibility: "hidden",
+                }}
               >
                 <svg
                   className="card-border-svg absolute inset-0 w-full h-full pointer-events-none"
@@ -95,6 +100,10 @@ export default function ServicesStatic() {
                                 bg-zinc-100 dark:bg-zinc-900
                                 border border-zinc-200 dark:border-zinc-800
                                 rounded-lg"
+                    style={{
+                      transform: "translateZ(0)",
+                      backfaceVisibility: "hidden",
+                    }}
                   >
                     <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
                   </div>

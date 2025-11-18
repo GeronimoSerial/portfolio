@@ -36,6 +36,10 @@ export default function Process() {
       ref={containerRef}
       id="process"
       className="relative min-h-screen py-20 px-4 overflow-x-hidden"
+      style={{
+        transform: "translateZ(0)",
+        contain: "layout style paint",
+      }}
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
@@ -78,6 +82,11 @@ export default function Process() {
                              border-2 border-zinc-200 dark:border-zinc-800
                              rounded-2xl
                              shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50`}
+                    style={{
+                      transform: "translateZ(0)",
+                      backfaceVisibility: "hidden",
+                      willChange: "auto",
+                    }}
                   >
                     {/* Number Badge */}
                     <div

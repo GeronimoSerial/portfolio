@@ -83,6 +83,131 @@
     transform: translateZ(0);
   }
 
+  /* Services section optimization */
+  #services {
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
+  /* Process section optimization */
+  #process {
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
+  .process-card {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .process-number,
+  .process-icon {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .process-connector {
+    will-change: auto;
+    backface-visibility: hidden;
+  }
+
+  /* ============================================ */
+  /* PROJECTS SECTION - MOBILE OPTIMIZED */
+  /* ============================================ */
+  #projects {
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
+  /* Project cards - GPU acceleration */
+  .project-card {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Card internals optimization */
+  .card-border,
+  .card-content,
+  .card-title,
+  .card-description,
+  .card-metadata,
+  .card-icon {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Character splitting optimization (desktop only) */
+  .char {
+    display: inline-block;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Decorative SVG optimization */
+  .decorative-svg {
+    will-change: opacity;
+    transform: translateZ(0);
+  }
+
+  /* Projects section text elements */
+  .word,
+  .projects-subtitle {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    .project-card {
+      transform: translate3d(0, 0, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+    }
+
+    /* Disable complex animations on low-end devices */
+    @media (prefers-reduced-motion: reduce) {
+      .project-card,
+      .card-border,
+      .card-content,
+      .char,
+      .decorative-svg {
+        will-change: auto;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  }
+
+  .service-card {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .service-card .card-border-svg {
+    will-change: auto;
+  }
+
+  .service-card .icon-container {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .service-card .feature-item {
+    will-change: auto;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
   .process-card {
     will-change: transform, opacity;
     backface-visibility: hidden;
