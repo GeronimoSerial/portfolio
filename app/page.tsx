@@ -25,8 +25,7 @@ export default async function Home() {
 
   return (
     <>
-      <SplineAutoRecorder></SplineAutoRecorder>
-      {/* <Background>
+      <Background>
         <main className="relative">
           <Hero />
           <Services />
@@ -34,7 +33,7 @@ export default async function Home() {
           <FeaturedProjects projectsData={projects} />
           <Results />
         </main>
-      </Background> */}
+      </Background>
     </>
   );
 }
