@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import { Application } from "@splinetool/runtime";
-
 export default function Robot() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   // Refs para controlar la lógica sin re-renders
@@ -33,7 +32,7 @@ export default function Robot() {
     //    En lugar de usar window.devicePixelRatio (que puede ser 3 en iPhone),
     //    lo limitamos a máximo 1.2 o 1.5.
     //    Si es gama baja (puedes integrar detect-gpu aqui), usas 0.8 o 1.
-    const dprMaximo = 0.3; // <--- AJUSTA ESTE VALOR (Menor = Más FPS)
+    const dprMaximo = 1.5; // <--- AJUSTA ESTE VALOR (Menor = Más FPS)
     const dpr = Math.min(window.devicePixelRatio, dprMaximo);
 
     // 3. Forzamos el tamaño del buffer interno
@@ -90,10 +89,6 @@ export default function Robot() {
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
-      {/* style={{ width: '100%', height: '100%' }} es CRÍTICO.
-         El canvas se estira visualmente por CSS, pero internamente (atributos width/height)
-         tiene la resolución baja que calculamos en la función.
-      */}
       <canvas ref={canvasRef} className="w-full h-full block" />
     </div>
   );

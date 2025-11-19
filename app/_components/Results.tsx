@@ -79,7 +79,7 @@ export default function Results() {
                     +
                   </span>
                   <span className="result-number text-5xl font-display font-bold text-zinc-900 dark:text-zinc-50">
-                    75
+                    150
                   </span>
                   <span className="text-3xl font-display font-bold text-zinc-900 dark:text-zinc-50">
                     k
