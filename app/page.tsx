@@ -10,6 +10,7 @@ import { getProjects } from "@/lib/get-projects";
 import { cookies } from "next/headers";
 import { defaultLocale, locales } from "@/lib/i18n/config";
 import FeaturedProjects from "@/app/_components/FeaturedProjects";
+import SplineAutoRecorder from "@/components/shared/ScreenRecorder";
 
 async function getLocale() {
   const cookieStore = await cookies();
@@ -24,7 +25,8 @@ export default async function Home() {
 
   return (
     <>
-      <Background>
+      <SplineAutoRecorder></SplineAutoRecorder>
+      {/* <Background>
         <main className="relative">
           <Hero />
           <Services />
@@ -32,7 +34,7 @@ export default async function Home() {
           <FeaturedProjects projectsData={projects} />
           <Results />
         </main>
-      </Background>
+      </Background> */}
     </>
   );
 }

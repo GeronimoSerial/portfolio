@@ -30,53 +30,6 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
       ref={containerRef}
       className="relative min-h-screen py-20 px-4 overflow-hidden"
     >
-      <svg
-        className="decorative-svg absolute top-20 left-10 w-40 h-40 opacity-20 pointer-events-none"
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle
-          cx="100"
-          cy="100"
-          r="80"
-          className="stroke-zinc-400 dark:stroke-zinc-600"
-          strokeWidth="2"
-        />
-        <path
-          d="M100 20 L100 180 M20 100 L180 100"
-          className="stroke-zinc-400 dark:stroke-zinc-600"
-          strokeWidth="2"
-        />
-        <circle
-          cx="100"
-          cy="100"
-          r="40"
-          className="stroke-zinc-400 dark:stroke-zinc-600"
-          strokeWidth="2"
-        />
-      </svg>
-
-      <svg
-        className="decorative-svg absolute bottom-20 right-10 w-32 h-32 opacity-20 pointer-events-none"
-        viewBox="0 0 200 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M20 100 L60 20 L140 20 L180 100 L140 180 L60 180 Z"
-          className="stroke-zinc-400 dark:stroke-zinc-600"
-          strokeWidth="2"
-        />
-        <circle
-          cx="100"
-          cy="100"
-          r="60"
-          className="stroke-zinc-400 dark:stroke-zinc-600"
-          strokeWidth="2"
-        />
-      </svg>
-
       {/* ==== Header ==== */}
       <div ref={headlineRef} className="mb-16">
         <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">

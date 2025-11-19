@@ -106,11 +106,11 @@ export default async function Page({
         <div className="container mx-auto max-w-4xl">
           {/* Back button */}
           <Link
-            href="/projects"
+            href="/"
             className="inline-flex items-center gap-2 mb-8 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Projects
+            Back to home
           </Link>
 
           {/* Project header */}
