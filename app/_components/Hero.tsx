@@ -5,39 +5,42 @@ import { Button } from "@/components/ui/moving-border";
 import dynamic from "next/dynamic";
 import { useHardwareTier } from "@/hooks/useHardwareTier";
 import { useRef } from "react";
+import Beams from "@/components/Beams";
 
-const Robot = dynamic(() => import("@/components/shared/SplineScene"), {
-  ssr: false,
-  loading: () => <VideoFallback />,
-});
+// const Robot = dynamic(() => import("@/components/shared/SplineScene"), {
+//   ssr: false,
+//   loading: () => (
+//     <div className="absolute inset-0 -z-10 pointer-events-none"></div>
+//   ),
+// });
 
-const VideoFallback = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+// const VideoFallback = () => {
+//   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const handleIntroEnd = () => {
-    if (videoRef.current) {
-      videoRef.current.src = "/assets/spline/loop.webm";
-      videoRef.current.loop = true;
-      videoRef.current.play();
-    }
-  };
+//   const handleIntroEnd = () => {
+//     if (videoRef.current) {
+//       videoRef.current.src = "/assets/spline/loop.webm";
+//       videoRef.current.loop = true;
+//       videoRef.current.play();
+//     }
+//   };
 
-  return (
-    <div className="absolute inset-0 -z-10 pointer-events-none">
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        playsInline
-        onEnded={handleIntroEnd}
-        className="w-full h-full object-cover opacity-60"
-      >
-        <source src="/assets/spline/intro.webm" type="video/webm" />
-      </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
-    </div>
-  );
-};
+//   return (
+//     <div className="absolute inset-0 -z-10 pointer-events-none">
+//       <video
+//         ref={videoRef}
+//         autoPlay
+//         muted
+//         playsInline
+//         onEnded={handleIntroEnd}
+//         className="w-full h-full object-cover opacity-60"
+//       >
+//         <source src="/assets/spline/intro.webm" type="video/webm" />
+//       </video>
+//       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
+//     </div>
+//   );
+// };
 
 export default function HeroStatic() {
   const t = useTranslations("hero");
@@ -49,13 +52,20 @@ export default function HeroStatic() {
         id="hero"
         className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
       >
-        {tier === null ? (
-          <VideoFallback />
+        {/* {tier === null ? (
+          <div className="relative inset-0 -z-10 pointer-events-none">
+            <Beams />
+          </div>
         ) : shouldLoad3d ? (
           <Robot />
         ) : (
-          <VideoFallback />
-        )}
+          <div className="relative inset-0 -z-10 pointer-events-none">
+            <Beams />
+          </div>
+        )} */}
+        <div className="absolute opacity-60 inset-0 -z-10 pointer-events-none">
+          <Beams />
+        </div>
 
         <div
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-24
