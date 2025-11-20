@@ -121,7 +121,7 @@ export default function AnimatedNav() {
 
             <LocaleSwitcher />
 
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
 
             <Link
               href={SITE_CONFIG.links.github}
