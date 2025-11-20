@@ -50,8 +50,11 @@ export default function HeroStatic() {
     <>
       <section
         id="hero"
-        className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
+        className="relative -mt-20 flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
       >
+        <div className="absolute opacity-60 inset-0 -z-10 pointer-events-none">
+          <Beams />
+        </div>
         {/* {tier === null ? (
           <div className="relative inset-0 -z-10 pointer-events-none">
             <Beams />
@@ -63,9 +66,6 @@ export default function HeroStatic() {
             <Beams />
           </div>
         )} */}
-        <div className="absolute opacity-60 inset-0 -z-10 pointer-events-none">
-          <Beams />
-        </div>
 
         <div
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-24
