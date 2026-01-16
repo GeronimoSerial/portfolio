@@ -1,12 +1,13 @@
 import "../global.css";
-import { Geist, Crimson_Text } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
-import { ThemeProvider } from "./providers/ThemeProvider";
 import AnimatedNav from "@/components/layout/AnimatedNav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
+import { SideNav } from "@/components/SideNav";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
   title: {
@@ -91,16 +92,23 @@ export const metadata: Metadata = {
     },
   },
 };
-const geist = Geist({
-  subsets: ["latin"],
+
+const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
-  variable: "--font-geist",
+  subsets: ["latin"],
+  variable: "--font-ibm-plex-sans",
 });
 
-const crimson_text = Crimson_Text({
+const ibmPlexMono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-crimson-text",
+  variable: "--font-ibm-plex-mono",
+});
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas",
 });
 
 export default async function RootLayout({
@@ -114,41 +122,34 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={[geist.variable, crimson_text.variable].join(" ")}
+      className={`dark ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${bebasNeue.variable}`}
       suppressHydrationWarning
     >
-      <body
-        className={`${
-          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-        }`}
-      >
-        <div id="smooth-wrapper">
+      <body className="bg-background text-foreground overflow-x-hidden antialiased font-sans">
+        <div className="noise-overlay" aria-hidden="true" />
+        <div className="grid-bg fixed inset-0 opacity-20 pointer-events-none z-0" />
+        
+        <div id="smooth-wrapper" className="relative z-10">
           <div id="smooth-content">
             <NextIntlClientProvider messages={messages}>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
                 <AnimatedNav />
+                <SideNav />
                 {children}
                 <Contact />
 
-                {/* Footer simple */}
-                <footer className="border-t border-zinc-800 py-8">
+                <footer className="border-t border-border py-8 bg-background relative z-10">
                   <div className="container mx-auto px-4 text-center">
-                    <p className="text-sm text-zinc-500">
+                    <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
                       © {new Date().getFullYear()}{" "}
                       <Link
                         href="https://geroserial.com"
-                        className="text-black hover:underline dark:text-white"
+                        className="text-foreground hover:text-accent transition-colors"
                       >
                         geroserial.com
                       </Link>
                     </p>
                   </div>
                 </footer>
-              </ThemeProvider>
             </NextIntlClientProvider>
           </div>
         </div>

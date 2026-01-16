@@ -1,11 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Github, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";
@@ -28,16 +27,16 @@ export default function AnimatedNav() {
   const router = useRouter();
 
   const navItems = [
-    { id: "services", label: t("services") },
-    { id: "process", label: t("process") },
-    { id: "projects", label: t("projects") },
-    { id: "results", label: t("results") },
+    { id: "cases", label: t("cases") },
+    { id: "expertise", label: t("expertise") },
+    { id: "methodology", label: t("methodology") },
+    { id: "impact", label: t("impact") },
     { id: "contact", label: t("contact") },
   ];
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 left-0 right-0 z-50 will-change-transform"
+      className="sticky top-0 left-0 right-0 z-40 will-change-transform border-b border-border/30 bg-background/80 backdrop-blur-sm md:pl-20"
       style={{ height: "5rem" }}
     >
       <div className="container mx-auto px-4 sm:px-6 h-full">
@@ -46,45 +45,19 @@ export default function AnimatedNav() {
             ref={logoRef}
             href="/"
             className="mr-auto ml-4 md:mr-0 md:ml-0
-                         text-xl sm:text-2xl font-display font-bold
-                         text-zinc-950 dark:text-zinc-50
-                         hover:text-zinc-700 dark:hover:text-zinc-300
+                         text-xl sm:text-2xl font-display font-bold tracking-tight
+                         text-foreground
+                         hover:text-accent
                          transition-colors duration-300
                          relative group
                          will-change-transform"
           >
             <span className="relative z-10">geroserial</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 dark:from-zinc-500/20 dark:to-zinc-300/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </Link>
 
-          {/* Desktop Nav Items */}
+          {/* Desktop Nav Items - HIDDEN as we use SideNav */}
           <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
-            {navItems.map((item, index) => (
-              <button
-                onClick={() => {
-                  const element = document.getElementById(item.id);
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    router.push(`/#${item.id}`);
-                  }
-                }}
-                key={item.id}
-                className="px-4 py-2 text-sm font-medium
-                             text-zinc-600 dark:text-zinc-400
-                             hover:text-zinc-900 dark:hover:text-zinc-100
-                             hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80
-                             rounded-lg
-                             relative group overflow-hidden
-                             will-change-transform"
-                style={{
-                  animationDelay: `${index * 50}ms`,
-                }}
-              >
-                <span className="relative z-10">{item.label}</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              </button>
-            ))}
+             {/* Empty by design */}
           </div>
 
           {/* Mobile Actions */}
@@ -95,10 +68,10 @@ export default function AnimatedNav() {
               <SheetTrigger asChild>
                 <button
                   className="p-2
-                  text-zinc-600 dark:text-zinc-400
-                  rounded-lg
+                  text-muted-foreground
+                  rounded-none
                   transition-all duration-300
-                  hover:scale-110 active:scale-95"
+                  hover:text-foreground active:scale-95"
                   aria-label="Toggle mobile menu"
                 >
                   <Menu className="w-6 h-6" />
@@ -115,23 +88,17 @@ export default function AnimatedNav() {
 
           {/* Desktop Actions */}
           <div ref={actionsRef} className="hidden md:flex items-center gap-3">
-            {/* <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
-              {isHome ? t("portfolio") : t("home")}{" "}
-            </MirrorButton> */}
-
             <LocaleSwitcher />
-
-            {/* <ThemeToggle /> */}
 
             <Link
               href={SITE_CONFIG.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-zinc-600 dark:text-zinc-400
-                hover:text-zinc-900 dark:hover:text-zinc-100
-                hover:bg-zinc-100 dark:hover:bg-zinc-800
-                rounded-lg
-                hover:scale-110 active:scale-95
+              className="p-2 text-muted-foreground
+                hover:text-foreground
+                hover:bg-zinc-800
+                rounded-none
+                transition-colors
                 will-change-transform"
               aria-label="GitHub"
             >

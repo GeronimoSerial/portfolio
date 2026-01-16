@@ -40,7 +40,7 @@ export default function PortfolioHeroStatic() {
                        text-zinc-700 dark:text-zinc-300 
                        bg-black/5 dark:bg-white/5 
                        border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
+                       rounded-none 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
                        "
@@ -57,7 +57,7 @@ export default function PortfolioHeroStatic() {
                        text-zinc-700 dark:text-zinc-300 
                        bg-black/5 dark:bg-white/5 
                        border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
+                       rounded-none 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
                        "
@@ -74,7 +74,7 @@ export default function PortfolioHeroStatic() {
                        text-zinc-700 dark:text-zinc-300 
                        bg-black/5 dark:bg-white/5 
                        border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
+                       rounded-none 
                        hover:bg-black/10 dark:hover:bg-white/10 
                        hover:border-zinc-400 dark:hover:border-zinc-500 
                        "
@@ -90,7 +90,7 @@ export default function PortfolioHeroStatic() {
 							className="flex items-center gap-2 px-6 py-3 text-sm font-medium 
                        text-white dark:text-black 
                        bg-black dark:bg-white 
-                       rounded-lg 
+                       rounded-none 
                        hover:bg-zinc-800 dark:hover:bg-zinc-100 
                        gsap-element"
 						>
@@ -104,7 +104,7 @@ export default function PortfolioHeroStatic() {
                        text-zinc-700 dark:text-white 
                        bg-black/10 dark:bg-white/10 
                        border border-zinc-300 dark:border-zinc-700 
-                       rounded-lg 
+                       rounded-none 
                        hover:bg-black/20 dark:hover:bg-white/20 
                        hover:border-zinc-500 dark:hover:border-zinc-500 
                        "

@@ -5,7 +5,7 @@ import { Search, Layers, Code, Rocket } from "lucide-react";
 import { useProcessAnimations } from "@/hooks/useProcessAnimations";
 import { Button } from "@/components/ui/moving-border";
 export default function Process() {
-  const t = useTranslations("process");
+  const t = useTranslations("methodology");
   const containerRef = useProcessAnimations();
 
   const steps = [
@@ -34,7 +34,7 @@ export default function Process() {
   return (
     <section
       ref={containerRef}
-      id="process"
+      id="methodology"
       className="relative min-h-screen py-20 px-4 overflow-x-hidden"
       style={{
         transform: "translateZ(0)",

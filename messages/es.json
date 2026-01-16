@@ -1,71 +1,65 @@
 {
   "nav": {
     "home": "Inicio",
-    "services": "Servicios",
-    "process": "Metodología",
-    "projects": "Proyectos",
-    "results": "Resultados",
+    "cases": "Proyectos",
+    "expertise": "Expertise",
+    "methodology": "Metodología",
+    "impact": "Impacto",
     "contact": "Contacto",
     "portfolio": "Portfolio"
   },
   "hero": {
-    "title": "Soluciones tecnológicas empresariales que",
-    "midtitle": "escalan tu negocio",
-    "subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
-    "description": "Enfoque metódico. Soluciones reales.",
-    "cta": "Ver servicios"
+    "name": "Geronimo Serial",
+    "tagline": "Transformo sistemas obsoletos en infraestructura digital que escala con tu organización.",
+    "credentials": {
+      "role1": "Systems Analyst",
+      "role2": "Full-Stack Developer",
+      "location": "Corrientes, Argentina"
+    },
+    "cta": {
+      "primary": "Explorar proyectos",
+      "secondary": "Mi trayectoria"
+    }
   },
-
-  "services": {
-    "title": "Servicios",
-    "subtitle": "Soluciones inteligentes para crecer en digital",
+  "impactStatement": {
+    "quote": {
+      "part1": "En 2024, lideré la digitalización de un proceso interministerial que eliminó el",
+      "highlight1": "100% del papel",
+      "part2": "en la gestión de salarios para",
+      "highlight2": "+10,000 docentes",
+      "part3": "en la provincia de Corrientes."
+    },
+    "cta": "Ver caso completo"
+  },
+  "expertise": {
+    "title": "Áreas de Expertise",
+    "subtitle": "Competencias desarrolladas a través de proyectos reales de transformación digital",
     "items": {
-      "consulting": {
-        "title": "Estrategia y dirección tecnologica",
-        "description": "Acompañamiento estratégico para definir, planificar y ejecutar decisiones tecnológicas de alto impacto.",
-        "features": [
-          "Diagnóstico integral de madurez tecnológica",
-          "Diseño de hoja de ruta digital personalizada",
-          "Análisis de inversión y retorno (ROI tecnológico)",
-          "Acompañamiento ejecutivo en decisiones críticas"
-        ],
-        "price": "Desde $2000 USD"
+      "strategy": {
+        "title": "Estrategia y Arquitectura Tecnológica",
+        "description": "Diseño de hojas de ruta digitales, análisis de sistemas existentes y definición de arquitecturas escalables que alinean tecnología con objetivos de negocio.",
+        "example": "Aplicado en: Sistema Interministerial SGS, Portal CGE"
       },
-      "support": {
-        "title": "Modernización y automatización",
-        "description": "Optimización de procesos mediante automatización, integraciones y análisis de reglas de negocio.",
-        "features": [
-          "Mapeo y modelado de procesos clave",
-          "Análisis y formalización de reglas de negocio",
-          "Implementación de flujos automatizados y conectores",
-          "Dashboards y reportes en tiempo real"
-        ],
-        "price": "Presupuesto personalizado"
-      },
-      "transformation": {
-        "title": "Mantenimiento y soporte evolutivo",
-        "description": "Cuidado continuo de sistemas para mantener rendimiento, estabilidad y mejora constante.",
-        "features": [
-          "Monitoreo proactivo y resolución de incidencias",
-          "Actualizaciones y optimización de rendimiento",
-          "Copias de seguridad y mantenimiento preventivo",
-          "Reportes periódicos y sugerencias de mejora"
-        ],
-        "price": "Desde $500 USD"
+      "automation": {
+        "title": "Automatización y Modernización",
+        "description": "Transformación de procesos manuales en flujos digitales integrados. Análisis de reglas de negocio y diseño de motores de validación automática.",
+        "example": "Aplicado en: Digitalización de Salario Familiar (0% papel)"
       },
       "development": {
-        "title": "Desarrollo web y plataformas",
-        "description": "Diseño y desarrollo de sitios y plataformas centrados en experiencia, velocidad y escalabilidad.",
-        "features": [
-          "Diseño moderno y responsive enfocado en conversión",
-          "Integraciones y funcionalidades a medida",
-          "SEO técnico, analítica y seguridad integradas",
-          "Panel de gestión y soporte de evolución continua"
-        ],
-        "price": "Desde $1000 USD"
+        "title": "Desarrollo Web y Plataformas",
+        "description": "Construcción de aplicaciones web de alto rendimiento con Next.js, React y arquitecturas modernas. Enfoque en UX, SEO técnico y escalabilidad.",
+        "example": "Aplicado en: consejo.mec.gob.ar (+28,500 usuarios/mes)"
+      },
+      "infrastructure": {
+        "title": "Infraestructura y Operaciones",
+        "description": "Gestión de entornos, monitoreo proactivo, optimización de rendimiento y mantenimiento evolutivo de sistemas en producción.",
+        "example": "Aplicado en: Infraestructura CGE, soporte a +1,200 escuelas"
       }
     },
-    "cta": "Solicitar presupuesto"
+    "cta": {
+      "text": "¿Tienes un proyecto que requiere este tipo de expertise?",
+      "button": "Conversemos"
+    }
   },
   "skills": {
     "title": "Habilidades Técnicas",
@@ -85,77 +79,81 @@
       }
     }
   },
-  "process": {
-    "title": "Metodología",
-    "subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",
-    "tagline": "Descubrir · Diseñar · Construir · Lanzar",
+  "methodology": {
+    "title": "Mi Metodología",
+    "subtitle": "Un enfoque estructurado para entregar soluciones que funcionan",
+    "tagline": "Descubrir · Diseñar · Construir · Entregar",
     "steps": {
       "1": {
         "title": "Descubrir",
-        "description": "Definimos objetivos, necesidades y oportunidades a través del análisis y la estrategia.",
+        "description": "Entiendo tu contexto antes de proponer soluciones. Analizo sistemas existentes, identifico fricciones y defino objetivos claros.",
         "items": [
-          "Comprender el contexto de tu negocio",
-          "Auditar sistemas y flujos de trabajo",
-          "Marcar una dirección clara para el proyecto"
+          "Inmersión en el problema real",
+          "Auditoría de sistemas y procesos",
+          "Definición de alcance y prioridades"
         ]
       },
       "2": {
         "title": "Diseñar",
-        "description": "Damos forma a la estructura, experiencia e identidad visual de tu solución.",
+        "description": "Diseño la arquitectura técnica y experiencia de usuario antes de escribir código. Itero con feedback temprano.",
         "items": [
-          "Arquitectura de información y diseño UX",
-          "Wireframes y sistema visual",
-          "Plan funcional y revisión constante"
+          "Arquitectura de información y flujos",
+          "Prototipado y validación",
+          "Especificación técnica detallada"
         ]
       },
       "3": {
         "title": "Construir",
-        "description": "Desarrollamos e integramos con precisión y total transparencia.",
+        "description": "Desarrollo iterativo con entregas frecuentes. Código limpio, testing integrado y documentación continua.",
         "items": [
-          "Desarrollo iterativo con revisiones frecuentes",
-          "Implementación segura y escalable",
-          "Pruebas de rendimiento y calidad"
+          "Sprints cortos con demos",
+          "Integración y testing continuo",
+          "Refinamiento basado en feedback"
         ]
       },
       "4": {
-        "title": "Lanzar",
-        "description": "Publicamos tu solución y garantizamos una transición fluida con soporte real.",
+        "title": "Entregar",
+        "description": "Despliegue controlado, transferencia de conocimiento y soporte post-lanzamiento. No desaparezco después de entregar.",
         "items": [
-          "Despliegue controlado y documentación",
-          "Monitoreo y ajustes iniciales",
-          "Soporte post-lanzamiento y plan de evolución"
+          "Deployment y monitoreo",
+          "Documentación y capacitación",
+          "Soporte evolutivo continuo"
         ]
       }
     }
   },
-  "featuredProjects": {
-    "title": "Proyectos destacados",
-    "subtitle": "Soluciones empresariales de transformación digital, del análisis crítico a la implementación a gran escala.",
-    "cta": "Ver todos los proyectos"
+  "cases": {
+    "title": "Casos de Transformación",
+    "subtitle": "Proyectos donde lideré el diseño e implementación de soluciones de alto impacto",
+    "cta": "Explorar todos los proyectos"
   },
   "projectsPage": {
     "title": "Todos los proyectos",
     "subtitle": "Explorá mi portfolio completo de proyectos que demuestran habilidades técnicas y creatividad."
   },
-  "results": {
-    "title": "Resultados que hablan",
-    "subtitle": "Cada entrega refleja precisión, estrategia y resultados que hablan por sí mismos",
+  "impact": {
+    "title": "Impacto Medible",
+    "subtitle": "Resultados verificables de proyectos en producción",
     "stats": {
       "visits": {
-        "label": "Visitas al sitio",
-        "period": "en 20 días"
+        "label": "Visitas mensuales",
+        "context": "Portal CGE",
+        "link": "#cases"
       },
       "performance": {
-        "label": "Tiempos de carga",
-        "period": "más rápidos tras la optimización"
+        "label": "Mejora en rendimiento",
+        "context": "Optimización de carga",
+        "link": "#cases"
       },
       "projects": {
         "label": "Proyectos finalizados",
-        "period": "con éxito"
+        "context": "Sector público y privado",
+        "link": "#cases"
       },
       "uptime": {
-        "label": "Promedio de",
-        "period": "disponibilidad"
+        "label": "Disponibilidad",
+        "context": "Infraestructura CGE",
+        "link": "#cases"
       }
     },
     "cta": {
@@ -165,10 +163,10 @@
   },
   "contact": {
     "heading": {
-      "line1": "Hablemos de tu",
-      "line2": "próximo proyecto"
+      "line1": "¿Tienes un proyecto",
+      "line2": "en mente?"
     },
-    "description": "Compartí tu visión y hagámosla realidad.",
+    "description": "Cuéntame sobre el desafío que enfrentas. Respondo personalmente cada mensaje.",
     "info": {
       "directContact": "Contacto directo",
       "basedIn": "Con base en"
@@ -176,48 +174,27 @@
     "form": {
       "name": {
         "label": "Tu nombre",
-        "placeholder": "Ingresá tu nombre completo"
+        "placeholder": "Nombre completo"
       },
       "email": {
-        "label": "Correo electrónico",
+        "label": "Email",
         "placeholder": "tu@email.com"
       },
       "company": {
-        "label": "Empresa",
-        "optional": "(Opcional)",
-        "placeholder": "Nombre de tu empresa"
+        "label": "Organización",
+        "optional": "(opcional)",
+        "placeholder": "Empresa o institución"
       },
       "message": {
-        "label": "Detalles del proyecto",
-        "placeholder": "Contame sobre tu proyecto, objetivos y plazos..."
+        "label": "Cuéntame sobre tu proyecto",
+        "placeholder": "¿Qué desafío enfrentas? ¿Qué resultados buscas lograr?"
       },
-      "success": "¡Gracias por contactarme! Te responderé lo antes posible.",
-      "error": "¡Ups! Algo salió mal. Por favor, intentá nuevamente más tarde.",
+      "success": "Mensaje recibido. Te respondo en las próximas 48 horas.",
+      "error": "Error al enviar. Intenta nuevamente o escríbeme directamente a contact@geroserial.com",
       "submit": "Enviar mensaje",
       "privacy": "Tu información es confidencial y será utilizada solo para responder a tu consulta. No compartimos datos con terceros."
     },
-    "availability": "DISPONIBLE PARA PROYECTOS SELECCIONADOS"
-  },
-  "testimonials": {
-    "title": "Opiniones de clientes",
-    "subtitle": "Experiencias de quienes confiaron en mi trabajo",
-    "items": {
-      "client1": {
-        "name": "Juan Pérez",
-        "role": "CEO, Tech Solutions",
-        "content": "Excelente trabajo con el sitio web de nuestra empresa. Profesional, puntual y superó las expectativas."
-      },
-      "client2": {
-        "name": "María González",
-        "role": "Product Manager, StartupXYZ",
-        "content": "Las herramientas de automatización nos ahorran horas de trabajo. Altamente recomendado."
-      },
-      "client3": {
-        "name": "Carlos Rodríguez",
-        "role": "CTO, Innovation Labs",
-        "content": "Gran conocimiento técnico y capacidad para resolver problemas complejos. Un gusto colaborar."
-      }
-    }
+    "availability": "DISPONIBLE PARA PROYECTOS SELECCIONADOS EN 2026"
   },
   "footer": {
     "rights": ""

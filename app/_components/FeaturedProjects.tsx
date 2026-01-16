@@ -11,7 +11,7 @@ interface ProjectsProps {
 }
 
 export default function FeaturedProjects({ projectsData }: ProjectsProps) {
-  const t = useTranslations("featuredProjects");
+  const t = useTranslations("cases");
   const { containerRef, headlineRef } = useProjectsAnimations();
 
   const getIndexValue = (p: Project) => {
@@ -26,14 +26,14 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
 
   return (
     <section
-      id="projects"
+      id="cases"
       ref={containerRef}
       className="relative min-h-screen py-20 px-4 overflow-hidden"
     >
       {/* ==== Header ==== */}
       <div ref={headlineRef} className="mb-16">
         <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
-          <h2 className="word text-4xl md:text-5xl lg:text-6xl font-semibold text-zinc-900 dark:text-zinc-50">
+          <h2 className="word text-4xl md:text-5xl lg:text-6xl font-semibold text-zinc-900 dark:text-zinc-200">
             {t("title")}
           </h2>
         </div>

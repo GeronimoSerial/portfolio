@@ -2,7 +2,7 @@ import { EmailTemplate } from "@/components/email/email-template";
 import { Resend } from "resend";
 import { ConfirmationTemplate } from "@/components/email/confirmation-template";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || "re_123456789");
 
 export async function POST(request: Request) {
   try {

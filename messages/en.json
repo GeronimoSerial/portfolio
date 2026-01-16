@@ -1,142 +1,141 @@
 {
   "nav": {
     "home": "Home",
-    "services": "Services",
-    "process": "Process",
-    "projects": "Projects",
-    "results": "Results",
+    "cases": "Projects",
+    "expertise": "Expertise",
+    "methodology": "Methodology",
+    "impact": "Impact",
     "contact": "Contact",
     "portfolio": "About me"
   },
   "hero": {
-    "title": "Enterprise technology solutions that",
-    "midtitle": "scale your business",
-    "subtitle": "IT Specialist · Infrastructure, Automation & Systems Management",
-    "description": "Methodical Approach. Real-World Solutions.",
-    "cta": "View Services"
+    "name": "Geronimo Serial",
+    "tagline": "I transform obsolete systems into digital infrastructure that scales with your organization.",
+    "credentials": {
+      "role1": "Systems Analyst",
+      "role2": "Full-Stack Developer",
+      "location": "Corrientes, Argentina"
+    },
+    "cta": {
+      "primary": "Explore projects",
+      "secondary": "My background"
+    }
   },
-  "services": {
-    "title": "Services",
-    "subtitle": "Smart solutions for digital growth",
+  "impactStatement": {
+    "quote": {
+      "part1": "In 2024, I led the digitization of an interministerial process that eliminated",
+      "highlight1": "100% of paper",
+      "part2": "in salary management for",
+      "highlight2": "+10,000 teachers",
+      "part3": "in the province of Corrientes."
+    },
+    "cta": "View full case"
+  },
+  "expertise": {
+    "title": "Areas of Expertise",
+    "subtitle": "Competencies developed through real digital transformation projects",
     "items": {
-      "consulting": {
-        "title": "Technology Strategy and Direction",
-        "description": "Strategic guidance to define, plan, and execute high-impact technological decisions.",
-        "features": [
-          "Comprehensive technological maturity diagnosis",
-          "Design of a customized digital roadmap",
-          "Investment and return analysis (Technological ROI)",
-          "Executive accompaniment in critical decisions"
-        ],
-        "price": "Starting at $2000 USD"
+      "strategy": {
+        "title": "Strategy and Technology Architecture",
+        "description": "Design of digital roadmaps, analysis of existing systems, and definition of scalable architectures that align technology with business goals.",
+        "example": "Applied in: SGS Interministerial System, CGE Portal"
       },
-      "support": {
-        "title": "Modernization and Automation",
-        "description": "Process optimization through automation, integrations, and business rule analysis.",
-        "features": [
-          "Mapping and modeling of key processes",
-          "Analysis and formalization of business rules",
-          "Implementation of automated flows and connectors",
-          "Real-time dashboards and reports"
-        ],
-        "price": "Custom quote"
-      },
-      "transformation": {
-        "title": "Maintenance and Evolutionary Support",
-        "description": "Continuous system care to maintain performance, stability, and constant improvement.",
-        "features": [
-          "Proactive monitoring and incident resolution",
-          "Updates and performance optimization",
-          "Backups and preventive maintenance",
-          "Periodic reports and improvement suggestions"
-        ],
-        "price": "Starting at $500 USD"
+      "automation": {
+        "title": "Automation and Modernization",
+        "description": "Transformation of manual processes into integrated digital flows. Business rule analysis and design of automatic validation engines.",
+        "example": "Applied in: Family Allowance Digitization (0% paper)"
       },
       "development": {
         "title": "Web Development and Platforms",
-        "description": "Design and development of sites and platforms focused on experience, speed, and scalability.",
-        "features": [
-          "Modern and responsive design focused on conversion",
-          "Custom integrations and functionalities",
-          "Technical SEO, analytics, and integrated security",
-          "Management panel and continuous evolution support"
-        ],
-        "price": "Starting at $1000 USD"
+        "description": "Building high-performance web applications with Next.js, React, and modern architectures. Focus on UX, technical SEO, and scalability.",
+        "example": "Applied in: consejo.mec.gob.ar (+28,500 users/month)"
+      },
+      "infrastructure": {
+        "title": "Infrastructure and Operations",
+        "description": "Environment management, proactive monitoring, performance optimization, and evolutionary maintenance of production systems.",
+        "example": "Applied in: CGE Infrastructure, support for +1,200 schools"
       }
     },
-    "cta": "Request a quote"
+    "cta": {
+      "text": "Do you have a project that requires this type of expertise?",
+      "button": "Let's talk"
+    }
   },
-  "process": {
-    "title": "Process",
-    "subtitle": "A clear and collaborative way to build technology that works.",
-    "tagline": "Discover · Design · Build · Launch",
+  "methodology": {
+    "title": "My Methodology",
+    "subtitle": "A structured approach to delivering solutions that work",
+    "tagline": "Discover · Design · Build · Deliver",
     "steps": {
       "1": {
         "title": "Discover",
-        "description": "We define goals, needs, and opportunities through analysis and strategy.",
+        "description": "I understand your context before proposing solutions. I analyze existing systems, identify frictions, and define clear goals.",
         "items": [
-          "Understand your business context",
-          "Audit systems and workflows",
-          "Set a clear direction for the project"
+          "Immersion in the real problem",
+          "Systems and processes audit",
+          "Scope and priorities definition"
         ]
       },
       "2": {
         "title": "Design",
-        "description": "We shape the structure, experience, and visual identity of your solution.",
+        "description": "I design the technical architecture and user experience before writing code. I iterate with early feedback.",
         "items": [
-          "Information architecture and UX design",
-          "Wireframes and visual system",
-          "Functional plan and feedback loop"
+          "Information architecture and flows",
+          "Prototyping and validation",
+          "Detailed technical specification"
         ]
       },
       "3": {
         "title": "Build",
-        "description": "We develop, integrate, and test everything with precision and transparency.",
+        "description": "Iterative development with frequent deliveries. Clean code, integrated testing, and continuous documentation.",
         "items": [
-          "Iterative development and reviews",
-          "Secure, scalable implementation",
-          "Performance and quality testing"
+          "Short sprints with demos",
+          "Continuous integration and testing",
+          "Feedback-based refinement"
         ]
       },
       "4": {
-        "title": "Launch",
-        "description": "We deploy your solution and ensure a smooth transition with real support.",
+        "title": "Deliver",
+        "description": "Controlled deployment, knowledge transfer, and post-launch support. I don't disappear after delivery.",
         "items": [
-          "Controlled rollout and documentation",
-          "Monitoring and adjustments",
-          "Post-launch support and evolution plan"
+          "Deployment and monitoring",
+          "Documentation and training",
+          "Continuous evolutionary support"
         ]
       }
     }
   },
-  "featuredProjects": {
-    "title": "Featured Projects",
-    "subtitle": "Digital transformation business solutions, from critical analysis to large-scale implementation.",
-    "cta": "View all projects"
+  "cases": {
+    "title": "Transformation Cases",
+    "subtitle": "Projects where I led the design and implementation of high-impact solutions",
+    "cta": "Explore all projects"
   },
   "projectsPage": {
     "title": "All Projects",
     "subtitle": "Explore my complete portfolio of projects that demonstrate technical skills and creativity."
   },
-  "results": {
-    "title": "Results that speak",
-    "subtitle": "Every project is measured by the impact it creates.",
+  "impact": {
+    "title": "Measurable Impact",
+    "subtitle": "Verifiable results from production projects",
     "stats": {
       "visits": {
-        "label": "Website Visits",
-        "period": "in 20 Days"
+        "label": "Monthly visits",
+        "context": "CGE Portal",
+        "link": "#cases"
       },
       "performance": {
-        "label": "Faster Load Times",
-        "period": "After Optimization"
+        "label": "Performance improvement",
+        "context": "Load optimization",
+        "link": "#cases"
       },
       "projects": {
-        "label": "Successful Projects",
-        "period": "Delivered"
+        "label": "Finished projects",
+        "context": "Public and private sector",
+        "link": "#cases"
       },
       "uptime": {
-        "label": "Average",
-        "period": "Uptime"
+        "label": "Uptime",
+        "context": "CGE Infrastructure",
+        "link": "#cases"
       }
     },
     "cta": {
@@ -146,10 +145,10 @@
   },
   "contact": {
     "heading": {
-      "line1": "Let's",
-      "line2": "Collaborate"
+      "line1": "Do you have a project",
+      "line2": "in mind?"
     },
-    "description": "Share your vision and let's make it happen.",
+    "description": "Tell me about the challenge you face. I reply to every message personally.",
     "info": {
       "directContact": "Direct Contact",
       "basedIn": "Based In"
@@ -157,48 +156,27 @@
     "form": {
       "name": {
         "label": "Your Name",
-        "placeholder": "Enter your full name"
+        "placeholder": "Full name"
       },
       "email": {
-        "label": "Email Address",
+        "label": "Email",
         "placeholder": "your@email.com"
       },
       "company": {
-        "label": "Company",
+        "label": "Organization",
         "optional": "(Optional)",
-        "placeholder": "Your company name"
+        "placeholder": "Company or institution"
       },
       "message": {
-        "label": "Project Details",
-        "placeholder": "Tell me about your project, goals, and timeline..."
+        "label": "Tell me about your project",
+        "placeholder": "What challenge are you facing? What results are you looking for?"
       },
       "submit": "Send Message",
       "privacy": "Your information is confidential and will only be used to respond to your inquiry. We respect your privacy and never share data with third parties.",
-      "success": "Thank you for reaching out! I'll get back to you as soon as possible.",
-      "error": "Oops! Something went wrong. Please try again later."
+      "success": "Message received. I will reply within 48 hours.",
+      "error": "Error sending. Please try again or write me directly at contact@geroserial.com"
     },
-    "availability": "AVAILABLE FOR SELECT PROJECTS"
-  },
-  "testimonials": {
-    "title": "What Clients Say",
-    "subtitle": "Testimonials from satisfied clients",
-    "items": {
-      "client1": {
-        "name": "Juan Pérez",
-        "role": "CEO, Tech Solutions",
-        "content": "Excellent work on our company website. Professional, timely, and exceeded expectations."
-      },
-      "client2": {
-        "name": "María González",
-        "role": "Product Manager, StartupXYZ",
-        "content": "The automation tools developed have saved us countless hours. Highly recommended."
-      },
-      "client3": {
-        "name": "Carlos Rodríguez",
-        "role": "CTO, Innovation Labs",
-        "content": "Outstanding technical expertise and problem-solving skills. A pleasure to work with."
-      }
-    }
+    "availability": "AVAILABLE FOR SELECT PROJECTS IN 2026"
   },
   "footer": {
     "rights": ""

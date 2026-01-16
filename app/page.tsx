@@ -1,6 +1,7 @@
 import { Background } from "@/components/layout/Background";
 import Hero from "@/app/_components/Hero";
-import Services from "@/app/_components/Services";
+import ImpactStatement from "@/app/_components/ImpactStatement";
+import Expertise from "@/app/_components/Expertise";
 import Process from "@/app/_components/Process";
 import Projects from "@/app/_components/FeaturedProjects";
 import Results from "@/app/_components/Results";
@@ -28,9 +29,10 @@ export default async function Home() {
       <Background>
         <main className="relative">
           <Hero />
-          <Services />
-          <Process />
+          <ImpactStatement />
           <FeaturedProjects projectsData={projects} />
+          <Expertise />
+          <Process />
           <Results />
         </main>
       </Background>

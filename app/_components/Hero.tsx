@@ -1,144 +1,68 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/moving-border";
-import dynamic from "next/dynamic";
-import { useHardwareTier } from "@/hooks/useHardwareTier";
-import { useRef } from "react";
-import Beams from "@/components/Beams";
-
-// const Robot = dynamic(() => import("@/components/shared/SplineScene"), {
-//   ssr: false,
-//   loading: () => (
-//     <div className="absolute inset-0 -z-10 pointer-events-none"></div>
-//   ),
-// });
-
-// const VideoFallback = () => {
-//   const videoRef = useRef<HTMLVideoElement>(null);
-
-//   const handleIntroEnd = () => {
-//     if (videoRef.current) {
-//       videoRef.current.src = "/assets/spline/loop.webm";
-//       videoRef.current.loop = true;
-//       videoRef.current.play();
-//     }
-//   };
-
-//   return (
-//     <div className="absolute inset-0 -z-10 pointer-events-none">
-//       <video
-//         ref={videoRef}
-//         autoPlay
-//         muted
-//         playsInline
-//         onEnded={handleIntroEnd}
-//         className="w-full h-full object-cover opacity-60"
-//       >
-//         <source src="/assets/spline/intro.webm" type="video/webm" />
-//       </video>
-//       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
-//     </div>
-//   );
-// };
+import { ScrambleText } from "@/components/scramble-text";
+import { BitmapChevron } from "@/components/bitmap-chevron";
 
 export default function HeroStatic() {
   const t = useTranslations("hero");
-  const { tier, shouldLoad3d } = useHardwareTier();
 
   return (
-    <>
-      <section
-        id="hero"
-        className="relative -mt-20 flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
-      >
-        <div className="absolute opacity-60 inset-0 -z-10 pointer-events-none">
-          <Beams />
+    <section
+      id="hero"
+      className="relative flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
+    >
+      <div className="flex flex-col items-center text-center z-10 max-w-5xl mx-auto">
+        <div className="mb-8 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-zinc-400">
+            {t("credentials.role1")} & {t("credentials.role2")}
         </div>
-        {/* {tier === null ? (
-          <div className="relative inset-0 -z-10 pointer-events-none">
-            <Beams />
-          </div>
-        ) : shouldLoad3d ? (
-          <Robot />
-        ) : (
-          <div className="relative inset-0 -z-10 pointer-events-none">
-            <Beams />
-          </div>
-        )} */}
 
-        <div
-          className="pointer-events-none absolute bottom-0 left-0 right-0 h-24
-        bg-gradient-to-t from-background/60 to-transparent"
-        />
+        <h1 className="text-5xl md:text-8xl font-display font-bold text-zinc-200 mb-8 leading-tight tracking-tight">
+          <ScrambleText text={t("name") || "Geronimo Serial"} duration={1.2} />
+        </h1>
 
-        <div
-          className="hero-content z-10 flex flex-col items-center text-center
-        rounded-2xl p-8
-        bg-gradient-to-b from-white/40 via-white/20 to-white/10
-        dark:bg-gradient-to-b dark:from-black/40 dark:via-black/20 dark:to-black/10
-        backdrop-saturate-150 pointer-events-none"
-        >
-          <div className="mb-6 w-full sm:max-w-full md:max-w-xl  lg:max-w-3xl">
-            <h1 className="font-extrabold font-display pb-3 bg-clip-text text-transparent bg-gradient-to-t from-neutral-800 lg:text-pretty to-neutral-900 dark:from-stone-200 dark:to-neutral-200 text-xl sm:text-3xl lg:text-5xl ">
-              {t("title")}{" "}
-              <span
-                className="relative z-10 bg-none text-slate-900 text-2xl sm:text-4xl lg:text-6xl dark:text-slate-50 font-normal italic "
-                style={{ fontFamily: "var(--font-crimson-text)" }}
-              >
-                {t("midtitle")}
-              </span>
-            </h1>
-          </div>
+        <p className="font-mono text-xs md:text-sm text-zinc-400 max-w-lg mx-auto mb-12 leading-relaxed tracking-wide">
+          {t("tagline")}
+        </p>
 
-          <h2
-            className="text-sm md:text-lg
-          text-zinc-700 dark:text-zinc-300
-          max-w-3xl font-sans"
-          >
-            {t("subtitle")}
-          </h2>
-
-          <p
-            className="mt-4 text-sm md:text-base
-          text-zinc-500 dark:text-zinc-500
-          max-w-xl leading-relaxed"
-          >
-            {t("description")}
-          </p>
-
-          {/* Botones simples */}
-          <div className="flex gap-4 mt-10">
-            <Button
-              borderRadius="0.75rem"
-              borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
-              as="button"
-              className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium pointer-events-auto cursor-pointer"
-              onClick={() => {
+        <div className="flex flex-col sm:flex-row gap-6 items-center">
+            <button
+                onClick={() => {
                 document
-                  .getElementById("services")
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
+                    .getElementById("cases")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="group flex items-center gap-3 bg-zinc-200 text-zinc-900 px-8 py-4 font-mono text-xs uppercase tracking-widest hover:bg-white transition-all duration-300 rounded-full"
             >
-              {t("cta")}
-            </Button>
-          </div>
+                {t("cta.primary")}
+                <BitmapChevron className="transition-transform duration-300 group-hover:rotate-45" />
+            </button>
+
+            <button
+                onClick={() => {
+                document
+                    .getElementById("expertise") // Changed to expertise or methodology depending on nav
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="px-8 py-4 border border-zinc-700 text-zinc-400 font-mono text-xs uppercase tracking-widest hover:text-zinc-200 hover:border-zinc-500 transition-colors duration-300 rounded-full"
+            >
+                {t("cta.secondary")}
+            </button>
         </div>
-        <div
-          className="absolute top-0 w-screen h-px
-        bg-linear-to-r
-        from-zinc-700/0 via-zinc-700/50 to-zinc-700/0
-        dark:from-zinc-300/0 dark:via-zinc-300/50 dark:to-zinc-300/0
-        origin-center"
-        />
-        <div
-          className="absolute bottom-0 w-screen h-px
-        bg-linear-to-r
-        from-zinc-700/0 via-zinc-700/50 to-zinc-700/0
-        dark:from-zinc-300/0 dark:via-zinc-300/50 dark:to-zinc-300/0
-        origin-center"
-        />
-      </section>
-    </>
+      </div>
+      
+      {/* Footer labels */}
+      <div className="absolute bottom-12 left-0 w-full px-6 md:px-12 flex justify-between items-end pointer-events-none">
+          <div className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest hidden md:block">
+            <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-accent" />
+                {t("credentials.location")}
+            </div>
+          </div>
+          <div className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest text-right">
+             v.2.4 / System Online
+          </div>
+      </div>
+    </section>
   );
 }

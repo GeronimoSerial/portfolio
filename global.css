@@ -1,304 +1,122 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+/* Interface Design System - Dark Mode Only */
+:root {
+  --background: 0.08 0 0;      /* oklch(0.08 0 0) -> we use tailwind colors usually, but here we define css vars */
+  --foreground: 0.95 0 0;      /* oklch(0.95 0 0) */
+  --accent: 0.7 0.2 45;        /* oklch(0.7 0.2 45) */
+  
+  /* Helper vars for HSL conversion if needed by shadcn/radix components */
+  --radius: 0rem;
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
+  :root {
+    --background: 0 0% 8%; /* hsl approximation of oklch(0.08 0 0) */
+    --foreground: 0 0% 95%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+    
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 85%;
+    
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 55%;
+    
+    --accent: 45 100% 50%; /* Orange-ish approximation */
+    --accent-foreground: 0 0% 8%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 20%;
+    --ring: 45 100% 50%;
+    
+    --radius: 0rem;
   }
+}
 
+@layer base {
+  * {
+    @apply border-border;
+  }
   html {
+    overflow-x: hidden;
+    max-width: 100vw;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(0, 0%, 24%) hsl(0, 0%, 8%);
     scroll-behavior: smooth;
   }
-
   body {
+    @apply bg-background text-foreground;
     overflow-x: hidden;
+    max-width: 100vw;
   }
-
-  .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-  }
-
-  :root {
-    --radius: 0.5rem;
-  }
-
-  h3 {
-    font-family: var(--font-geist), serif;
-  }
-
-  h2 {
-    font-family: var(--font-crimson-text), serif;
-  }
-
-  /* Ocultar scrollbar pero mantener funcionalidad */
-  .scrollbar-hide {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-  }
-
-  /* GSAP Performance Optimizations */
-  .gsap-mask-1,
-  .gsap-mask-2,
-  .gsap-float-1,
-  .gsap-float-2,
-  .gsap-float-3,
-  .gsap-fade-left,
-  .gsap-fade-right,
-  .gsap-title,
-  .gsap-line,
-  .gsap-description,
-  .gsap-info,
-  .gsap-frame,
-  .gsap-field,
-  .gsap-submit,
-  .gsap-privacy,
-  .gsap-accent,
-  .gsap-social {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Prevent layout thrashing for animated sections */
-  #contact {
-    contain: layout style paint;
-    transform: translateZ(0);
-  }
-
-  /* Services section optimization */
-  #services {
-    contain: layout style paint;
-    transform: translateZ(0);
-  }
-
-  /* Process section optimization */
-  #process {
-    contain: layout style paint;
-    transform: translateZ(0);
-  }
-
-  .process-card {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .process-number,
-  .process-icon {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  .process-connector {
-    will-change: auto;
-    backface-visibility: hidden;
-  }
-
-  /* ============================================ */
-  /* PROJECTS SECTION - MOBILE OPTIMIZED */
-  /* ============================================ */
-  #projects {
-    contain: layout style paint;
-    transform: translateZ(0);
-  }
-
-  /* Project cards - GPU acceleration */
-  .project-card {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Card internals optimization */
-  .card-border,
-  .card-content,
-  .card-title,
-  .card-description,
-  .card-metadata,
-  .card-icon {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  /* Character splitting optimization (desktop only) */
-  .char {
-    display: inline-block;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  /* Decorative SVG optimization */
-  .decorative-svg {
-    will-change: opacity;
-    transform: translateZ(0);
-  }
-
-  /* Projects section text elements */
-  .word,
-  .projects-subtitle {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  /* Mobile-specific optimizations */
-  @media (max-width: 768px) {
-    .project-card {
-      transform: translate3d(0, 0, 0);
-      -webkit-transform: translate3d(0, 0, 0);
-    }
-
-    /* Disable complex animations on low-end devices */
-    @media (prefers-reduced-motion: reduce) {
-      .project-card,
-      .card-border,
-      .card-content,
-      .char,
-      .decorative-svg {
-        will-change: auto;
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-  }
-
-  .service-card {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .service-card .card-border-svg {
-    will-change: auto;
-  }
-
-  .service-card .icon-container {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  .service-card .feature-item {
-    will-change: auto;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  .process-card {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-  .process-card svg,
-  .process-card rect {
-    vector-effect: non-scaling-stroke;
-    shape-rendering: geometricPrecision;
-  }
-
-  /* GPU optimization básica para elementos animados con GSAP */
-  .gsap-element {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    /* transform: translateZ(0);   */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Optimización para project cards */
-  .project-card {
-    perspective: 1000px;
-    transform-style: preserve-3d;
-  }
-
-  .project-card .card-content {
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  /* SVG stroke animation optimization */
-  .card-border path,
-  .card-border rect,
-  .card-border circle {
-    vector-effect: non-scaling-stroke;
-  }
-
-  .decorative-svg path,
-  .decorative-svg circle,
-  .decorative-svg line {
-    vector-effect: non-scaling-stroke;
-  }
-
-  /* Smooth font rendering para caracteres animados */
-  .char {
-    display: inline-block;
-    transform-origin: 50% 100%;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Word animation container */
-  .word {
-    display: inline-block;
-    transform-origin: 50% 100%;
-    perspective: 1000px;
-  }
-
-  /* Mejora visual para iconos animados */
-  .card-icon {
-    transform-origin: center;
-    backface-visibility: hidden;
-  }
-
-  @keyframes fade-in-down {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-fade-in-down {
-    animation: fade-in-down 0.3s ease-out forwards;
+  
+  /* Fonts - mapped to tailwind config */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
   }
 }
 
-/* Critical for smooth animations */
-.animated-element {
+/* Custom noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Grid background pattern */
+.grid-bg {
+  background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Custom selection color */
+::selection {
+  @apply bg-accent text-accent-foreground;
+}
+
+/* Utilities */
+.text-edge-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* GSAP Performance Optimizations */
+.gsap-element, 
+.project-card, 
+.service-card,
+.process-card {
   will-change: transform, opacity;
   backface-visibility: hidden;
-  transform: translateZ(0); /* Force GPU layer */
-  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
 }
 
-/* Prevent layout thrashing */
-.animation-container {
+#contact, #services, #process, #projects {
   contain: layout style paint;
-  transform: translateZ(0);
 }
