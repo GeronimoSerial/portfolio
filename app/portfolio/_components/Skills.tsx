@@ -1,21 +1,18 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-
-import { useSkillsAnimations } from "@/hooks/useSkillsAnimations";
 import { skillsData } from "@/lib/skills-data";
 import Image from "next/image";
 import { useState } from "react";
 
 export default function Skills() {
 	const t = useTranslations("skills");
-	const { containerRef } = useSkillsAnimations();
 	const [activeTab, setActiveTab] = useState(skillsData[0].key);
 
 	const activeCategory = skillsData.find((cat) => cat.key === activeTab);
 
 	return (
-		<section ref={containerRef} id="skills" className="relative py-20 px-4">
+		<section id="skills" className="relative py-20 px-4">
 			<div className="container mx-auto max-w-6xl">
 				{/* Header */}
 				<div className="skills-header text-center mb-12">

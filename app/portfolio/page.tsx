@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Background } from "@/components/layout/Background";
 import PortfolioHero from "./_components/PortfolioHero";
 import About from "./_components/About";
 import Skills from "./_components/Skills";
@@ -28,24 +27,22 @@ export default async function PortfolioPage() {
   return (
     <>
       <main className="relative">
-        <Background>
-          <About />
-          <Skills />
-          <ExperienceTimeline />
-          <EducationSection />
-          <Projects projectsData={projects} />
-          <ResumeDownload />
-          <ContactOpportunities />
-        </Background>
+        <About />
+        <Skills />
+        <ExperienceTimeline />
+        <EducationSection />
+        <Projects projectsData={projects} />
+        <ResumeDownload />
+        <ContactOpportunities />
       </main>
 
       <footer
         className="border-t
         border-zinc-200 dark:border-zinc-800
-        py-8 gsap-element"
+        py-8"
       >
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-zinc-500 dark:text-zinc-500 gsap-element">
+          <p className="text-sm text-zinc-500 dark:text-zinc-500">
             © {new Date().getFullYear()} Geronimo Serial.
           </p>
         </div>

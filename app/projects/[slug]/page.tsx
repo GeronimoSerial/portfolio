@@ -1,5 +1,4 @@
 import { getProjects } from "@/lib/get-projects";
-import { Background } from "@/components/layout/Background";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Metadata } from "next";
@@ -101,7 +100,6 @@ export default async function Page({
   });
 
   return (
-    <Background>
       <div className="relative min-h-screen py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           {/* Back button */}
@@ -149,7 +147,6 @@ export default async function Page({
           </article>
         </div>
       </div>
-    </Background>
   );
 }
 

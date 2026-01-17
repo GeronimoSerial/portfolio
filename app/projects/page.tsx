@@ -1,5 +1,4 @@
 import { getProjects } from "@/lib/get-projects";
-import { Background } from "@/components/layout/Background";
 import ProjectCard from "./_components/ProjectCard";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
@@ -24,7 +23,6 @@ export default async function ProjectsPage() {
   const publishedProjects = allProjects.filter((p) => p.published);
 
   return (
-    <Background>
       <div className="relative min-h-screen py-20 px-4">
         {/* Decorative SVG */}
         <svg
@@ -97,6 +95,5 @@ export default async function ProjectsPage() {
           )}
         </div>
       </div>
-    </Background>
   );
 }
