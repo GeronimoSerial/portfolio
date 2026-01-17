@@ -3,10 +3,9 @@ import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
-import AnimatedNav from "@/components/layout/AnimatedNav";
+    import Nav from "@/components/layout/Nav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
-import { SideNav } from "@/components/SideNav";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
@@ -126,35 +125,25 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground overflow-x-hidden antialiased font-sans">
-        <div className="noise-overlay" aria-hidden="true" />
-        <div className="grid-bg fixed inset-0 opacity-20 pointer-events-none z-0" />
+        <NextIntlClientProvider messages={messages}>
+          <Nav />
+          {children}
+          <Contact />
 
-        <div id="smooth-wrapper" className="relative z-10">
-          <div id="smooth-content">
-            <NextIntlClientProvider messages={messages}>
-              <AnimatedNav />
-              <SideNav />
-              <div className="md:pl-16 transition-[padding] duration-300">
-                {children}
-                <Contact />
-
-                <footer className="border-t border-border py-8 bg-background relative z-10">
-                  <div className="container mx-auto px-4 text-center">
-                    <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
-                      © {new Date().getFullYear()}{" "}
-                      <Link
-                        href="https://geroserial.com"
-                        className="text-foreground hover:text-accent transition-colors"
-                      >
-                        geroserial.com
-                      </Link>
-                    </p>
-                  </div>
-                </footer>
-              </div>
-            </NextIntlClientProvider>
-          </div>
-        </div>
+          <footer className="border-t border-border py-8 bg-background relative z-10">
+            <div className="container mx-auto px-4 text-center">
+              <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
+                © {new Date().getFullYear()}{" "}
+                <Link
+                  href="https://geroserial.com"
+                  className="text-foreground hover:text-accent transition-colors"
+                >
+                  geroserial.com
+                </Link>
+              </p>
+            </div>
+          </footer>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
