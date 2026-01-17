@@ -1,300 +1,114 @@
 "use client";
 
-import { useRef } from "react";
 import { useTranslations } from "next-intl";
-import { useResultsAnimations } from "@/hooks/useResultsAnimations";
 import { TrendingUp, Zap, Target, Shield } from "lucide-react";
 
 export default function Results() {
   const t = useTranslations("impact");
-  const containerRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useResultsAnimations(containerRef, headerRef);
 
   return (
-    <section
-      id="impact"
-      ref={containerRef}
-      className="relative min-h-screen py-20 px-4 overflow-hidden"
-    >
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-900/10 to-transparent pointer-events-none" />
-
-      {/* Decorative Grid */}
-      <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, currentColor 1px, transparent 1px),
-            linear-gradient(to bottom, currentColor 1px, transparent 1px)
-          `,
-          backgroundSize: "4rem 4rem",
-          color: "rgb(255 255 255 / 0.1)"
-        }}
-      />
-
+    <section id="impact" className="relative min-h-screen py-20 px-4">
       <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-16">
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-            <h2 className="result-word text-5xl md:text-6xl lg:text-7xl font-semibold text-zinc-200">
-              {t("title")}
-            </h2>
-          </div>
-
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-zinc-200 mb-6">
+            {t("title")}
+          </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent mx-auto mb-6" />
-
-          <p className="result-subtitle text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">
             {t("subtitle")}
           </p>
         </div>
 
-        {/* Results Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Card 1: Morph Animation */}
-          <article className="result-card-1 relative group">
-            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors duration-300">
-              {/* Background SVG with Morph */}
-              <div className="absolute top-4 right-4 w-20 h-20 opacity-5">
-                <svg
-                  viewBox="0 0 100 100"
-                  className="w-full h-full"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    className="morph-path fill-zinc-500"
-                    d="M50,10 C72.09,10 90,27.91 90,50 C90,72.09 72.09,90 50,90 C27.91,90 10,72.09 10,50 C10,27.91 27.91,10 50,10 Z"
-                  />
-                </svg>
+          <article className="relative group">
+            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors duration-300">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
+                <TrendingUp className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
               </div>
 
-              {/* Content */}
-              <div className="result-content relative z-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
-                  <TrendingUp className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
-                </div>
-
-                <div className="mb-2">
-                  <span className="text-3xl font-display font-bold text-zinc-200">
-                    +
-                  </span>
-                  <span className="result-number text-5xl font-display font-bold text-zinc-200">
-                    150
-                  </span>
-                  <span className="text-3xl font-display font-bold text-zinc-200">
-                    k
-                  </span>
-                </div>
-
-                <p className="text-sm font-medium text-zinc-400">
-                  {t("stats.visits.label")}
-                  <br />
-                  <span className="text-xs opacity-70">
-                    {t("stats.visits.context")}
-                  </span>
-                </p>
+              <div className="mb-2">
+                <span className="text-5xl font-display font-bold text-zinc-200">
+                  +150k
+                </span>
               </div>
 
-              {/* Decorative Corner */}
-              <div className="absolute bottom-0 left-0 w-16 h-16">
-                <svg
-                  viewBox="0 0 100 100"
-                  className="w-full h-full opacity-5"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0,100 L0,0 L100,100 Z"
-                    className="fill-zinc-500"
-                  />
-                </svg>
-              </div>
+              <p className="text-sm font-medium text-zinc-400">
+                {t("stats.visits.label")}
+                <br />
+                <span className="text-xs opacity-70">
+                  {t("stats.visits.context")}
+                </span>
+              </p>
             </div>
           </article>
 
-          {/* Card 2: Path Animation */}
-          <article className="result-card-2 relative group">
-            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors duration-300">
-              {/* SVG Path Background */}
-              <svg
-                className="absolute inset-0 w-full h-full opacity-10"
-                viewBox="0 0 200 300"
-                preserveAspectRatio="none"
-              >
-                <path
-                  className="result-path stroke-zinc-700 fill-none"
-                  strokeWidth="3"
-                  d="M 20,150 Q 60,50 100,150 T 180,150"
-                />
-              </svg>
-
-              {/* Animated Icon */}
-              <div className="result-icon absolute top-8 left-8 w-8 h-8 opacity-0">
-                <Zap className="w-full h-full text-zinc-100" />
+          <article className="relative group">
+            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors duration-300">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
+                <Zap className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
               </div>
 
-              {/* Content */}
-              <div className="result-content relative z-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
-                  <Zap className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
-                </div>
-
-                <div className="mb-2">
-                  <span className="result-number text-5xl font-display font-bold text-zinc-200">
-                    5.0
-                  </span>
-                  <span className="text-3xl font-display font-bold text-zinc-200">
-                    x
-                  </span>
-                </div>
-
-                <p className="text-sm font-medium text-zinc-400">
-                  {t("stats.performance.label")}
-                  <br />
-                  <span className="text-xs opacity-70">
-                    {t("stats.performance.context")}
-                  </span>
-                </p>
+              <div className="mb-2">
+                <span className="text-5xl font-display font-bold text-zinc-200">
+                  5.0x
+                </span>
               </div>
 
-              {/* Decorative Corner */}
-              <div className="absolute top-0 right-0 w-16 h-16">
-                <svg
-                  viewBox="0 0 100 100"
-                  className="w-full h-full opacity-5"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M100,0 L100,100 L0,0 Z"
-                    className="fill-zinc-500"
-                  />
-                </svg>
-              </div>
+              <p className="text-sm font-medium text-zinc-400">
+                {t("stats.performance.label")}
+                <br />
+                <span className="text-xs opacity-70">
+                  {t("stats.performance.context")}
+                </span>
+              </p>
             </div>
           </article>
 
-          {/* Card 3: Split Digits */}
-          <article className="result-card-3 relative group">
-            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors duration-300">
-              {/* Content */}
-              <div className="result-content relative z-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
-                  <Target className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
-                </div>
-
-                <div className="mb-2 flex items-center gap-1">
-                  <span className="result-digit text-5xl font-display font-bold text-zinc-200">
-                    2
-                  </span>
-                  <span className="result-digit text-5xl font-display font-bold text-zinc-200">
-                    0
-                  </span>
-                  <span className="text-3xl font-display font-bold text-zinc-200">
-                    +
-                  </span>
-                </div>
-
-                <p className="result-label text-sm font-medium text-zinc-400">
-                  {t("stats.projects.label")}
-                  <br />
-                  <span className="text-xs opacity-70">
-                    {t("stats.projects.context")}
-                  </span>
-                </p>
+          <article className="relative group">
+            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors duration-300">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
+                <Target className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
               </div>
 
-              {/* Background Pattern */}
-              <div className="absolute bottom-4 right-4 w-24 h-24 opacity-10">
-                <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="30"
-                    className="stroke-zinc-600 fill-none"
-                    strokeWidth="2"
-                  />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="20"
-                    className="stroke-zinc-600 fill-none"
-                    strokeWidth="2"
-                  />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="10"
-                    className="stroke-zinc-600 fill-none"
-                    strokeWidth="2"
-                  />
-                </svg>
+              <div className="mb-2">
+                <span className="text-5xl font-display font-bold text-zinc-200">
+                  20+
+                </span>
               </div>
+
+              <p className="text-sm font-medium text-zinc-400">
+                {t("stats.projects.label")}
+                <br />
+                <span className="text-xs opacity-70">
+                  {t("stats.projects.context")}
+                </span>
+              </p>
             </div>
           </article>
 
-          {/* Card 4: Circle Progress */}
-          <article className="result-card-4 relative group">
-            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl overflow-hidden hover:border-zinc-700 transition-colors duration-300">
-              {/* Content */}
-              <div className="result-content relative z-10">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
-                  <Shield className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
-                </div>
-
-                {/* Circle Progress */}
-                <div className="relative w-32 h-32 mx-auto mb-4">
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="w-full h-full -rotate-90"
-                  >
-                    {/* Background circle */}
-                    <circle
-                      className="circle-bg stroke-zinc-800"
-                      cx="50"
-                      cy="50"
-                      r="45"
-                      fill="none"
-                      strokeWidth="8"
-                      strokeDasharray="282.7"
-                    />
-                    {/* Progress circle */}
-                    <circle
-                      className="circle-progress stroke-zinc-200"
-                      cx="50"
-                      cy="50"
-                      r="45"
-                      fill="none"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-
-                  {/* Percentage in center */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center">
-                      <span className="result-percentage text-3xl font-display font-bold text-zinc-200">
-                        99.9
-                      </span>
-                      <span className="text-xl font-display font-bold text-zinc-200">
-                        %
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="result-label text-sm font-medium text-zinc-400 text-center">
-                  {t("stats.uptime.label")}
-                  <br />
-                  <span className="text-xs opacity-70">
-                    {t("stats.uptime.context")}
-                  </span>
-                </p>
+          <article className="relative group">
+            <div className="relative h-full p-8 bg-white/5 backdrop-blur-sm border border-zinc-800 rounded-2xl hover:border-zinc-700 transition-colors duration-300">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-900/50 border border-zinc-800 mb-4 group-hover:border-zinc-700 transition-colors">
+                <Shield className="w-6 h-6 text-zinc-400 group-hover:text-zinc-200 transition-colors" />
               </div>
+
+              <div className="mb-2">
+                <span className="text-5xl font-display font-bold text-zinc-200">
+                  99.9%
+                </span>
+              </div>
+
+              <p className="text-sm font-medium text-zinc-400">
+                {t("stats.uptime.label")}
+                <br />
+                <span className="text-xs opacity-70">
+                  {t("stats.uptime.context")}
+                </span>
+              </p>
             </div>
           </article>
         </div>
 
-        {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <p className="text-base text-zinc-400 max-w-2xl mx-auto">
             {t("cta.text")}{" "}
