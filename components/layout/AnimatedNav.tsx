@@ -36,8 +36,7 @@ export default function AnimatedNav() {
   return (
     <nav
       ref={navRef}
-      className="sticky top-0 left-0 right-0 z-40 will-change-transform border-b border-border/30 bg-background/80 backdrop-blur-sm md:pl-20"
-      style={{ height: "5rem" }}
+      className="sticky top-0 left-0 right-0 z-40 will-change-transform border-b border-border/30 bg-background/80 backdrop-blur-sm h-16 md:hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 h-full">
         <div className="relative flex items-center justify-between h-full">
@@ -57,7 +56,7 @@ export default function AnimatedNav() {
 
           {/* Desktop Nav Items - HIDDEN as we use SideNav */}
           <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
-             {/* Empty by design */}
+            {/* Empty by design */}
           </div>
 
           {/* Mobile Actions */}

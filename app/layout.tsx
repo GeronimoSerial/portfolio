@@ -128,12 +128,13 @@ export default async function RootLayout({
       <body className="bg-background text-foreground overflow-x-hidden antialiased font-sans">
         <div className="noise-overlay" aria-hidden="true" />
         <div className="grid-bg fixed inset-0 opacity-20 pointer-events-none z-0" />
-        
+
         <div id="smooth-wrapper" className="relative z-10">
           <div id="smooth-content">
             <NextIntlClientProvider messages={messages}>
-                <AnimatedNav />
-                <SideNav />
+              <AnimatedNav />
+              <SideNav />
+              <div className="md:pl-16 transition-[padding] duration-300">
                 {children}
                 <Contact />
 
@@ -150,6 +151,7 @@ export default async function RootLayout({
                     </p>
                   </div>
                 </footer>
+              </div>
             </NextIntlClientProvider>
           </div>
         </div>

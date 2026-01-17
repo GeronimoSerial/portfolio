@@ -3,45 +3,39 @@
 @tailwind utilities;
 
 /* Interface Design System - Dark Mode Only */
-:root {
-  --background: 0.08 0 0;      /* oklch(0.08 0 0) -> we use tailwind colors usually, but here we define css vars */
-  --foreground: 0.95 0 0;      /* oklch(0.95 0 0) */
-  --accent: 0.7 0.2 45;        /* oklch(0.7 0.2 45) */
-  
-  /* Helper vars for HSL conversion if needed by shadcn/radix components */
-  --radius: 0rem;
-}
+/* Interface Design System - Dark Mode Only */
+/* :root block removed to unify with @layer base definition */
 
 @layer base {
   :root {
     --background: 0 0% 8%; /* hsl approximation of oklch(0.08 0 0) */
     --foreground: 0 0% 95%;
-    
+
     --card: 0 0% 12%;
     --card-foreground: 0 0% 95%;
-    
+
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
-    
+
     --primary: 0 0% 95%;
     --primary-foreground: 0 0% 8%;
-    
+
     --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 85%;
-    
+
     --muted: 0 0% 25%;
     --muted-foreground: 0 0% 55%;
-    
+
     --accent: 45 100% 50%; /* Orange-ish approximation */
     --accent-foreground: 0 0% 8%;
-    
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    
+
     --border: 0 0% 25%;
     --input: 0 0% 20%;
     --ring: 45 100% 50%;
-    
+
     --radius: 0rem;
   }
 }
@@ -62,9 +56,14 @@
     overflow-x: hidden;
     max-width: 100vw;
   }
-  
+
   /* Fonts - mapped to tailwind config */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 }
@@ -84,9 +83,13 @@
 
 /* Grid background pattern */
 .grid-bg {
-  background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 4rem 4rem;
 }
 
 /* Custom selection color */
@@ -108,8 +111,8 @@
 }
 
 /* GSAP Performance Optimizations */
-.gsap-element, 
-.project-card, 
+.gsap-element,
+.project-card,
 .service-card,
 .process-card {
   will-change: transform, opacity;
@@ -117,6 +120,9 @@
   transform: translateZ(0);
 }
 
-#contact, #services, #process, #projects {
+#contact,
+#services,
+#process,
+#projects {
   contain: layout style paint;
 }

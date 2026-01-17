@@ -12,6 +12,13 @@ module.exports = {
   ],
 
   theme: {
+    container: {
+      center: true,
+      padding: "2rem", // Aligns with grid (32px or 2rem, fits into 4rem grid)
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
