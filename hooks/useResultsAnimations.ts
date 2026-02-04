@@ -1,5 +1,4 @@
 "use client";
-gsap.defaults({ force3D: true, lazy: false });
 import { useLayoutEffect, RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -7,6 +6,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+gsap.defaults({ lazy: false });
 
 export function useResultsAnimations(
 	containerRef: RefObject<HTMLElement | null>,
@@ -368,7 +368,9 @@ export function useResultsAnimations(
 	// Cleanup on unmount
 	useLayoutEffect(() => {
 		return () => {
-			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+			ScrollTrigger.getAll().forEach((trigger) => {
+				trigger.kill();
+			});
 		};
 	}, []);
 }

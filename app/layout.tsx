@@ -1,12 +1,13 @@
 import "../global.css";
-import { Geist, Crimson_Text } from "next/font/google";
+import { Geist, Inter, Space_Grotesk, JetBrains_Mono, Outfit } from "next/font/google";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
-import { ThemeProvider } from "./providers/ThemeProvider";
+
 import AnimatedNav from "@/components/layout/AnimatedNav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
   title: {
@@ -91,16 +92,35 @@ export const metadata: Metadata = {
     },
   },
 };
+
 const geist = Geist({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-geist",
 });
 
-const crimson_text = Crimson_Text({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-crimson-text",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-jetbrains-mono",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-outfit",
 });
 
 export default async function RootLayout({
@@ -114,8 +134,14 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={[geist.variable, crimson_text.variable].join(" ")}
-      suppressHydrationWarning
+      className={[
+        geist.variable,
+        inter.variable,
+        spaceGrotesk.variable,
+        jetbrainsMono.variable,
+        outfit.variable,
+        "dark",
+      ].join(" ")}
     >
       <body
         className={`${
@@ -125,30 +151,24 @@ export default async function RootLayout({
         <div id="smooth-wrapper">
           <div id="smooth-content">
             <NextIntlClientProvider messages={messages}>
-              <ThemeProvider
-                attribute="class"
-                defaultTheme="system"
-                enableSystem
-              >
-                <AnimatedNav />
-                {children}
-                <Contact />
+              <AnimatedNav />
+              {children}
+              <Contact />
 
-                {/* Footer simple */}
-                <footer className="border-t border-zinc-800 py-8">
-                  <div className="container mx-auto px-4 text-center">
-                    <p className="text-sm text-zinc-500">
-                      © {new Date().getFullYear()}{" "}
-                      <Link
-                        href="https://geroserial.com"
-                        className="text-black hover:underline dark:text-white"
-                      >
-                        geroserial.com
-                      </Link>
-                    </p>
-                  </div>
-                </footer>
-              </ThemeProvider>
+              {/* Footer simple */}
+              <footer className="border-t border-zinc-800 py-8">
+                <div className="container mx-auto px-4 text-center">
+                  <p className="text-sm text-zinc-500">
+                    © {new Date().getFullYear()}{" "}
+                    <Link
+                      href="https://geroserial.com"
+                      className="text-white hover:underline"
+                    >
+                      geroserial.com
+                    </Link>
+                  </p>
+                </div>
+              </footer>
             </NextIntlClientProvider>
           </div>
         </div>

@@ -14,7 +14,7 @@ export const useServicesAnimations = () => {
     () => {
       if (!containerRef.current) return;
 
-      // Optimización 60fps: force3D para renderizado inmediato
+      // Optimización 60fps: renderizado inmediato
       gsap.config({ force3D: true });
 
       const mm = gsap.matchMedia();
@@ -36,7 +36,6 @@ export const useServicesAnimations = () => {
             gsap.set([headline, subtitle], {
               opacity: 0,
               y: 50,
-              force3D: true,
               willChange: "transform, opacity",
             });
 
@@ -46,7 +45,7 @@ export const useServicesAnimations = () => {
               onEnter: () => {
                 // Batch animations in timeline for better performance
                 const tl = gsap.timeline({
-                  defaults: { ease: "power3.out", force3D: true },
+                  defaults: { ease: "power3.out" },
                 });
 
                 tl.to(headline, {
@@ -88,7 +87,6 @@ export const useServicesAnimations = () => {
             gsap.set(card, {
               opacity: 0,
               y: 50,
-              force3D: true,
               willChange: "transform, opacity",
             });
             if (border) {
@@ -102,19 +100,16 @@ export const useServicesAnimations = () => {
             gsap.set(iconContainer, {
               scale: 0,
               opacity: 0,
-              force3D: true,
               willChange: "transform, opacity",
             });
             gsap.set([title, description], {
               opacity: 0,
               x: -30,
-              force3D: true,
               willChange: "transform, opacity",
             });
             gsap.set(features, {
               opacity: 0,
               y: 20,
-              force3D: true,
               willChange: "transform, opacity",
             });
             gsap.set(footer, {
@@ -127,9 +122,9 @@ export const useServicesAnimations = () => {
               start: "top 85%",
               once: true,
               onEnter: () => {
-                // Optimized timeline with force3D and clearProps
+                // Optimized timeline with clearProps
                 const tl = gsap.timeline({
-                  defaults: { force3D: true, ease: "power2.out" },
+                  defaults: { ease: "power2.out" },
                 });
 
                 tl.to(card, {
@@ -199,7 +194,9 @@ export const useServicesAnimations = () => {
       // Cleanup
       return () => {
         mm.revert();
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => {
+          trigger.kill();
+        });
       };
     },
     { scope: containerRef }

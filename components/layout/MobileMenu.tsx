@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Github } from "lucide-react";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+
 import { SITE_CONFIG } from "@/config/site";
 import { NavItem } from "@/config/navigation";
 import {
@@ -79,7 +79,6 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 			<div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
 
 			<div className="flex items-center justify-center gap-6 px-6 pt-2">
-				<ThemeToggle />
 				<a
 					href={SITE_CONFIG.links.github}
 					target="_blank"

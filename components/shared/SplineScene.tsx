@@ -9,8 +9,10 @@ export default function Robot() {
   const appRef = useRef<Application | null>(null);
   const isLoadedRef = useRef(false);
   const isLoadingRef = useRef(false);
-  const mouse = useRef({ x: 0, y: 0 });
+  const lastSizeRef = useRef({ width: 0, height: 0 });
+  const dprRef = useRef<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
 
   // Detectar mobile para optimizar DPR
   useEffect(() => {
@@ -21,12 +23,10 @@ export default function Robot() {
   }, []);
 
   useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
+    const isiOSDevice =
+      /iP(hone|ad|od)/.test(navigator.userAgent) ||
+      (navigator.userAgent.includes("Mac") && navigator.maxTouchPoints > 1);
+    setIsIOS(isiOSDevice);
   }, []);
 
   const optimizarResolucion = useCallback(() => {
@@ -36,22 +36,35 @@ export default function Robot() {
     const { clientWidth, clientHeight } = canvas;
 
     // DPR más agresivo en mobile para mejor performance
-    const dprMaximo = isMobile ? 0.8 : 1.2;
-    const dpr = Math.min(window.devicePixelRatio, dprMaximo);
+    if (!dprRef.current) {
+      const dprMaximo = isMobile ? 0.6 : 1.0;
+      dprRef.current = Math.min(window.devicePixelRatio, dprMaximo);
+    }
+    const dpr = dprRef.current;
 
-    const newWidth = clientWidth * dpr;
-    const newHeight = clientHeight * dpr;
+    const newWidth = Math.round(clientWidth * dpr);
+    const newHeight = Math.round(clientHeight * dpr);
+
+    if (
+      isIOS &&
+      lastSizeRef.current.width === newWidth &&
+      lastSizeRef.current.height !== 0
+    ) {
+      return;
+    }
 
     if (canvas.width !== newWidth || canvas.height !== newHeight) {
       canvas.width = newWidth;
       canvas.height = newHeight;
+
+      lastSizeRef.current = { width: newWidth, height: newHeight };
 
       if (appRef.current?.setSize) {
         /* @ts-ignore */
         appRef.current.setSize(newWidth, newHeight);
       }
     }
-  }, [isMobile]);
+  }, [isIOS, isMobile]);
 
   // Función de carga diferida con requestIdleCallback
   const loadSplineScene = useCallback(() => {
@@ -125,8 +138,16 @@ export default function Robot() {
   }, [optimizarResolucion]);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden">
-      <canvas ref={canvasRef} className="w-full h-full block" />
+    <div
+      ref={containerRef}
+      className="absolute inset-0 z-0 overflow-hidden spline-scene"
+    >
+      <canvas
+        ref={canvasRef}
+        className={`w-full h-full block spline-canvas ${
+          isMobile ? "pointer-events-none" : ""
+        }`}
+      />
     </div>
   );
 }

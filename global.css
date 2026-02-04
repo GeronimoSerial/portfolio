@@ -40,7 +40,7 @@
   }
 
   h2 {
-    font-family: var(--font-crimson-text), serif;
+    font-family: var(--font-space-grotesk), sans-serif;
   }
 
   /* Ocultar scrollbar pero mantener funcionalidad */
@@ -166,6 +166,21 @@
 
   /* Mobile-specific optimizations */
   @media (max-width: 768px) {
+    #hero {
+      min-height: 1000;
+    }
+
+    .spline-scene {
+      inset: auto 0 0 0;
+      height: 70svh;
+      transform: translateY(6vh) scale(1.05);
+      transform-origin: center bottom;
+    }
+
+    .spline-canvas {
+      display: block;
+    }
+
     .project-card {
       transform: translate3d(0, 0, 0);
       -webkit-transform: translate3d(0, 0, 0);

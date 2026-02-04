@@ -4,13 +4,14 @@ import React from "react";
 export function Background({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className="fixed inset-0 -z-10 h-full w-full bg-white dark:bg-black">
+      <div className="fixed inset-0 -z-10 h-full w-full bg-black">
         <svg
           className="decorative-svg absolute top-20 left-10 w-40 h-40 opacity-20 pointer-events-none"
           viewBox="0 0 200 200"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <title>Background decorative circle</title>
           <circle
             cx="100"
             cy="100"
@@ -38,6 +39,7 @@ export function Background({ children }: { children: React.ReactNode }) {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
+          <title>Background decorative hexagon</title>
           <path
             d="M20 100 L60 20 L140 20 L180 100 L140 180 L60 180 Z"
             className="stroke-zinc-400 dark:stroke-zinc-600"
@@ -61,8 +63,7 @@ export function Background({ children }: { children: React.ReactNode }) {
           )}
         />
 
-        {/* Radial gradient for the container to give a faded look */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
+        {/* Radial gradient removed to avoid white overlay */}
         <p className="relative z-20 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text py-8 text-4xl font-bold text-transparent sm:text-7xl" />
       </div>
       {children}

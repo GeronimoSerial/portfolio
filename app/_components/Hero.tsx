@@ -2,10 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/moving-border";
-import dynamic from "next/dynamic";
 import { useHardwareTier } from "@/hooks/useHardwareTier";
-import { useRef } from "react";
-import Beams from "@/components/Beams";
+import { useEffect, useState } from "react";
+import Robot from "@/components/shared/SplineScene";
 
 // const Robot = dynamic(() => import("@/components/shared/SplineScene"), {
 //   ssr: false,
@@ -14,58 +13,85 @@ import Beams from "@/components/Beams";
 //   ),
 // });
 
-// const VideoFallback = () => {
-//   const videoRef = useRef<HTMLVideoElement>(null);
+const VideoFallback = () => (
+  <div className="absolute inset-0 -z-10 pointer-events-none">
+    <video
+      autoPlay
+      muted
+      playsInline
+      loop
+      preload="none"
+      poster="/assets/images/poster.png"
+      className="w-full h-full object-cover opacity-70"
+    >
+      <source
+        src="https://res.cloudinary.com/dmitnt8de/video/upload/v1770236274/video_mf0fdh.mp4"
+        type="video/mp4"
+      />
+    </video>
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
+  </div>
+);
 
-//   const handleIntroEnd = () => {
-//     if (videoRef.current) {
-//       videoRef.current.src = "/assets/spline/loop.webm";
-//       videoRef.current.loop = true;
-//       videoRef.current.play();
-//     }
-//   };
-
-//   return (
-//     <div className="absolute inset-0 -z-10 pointer-events-none">
-//       <video
-//         ref={videoRef}
-//         autoPlay
-//         muted
-//         playsInline
-//         onEnded={handleIntroEnd}
-//         className="w-full h-full object-cover opacity-60"
-//       >
-//         <source src="/assets/spline/intro.webm" type="video/webm" />
-//       </video>
-//       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80" />
-//     </div>
-//   );
-// };
+const LoadingBackdrop = () => (
+  <div className="absolute inset-0 -z-10 pointer-events-none">
+    <div className="w-full h-full bg-gradient-to-b from-transparent via-transparent to-background/80" />
+  </div>
+);
 
 export default function HeroStatic() {
   const t = useTranslations("hero");
-  const { tier, shouldLoad3d } = useHardwareTier();
+  const { tier } = useHardwareTier();
+  const [isMobile, setIsMobile] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const updateMobile = () => setIsMobile(window.innerWidth < 768);
+    updateMobile();
+    window.addEventListener("resize", updateMobile);
+    return () => window.removeEventListener("resize", updateMobile);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setPrefersReducedMotion(media.matches);
+    updatePreference();
+
+    if ("addEventListener" in media) {
+      media.addEventListener("change", updatePreference);
+      return () => media.removeEventListener("change", updatePreference);
+    }
+
+    // Fallback for older Safari
+    const legacyMedia = media as MediaQueryList & {
+      addListener: (listener: (event: MediaQueryListEvent) => void) => void;
+      removeListener: (listener: (event: MediaQueryListEvent) => void) => void;
+    };
+    legacyMedia.addListener(updatePreference);
+    return () => legacyMedia.removeListener(updatePreference);
+  }, []);
+
+  const canRender3dDesktop = tier !== null && tier >= 2;
+  const canRender3dMobile = tier !== null && tier >= 3;
+  const shouldRender3d =
+    !prefersReducedMotion && (isMobile ? canRender3dMobile : canRender3dDesktop);
 
   return (
     <>
       <section
         id="hero"
-        className="relative -mt-20 flex flex-col items-center justify-center w-full min-h-screen px-4 overflow-hidden"
+        className="relative -mt-20 flex flex-col items-center justify-center w-full min-h-[100svh] md:min-h-[100svh] px-4 overflow-hidden"
       >
         <div className="absolute opacity-60 inset-0 -z-10 pointer-events-none">
-          <Beams />
+          {/* <Beams /> */}
         </div>
-        {/* {tier === null ? (
-          <div className="relative inset-0 -z-10 pointer-events-none">
-            <Beams />
-          </div>
-        ) : shouldLoad3d ? (
+        {tier === null ? (
+          <LoadingBackdrop />
+        ) : shouldRender3d ? (
           <Robot />
         ) : (
-          <div className="relative inset-0 -z-10 pointer-events-none">
-            <Beams />
-          </div>
-        )} */}
+          <VideoFallback />
+        )}
 
         <div
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-24

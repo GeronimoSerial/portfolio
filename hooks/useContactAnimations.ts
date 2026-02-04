@@ -1,7 +1,5 @@
 "use client";
 // Performance-Optimized Version
-gsap.defaults({ force3D: true, lazy: false });
-
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,7 +8,7 @@ import { SplitText } from "gsap/SplitText";
 if (typeof window !== "undefined") {
 	gsap.registerPlugin(ScrollTrigger, SplitText);
 	// Set global defaults for optimal performance
-	gsap.defaults({ force3D: true, lazy: false });
+	gsap.defaults({ lazy: false });
 }
 
 export function useContactAnimations() {

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Github, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "@/components/shared/ThemeToggle";
+
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";

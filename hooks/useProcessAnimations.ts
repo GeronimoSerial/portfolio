@@ -12,7 +12,7 @@ export const useProcessAnimations = () => {
 
   useGSAP(
     () => {
-      // Optimización 60fps: force3D para aceleración GPU
+      // Optimización 60fps: aceleración GPU
       gsap.config({ force3D: true });
 
       const cards = gsap.utils.toArray<HTMLDivElement>(".process-card");
@@ -23,12 +23,11 @@ export const useProcessAnimations = () => {
         rotation: (i: number) => (i % 2 === 0 ? -4 : 4),
         opacity: 0,
         scale: 0.98,
-        force3D: true,
         willChange: "transform, opacity",
       });
 
       const tl = gsap.timeline({
-        defaults: { force3D: true, ease: "power3.out" },
+        defaults: { ease: "power3.out" },
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 40%",

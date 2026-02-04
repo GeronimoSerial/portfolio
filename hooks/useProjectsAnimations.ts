@@ -49,14 +49,12 @@ export const useProjectsAnimations = () => {
               y: isMobile ? 50 : 100,
               rotateX: isMobile ? 0 : -90,
               transformOrigin: "50% 100%",
-              force3D: true,
             });
 
             if (subtitle) {
               gsap.set(subtitle, {
                 opacity: 0,
                 y: isMobile ? 15 : 30,
-                force3D: true,
               });
             }
 
@@ -74,7 +72,6 @@ export const useProjectsAnimations = () => {
                     from: "start",
                   },
                   ease: "power3.out",
-                  force3D: true,
                 });
 
                 if (subtitle) {
@@ -84,7 +81,6 @@ export const useProjectsAnimations = () => {
                     duration: isMobile ? 0.5 : 0.8,
                     delay: isMobile ? 0.3 : 0.6,
                     ease: "power2.out",
-                    force3D: true,
                   });
                 }
               },
@@ -134,14 +130,12 @@ export const useProjectsAnimations = () => {
               rotation: direction.rotation,
               scale: isMobile ? 0.95 : 0.8,
               clipPath: isMobile ? "none" : "circle(0% at 50% 50%)",
-              force3D: true,
             });
 
             if (border) {
               gsap.set(border, {
                 opacity: 0,
                 scale: isMobile ? 1 : 0.5,
-                force3D: true,
               });
             }
 
@@ -155,7 +149,7 @@ export const useProjectsAnimations = () => {
               trigger: card,
               start: "top 85%",
               onEnter: () => {
-                const tl = gsap.timeline({ defaults: { force3D: true } });
+                const tl = gsap.timeline();
 
                 // Animación del card principal
                 tl.to(card, {
@@ -224,7 +218,6 @@ export const useProjectsAnimations = () => {
                       opacity: 0,
                       y: 20,
                       rotateX: -90,
-                      force3D: true,
                     });
 
                     tl.to(
@@ -286,7 +279,6 @@ export const useProjectsAnimations = () => {
                     opacity: 0,
                     scale: 0,
                     rotation: isMobile ? 0 : -180,
-                    force3D: true,
                   });
 
                   tl.to(
@@ -389,7 +381,9 @@ export const useProjectsAnimations = () => {
       // Cleanup
       return () => {
         mm.revert();
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => {
+          trigger.kill();
+        });
       };
     },
     { scope: containerRef, dependencies: [] }

@@ -70,16 +70,17 @@ export default function ServicesStatic() {
               >
                 <svg
                   className="card-border-svg absolute inset-0 w-full h-full pointer-events-none"
-                  viewBox="0 0 100% 100%"
+                  viewBox="0 0 300 400"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   preserveAspectRatio="none"
                 >
+                  <title>{`${title} card border`}</title>
                   <rect
                     x="1"
                     y="1"
-                    width="calc(100% - 2px)"
-                    height="calc(100% - 2px)"
+                    width="298"
+                    height="398"
                     rx="16"
                     className="stroke-zinc-400 dark:stroke-white"
                     strokeWidth="2"
@@ -118,9 +119,9 @@ export default function ServicesStatic() {
                 </div>
 
                 <ul className="space-y-2 mb-6 relative z-10">
-                  {features.map((feature, featureIndex) => (
+                  {features.map((feature) => (
                     <li
-                      key={featureIndex}
+                      key={`${service.key}-${feature}`}
                       className="feature-item flex items-center gap-2 text-sm
                                text-zinc-700 dark:text-zinc-300"
                     >
@@ -129,6 +130,7 @@ export default function ServicesStatic() {
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
+                        <title>{`${title} feature`}</title>
                         <path
                           fillRule="evenodd"
                           d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

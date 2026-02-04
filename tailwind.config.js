@@ -40,6 +40,10 @@ module.exports = {
         display: ["var(--font-calsans)"],
         dm: ["var(--font-dm_sans)", ...defaultTheme.fontFamily.sans],
         mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
+        inter: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        "space-grotesk": ["var(--font-space-grotesk)", ...defaultTheme.fontFamily.sans],
+        "jetbrains-mono": ["var(--font-jetbrains-mono)", ...defaultTheme.fontFamily.mono],
+        outfit: ["var(--font-outfit)", ...defaultTheme.fontFamily.sans],
       },
       backgroundImage: {
         "gradient-radial":
