@@ -68,3 +68,13 @@ MIGRATION_NEXT_THEMES.md
 MIGRATION_COMPLETE.md
 DARK_MODE_TECHNICAL_AUDIT.md
 .env
+/.agent
+/.agents
+/.claude
+/.codex
+/.cursor
+/.gemini
+/.github
+/.next 
+/.opencode
+/.vscode
