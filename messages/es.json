@@ -13,7 +13,8 @@
     "midtitle": "escalan tu negocio",
     "subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
     "description": "Enfoque metódico. Soluciones reales.",
-    "cta": "Ver servicios"
+    "cta": "Ver servicios",
+    "portfolio_cta": "Ver portfolio"
   },
 
   "services": {
@@ -227,6 +228,11 @@
         "content": "Gran conocimiento técnico y capacidad para resolver problemas complejos. Un gusto colaborar."
       }
     }
+  },
+  "development": {
+    "title": "Sitio en desarrollo",
+    "description": "Esta página está en construcción activa. Puede contener errores o funcionalidades incompletas.",
+    "close": "Cerrar aviso"
   },
   "footer": {
     "rights": ""

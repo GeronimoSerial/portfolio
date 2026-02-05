@@ -2,14 +2,12 @@ import { Download, FileText } from "lucide-react";
 
 const documents = [
 	{
-		title: "CV en ingles",
-		description: "Version profesional para oportunidades internacionales.",
+		title: "CV (EN)",
 		href: "/resume/geronimo-serial-resume-en.pdf",
 		cta: "Descargar PDF",
 	},
 	{
-		title: "CV en espanol",
-		description: "Version completa para contextos locales y regionales.",
+		title: "CV (ES)",
 		href: "/resume/geronimo-serial-cv-es.pdf",
 		cta: "Descargar PDF",
 	},
@@ -26,8 +24,7 @@ export default function ResumeDownload() {
 							Descarga de CV
 						</h2>
 						<p className="text-zinc-400">
-							Si queres revisar mi experiencia en detalle, aca tenes las dos
-							versiones actualizadas de mi CV.
+							Dos versiones actualizadas para compartir segun el contexto.
 						</p>
 					</div>
 
@@ -43,7 +40,6 @@ export default function ResumeDownload() {
 									</div>
 									<div>
 										<h3 className="text-base font-medium text-zinc-100">{doc.title}</h3>
-										<p className="text-sm text-zinc-500">{doc.description}</p>
 									</div>
 								</div>
 

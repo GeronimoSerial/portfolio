@@ -27,16 +27,11 @@ export default function PortfolioHero() {
               </p>
             </div>
 
-            <div className="max-w-2xl space-y-4 text-zinc-400">
+            <div className="max-w-2xl text-zinc-400">
               <p>
-                Trabajo actualmente en sistemas multi-tenant sobre PostgreSQL
-                con Row-Level Security, arquitectura por capas y despliegues
-                automatizados en Linux.
-              </p>
-              <p>
-                Cuando tomo un proyecto, mi objetivo es simple: bajar
-                complejidad, subir confiabilidad y dejar una base fácil de
-                mantener.
+                Trabajo en sistemas multi-tenant sobre PostgreSQL con Row-Level
+                Security, arquitectura por capas y despliegues automatizados en
+                Linux, con foco en bajar complejidad y aumentar confiabilidad.
               </p>
             </div>
 

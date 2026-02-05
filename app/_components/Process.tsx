@@ -3,151 +3,64 @@
 import { useTranslations } from "next-intl";
 import { Search, Layers, Code, Rocket } from "lucide-react";
 import { useProcessAnimations } from "@/hooks/useProcessAnimations";
-import { Button } from "@/components/ui/moving-border";
+
 export default function Process() {
   const t = useTranslations("process");
   const containerRef = useProcessAnimations();
 
   const steps = [
-    {
-      icon: Search,
-      number: "01",
-      key: "1",
-    },
-    {
-      icon: Layers,
-      number: "02",
-      key: "2",
-    },
-    {
-      icon: Code,
-      number: "03",
-      key: "3",
-    },
-    {
-      icon: Rocket,
-      number: "04",
-      key: "4",
-    },
+    { icon: Search, number: "01", key: "1" },
+    { icon: Layers, number: "02", key: "2" },
+    { icon: Code, number: "03", key: "3" },
+    { icon: Rocket, number: "04", key: "4" },
   ];
 
   return (
-    <section
-      ref={containerRef}
-      id="process"
-      className="relative min-h-screen py-20 px-4 overflow-x-hidden"
-      style={{
-        transform: "translateZ(0)",
-        contain: "layout style paint",
-      }}
-    >
+    <section ref={containerRef} id="process" className="relative overflow-x-hidden px-4 py-20">
       <div className="container mx-auto max-w-7xl">
-        {/* Header */}
-        <div className="text-center mb-20 process-header">
-          <h2 className="text-5xl md:text-6xl font-semibold text-zinc-950 dark:text-white mb-6">
-            {t("title")}
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mb-6 process-divider" />
-
-          <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed   mx-auto">
-            {t("subtitle")}
-          </p>
+        <div className="process-header mb-14 max-w-3xl space-y-4">
+          <p className="text-sm tracking-wide text-zinc-500">Proceso</p>
+          <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">{t("title")}</h2>
+          <div className="process-divider h-px w-24 bg-zinc-800" />
+          <p className="text-zinc-400">{t("subtitle")}</p>
         </div>
-        {/* Process Cards Grid */}
+
         <div className="relative">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {steps.map((step, index) => {
               const Icon = step.icon;
-              const isEven = index % 2 === 0;
 
               return (
                 <div key={step.number} className="relative">
-                  {/* Connector Line (hidden on mobile, visible on lg) */}
                   {index < steps.length - 1 && (
                     <div
-                      className="process-connector hidden lg:block absolute top-16 -right-3 w-6 h-0.5
-                                 bg-gradient-to-r from-zinc-300 dark:from-zinc-700 to-transparent"
+                      className="process-connector absolute -right-2 top-14 hidden h-px w-4 bg-zinc-800 lg:block"
                       style={{ transformOrigin: "left center" }}
                     />
                   )}
 
-                  {/* Card */}
-                  <div
-                    className={`process-card relative p-8 h-full
-                             bg-gradient-to-br ${
-                               isEven
-                                 ? "from-zinc-50 to-zinc-100 dark:from-zinc-900/50 dark:to-zinc-800/30"
-                                 : "from-zinc-100 to-zinc-50 dark:from-zinc-800/30 dark:to-zinc-900/50"
-                             }
-                             border-2 border-zinc-200 dark:border-zinc-800
-                             rounded-2xl
-                             shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50`}
-                    style={{
-                      transform: "translateZ(0)",
-                      backfaceVisibility: "hidden",
-                      willChange: "auto",
-                    }}
-                  >
-                    {/* Number Badge */}
-                    <div
-                      className="process-number absolute -top-4 -left-4
-                                   w-16 h-16
-                                   bg-zinc-950 dark:bg-zinc-50
-                                   text-zinc-50 dark:text-zinc-950
-                                   rounded-full
-                                   flex items-center justify-center
-                                   text-2xl font-display font-bold
-                                   border-4 border-white dark:border-zinc-950
-                                   shadow-xl"
-                    >
+                  <div className="process-card relative h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+                    <div className="process-number mb-5 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-sm font-semibold text-zinc-300">
                       {step.number}
                     </div>
 
-                    {/* Icon */}
-                    <div className="mb-6 mt-6">
-                      <div
-                        className="process-icon inline-flex p-3
-                                   bg-zinc-200 dark:bg-zinc-800
-                                   rounded-xl"
-                      >
-                        <Icon className="w-7 h-7 text-zinc-700 dark:text-zinc-300" />
-                      </div>
+                    <div className="process-icon mb-5 inline-flex rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+                      <Icon className="h-5 w-5 text-zinc-300" />
                     </div>
 
-                    {/* Title */}
-                    <h3 className="process-title text-xl font-bold text-zinc-950 dark:text-zinc-50 mb-3">
-                      {t(`steps.${step.key}.title`)}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="process-description text-sm text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
+                    <h3 className="process-title mb-3 text-lg font-medium text-zinc-100">{t(`steps.${step.key}.title`)}</h3>
+                    <p className="process-description mb-5 text-sm leading-relaxed text-zinc-400">
                       {t(`steps.${step.key}.description`)}
                     </p>
 
-                    {/* Items List */}
-                    <ul className="space-y-3">
+                    <ul className="space-y-2.5">
                       {[0, 1, 2].map((itemIndex) => (
-                        <li
-                          key={itemIndex}
-                          className="process-list-item flex items-start gap-3 text-sm text-zinc-700 dark:text-zinc-300"
-                        >
-                          <span
-                            className="flex-shrink-0 w-1.5 h-1.5 rounded-full
-                                       bg-zinc-400 dark:bg-zinc-600 mt-1.5"
-                          />
-                          <span className="leading-relaxed">
-                            {t(`steps.${step.key}.items.${itemIndex}`)}
-                          </span>
+                        <li key={itemIndex} className="process-list-item flex items-start gap-2 text-sm text-zinc-400">
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-zinc-500" />
+                          <span>{t(`steps.${step.key}.items.${itemIndex}`)}</span>
                         </li>
                       ))}
                     </ul>
-
-                    {/* Decorative corner accent */}
-                    <div
-                      className="absolute bottom-0 right-0 w-20 h-20
-                                 bg-gradient-to-tl from-zinc-200/50 dark:from-zinc-800/50 to-transparent
-                                 rounded-tl-full rounded-br-2xl"
-                    />
                   </div>
                 </div>
               );
@@ -155,17 +68,10 @@ export default function Process() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-16 process-footer">
-          <Button
-            borderClassName="bg-[radial-gradient(black_40%,transparent_60%)] dark:bg-[radial-gradient(white_40%,transparent_60%)]"
-            containerClassName="w-full max-w-96 h-12 mx-auto"
-            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 text-sm font-medium "
-            type="primary"
-            size="lg"
-          >
+        <div className="process-footer mt-12">
+          <p className="inline-flex rounded-lg border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-zinc-300">
             {t("tagline")}
-          </Button>
+          </p>
         </div>
       </div>
     </section>

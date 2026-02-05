@@ -73,7 +73,7 @@ export async function POST(request: Request) {
             : "Gracias por tu mensaje",
         react: ConfirmationTemplate({
           firstName,
-          locale: locale || "es,",
+          locale: locale || "es",
         }),
         replyTo: email,
       });

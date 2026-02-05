@@ -67,6 +67,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const locale = await getLocale();
+  const dateLocale = locale === "en" ? "en-US" : "es-ES";
 
   // Verify project exists
   const projects = await getProjects(locale as string);
@@ -123,7 +124,7 @@ export default async function Page({
             </p>
             {project.date && (
               <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
-                {new Date(project.date).toLocaleDateString("en-US", {
+                {new Date(project.date).toLocaleDateString(dateLocale, {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
+import { NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
 import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
@@ -26,14 +27,15 @@ export default function AnimatedNav() {
     actionsRef
   );
   const router = useRouter();
+  const pathname = usePathname();
+  const isPortfolio = pathname === "/portfolio";
 
-  const navItems = [
-    { id: "services", label: t("services") },
-    { id: "process", label: t("process") },
-    { id: "projects", label: t("projects") },
-    { id: "results", label: t("results") },
-    { id: "contact", label: t("contact") },
-  ];
+  // Use different nav items based on current page
+  // Portfolio items use direct labels (no translations yet)
+  // Home items use translations
+  const navItems = isPortfolio
+    ? PORTFOLIO_ITEMS.slice(1)
+    : NAVIGATION_ITEMS.slice(1).map((item) => ({ ...item, label: t(item.id) }));
   return (
     <nav
       ref={navRef}
@@ -59,8 +61,25 @@ export default function AnimatedNav() {
 
           {/* Desktop Nav Items */}
           <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
+            {/* Portfolio button - shown on home page */}
+            {!isPortfolio && (
+              <Link
+                href="/portfolio"
+                className="px-4 py-2 text-sm font-medium
+                             text-zinc-600 dark:text-zinc-400
+                             hover:text-zinc-900 dark:hover:text-zinc-100
+                             hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80
+                             rounded-lg
+                             relative group overflow-hidden
+                             will-change-transform"
+              >
+                <span className="relative z-10">{t("portfolio")}</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+              </Link>
+            )}
             {navItems.map((item, index) => (
               <button
+                type="button"
                 onClick={() => {
                   const element = document.getElementById(item.id);
                   if (element) {
@@ -94,6 +113,7 @@ export default function AnimatedNav() {
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
+                  type="button"
                   className="p-2
                   text-zinc-600 dark:text-zinc-400
                   rounded-lg
@@ -104,12 +124,7 @@ export default function AnimatedNav() {
                   <Menu className="w-6 h-6" />
                 </button>
               </SheetTrigger>
-              <MobileMenu
-                navigationItems={[
-                  { id: "hero", label: t("home") },
-                  ...navItems,
-                ]}
-              />
+              <MobileMenu />
             </Sheet>
           </div>
 

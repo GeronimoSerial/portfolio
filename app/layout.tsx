@@ -7,6 +7,7 @@ import { getMessages, getLocale } from "next-intl/server";
 import AnimatedNav from "@/components/layout/AnimatedNav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
+import DevelopmentToast from "@/components/DevelopmentToast";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
@@ -169,6 +170,9 @@ export default async function RootLayout({
                   </p>
                 </div>
               </footer>
+
+              {/* Development notice toast */}
+              <DevelopmentToast />
             </NextIntlClientProvider>
           </div>
         </div>

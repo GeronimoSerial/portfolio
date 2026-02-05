@@ -3,161 +3,70 @@
 import { useTranslations } from "next-intl";
 import { Lightbulb, Wrench, TrendingUp, Code } from "lucide-react";
 import { useServicesAnimations } from "@/hooks/useServicesAnimations";
-import { MirrorButton } from "@/components/ui/mirror_button";
 
-export default function ServicesStatic() {
+export default function Services() {
   const t = useTranslations("services");
   const { containerRef, headerRef } = useServicesAnimations();
 
   const services = [
-    {
-      icon: Wrench,
-      key: "transformation",
-    },
-    {
-      icon: Code,
-      key: "development",
-    },
-    {
-      icon: Lightbulb,
-      key: "consulting",
-    },
-    {
-      icon: TrendingUp,
-      key: "support",
-    },
+    { icon: Wrench, key: "transformation" },
+    { icon: Code, key: "development" },
+    { icon: Lightbulb, key: "consulting" },
+    { icon: TrendingUp, key: "support" },
   ];
 
   return (
-    <section
-      ref={containerRef}
-      id="services"
-      className="relative min-h-screen py-20 px-4"
-    >
+    <section ref={containerRef} id="services" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div ref={headerRef} className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-semibold text-zinc-950 dark:text-white mb-4">
-            {t("title")}
-          </h2>
-
-          <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
-            {t("subtitle")}
-          </p>
+        <div ref={headerRef} className="mb-12 max-w-3xl space-y-4">
+          <p className="text-sm tracking-wide text-zinc-500">Servicios</p>
+          <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">{t("title")}</h2>
+          <p className="text-zinc-400">{t("subtitle")}</p>
         </div>
 
-        {/* Grid de servicios */}
-        <div className="services-grid grid md:grid-cols-2 gap-8">
+        <div className="services-grid grid gap-6 md:grid-cols-2">
           {services.map((service) => {
             const Icon = service.icon;
             const title = t(`items.${service.key}.title`);
             const description = t(`items.${service.key}.description`);
             const price = t(`items.${service.key}.price`);
-            const cta = t("cta");
-            const features = [0, 1, 2, 3].map((i) =>
-              t(`items.${service.key}.features.${i}`)
-            );
+            const features = [0, 1, 2, 3].map((i) => t(`items.${service.key}.features.${i}`));
 
             return (
-              <article
-                key={service.key}
-                className="service-card group p-6 bg-gradient-to-b from-zinc-50/30 to-zinc-100/30 dark:from-zinc-900/50 dark:to-zinc-800/30 hover:opacity-100 border-2 border-zinc-200 dark:border-zinc-800 rounded-2xl pointer-events-auto relative overflow-hidden shadow-lg shadow-zinc-200/50 dark:shadow-zinc-900/50"
-                style={{
-                  willChange: "auto",
-                  transform: "translateZ(0)",
-                  backfaceVisibility: "hidden",
-                }}
-              >
+              <article key={service.key} className="service-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6">
                 <svg
-                  className="card-border-svg absolute inset-0 w-full h-full pointer-events-none"
-                  viewBox="0 0 300 400"
+                  className="card-border-svg pointer-events-none absolute inset-0 h-full w-full"
+                  viewBox="0 0 300 240"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                   preserveAspectRatio="none"
                 >
-                  <title>{`${title} card border`}</title>
-                  <rect
-                    x="1"
-                    y="1"
-                    width="298"
-                    height="398"
-                    rx="16"
-                    className="stroke-zinc-400 dark:stroke-white"
-                    strokeWidth="2"
-                    fill="none"
-                  />
+                  <title>{`${title} frame`}</title>
+                  <rect x="1" y="1" width="298" height="238" rx="16" className="stroke-white/10" strokeWidth="1" fill="none" />
                 </svg>
 
-                {/* Glow effect on hover */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100
-                             transition-opacity duration-500 pointer-events-none
-                             bg-gradient-to-br from-white/5 via-transparent to-transparent"
-                />
-
-                <div className="flex items-start gap-4 mb-4 relative z-10">
-                  <div
-                    className="icon-container p-3
-                                bg-zinc-100 dark:bg-zinc-900
-                                border border-zinc-200 dark:border-zinc-800
-                                rounded-lg"
-                    style={{
-                      transform: "translateZ(0)",
-                      backfaceVisibility: "hidden",
-                    }}
-                  >
-                    <Icon className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                <div className="relative z-10 flex items-start gap-4">
+                  <div className="icon-container rounded-lg border border-white/10 bg-white/[0.02] p-3">
+                    <Icon className="h-5 w-5 text-zinc-300" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl text-zinc-950 dark:text-zinc-50 mb-2">
-                      {title}
-                    </h3>
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                      {description}
-                    </p>
+                    <h3 className="mb-2 text-xl text-zinc-100">{title}</h3>
+                    <p className="mb-5 text-sm leading-relaxed text-zinc-400">{description}</p>
                   </div>
                 </div>
 
-                <ul className="space-y-2 mb-6 relative z-10">
+                <ul className="relative z-10 mb-6 space-y-2.5">
                   {features.map((feature) => (
-                    <li
-                      key={`${service.key}-${feature}`}
-                      className="feature-item flex items-center gap-2 text-sm
-                               text-zinc-700 dark:text-zinc-300"
-                    >
-                      <svg
-                        className="w-4 h-4 text-zinc-500 dark:text-zinc-500 shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <title>{`${title} feature`}</title>
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      {feature}
+                    <li key={`${service.key}-${feature}`} className="feature-item flex items-start gap-2 text-sm text-zinc-400">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-zinc-500" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div
-                  className="service-footer flex items-center justify-between pt-4
-                              border-t border-zinc-200 dark:border-zinc-800
-                              relative z-10"
-                >
-                  <span className="text-sm md:text-lg font-display text-zinc-900 dark:text-zinc-100">
-                    {price}
-                  </span>
+                <div className="service-footer relative z-10 border-t border-white/10 pt-4">
+                  <span className="text-sm font-medium text-zinc-300">{price}</span>
                 </div>
-
-                {/* Decorative corner accent */}
-                <div
-                  className="absolute bottom-0 right-0 w-16 h-16
-                             bg-gradient-to-tl from-zinc-400/30 dark:from-zinc-800/30 to-transparent
-                             rounded-tl-full rounded-br-2xl pointer-events-none"
-                />
               </article>
             );
           })}

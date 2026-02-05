@@ -3,7 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { Project } from "@/types";
 
-export async function getProjects(locale: string = "en"): Promise<Project[]> {
+export async function getProjects(locale: string = "es"): Promise<Project[]> {
   const projectsDirectory = path.join(
     process.cwd(),
     "content/projects",

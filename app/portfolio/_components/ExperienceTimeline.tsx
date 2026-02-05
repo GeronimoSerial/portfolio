@@ -1,4 +1,4 @@
-import { Briefcase, Calendar, GraduationCap } from "lucide-react";
+import { Briefcase, Calendar } from "lucide-react";
 import type { ComponentType } from "react";
 
 const experiences = [
@@ -21,15 +21,6 @@ const experiences = [
 		highlight:
 			"Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en produccion.",
 		icon: Briefcase,
-	},
-	{
-		title: "Formacion academica en Analisis de Sistemas",
-		organization: "Universidad Nacional del Nordeste (UNNE)",
-		period: "En curso - finalizacion estimada 2026",
-		summary:
-			"Mantengo una base metodologica en ingenieria de software, estructuras de datos, bases de datos y diseno de sistemas.",
-		highlight: "Aplico de forma directa esa base academica en proyectos de alta exigencia.",
-		icon: GraduationCap,
 	},
 ];
 

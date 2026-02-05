@@ -31,8 +31,8 @@ export default function ContactOpportunities() {
 						Estoy disponible para nuevos desafios
 					</h2>
 					<p className="text-zinc-400">
-						Si estas evaluando una colaboracion, una consultoria o una posicion,
-						contame el contexto tecnico y te digo como lo abordaria.
+						Si queres conversar una colaboracion, consultoria o posicion,
+						escribime por correo o LinkedIn.
 					</p>
 				</div>
 
@@ -68,8 +68,8 @@ export default function ContactOpportunities() {
 							<span className="text-sm">Corrientes, Argentina</span>
 						</div>
 						<p className="text-sm leading-relaxed text-zinc-400">
-							Respondo dentro de 24 a 48 horas. Si me compartis objetivo,
-							restricciones y stack actual, te doy una respuesta tecnica concreta.
+							Respuesta clara y directa para que puedas decidir rapido los
+							siguientes pasos.
 						</p>
 						<a
 							href="mailto:contacto@geroserial.com"
