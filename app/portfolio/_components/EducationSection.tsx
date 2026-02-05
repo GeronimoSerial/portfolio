@@ -1,179 +1,79 @@
-import { GraduationCap, Award, BookOpen } from "lucide-react";
+import { BookOpen, GraduationCap } from "lucide-react";
 
-export default function EducationSectionStatic() {
-	const education = [
-		{
-			degree: "Bachelor's in Systems Analysis",
-			institution: "Universidad Nacional del Nordeste (UNNE)",
-			location: "Corrientes, Argentina",
-			period: "2020 - 2026 (Expected)",
-			description:
-				"Comprehensive program covering software engineering, system design, database management, and project management.",
-			icon: GraduationCap,
-		},
-		{
-			degree: "Talentos Digitales - Full Stack Development",
-			institution: "Ministerio de Educación de Corrientes",
-			location: "Corrientes, Argentina",
-			period: "2022",
-			description:
-				"Intensive training in modern web development, agile methodologies, and collaborative projects.",
-			icon: Award,
-		},
-	];
+const education = [
+	{
+		title: "Tecnicatura / Licenciatura en Analisis de Sistemas",
+		institution: "Universidad Nacional del Nordeste (UNNE)",
+		period: "En curso - finalizacion estimada 2026",
+		summary:
+			"Me forme en diseno de sistemas, modelado de datos, arquitectura de software y metodologias de desarrollo.",
+	},
+	{
+		title: "Talentos Digitales - Full Stack",
+		institution: "Ministerio de Educacion de Corrientes",
+		period: "2022",
+		summary:
+			"Hice entrenamiento intensivo en desarrollo web moderno, trabajo colaborativo y ciclos de entrega agiles.",
+	},
+];
 
-	const certifications = [
-		"Agile Project Management",
-		"Cloud Infrastructure (AWS/Azure basics)",
-		"Database Administration",
-		"Software Architecture Design",
-	];
+const continuousLearning = [
+	"Gestion de proyectos agiles",
+	"Arquitectura de software y patrones",
+	"Infraestructura cloud y despliegue",
+	"Modelado y administracion de datos",
+];
 
+export default function EducationSection() {
 	return (
-		<section id="education" className="relative py-20 px-4">
-			<div className="container mx-auto max-w-4xl">
-				<div className="text-center mb-16">
-					<h2
-						className="text-4xl md:text-5xl font-display 
-                       text-zinc-950 dark:text-zinc-50 
-                       mb-4 gsap-element"
-					>
-						Education & Certifications
+		<section id="education" className="relative px-4 py-20">
+			<div className="container mx-auto max-w-6xl">
+				<div className="mb-12 max-w-3xl space-y-4">
+					<p className="text-sm tracking-wide text-zinc-500">Formacion</p>
+					<h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+						Sostengo base academica y aprendizaje continuo
 					</h2>
-					<div
-						className="w-20 h-1 
-                        bg-linear-to-r from-transparent 
-                        via-zinc-400 dark:via-zinc-300 
-                        to-transparent 
-                        mx-auto mb-4"
-					/>
-					<p
-						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto gsap-element"
-					>
-						Academic background and professional training
+					<p className="text-zinc-400">
+						Combino formacion formal con aprendizaje practico para tomar mejores
+						decisiones tecnicas en proyectos reales.
 					</p>
 				</div>
 
-				{/* Education */}
-				<div className="space-y-8 mb-12">
-					{education.map((edu, index) => {
-						const Icon = edu.icon;
-						return (
-							<div
-								key={index}
-								className="p-6 
-                         bg-black/5 dark:bg-white/5 
-                         border border-zinc-200 dark:border-zinc-800 
-                         rounded-lg 
-                         hover:border-zinc-400 dark:hover:border-zinc-700 
-                         hover:bg-black/10 dark:hover:bg-white/10 
-                         "
-							>
-								<div className="flex items-start gap-4">
-									<div
-										className="p-3 
-                                bg-zinc-100 dark:bg-zinc-900 
-                                border border-zinc-200 dark:border-zinc-800 
-                                rounded-lg gsap-element"
-									>
-										<Icon
-											className="w-6 h-6 
-                                   text-zinc-600 dark:text-zinc-400 
-                                   gsap-element"
-										/>
+				<div className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
+					<div className="space-y-5">
+						{education.map((item) => (
+							<article key={item.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+								<div className="mb-4 flex items-start gap-3">
+									<div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+										<GraduationCap className="h-5 w-5 text-zinc-300" />
 									</div>
-
-									<div className="flex-1">
-										<h3
-											className="text-xl 
-                                 text-zinc-950 dark:text-zinc-50 
-                                 font-semibold mb-1 gsap-element"
-										>
-											{edu.degree}
-										</h3>
-										<p
-											className="text-sm 
-                                text-zinc-600 dark:text-zinc-400 
-                                mb-1 gsap-element"
-										>
-											{edu.institution}
-										</p>
-										<p
-											className="text-sm 
-                                text-zinc-500 dark:text-zinc-500 
-                                mb-3 gsap-element"
-										>
-											{edu.location} • {edu.period}
-										</p>
-										<p
-											className="text-zinc-700 dark:text-zinc-300 
-                                leading-relaxed gsap-element"
-										>
-											{edu.description}
-										</p>
+									<div>
+										<h3 className="text-lg font-medium text-zinc-100">{item.title}</h3>
+										<p className="text-sm text-zinc-500">{item.institution}</p>
 									</div>
 								</div>
-							</div>
-						);
-					})}
-				</div>
-
-				{/* Certifications */}
-				<div
-					className="p-6 
-                      bg-black/5 dark:bg-white/5 
-                      border border-zinc-200 dark:border-zinc-800 
-                      rounded-lg gsap-element"
-				>
-					<div className="flex items-start gap-4">
-						<div
-							className="p-3 
-                          bg-zinc-100 dark:bg-zinc-900 
-                          border border-zinc-200 dark:border-zinc-800 
-                          rounded-lg gsap-element"
-						>
-							<BookOpen
-								className="w-6 h-6 
-                                 text-zinc-600 dark:text-zinc-400 
-                                 gsap-element"
-							/>
-						</div>
-
-						<div className="flex-1">
-							<h3
-								className="text-xl 
-                           text-zinc-950 dark:text-zinc-50 
-                           font-semibold mb-4 gsap-element"
-							>
-								Relevant Certifications & Training
-							</h3>
-
-							<ul className="grid md:grid-cols-2 gap-3">
-								{certifications.map((cert) => (
-									<li
-										key={cert}
-										className="flex items-center gap-2 text-sm 
-                             text-zinc-700 dark:text-zinc-300 
-                             gsap-element"
-									>
-										<svg
-											className="w-4 h-4 text-zinc-500 dark:text-zinc-500 shrink-0"
-											fill="currentColor"
-											viewBox="0 0 20 20"
-										>
-											<path
-												fillRule="evenodd"
-												d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-												clipRule="evenodd"
-											/>
-										</svg>
-										{cert}
-									</li>
-								))}
-							</ul>
-						</div>
+								<p className="mb-3 text-xs uppercase tracking-wide text-zinc-500">{item.period}</p>
+								<p className="text-sm leading-relaxed text-zinc-400">{item.summary}</p>
+							</article>
+						))}
 					</div>
+
+					<aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+						<div className="mb-4 flex items-center gap-3">
+							<div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+								<BookOpen className="h-5 w-5 text-zinc-300" />
+							</div>
+							<h3 className="text-lg font-medium text-zinc-100">Aprendizaje continuo</h3>
+						</div>
+						<ul className="space-y-2.5 text-sm text-zinc-400">
+							{continuousLearning.map((item) => (
+								<li key={item} className="flex items-start gap-2">
+									<span className="mt-2 h-1.5 w-1.5 rounded-full bg-zinc-500" />
+									<span>{item}</span>
+								</li>
+							))}
+						</ul>
+					</aside>
 				</div>
 			</div>
 		</section>

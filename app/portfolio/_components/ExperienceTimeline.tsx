@@ -1,180 +1,96 @@
-import { Briefcase, Calendar, Code, GraduationCap } from "lucide-react";
+import { Briefcase, Calendar, GraduationCap } from "lucide-react";
+import type { ComponentType } from "react";
 
-export default function ExperienceTimelineStatic() {
-	const experiences = [
-		{
-			title: "Help Desk",
-			company: "CGE Corrientes",
-			period: "2022 - Presente",
-			type: "full-time",
-			description:
-				"Soporte técnico nivel 1 y 2, gestión de proyectos audiovisuales en redes sociales, mantenimiento de infraestructura IT y capacitación a usuarios finales.",
-			technologies: ["Windows", "Linux", "Redes", "Soporte Técnico"],
-			icon: Briefcase,
-		},
-		{
-			title: "Freelance Developer",
-			company: "Independiente",
-			period: "2020 - Presente",
-			type: "freelance",
-			description:
-				"Desarrollo de aplicaciones web personalizadas, consultoría tecnológica, diseño e implementación de APIs y optimización de rendimiento web.",
-			technologies: ["React", "Next.js", "Node.js", "TypeScript", "MySQL"],
-			icon: Code,
-		},
-		{
-			title: "Talentos Digitales - FullStack",
-			company: "Telco, UNNE, PoloIT",
-			period: "2022",
-			type: "training",
-			description:
-				"Formación intensiva en desarrollo web full stack. Proyectos colaborativos utilizando metodologías ágiles (Scrum). Certificación en programación frontend y backend.",
-			technologies: ["HTML", "CSS", "JavaScript", "Angular", "C#", ".NET"],
-			icon: GraduationCap,
-		},
-	];
+const experiences = [
+	{
+		title: "Coordinacion Tecnologica Institucional",
+		organization: "Consejo General de Educacion de Corrientes",
+		period: "2022 - Actualidad",
+		summary:
+			"Coordino iniciativas de transformacion digital a escala provincial, con foco en infraestructura, arquitectura y continuidad operativa.",
+		highlight:
+			"Implemente sistemas multi-tenant, automatice despliegues y reduje tiempos de entrega.",
+		icon: Briefcase,
+	},
+	{
+		title: "Desarrollo y consultoria independiente",
+		organization: "Proyectos freelance",
+		period: "2020 - Actualidad",
+		summary:
+			"Diseno y construyo productos web para organizaciones con necesidades de integracion, rendimiento y escalabilidad.",
+		highlight:
+			"Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en produccion.",
+		icon: Briefcase,
+	},
+	{
+		title: "Formacion academica en Analisis de Sistemas",
+		organization: "Universidad Nacional del Nordeste (UNNE)",
+		period: "En curso - finalizacion estimada 2026",
+		summary:
+			"Mantengo una base metodologica en ingenieria de software, estructuras de datos, bases de datos y diseno de sistemas.",
+		highlight: "Aplico de forma directa esa base academica en proyectos de alta exigencia.",
+		icon: GraduationCap,
+	},
+];
 
+function ExperienceCard({
+	title,
+	organization,
+	period,
+	summary,
+	highlight,
+	icon: Icon,
+}: {
+	title: string;
+	organization: string;
+	period: string;
+	summary: string;
+	highlight: string;
+	icon: ComponentType<{ className?: string }>;
+}) {
 	return (
-		<section id="experience" className="relative min-h-screen py-20 px-4">
-			<div className="container mx-auto max-w-4xl">
-				<div className="text-center mb-16">
-					<h3
-						className="text-4xl md:text-5xl font-display 
-                       text-zinc-950 dark:text-zinc-50 
-                       mb-4 tracking-tight gsap-element"
-					>
-						<span
-							className="bg-linear-to-b 
-                           from-zinc-950 via-zinc-700 to-zinc-500
-                           dark:from-zinc-50 dark:via-zinc-200 dark:to-zinc-400 
-                           bg-clip-text text-transparent 
-                           drop-shadow-[0_0_40px_rgba(0,0,0,0.15)]
-                           dark:drop-shadow-[0_0_40px_rgba(255,255,255,0.15)]"
-						>
-							Experience
-						</span>
-					</h3>
-					<div className="flex items-center justify-center gap-3 mb-2">
-						<div
-							className="w-12 h-px 
-                          bg-linear-to-r from-transparent to-zinc-500"
-						/>
-						<div
-							className="w-2 h-2 rounded-full 
-                          bg-zinc-400 dark:bg-zinc-400 
-                          shadow-[0_0_10px_rgba(150,150,150,0.3)]"
-						/>
-						<div
-							className="w-12 h-px 
-                          bg-linear-to-l from-transparent to-zinc-500"
-						/>
+		<article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+			<div className="mb-4 flex items-start justify-between gap-4">
+				<div className="flex items-start gap-3">
+					<div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+						<Icon className="h-5 w-5 text-zinc-300" />
+					</div>
+					<div>
+						<h3 className="text-lg font-medium text-zinc-100">{title}</h3>
+						<p className="text-sm text-zinc-500">{organization}</p>
 					</div>
 				</div>
+				<div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-500">
+					<Calendar className="h-3.5 w-3.5" />
+					{period}
+				</div>
+			</div>
 
-				<div className="relative">
-					{/* Timeline line */}
-					<div
-						className="absolute left-8 top-0 bottom-0 w-px 
-                        bg-zinc-200 dark:bg-zinc-800 
-                        hidden md:block gsap-element"
-					/>
+			<p className="mb-3 text-sm leading-relaxed text-zinc-400">{summary}</p>
+			<p className="text-sm leading-relaxed text-zinc-200">{highlight}</p>
+		</article>
+	);
+}
 
-					<div className="space-y-12">
-						{experiences.map((exp, index) => {
-							const Icon = exp.icon;
-							return (
-								<div key={index} className="relative">
-									{/* Timeline dot */}
-									<div
-										className="absolute left-6 top-6 w-5 h-5 rounded-full 
-                                bg-white dark:bg-zinc-950 
-                                border-2 
-                                border-zinc-300 dark:border-zinc-700 
-                                hidden md:block z-10 gsap-element"
-									/>
+export default function ExperienceTimeline() {
+	return (
+		<section id="experience" className="relative px-4 py-20">
+			<div className="container mx-auto max-w-6xl">
+				<div className="mb-12 max-w-3xl space-y-4">
+					<p className="text-sm tracking-wide text-zinc-500">Trayectoria</p>
+					<h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+						Mi experiencia esta enfocada en resolver problemas reales
+					</h2>
+					<p className="text-zinc-400">
+						En cada etapa asumi contexto, ejecute soluciones y deje sistemas mas
+						estables para el equipo.
+					</p>
+				</div>
 
-									{/* Content card */}
-									<div className="md:ml-20">
-										<div
-											className="p-6 
-                                  bg-black/5 dark:bg-white/5 
-                                  border border-zinc-200 dark:border-zinc-800 
-                                  rounded-lg 
-                                  hover:border-zinc-400 dark:hover:border-zinc-700 
-                                  hover:bg-black/10 dark:hover:bg-white/10 
-                                  "
-										>
-											<div className="flex items-start gap-4 mb-4">
-												<div
-													className="p-3 
-                                      bg-zinc-100 dark:bg-zinc-900 
-                                      border border-zinc-200 dark:border-zinc-800 
-                                      rounded-lg gsap-element"
-												>
-													<Icon
-														className="w-6 h-6 
-                                         text-zinc-600 dark:text-zinc-400 
-                                         gsap-element"
-													/>
-												</div>
-
-												<div className="flex-1">
-													<div className="flex items-start justify-between gap-4 mb-2">
-														<div>
-															<h4
-																className="text-xl 
-                                           text-zinc-950 dark:text-zinc-50 
-                                           font-semibold mb-1 gsap-element"
-															>
-																{exp.title}
-															</h4>
-															<p
-																className="text-sm 
-                                          text-zinc-600 dark:text-zinc-400 
-                                          gsap-element"
-															>
-																{exp.company}
-															</p>
-														</div>
-														<div
-															className="flex items-center gap-2 
-                                          text-zinc-500 dark:text-zinc-500 
-                                          text-sm shrink-0 gsap-element"
-														>
-															<Calendar className="w-4 h-4" />
-															<span>{exp.period}</span>
-														</div>
-													</div>
-
-													<p
-														className="text-zinc-700 dark:text-zinc-300 
-                                      mb-4 leading-relaxed gsap-element"
-													>
-														{exp.description}
-													</p>
-
-													<div className="flex flex-wrap gap-2">
-														{exp.technologies.map((tech) => (
-															<span
-																key={tech}
-																className="px-3 py-1 text-xs font-medium 
-                                         text-zinc-700 dark:text-zinc-300 
-                                         bg-zinc-100 dark:bg-zinc-900 
-                                         border border-zinc-200 dark:border-zinc-800 
-                                         rounded-full gsap-element"
-															>
-																{tech}
-															</span>
-														))}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							);
-						})}
-					</div>
+				<div className="space-y-5">
+					{experiences.map((item) => (
+						<ExperienceCard key={item.title} {...item} />
+					))}
 				</div>
 			</div>
 		</section>

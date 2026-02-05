@@ -1,119 +1,112 @@
-import { MapPin, Download, Linkedin, Github, Mail } from "lucide-react";
+import Image from "next/image";
+import { ArrowDown, Mail, MapPin } from "lucide-react"; 
 
-export default function PortfolioHeroStatic() {
-	return (
-		<section
-			id="hero"
-			className="relative pt-32 pb-20 px-4 min-h-[60vh] flex items-center"
-		>
-			<div className="container mx-auto max-w-4xl">
-				<div className="text-center">
-					<h1
-						className="text-5xl md:text-7xl font-display 
-                       text-zinc-950 dark:text-zinc-50 
-                       mb-4 gsap-element"
-					>
-						Geronimo Serial
-					</h1>
+const highlights = [
+  { label: "Proyectos entregados", value: "15+" },
+  { label: "Organizaciones", value: "3+" },
+  { label: "Años de experiencia", value: "2+" },
+];
 
-					<p
-						className="text-xl md:text-2xl 
-                      text-zinc-600 dark:text-zinc-400 
-                      mb-6 gsap-element"
-					>
-						Systems Analyst & Full Stack Developer
-					</p>
+export default function PortfolioHero() {
+  return (
+    <section id="hero" className="relative px-4 pt-28 pb-20">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start">
+          <div className="space-y-8">
+            <p className="text-sm tracking-wide text-zinc-500">
+              Perfil profesional
+            </p>
+            <div className="space-y-4">
+              <h1 className="text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
+                Geronimo Serial
+              </h1>
+              <p className="max-w-2xl text-xl text-zinc-300 md:text-2xl">
+                Ingeniero de software full-stack orientado a entornos
+                productivos, especializado en arquitectura escalable,
+                infraestructura y performance.
+              </p>
+            </div>
 
-					<div
-						className="flex items-center justify-center gap-2 
-                        text-zinc-500 dark:text-zinc-500 
-                        mb-8 gsap-element"
-					>
-						<MapPin className="w-4 h-4" />
-						<span className="text-sm">Corrientes, Argentina</span>
-					</div>
+            <div className="max-w-2xl space-y-4 text-zinc-400">
+              <p>
+                Trabajo actualmente en sistemas multi-tenant sobre PostgreSQL
+                con Row-Level Security, arquitectura por capas y despliegues
+                automatizados en Linux.
+              </p>
+              <p>
+                Cuando tomo un proyecto, mi objetivo es simple: bajar
+                complejidad, subir confiabilidad y dejar una base fácil de
+                mantener.
+              </p>
+            </div>
 
-					<div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-						<a
-							href="mailto:contacto@geroserial.com"
-							className="flex items-center gap-2 px-4 py-2 text-sm 
-                       text-zinc-700 dark:text-zinc-300 
-                       bg-black/5 dark:bg-white/5 
-                       border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
-                       hover:bg-black/10 dark:hover:bg-white/10 
-                       hover:border-zinc-400 dark:hover:border-zinc-500 
-                       "
-						>
-							<Mail className="w-4 h-4" />
-							contacto@geroserial.com
-						</a>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+                <MapPin className="h-4 w-4" />
+                Corrientes, Argentina
+              </span>
+              <a
+                href="mailto:contacto@geroserial.com"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 transition-colors hover:border-white/20 hover:bg-white/10"
+              >
+                <Mail className="h-4 w-4" />
+                contacto@geroserial.com
+              </a>
+            </div>
 
-						<a
-							href="https://github.com/geroserial"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="flex items-center gap-2 px-4 py-2 text-sm 
-                       text-zinc-700 dark:text-zinc-300 
-                       bg-black/5 dark:bg-white/5 
-                       border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
-                       hover:bg-black/10 dark:hover:bg-white/10 
-                       hover:border-zinc-400 dark:hover:border-zinc-500 
-                       "
-						>
-							<Github className="w-4 h-4" />
-							GitHub
-						</a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#architecture"
+                className="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
+              >
+                Ver como trabajo
+                <ArrowDown className="h-4 w-4" />
+              </a>
+              <a
+                href="#resume"
+                className="inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
+              >
+                Ir al CV
+              </a>
+            </div>
+          </div>
 
-						<a
-							href="https://linkedin.com/in/geroserial"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="flex items-center gap-2 px-4 py-2 text-sm 
-                       text-zinc-700 dark:text-zinc-300 
-                       bg-black/5 dark:bg-white/5 
-                       border border-zinc-200 dark:border-zinc-800 
-                       rounded-lg 
-                       hover:bg-black/10 dark:hover:bg-white/10 
-                       hover:border-zinc-400 dark:hover:border-zinc-500 
-                       "
-						>
-							<Linkedin className="w-4 h-4" />
-							LinkedIn
-						</a>
-					</div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="mb-6 flex items-center gap-4">
+              <Image
+                src="/assets/images/profile_photo.jpeg"
+                width={104}
+                height={104}
+                alt="Geronimo Serial"
+                className="h-24 w-24 rounded-xl object-cover"
+              />
+              <div>
+                <p className="text-sm text-zinc-500">Rol actual</p>
+                <p className="text-zinc-200">
+                  Coordinador Tecnologico Institucional
+                </p>
+                <p className="text-sm text-zinc-500">
+                  Consejo General de Educacion
+                </p>
+              </div>
+            </div>
 
-					<div className="flex flex-wrap items-center justify-center gap-4">
-						<a
-							href="#resume"
-							className="flex items-center gap-2 px-6 py-3 text-sm font-medium 
-                       text-white dark:text-black 
-                       bg-black dark:bg-white 
-                       rounded-lg 
-                       hover:bg-zinc-800 dark:hover:bg-zinc-100 
-                       gsap-element"
-						>
-							<Download className="w-4 h-4" />
-							Download Resume
-						</a>
-
-						<a
-							href="#contact"
-							className="px-6 py-3 text-sm font-medium 
-                       text-zinc-700 dark:text-white 
-                       bg-black/10 dark:bg-white/10 
-                       border border-zinc-300 dark:border-zinc-700 
-                       rounded-lg 
-                       hover:bg-black/20 dark:hover:bg-white/20 
-                       hover:border-zinc-500 dark:hover:border-zinc-500 
-                       "
-						>
-							Open to Opportunities
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+            <div className="grid grid-cols-2 gap-3">
+              {highlights.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-xl border border-white/10 bg-white/[0.02] p-4"
+                >
+                  <p className="text-2xl font-semibold text-zinc-100">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 text-xs text-zinc-500">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

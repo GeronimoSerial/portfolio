@@ -5,7 +5,7 @@
 
 export interface Skill {
 	name: string;
-	svglId: string; // ID from svgl.dev
+	svglId: string;
 }
 
 export interface SkillCategory {
@@ -15,47 +15,77 @@ export interface SkillCategory {
 
 export const skillsData: SkillCategory[] = [
 	{
-		key: "frontend",
+		key: "architecture",
 		skills: [
-			{ name: "React", svglId: "react_dark" },
-			{ name: "Next.js", svglId: "nextjs_icon_dark" },
-			{ name: "Tailwind CSS", svglId: "tailwindcss" },
-			{ name: "Bootstrap", svglId: "bootstrap" },
-		],
-	},
-	{
-		key: "backend",
-		skills: [
-			{ name: "Node.js", svglId: "nodejs" },
-			{ name: "Express", svglId: "expressjs_dark" },
-			{ name: "ASP.NET", svglId: "dotnet" },
-			{ name: "Strapi", svglId: "strapi" },
-			{ name: "Redis", svglId: "redis" },
-			{ name: "Prisma", svglId: "prisma_dark" },
-			{ name: "Git", svglId: "git" },
-			{ name: "GitHub", svglId: "github_dark" },
+			{ name: "Next.js App Router", svglId: "nextjs_icon_dark" },
+			{ name: "React Server Components", svglId: "react_dark" },
+			{ name: "Server Actions", svglId: "nextjs_icon_dark" },
+			{ name: "ISR / SSG / SSR", svglId: "vercel" },
+			{ name: "PWA", svglId: "pwa" },
+			{ name: "Service Workers", svglId: "javascript" },
 		],
 	},
 	{
 		key: "data",
 		skills: [
-			{ name: "SQL Server", svglId: "sql-server" },
 			{ name: "PostgreSQL", svglId: "postgresql" },
-			{ name: "SQLite", svglId: "sqlite" },
-			{ name: "Power BI", svglId: "microsoft-power-bi" },
-			{ name: "Excel", svglId: "microsoft-excel" },
+			{ name: "JSON / JSONB", svglId: "json" },
+			{ name: "Prisma", svglId: "prisma_dark" },
+			{ name: "Kysely", svglId: "typescript" },
+			{ name: "DuckDB", svglId: "duckdb" },
+			{ name: "Row Level Security", svglId: "postgresql" },
+			{ name: "Multi-tenant SaaS", svglId: "vercel" },
 		],
 	},
 	{
-		key: "languages",
+		key: "backend",
 		skills: [
-			{ name: "C", svglId: "c" },
-			{ name: "C#", svglId: "csharp" },
-			{ name: "Java", svglId: "java" },
-			{ name: "JavaScript", svglId: "javascript" },
-			{ name: "TypeScript", svglId: "typescript" },
-			{ name: "PHP", svglId: "php_dark" },
-			{ name: "Common Lisp", svglId: "lisp" },
+			{ name: "Webhooks", svglId: "webhook" },
+			{ name: "API Design", svglId: "api" },
+			{ name: "RAG", svglId: "openai" },
+			{ name: "Real-time Events", svglId: "websocket" },
+			{ name: "Cron Jobs", svglId: "github_actions" },
+			{ name: "n8n", svglId: "n8n" },
+		],
+	},
+	{
+		key: "infrastructure",
+		skills: [
+			{ name: "Docker", svglId: "docker" },
+			{ name: "GitHub Actions", svglId: "github_actions" },
+			{ name: "CI/CD", svglId: "github_actions" },
+			{ name: "VPS / Linux", svglId: "linux" },
+			{ name: "Vercel", svglId: "vercel" },
+			{ name: "Ngrok", svglId: "ngrok" },
+			{ name: "Git", svglId: "git" },
+		],
+	},
+	{
+		key: "performance",
+		skills: [
+			{ name: "Caching Strategies", svglId: "redis" },
+			{ name: "Database Indexing", svglId: "postgresql" },
+			{ name: "SRE Practices", svglId: "datadog" },
+			{ name: "CDN", svglId: "cloudflare" },
+			{ name: "Sparse Checkout", svglId: "git" },
+		],
+	},
+	{
+		key: "software",
+		skills: [
+			{ name: "Domain-Driven Design", svglId: "ddd" },
+			{ name: "Layered Architecture", svglId: "architecture" },
+			{ name: "Modularización", svglId: "typescript" },
+			{ name: "Unit Testing", svglId: "vitest" },
+		],
+	},
+	{
+		key: "security",
+		skills: [
+			{ name: "OAuth", svglId: "oauth" },
+			{ name: "Rate Limiting", svglId: "security" },
+			{ name: "ETL Pipelines", svglId: "data" },
+			{ name: "Google Sheets API", svglId: "google" },
 		],
 	},
 ];

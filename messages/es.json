@@ -68,20 +68,29 @@
     "cta": "Solicitar presupuesto"
   },
   "skills": {
-    "title": "Habilidades Técnicas",
-    "subtitle": "Tecnologías y herramientas con las que trabajo para construir soluciones efectivas",
+    "title": "Stack Técnico",
+    "subtitle": "Arquitectura, infraestructura y herramientas de desarrollo",
     "categories": {
-      "frontend": {
-        "title": "Frontend"
-      },
-      "backend": {
-        "title": "Backend"
+      "architecture": {
+        "title": "Arquitectura & Rendering"
       },
       "data": {
-        "title": "Análisis de Datos"
+        "title": "Data & Persistence"
       },
-      "languages": {
-        "title": "Lenguajes de Programación"
+      "backend": {
+        "title": "Backend & APIs"
+      },
+      "infrastructure": {
+        "title": "Infrastructure & DevOps"
+      },
+      "performance": {
+        "title": "Performance & Optimization"
+      },
+      "software": {
+        "title": "Software Architecture"
+      },
+      "security": {
+        "title": "Security & Integrations"
       }
     }
   },

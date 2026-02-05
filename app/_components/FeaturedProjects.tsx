@@ -28,23 +28,17 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
     <section
       id="projects"
       ref={containerRef}
-      className="relative min-h-screen py-20 px-4 overflow-hidden"
+      className="relative px-4 py-20 overflow-hidden"
     >
-      {/* ==== Header ==== */}
-      <div ref={headlineRef} className="mb-16">
-        <div className="relative mx-4 my-4 flex flex-col items-center justify-center gap-4 text-center sm:mx-0 sm:mb-0 sm:flex-row flex-wrap">
-          <h2 className="word text-4xl md:text-5xl lg:text-6xl font-semibold text-zinc-900 dark:text-zinc-50">
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div ref={headlineRef} className="mb-12 max-w-3xl space-y-4">
+          <p className="text-sm tracking-wide text-zinc-500">Proyectos</p>
+          <h2 className="word text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
             {t("title")}
           </h2>
+          <p className="projects-subtitle text-zinc-400">{t("subtitle")}</p>
         </div>
-        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent mx-auto mt-3 mb-6 process-divider" />
 
-        <p className="projects-subtitle mt-6 mb-4 text-center text-base text-zinc-600 dark:text-zinc-400">
-          {t("subtitle")}
-        </p>
-      </div>
-
-      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />

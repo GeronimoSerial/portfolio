@@ -1,11 +1,21 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-
 import { useSkillsAnimations } from "@/hooks/useSkillsAnimations";
 import { skillsData } from "@/lib/skills-data";
 import Image from "next/image";
 import { useState } from "react";
+import { Terminal, Database, Server, Cloud, Zap, Layers, Shield } from "lucide-react";
+
+const categoryIcons: Record<string, React.ReactNode> = {
+	architecture: <Terminal className="w-4 h-4" />,
+	data: <Database className="w-4 h-4" />,
+	backend: <Server className="w-4 h-4" />,
+	infrastructure: <Cloud className="w-4 h-4" />,
+	performance: <Zap className="w-4 h-4" />,
+	software: <Layers className="w-4 h-4" />,
+	security: <Shield className="w-4 h-4" />,
+};
 
 export default function Skills() {
 	const t = useTranslations("skills");
@@ -15,76 +25,77 @@ export default function Skills() {
 	const activeCategory = skillsData.find((cat) => cat.key === activeTab);
 
 	return (
-		<section ref={containerRef} id="skills" className="relative py-20 px-4">
-			<div className="container mx-auto max-w-6xl">
+		<section ref={containerRef} id="skills" className="relative py-16 px-4">
+			<div className="container mx-auto max-w-5xl">
 				{/* Header */}
-				<div className="skills-header text-center mb-12">
-					<h2 className="text-3xl md:text-5xl font-display text-zinc-950 dark:text-white mb-3">
+				<div className="skills-header mb-8">
+					<div className="flex items-center gap-3 mb-2">
+						<div className="px-2 py-1 bg-zinc-800 dark:bg-zinc-200 rounded text-xs font-mono text-zinc-200 dark:text-zinc-800">
+							$ stack --list
+						</div>
+					</div>
+					<h2 className="text-2xl md:text-3xl font-mono font-semibold text-zinc-950 dark:text-white">
 						{t("title")}
 					</h2>
-					<p className="text-base md:text-lg text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto">
+					<p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono mt-1">
 						{t("subtitle")}
 					</p>
 				</div>
 
-				{/* Tabs Layout */}
-				<div className="flex flex-col md:flex-row gap-6 md:gap-8">
-					{/* Tabs - Horizontal en mobile, Vertical en desktop */}
-					<div className="flex md:flex-col gap-2 overflow-x-auto md:overflow-visible md:w-48 flex-shrink-0">
+				{/* Layout: Tabs + Grid */}
+				<div className="flex flex-col lg:flex-row gap-6">
+					{/* Tabs - Compact horizontal scroll */}
+					<div className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible lg:w-56 flex-shrink-0 pb-2 lg:pb-0">
 						{skillsData.map((category) => (
 							<button
+								type="button"
 								key={category.key}
 								onClick={() => setActiveTab(category.key)}
 								className={`
-                  tab-button px-4 py-3 rounded-lg text-left
-                  transition-all duration-300
-                  whitespace-nowrap md:whitespace-normal
-                  ${
+									tab-button flex items-center gap-2 px-3 py-2 rounded-md text-left
+									transition-all duration-200 text-sm
+									whitespace-nowrap lg:whitespace-normal
+									font-mono
+									${
 										activeTab === category.key
-											? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium"
-											: "bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800"
+											? "bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 border border-zinc-700 dark:border-zinc-300"
+											: "bg-transparent text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent"
 									}
-                `}
+								`}
 							>
+								<span className={activeTab === category.key ? "text-cyan-400 dark:text-cyan-600" : "text-zinc-400"}>
+									{categoryIcons[category.key]}
+								</span>
 								{t(`categories.${category.key}.title`)}
 							</button>
 						))}
 					</div>
 
-					{/* Skills Content */}
+					{/* Skills Grid - Dense layout */}
 					<div className="flex-1">
-						<div className="skills-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+						<div className="skills-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
 							{activeCategory?.skills.map((skill, index) => (
 								<div
 									key={`${skill.svglId}-${index}`}
-									className="skill-card group relative p-4
-                            bg-gradient-to-b from-zinc-50/30 to-zinc-100/30 
-                            dark:from-zinc-900/50 dark:to-zinc-800/30
-                            border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg
-                            hover:border-zinc-300 dark:hover:border-zinc-700
-                            transition-all duration-300
-                            shadow-md shadow-zinc-200/50 dark:shadow-zinc-900/50"
+									className="skill-card group relative p-3
+										bg-zinc-900/5 dark:bg-zinc-100/5
+										border border-zinc-200 dark:border-zinc-800
+										rounded-md
+										hover:border-cyan-500/50 dark:hover:border-cyan-400/50
+										transition-all duration-200"
 								>
-									{/* Icon Container */}
 									<div className="skill-icon-container flex flex-col items-center gap-2">
-										<div
-											className="w-12 h-12 md:w-16 md:h-16 relative
-                                  flex items-center justify-center
-                                  group-hover:scale-110 transition-transform duration-300"
-										>
+										<div className="w-8 h-8 relative flex items-center justify-center">
 											<Image
 												src={`https://svgl.app/library/${skill.svglId}.svg`}
 												alt={skill.name}
-												width={64}
-												height={64}
-												className="w-full h-full object-contain"
+												width={32}
+												height={32}
+												className="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
 												unoptimized
 											/>
 										</div>
-
-										{/* Skill Name */}
-										<span className="skill-name text-xs md:text-sm font-medium text-zinc-800 dark:text-zinc-200 text-center">
+										<span className="skill-name text-xs font-mono text-zinc-600 dark:text-zinc-400 text-center leading-tight">
 											{skill.name}
 										</span>
 									</div>

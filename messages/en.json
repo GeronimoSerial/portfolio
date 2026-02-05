@@ -66,6 +66,33 @@
     },
     "cta": "Request a quote"
   },
+  "skills": {
+    "title": "Technical Stack",
+    "subtitle": "Architecture, infrastructure and development tools",
+    "categories": {
+      "architecture": {
+        "title": "Architecture & Rendering"
+      },
+      "data": {
+        "title": "Data & Persistence"
+      },
+      "backend": {
+        "title": "Backend & APIs"
+      },
+      "infrastructure": {
+        "title": "Infrastructure & DevOps"
+      },
+      "performance": {
+        "title": "Performance & Optimization"
+      },
+      "software": {
+        "title": "Software Architecture"
+      },
+      "security": {
+        "title": "Security & Integrations"
+      }
+    }
+  },
   "process": {
     "title": "Process",
     "subtitle": "A clear and collaborative way to build technology that works.",

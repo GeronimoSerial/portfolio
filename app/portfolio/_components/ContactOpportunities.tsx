@@ -1,272 +1,84 @@
-import { Mail, MapPin, Github, Linkedin, Calendar } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
 
-export default function ContactOpportunitiesStatic() {
+const channels = [
+	{
+		label: "Correo",
+		value: "contacto@geroserial.com",
+		href: "mailto:contacto@geroserial.com",
+		icon: Mail,
+	},
+	{
+		label: "GitHub",
+		value: "@geroserial",
+		href: "https://github.com/geroserial",
+		icon: Github,
+	},
+	{
+		label: "LinkedIn",
+		value: "Geronimo Serial",
+		href: "https://linkedin.com/in/geroserial",
+		icon: Linkedin,
+	},
+];
+
+export default function ContactOpportunities() {
 	return (
-		<section id="contact" className="relative py-20 px-4">
-			<div className="container mx-auto max-w-4xl">
-				<div className="text-center mb-16">
-					<h2
-						className="text-4xl md:text-5xl font-display 
-                       text-zinc-950 dark:text-zinc-50 
-                       mb-4 gsap-element"
-					>
-						Let's Connect
+		<section id="contact" className="relative px-4 py-20">
+			<div className="container mx-auto max-w-6xl">
+				<div className="mb-12 max-w-3xl space-y-4">
+					<p className="text-sm tracking-wide text-zinc-500">Contacto</p>
+					<h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+						Estoy disponible para nuevos desafios
 					</h2>
-					<div
-						className="w-20 h-1 
-                        bg-linear-to-r from-transparent 
-                        via-zinc-400 dark:via-zinc-300 
-                        to-transparent 
-                        mx-auto mb-4"
-					/>
-					<p
-						className="text-zinc-600 dark:text-zinc-400 
-                      max-w-2xl mx-auto gsap-element"
-					>
-						Open to new opportunities and collaborations
+					<p className="text-zinc-400">
+						Si estas evaluando una colaboracion, una consultoria o una posicion,
+						contame el contexto tecnico y te digo como lo abordaria.
 					</p>
 				</div>
 
-				{/* Contact Info Grid */}
-				<div className="grid md:grid-cols-2 gap-6 mb-12">
-					<a
-						href="mailto:contacto@geroserial.com"
-						className="p-6 
-                     bg-black/5 dark:bg-white/5 
-                     border border-zinc-200 dark:border-zinc-800 
-                     rounded-lg 
-                     hover:border-zinc-400 dark:hover:border-zinc-700 
-                     hover:bg-black/10 dark:hover:bg-white/10 
-                     "
-					>
-						<div className="flex items-center gap-4">
-							<div
-								className="p-3 
-                            bg-zinc-100 dark:bg-zinc-900 
-                            border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg gsap-element"
-							>
-								<Mail
-									className="w-5 h-5 
-                               text-zinc-600 dark:text-zinc-400 
-                               gsap-element"
-								/>
-							</div>
-							<div>
-								<p
-									className="text-xs 
-                            text-zinc-500 dark:text-zinc-500 
-                            mb-1 gsap-element"
+				<div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+					<div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+						<div className="space-y-4">
+							{channels.map((channel) => (
+								<a
+									key={channel.label}
+									href={channel.href}
+									target={channel.href.startsWith("http") ? "_blank" : undefined}
+									rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
+									className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] p-4 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
 								>
-									Email
-								</p>
-								<p
-									className="text-sm 
-                            text-zinc-900 dark:text-zinc-100 
-                            gsap-element"
-								>
-									contacto@geroserial.com
-								</p>
-							</div>
-						</div>
-					</a>
-
-					<div
-						className="p-6 
-                        bg-black/5 dark:bg-white/5 
-                        border border-zinc-200 dark:border-zinc-800 
-                        rounded-lg gsap-element"
-					>
-						<div className="flex items-center gap-4">
-							<div
-								className="p-3 
-                            bg-zinc-100 dark:bg-zinc-900 
-                            border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg gsap-element"
-							>
-								<MapPin
-									className="w-5 h-5 
-                                 text-zinc-600 dark:text-zinc-400 
-                                 gsap-element"
-								/>
-							</div>
-							<div>
-								<p
-									className="text-xs 
-                            text-zinc-500 dark:text-zinc-500 
-                            mb-1 gsap-element"
-								>
-									Location
-								</p>
-								<p
-									className="text-sm 
-                            text-zinc-900 dark:text-zinc-100 
-                            gsap-element"
-								>
-									Corrientes, Argentina
-								</p>
-							</div>
+									<div className="flex items-center gap-3">
+										<div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+											<channel.icon className="h-5 w-5 text-zinc-300" />
+										</div>
+										<div>
+											<p className="text-xs uppercase tracking-wide text-zinc-500">{channel.label}</p>
+											<p className="text-sm text-zinc-200">{channel.value}</p>
+										</div>
+									</div>
+									<ArrowUpRight className="h-4 w-4 text-zinc-500" />
+								</a>
+							))}
 						</div>
 					</div>
 
-					<a
-						href="https://github.com/geroserial"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="p-6 
-                     bg-black/5 dark:bg-white/5 
-                     border border-zinc-200 dark:border-zinc-800 
-                     rounded-lg 
-                     hover:border-zinc-400 dark:hover:border-zinc-700 
-                     hover:bg-black/10 dark:hover:bg-white/10 
-                     "
-					>
-						<div className="flex items-center gap-4">
-							<div
-								className="p-3 
-                            bg-zinc-100 dark:bg-zinc-900 
-                            border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg gsap-element"
-							>
-								<Github
-									className="w-5 h-5 
-                                 text-zinc-600 dark:text-zinc-400 
-                                 gsap-element"
-								/>
-							</div>
-							<div>
-								<p
-									className="text-xs 
-                            text-zinc-500 dark:text-zinc-500 
-                            mb-1 gsap-element"
-								>
-									GitHub
-								</p>
-								<p
-									className="text-sm 
-                            text-zinc-900 dark:text-zinc-100 
-                            gsap-element"
-								>
-									@geroserial
-								</p>
-							</div>
+					<aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+						<div className="mb-4 flex items-center gap-2 text-zinc-300">
+							<MapPin className="h-4 w-4" />
+							<span className="text-sm">Corrientes, Argentina</span>
 						</div>
-					</a>
-
-					<a
-						href="https://linkedin.com/in/geroserial"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="p-6 
-                     bg-black/5 dark:bg-white/5 
-                     border border-zinc-200 dark:border-zinc-800 
-                     rounded-lg 
-                     hover:border-zinc-400 dark:hover:border-zinc-700 
-                     hover:bg-black/10 dark:hover:bg-white/10 
-                     "
-					>
-						<div className="flex items-center gap-4">
-							<div
-								className="p-3 
-                            bg-zinc-100 dark:bg-zinc-900 
-                            border border-zinc-200 dark:border-zinc-800 
-                            rounded-lg gsap-element"
-							>
-								<Linkedin
-									className="w-5 h-5 
-                                   text-zinc-600 dark:text-zinc-400 
-                                   gsap-element"
-								/>
-							</div>
-							<div>
-								<p
-									className="text-xs 
-                            text-zinc-500 dark:text-zinc-500 
-                            mb-1 gsap-element"
-								>
-									LinkedIn
-								</p>
-								<p
-									className="text-sm 
-                            text-zinc-900 dark:text-zinc-100 
-                            gsap-element"
-								>
-									Geronimo Serial
-								</p>
-							</div>
-						</div>
-					</a>
-				</div>
-
-				{/* Availability Card */}
-				<div
-					className="p-8 
-                      bg-linear-to-br 
-                      from-black/10 to-black/5
-                      dark:from-white/10 dark:to-white/5 
-                      border 
-                      border-zinc-300 dark:border-zinc-700 
-                      rounded-lg text-center gsap-element"
-				>
-					<div className="flex items-center justify-center gap-2 mb-4">
-						<Calendar
-							className="w-5 h-5 
-                               text-zinc-700 dark:text-zinc-300 
-                               gsap-element"
-						/>
-						<h3
-							className="text-xl 
-                         text-zinc-950 dark:text-zinc-50 
-                         font-semibold gsap-element"
-						>
-							Currently Available
-						</h3>
-					</div>
-					<p
-						className="text-zinc-700 dark:text-zinc-300 
-                      mb-6 max-w-xl mx-auto gsap-element"
-					>
-						I'm open to freelance projects, consulting opportunities, and
-						full-time positions. Let's discuss how I can help bring your ideas
-						to life.
-					</p>
-					<div className="flex flex-wrap items-center justify-center gap-4">
+						<p className="text-sm leading-relaxed text-zinc-400">
+							Respondo dentro de 24 a 48 horas. Si me compartis objetivo,
+							restricciones y stack actual, te doy una respuesta tecnica concreta.
+						</p>
 						<a
 							href="mailto:contacto@geroserial.com"
-							className="px-6 py-3 text-sm font-medium 
-                       text-white dark:text-black 
-                       bg-black dark:bg-white 
-                       rounded-lg 
-                       hover:bg-zinc-800 dark:hover:bg-zinc-100 
-                       gsap-element"
+							className="mt-6 inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
 						>
-							Send Email
+							Enviar mensaje
+							<ArrowUpRight className="h-4 w-4" />
 						</a>
-						<a
-							href="#resume"
-							className="px-6 py-3 text-sm font-medium 
-                       text-zinc-700 dark:text-white 
-                       bg-black/10 dark:bg-white/10 
-                       border border-zinc-300 dark:border-zinc-700 
-                       rounded-lg 
-                       hover:bg-black/20 dark:hover:bg-white/20 
-                       hover:border-zinc-500 dark:hover:border-zinc-500 
-                       "
-						>
-							View Resume
-						</a>
-					</div>
-				</div>
-
-				{/* Footer Note */}
-				<div className="mt-12 text-center">
-					<p
-						className="text-sm 
-                      text-zinc-500 dark:text-zinc-500 
-                      gsap-element"
-					>
-						Response time: Usually within 24-48 hours
-					</p>
+					</aside>
 				</div>
 			</div>
 		</section>
