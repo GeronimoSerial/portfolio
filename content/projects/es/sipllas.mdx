@@ -1,0 +1,188 @@
+---
+title: "Sistema de Planillas de Novedades"
+description: "Sistema web crítico para la gestión de planillas de novedades del personal docente y no docente, orientado a escala, trazabilidad y confiabilidad."
+date: "2024-03-01"
+url: "https://consejo.mec.gob.ar"
+repository: "https://github.com/geronimoserial/SIPLLAS"
+published: true
+index: 5
+---
+
+<Image
+  src="/assets/images/projects/sipllas/image.png"
+  alt="Sistema de Planillas de Novedades - Panel de control"
+  width={1200}
+  height={600}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+---
+
+## Sistema de Planillas de Novedades
+
+**Problema · Solución · Impacto**  
+**Fecha:** Marzo 2024 - Actualidad  
+**Cliente:** Consejo General de Educación de Corrientes
+
+---
+
+## Problema
+
+El Consejo General de Educación enfrentaba desafíos estructurales en la gestión mensual de novedades del personal docente y no docente:
+
+- **Procesos manuales y descentralizados** (papel, planillas sueltas, correos electrónicos)
+- **Escala elevada:** >1000 establecimientos, miles de agentes, ejecución mensual
+- **Ausencia de validaciones en origen**, generando errores en etapas posteriores
+- **Nula trazabilidad:** sin estados claros, sin visibilidad de avance ni responsables
+- **Alto costo operativo** para supervisores y áreas centrales
+- **Riesgo sistémico:** inconsistencias con impacto directo en liquidaciones salariales
+
+El desafío técnico no era solo digitalizar, sino diseñar un sistema confiable para producción, capaz de absorber volumen, reducir errores y modelar correctamente el dominio.
+
+---
+
+## Solución
+
+Implementación de un sistema web centralizado, orientado a procesos, con foco en integridad de datos, validación temprana y separación de responsabilidades.
+
+### Características principales
+
+**Ciclo mensual estandarizado**  
+Flujo con estados definidos: pendiente → presentada → observada → validada, con reglas de negocio explícitas sobre qué se puede modificar y cuándo.
+
+<Image
+  src="/assets/images/projects/sipllas/flujo.png"
+  alt="Ciclo de vida de planillas con estados y transiciones"
+  width={800}
+  height={200}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+**Validaciones en tiempo real**  
+Controles sintácticos y semánticos en el momento de carga, previniendo estados inconsistentes desde el frontend hasta la capa de dominio.
+
+<Image
+  src="/assets/images/projects/sipllas/validaciones.png"
+  alt="Panel de validaciones con errores y advertencias"
+  width={1200}
+  height={450}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+**Observabilidad y métricas**  
+Estado de cumplimiento visible en tiempo real por escuela, supervisor, localidad y período.
+
+**Gestión por roles**  
+Identificación clara de actores y responsabilidades (escuela, supervisor, área central) con permisos y acciones definidos por estado.
+
+**Auditoría completa**  
+Registro de todas las transiciones, observaciones y correcciones para trazabilidad institucional.
+
+---
+
+## Stack Tecnológico
+
+<TechStackSection />
+
+**Arquitectura:** Separación por capas (actions / services / repositories) con contratos claros para minimizar acoplamiento y facilitar cambios.
+
+---
+
+## Impacto
+
+### Métricas clave
+
+- **1000+ establecimientos** incorporados al sistema
+- **Reducción significativa** de errores de carga en el primer año
+- **Visibilidad en tiempo real** del estado del proceso a escala provincial
+- **Base analítica** preparada para dashboards institucionales y análisis histórico
+- **Infraestructura reutilizable** para otros procesos administrativos
+
+---
+
+## Transformación digital
+
+### Antes
+
+- Procesos manuales con papel y planillas sueltas
+- Validaciones tardías en etapas posteriores del ciclo
+- Sin visibilidad del avance del proceso
+- Correcciones manuales con alto costo operativo
+- Riesgo de errores en liquidaciones salariales
+
+### Después
+
+- Flujo centralizado con estados definidos y validaciones en origen
+- Observabilidad inmediata por escuela, supervisor y período
+- Sistema auditable con trazabilidad completa
+- Diseño orientado a cambios y escalabilidad funcional
+- Base sólida para decisiones basadas en datos
+
+---
+
+## Resultados clave
+
+### Integridad y confiabilidad
+
+- **Validación temprana:** Mover el error lo más cerca posible del origen reduce reprocesos manuales
+- **Estados finitos y transiciones controladas:** Eliminan ambigüedad y crean responsabilidad explícita
+- **Modelado de dominio explícito:** Reduce deuda conceptual y evita lógica dispersa
+
+### Escalabilidad y mantenibilidad
+
+- **Arquitectura por capas:** Facilita incorporación de nuevas funcionalidades sin refactor estructural
+- **Contratos claros entre capas:** Minimizan acoplamiento y riesgos de cambios en producción
+- **Diseño orientado a procesos:** Preparado para evolucionar con nuevas métricas y reportes
+
+### Impacto institucional
+
+- **Mayor previsibilidad operativa** para áreas críticas (RRHH, liquidaciones)
+- **Visibilidad inmediata** del estado del proceso a escala provincial
+- **Reducción de carga administrativa** para supervisores y áreas centrales
+- **Base para analítica institucional** y detección de patrones operativos
+
+---
+
+## Arquitectura y diseño
+
+### Modelado de dominio
+
+Representación explícita del ciclo mensual de planillas con:
+
+- **Estados definidos y finitos:** pendiente → presentada → observada → validada
+- **Reglas de negocio encapsuladas:** qué se puede modificar y cuándo
+- **Identificación de actores:** escuela, supervisor, área central con permisos diferenciados
+
+### Arquitectura de software
+
+- **Separación por capas:** actions / services / repositories
+- **Contratos claros** entre capas para minimizar acoplamiento
+- **Persistencia normalizada** preparada para consultas analíticas
+- **Diseño orientado a cambios** que no requiere refactor estructural para nuevas funcionalidades
+
+La arquitectura prioriza legibilidad, mantenibilidad y bajo riesgo de cambios en producción.
+
+---
+
+## Aprendizajes y próximos pasos
+
+### Lo que funcionó
+
+- Enfoque orientado a dominio y procesos reales, no a formularios aislados
+- Validaciones en tiempo real con feedback inmediato al usuario
+- Observabilidad integrada desde el diseño, no como funcionalidad posterior
+- Arquitectura pragmática sin sobreingeniería
+
+### Desafíos superados
+
+- Migración de datos históricos desde múltiples fuentes manuales
+- Definición de estados y transiciones que reflejaran el proceso real
+- Optimización para conexiones lentas en zonas rurales
+- Capacitación de usuarios en un nuevo flujo de trabajo
+
+### Roadmap 2025-2026
+
+- Integración directa con sistema de liquidaciones salariales
+- Dashboards analíticos con detección de anomalías y patrones
+- Notificaciones automáticas de estados y observaciones
+- API para integración con otros sistemas institucionales

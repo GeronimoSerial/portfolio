@@ -1,11 +1,18 @@
 ---
-title: "Whatsapp Chatbot: Asistente AI" 
+title: "Whatsapp Chatbot: Asistente AI"
 description: "Implementación de un chatbot con IA (GPT/Gemini) en WhatsApp para proveer un canal de comunicación oficial y soporte 24/7 a más de 10.000 usuarios."
 date: "2024-08-11"
 published: true
-index: 4
+index: 6
 ---
-<Image src="/assets/images/projects/wppbot/bot.png" alt="WhatsApp AI Assistant Dashboard" width={1200} height={600} className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800" />
+
+<Image
+  src="/assets/images/projects/wppbot/bot.png"
+  alt="WhatsApp AI Assistant Dashboard"
+  width={1200}
+  height={600}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
 
 ## Asistente IA por WhatsApp para +10.000 usuarios
 
@@ -43,9 +50,10 @@ Es la cara pública del sistema. Una instancia de IA (Google Gemini vía API) en
 
 Una "puerta trasera" de productividad para el equipo de gestión, accesible solo con permisos de administrador.
 
-- **IA de Propósito General (GPT):** Integrado vía *Magic Loops*, permite a un administrador usar una IA avanzada (GPT) para tareas internas, como redactar comunicados, analizar datos o depurar código, todo desde la misma interfaz de WhatsApp.
+- **IA de Propósito General (GPT):** Integrado vía _Magic Loops_, permite a un administrador usar una IA avanzada (GPT) para tareas internas, como redactar comunicados, analizar datos o depurar código, todo desde la misma interfaz de WhatsApp.
 
 - **Gestión de Contexto Flexible:** Permite "salir del contexto" del CGE para usar la IA como una herramienta de productividad general, sin contaminar el historial del bot de usuario.
+
 ---
 
 ## Tech Stack
@@ -55,7 +63,7 @@ Una "puerta trasera" de productividad para el equipo de gestión, accesible solo
 - **Plataforma:** Node.js (v20+)
 - **Integración WhatsApp:** `whatsapp-web.js`
 - **IA de Usuario:** Google Gemini (vía API y `getGeminiResponse.js`)
-- **IA de Administrador:** GPT (vía *Magic Loops*)
+- **IA de Administrador:** GPT (vía _Magic Loops_)
 - **Gestión de Entorno:** `dotenv`
 
 ---
@@ -99,5 +107,5 @@ Una "puerta trasera" de productividad para el equipo de gestión, accesible solo
 ## Roadmap futuro
 
 - Integración con las bases de datos internas para dar respuestas personalizadas.
-- Implementación de notificaciones *push* para comunicados urgentes.
+- Implementación de notificaciones _push_ para comunicados urgentes.
 - Expandir el entrenamiento de la IA (Gemini) con un corpus de normativas más profundo.

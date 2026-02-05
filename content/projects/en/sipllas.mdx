@@ -1,0 +1,188 @@
+---
+title: "Novelty Sheets Management System"
+description: "Critical web system for managing monthly novelty sheets for teaching and non-teaching staff, focused on scale, traceability, and reliability."
+date: "2024-03-01"
+url: "https://consejo.mec.gob.ar"
+repository: "https://github.com/geronimoserial/SIPLLAS"
+published: true
+index: 2
+---
+
+<Image
+  src="/assets/images/projects/sipllas/image.png"
+  alt="Novelty Sheets Management System - Control Panel"
+  width={1200}
+  height={600}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+---
+
+## Novelty Sheets Management System
+
+**Problem · Solution · Impact**  
+**Date:** March 2024 - Present  
+**Client:** Consejo General de Educación de Corrientes
+
+---
+
+## Problem
+
+The Consejo General de Educación faced structural challenges in the monthly management of novelty sheets for teaching and non-teaching staff:
+
+- **Manual and decentralized processes** (paper, scattered sheets, email)
+- **High scale:** >1000 establishments, thousands of agents, monthly execution
+- **Lack of source validations**, generating errors in later stages
+- **Zero traceability:** no clear states, no progress visibility, no responsible parties
+- **High operational cost** for supervisors and central areas
+- **Systemic risk:** inconsistencies with direct impact on salary settlements
+
+The technical challenge was not just to digitize, but to design a production-ready system capable of absorbing volume, reducing errors, and correctly modeling the domain.
+
+---
+
+## Solution
+
+Implementation of a centralized, process-oriented web system, focused on data integrity, early validation, and separation of responsibilities.
+
+### Key features
+
+**Standardized monthly cycle**  
+Flow with defined states: pending → submitted → observed → validated, with explicit business rules on what can be modified and when.
+
+<Image
+  src="/assets/images/projects/sipllas/flujo.png"
+  alt="Sheet lifecycle with states and transitions"
+  width={800}
+  height={200}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+**Real-time validations**  
+Syntactic and semantic controls at loading time, preventing inconsistent states from the frontend to the domain layer.
+
+<Image
+  src="/assets/images/projects/sipllas/validaciones.png"
+  alt="Validations panel with errors and warnings"
+  width={1200}
+  height={450}
+  className="my-6 rounded-lg border border-zinc-200 dark:border-zinc-800"
+/>
+
+**Observability and metrics**  
+Compliance status visible in real time by school, supervisor, locality, and period.
+
+**Role-based management**  
+Clear identification of actors and responsibilities (school, supervisor, central area) with permissions and actions defined by state.
+
+**Complete audit**  
+Registration of all transitions, observations, and corrections for institutional traceability.
+
+---
+
+## Tech Stack
+
+<TechStackSection />
+
+**Architecture:** Separation by layers (actions / services / repositories) with clear contracts to minimize coupling and facilitate changes.
+
+---
+
+## Impact
+
+### Key metrics
+
+- **1000+ establishments** incorporated into the system
+- **Significant reduction** of loading errors in the first year
+- **Real-time visibility** of the process status at provincial scale
+- **Analytical base** prepared for institutional dashboards and historical analysis
+- **Reusable infrastructure** for other administrative processes
+
+---
+
+## Digital transformation
+
+### Before
+
+- Manual processes with paper and scattered sheets
+- Late validations in later stages of the cycle
+- No visibility of process progress
+- Manual corrections with high operational cost
+- Risk of errors in salary settlements
+
+### After
+
+- Centralized flow with defined states and source validations
+- Immediate observability by school, supervisor, and period
+- Auditable system with complete traceability
+- Change-oriented design and functional scalability
+- Solid foundation for data-driven decisions
+
+---
+
+## Key results
+
+### Integrity and reliability
+
+- **Early validation:** Moving the error as close to the source as possible reduces manual reprocessing
+- **Finite states and controlled transitions:** Eliminate ambiguity and create explicit responsibility
+- **Explicit domain modeling:** Reduces conceptual debt and avoids scattered logic
+
+### Scalability and maintainability
+
+- **Layered architecture:** Facilitates incorporation of new functionalities without structural refactoring
+- **Clear contracts between layers:** Minimize coupling and production change risks
+- **Process-oriented design:** Prepared to evolve with new metrics and reports
+
+### Institutional impact
+
+- **Greater operational predictability** for critical areas (HR, settlements)
+- **Immediate visibility** of the process status at provincial scale
+- **Reduction of administrative burden** for supervisors and central areas
+- **Foundation for institutional analytics** and detection of operational patterns
+
+---
+
+## Architecture and design
+
+### Domain modeling
+
+Explicit representation of the monthly sheet cycle with:
+
+- **Defined and finite states:** pending → submitted → observed → validated
+- **Encapsulated business rules:** what can be modified and when
+- **Actor identification:** school, supervisor, central area with differentiated permissions
+
+### Software architecture
+
+- **Separation by layers:** actions / services / repositories
+- **Clear contracts** between layers to minimize coupling
+- **Normalized persistence** prepared for analytical queries
+- **Change-oriented design** that does not require structural refactoring for new functionalities
+
+The architecture prioritizes readability, maintainability, and low production change risk.
+
+---
+
+## Learnings and next steps
+
+### What worked
+
+- Domain and real process-oriented approach, not isolated forms
+- Real-time validations with immediate user feedback
+- Observability integrated from design, not as a later functionality
+- Pragmatic architecture without over-engineering
+
+### Challenges overcome
+
+- Historical data migration from multiple manual sources
+- Definition of states and transitions that reflect the real process
+- Optimization for slow connections in rural areas
+- User training in a new workflow
+
+### Roadmap 2025-2026
+
+- Direct integration with salary settlement system
+- Analytical dashboards with anomaly and pattern detection
+- Automatic notifications of states and observations
+- API for integration with other institutional systems
