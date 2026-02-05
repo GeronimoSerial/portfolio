@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SITE_CONFIG } from "@/config/site";
 import { NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
-import { useAnimatedNav } from "@/hooks/useAnimatedNav";
 import { MobileMenu } from "./MobileMenu";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
@@ -20,12 +19,7 @@ export default function AnimatedNav() {
   const navItemsRef = useRef<HTMLDivElement>(null!);
   const actionsRef = useRef<HTMLDivElement>(null!);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isExpanded } = useAnimatedNav(
-    navRef,
-    logoRef,
-    navItemsRef,
-    actionsRef
-  );
+
   const router = useRouter();
   const pathname = usePathname();
   const isPortfolio = pathname === "/portfolio";
@@ -65,6 +59,7 @@ export default function AnimatedNav() {
             {!isPortfolio && (
               <Link
                 href="/portfolio"
+                scroll={false}
                 className="px-4 py-2 text-sm font-medium
                              text-zinc-600 dark:text-zinc-400
                              hover:text-zinc-900 dark:hover:text-zinc-100

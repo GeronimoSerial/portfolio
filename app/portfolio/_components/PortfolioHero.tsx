@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowDown, Mail, MapPin } from "lucide-react"; 
+import { ArrowDown, Mail, MapPin } from "lucide-react";
 
 const highlights = [
   { label: "Proyectos entregados", value: "15+" },
@@ -21,17 +21,23 @@ export default function PortfolioHero() {
                 Geronimo Serial
               </h1>
               <p className="max-w-2xl text-xl text-zinc-300 md:text-2xl">
-                Ingeniero de software full-stack orientado a entornos
-                productivos, especializado en arquitectura escalable,
-                infraestructura y performance.
+                IT Specialist | Web Systems, Automation & Infrastructure
               </p>
             </div>
 
             <div className="max-w-2xl text-zinc-400">
               <p>
-                Trabajo en sistemas multi-tenant sobre PostgreSQL con Row-Level
-                Security, arquitectura por capas y despliegues automatizados en
-                Linux, con foco en bajar complejidad y aumentar confiabilidad.
+                Actualmente trabajando un sistema de gestión de reservas
+                multi-tenant:{" "}
+                <span className="font-bold text-zinc-100">
+                  <a
+                    href="https://turnero.geroserial.com/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    turnero.geroserial.com
+                  </a>
+                </span>
               </p>
             </div>
 
@@ -54,7 +60,7 @@ export default function PortfolioHero() {
                 href="#architecture"
                 className="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
               >
-                Ver como trabajo
+                Ver cómo trabajo
                 <ArrowDown className="h-4 w-4" />
               </a>
               <a
@@ -78,10 +84,10 @@ export default function PortfolioHero() {
               <div>
                 <p className="text-sm text-zinc-500">Rol actual</p>
                 <p className="text-zinc-200">
-                  Coordinador Tecnologico Institucional
+                  Coordinador Tecnológico Institucional
                 </p>
                 <p className="text-sm text-zinc-500">
-                  Consejo General de Educacion
+                  Consejo General de Educación
                 </p>
               </div>
             </div>

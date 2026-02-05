@@ -31,13 +31,13 @@ export default async function PortfolioPage() {
       <main className="relative">
         <Background>
           <PortfolioHero />
+          <ExperienceTimeline />
+          <Projects projectsData={projects} />
           <ArchitectureDevOps />
           <APIsIntegrations />
           <DataPerformance />
           <SoftwareArchitecture />
-          <ExperienceTimeline />
           <EducationSection />
-          <Projects projectsData={projects} />
           <ContactOpportunities />
           <ResumeDownload />
         </Background>

@@ -5,9 +5,9 @@ const integrationCases = [
   {
     title: "Webhooks para flujo continuo",
     summary:
-      "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automatica.",
+      "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automática.",
     impact:
-      "Menor tiempo entre merge y disponibilidad en produccion, con trazabilidad de punta a punta.",
+      "Menor tiempo entre merge y disponibilidad en producción, con trazabilidad de punta a punta.",
     icon: Link2,
   },
   {
@@ -15,7 +15,7 @@ const integrationCases = [
     summary:
       "Desarrollo bots de Telegram para consultar salud de servicios, procesos y eventos de despliegue.",
     impact:
-      "Deteccion de desvios mas rapida, sin depender de paneles aislados.",
+      "Detección de desvíos más rápida, sin depender de paneles aislados.",
     icon: Bot,
   },
 ];
@@ -62,7 +62,7 @@ export default function APIsIntegrations() {
           </h2>
           <p className="text-zinc-400">
             Trabajo APIs y eventos con foco en contratos claros, errores
-            trazables y operacion continua.
+            trazables y operación continua.
           </p>
         </div>
 

@@ -37,7 +37,7 @@ export function ConfirmationTemplate({
         "Te respondo a la brevedad posible, generalmente dentro de las próximas 24 horas.",
       message3:
         "Si tu consulta es urgente y requiere atención inmediata, por favor, enviame un correo directamente acá:",
-      cta: "contact@geroserial.com",
+      cta: "contacto@geroserial.com",
 
       regards: "Saludos",
       signature: "Geronimo Serial",
@@ -52,7 +52,7 @@ export function ConfirmationTemplate({
       message2:
         "I'll get back to you as soon as possible, usually within the next 24 hours.",
       message3: "If you need to contact me urgently, email me directly at:",
-      cta: "contact@geroserial.com",
+      cta: "contacto@geroserial.com",
       regards: "Best regards",
       signature: "Geronimo Serial",
       role: "IT Specialist · Infrastructure, Automation & Systems Management",
@@ -117,7 +117,7 @@ export function ConfirmationTemplate({
               {/* CTA con estilo "glass" */}
               <Section className="text-left my-5">
                 <Link
-                  href="mailto:contact@geroserial.com"
+                  href="mailto:contacto@geroserial.com"
                   className="bg-gray-700 text-white px-4 py-2 rounded-md inline-block"
                 >
                   {t.cta}

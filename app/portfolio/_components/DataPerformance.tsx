@@ -10,17 +10,17 @@ const performanceCases = [
   {
     title: "Datos con aislamiento real",
     summary:
-      "Aplico Row Level Security en PostgreSQL con politicas alineadas al contexto de cada organizacion.",
+      "Aplico Row Level Security en PostgreSQL con políticas alineadas al contexto de cada organización.",
     impact:
       "Menor riesgo de fuga de datos y mayor confianza operativa en entornos multi-tenant.",
     icon: Database,
   },
   {
-    title: "Performance guiada por medicion",
+    title: "Performance guiada por medición",
     summary:
-      "Analizo planes de ejecucion, ajusto indices y aplico cache segun el patron de consumo.",
+      "Analizo planes de ejecución, ajusto índices y aplico cache según el patrón de consumo.",
     impact:
-      "Reduccion sostenida de latencia en consultas y endpoints de alto trafico.",
+      "Reducción sostenida de latencia en consultas y endpoints de alto tráfico.",
     icon: Gauge,
   },
 ];
@@ -66,7 +66,7 @@ export default function DataPerformance() {
           </h2>
           <p className="text-zinc-400">
             Mido, ajusto y vuelvo a medir para reducir latencia y sostener
-            estabilidad en produccion.
+            estabilidad en producción.
           </p>
         </div>
 

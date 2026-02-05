@@ -7,15 +7,15 @@ const softwareCases = [
     summary:
       "Organizo actions, services y repositories con contratos claros y dependencias controladas.",
     impact:
-      "Codigo legible y mantenible, preparado para escalar funcional y tecnicamente.",
+      "Código legible y mantenible, preparado para escalar funcional y técnicamente.",
     icon: Layers2,
   },
   {
     title: "Modelado de dominio",
     summary:
-      "Aplico principios de Domain-Driven Design en entidades, objetos de valor y limites de contexto.",
+      "Aplico principios de Domain-Driven Design en entidades, objetos de valor y límites de contexto.",
     impact:
-      "Menor deuda conceptual y una representacion mas fiel de las reglas del negocio.",
+      "Menor deuda conceptual y una representación más fiel de las reglas del negocio.",
     icon: Boxes,
   },
 ];

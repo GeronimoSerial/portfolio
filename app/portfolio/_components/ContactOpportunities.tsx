@@ -32,8 +32,15 @@ export default function ContactOpportunities() {
             Estoy disponible para nuevos desafios
           </h2>
           <p className="text-zinc-400">
-            Si queres conversar una colaboracion, consultoria o posicion,
-            escribime por correo o LinkedIn.
+            Si queres conversar una colaboración, consultoría o posición,
+            escribíme por{" "}
+            <span>
+              <a href="mailto:contacto@geroserial.com">correo</a>
+            </span>{" "}
+            o{" "}
+            <span>
+              <a href="https://www.linkedin.com/in/geronimoserial/">LinkedIn</a>
+            </span>
           </p>
         </div>
 
@@ -77,7 +84,7 @@ export default function ContactOpportunities() {
               <span className="text-sm">Corrientes, Argentina</span>
             </div>
             <p className="text-sm leading-relaxed text-zinc-400">
-              Respuesta clara y directa para que puedas decidir rapido los
+              Respuesta clara y directa para que puedas decidir rápido los
               siguientes pasos.
             </p>
             <a

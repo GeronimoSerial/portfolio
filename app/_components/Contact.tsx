@@ -82,10 +82,10 @@ export default function Contact() {
               <div>
                 <p className="text-xs uppercase tracking-wide text-zinc-500">{t("info.directContact")}</p>
                 <a
-                  href="mailto:contact@geroserial.com"
+                  href="mailto:contacto@geroserial.com"
                   className="text-zinc-200 transition-colors hover:text-zinc-100"
                 >
-                  contact@geroserial.com
+                  contacto@geroserial.com
                 </a>
               </div>
               <div>

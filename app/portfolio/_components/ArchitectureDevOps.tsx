@@ -3,17 +3,17 @@ import type { ComponentType } from "react";
 
 const architectureCases = [
   {
-    title: "CI/CD con cero friccion",
+    title: "CI/CD con cero fricción",
     summary:
-      "Diseno pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
-    impact: "Releases mas predecibles y menor riesgo operativo.",
+      "Diseño pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
+    impact: "Releases más predecibles y menor riesgo operativo.",
     icon: Workflow,
   },
   {
     title: "Infraestructura mantenible",
     summary:
-      "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios criticos.",
-    impact: "Entornos previsibles y recuperacion mas rapida ante incidentes.",
+      "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios críticos.",
+    impact: "Entornos previsibles y recuperación más rápida ante incidentes.",
     icon: Wrench,
   },
 ];
@@ -55,11 +55,11 @@ export default function ArchitectureDevOps() {
             Arquitectura y operaciones
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Diseño infraestructura para sostener carga real en produccion
+            Diseño infraestructura para sostener carga real en producción
           </h2>
           <p className="text-zinc-400">
-            Estas son practicas que aplico para desplegar, operar y escalar
-            sistemas sin sumar friccion al equipo.
+            Estas son prácticas que aplico para desplegar, operar y escalar
+            sistemas sin sumar fricción al equipo.
           </p>
         </div>
 
