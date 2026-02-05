@@ -1,9 +1,10 @@
 "use client";
 // Performance-Optimized Version
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { useGSAP } from "@gsap/react";
 
 if (typeof window !== "undefined") {
 	gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -14,16 +15,17 @@ if (typeof window !== "undefined") {
 export function useContactAnimations() {
 	const containerRef = useRef<HTMLElement>(null);
 
-	useEffect(() => {
-		if (!containerRef.current) return;
+	useGSAP(
+		() => {
+			if (!containerRef.current) return;
 
-		const ctx = gsap.context(() => {
+			let split: SplitText | null = null;
 			// ============================================
 			// TITLE CHARACTER REVEAL - "Let's Collaborate"
 			// ============================================
-			const titleElement = containerRef.current?.querySelector(".gsap-title");
+			const titleElement = containerRef.current.querySelector(".gsap-title");
 			if (titleElement) {
-				const split = new SplitText(titleElement, { type: "chars,words" });
+				split = new SplitText(titleElement, { type: "chars,words" });
 
 				gsap.from(split.chars, {
 					opacity: 0,
@@ -35,16 +37,19 @@ export function useContactAnimations() {
 					scrollTrigger: {
 						trigger: titleElement,
 						start: "top 75%",
-						toggleActions: "play none none none",
+						toggleActions: "play none none reset",
 					},
 				});
 			}
-		}, containerRef);
 
-		return () => {
-			ctx.revert();
-		};
-	}, []);
+			ScrollTrigger.refresh();
+
+			return () => {
+				split?.revert();
+			};
+		},
+		{ scope: containerRef, dependencies: [] }
+	);
 
 	return containerRef;
 }

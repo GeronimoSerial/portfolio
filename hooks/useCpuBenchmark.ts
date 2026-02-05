@@ -14,6 +14,9 @@ type UseCpuBenchmarkOptions = {
   isMobile?: boolean;
 };
 
+const benchmarkCache = new Map<string, BenchmarkResult>();
+const benchmarkPromises = new Map<string, Promise<BenchmarkResult>>();
+
 const DEFAULT_ITERATIONS_DESKTOP = 800000;
 const DEFAULT_ITERATIONS_MOBILE = 600000;
 const DEFAULT_MAX_TIME_DESKTOP = 35;
@@ -43,68 +46,112 @@ function runMainThreadBenchmark(
 export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
   const [result, setResult] = useState<BenchmarkResult | null>(null);
   const [isRunning, setIsRunning] = useState(false);
-  const workerRef = useRef<Worker | null>(null);
   const hasRunRef = useRef(false);
-
-  const {
-    isMobile = false,
-    iterations = isMobile
-      ? DEFAULT_ITERATIONS_MOBILE
-      : DEFAULT_ITERATIONS_DESKTOP,
-    maxTime = isMobile ? DEFAULT_MAX_TIME_MOBILE : DEFAULT_MAX_TIME_DESKTOP,
-  } = options;
+  const optionsRef = useRef(options);
+  optionsRef.current = options;
 
   useEffect(() => {
     if (hasRunRef.current) return;
     hasRunRef.current = true;
 
-    // First: quick main-thread check (catches DevTools throttling)
-    const mainResult = runMainThreadBenchmark(iterations / 4, maxTime / 4);
+    let isActive = true;
 
-    if (!mainResult.passed) {
-      setResult({
-        passed: false,
-        duration: mainResult.duration,
-        source: "main",
-      });
-      return;
+    const resolvedIsMobile =
+      typeof optionsRef.current.isMobile === "boolean"
+        ? optionsRef.current.isMobile
+        : typeof window !== "undefined" && window.innerWidth < 1024;
+    const resolvedIterations =
+      optionsRef.current.iterations ??
+      (resolvedIsMobile ? DEFAULT_ITERATIONS_MOBILE : DEFAULT_ITERATIONS_DESKTOP);
+    const resolvedMaxTime =
+      optionsRef.current.maxTime ??
+      (resolvedIsMobile ? DEFAULT_MAX_TIME_MOBILE : DEFAULT_MAX_TIME_DESKTOP);
+
+    const cacheKey = `${resolvedIsMobile}-${resolvedIterations}-${resolvedMaxTime}`;
+
+    const cachedResult = benchmarkCache.get(cacheKey);
+    if (cachedResult) {
+      setResult(cachedResult);
+      return () => {
+        isActive = false;
+      };
     }
 
-    // Then: worker benchmark for more accurate off-thread measurement
-    if (typeof window === "undefined" || !window.Worker) {
-      setResult({ passed: true, duration: 0, source: "main" });
-      return;
+    const existingPromise = benchmarkPromises.get(cacheKey);
+    if (existingPromise) {
+      setIsRunning(true);
+      existingPromise.then((resolved) => {
+        if (!isActive) return;
+        setResult(resolved);
+        setIsRunning(false);
+      });
+      return () => {
+        isActive = false;
+      };
     }
 
     setIsRunning(true);
 
-    const worker = new Worker("/workers/cpu-benchmark.worker.js");
-    workerRef.current = worker;
+    const benchmarkPromise = new Promise<BenchmarkResult>((resolve) => {
+      // First: quick main-thread check (catches DevTools throttling)
+      const mainResult = runMainThreadBenchmark(
+        resolvedIterations / 4,
+        resolvedMaxTime / 4
+      );
 
-    worker.onmessage = (e: MessageEvent) => {
-      const { passed, duration } = e.data;
-      setResult({ passed, duration, source: "worker" });
-      setIsRunning(false);
-      worker.terminate();
-      workerRef.current = null;
-    };
+      if (!mainResult.passed) {
+        resolve({
+          passed: false,
+          duration: mainResult.duration,
+          source: "main",
+        });
+        return;
+      }
 
-    worker.onerror = () => {
-      setResult({ passed: true, duration: 0, source: "main" });
-      setIsRunning(false);
-      worker.terminate();
-      workerRef.current = null;
-    };
+      // Then: worker benchmark for more accurate off-thread measurement
+      if (typeof window === "undefined" || !window.Worker) {
+        resolve({ passed: true, duration: 0, source: "main" });
+        return;
+      }
 
-    worker.postMessage({ iterations, maxTime, isMobile });
+      const worker = new Worker("/workers/cpu-benchmark.worker.js");
+
+      worker.onmessage = (e: MessageEvent) => {
+        const { passed, duration } = e.data;
+        resolve({ passed, duration, source: "worker" });
+        worker.terminate();
+      };
+
+      worker.onerror = () => {
+        resolve({ passed: true, duration: 0, source: "main" });
+        worker.terminate();
+      };
+
+      worker.postMessage({
+        iterations: resolvedIterations,
+        maxTime: resolvedMaxTime,
+        isMobile: resolvedIsMobile,
+      });
+    });
+
+    benchmarkPromises.set(cacheKey, benchmarkPromise);
+
+    benchmarkPromise
+      .then((resolved) => {
+        benchmarkCache.set(cacheKey, resolved);
+        benchmarkPromises.delete(cacheKey);
+        return resolved;
+      })
+      .then((resolved) => {
+        if (!isActive) return;
+        setResult(resolved);
+        setIsRunning(false);
+      });
 
     return () => {
-      if (workerRef.current) {
-        workerRef.current.terminate();
-        workerRef.current = null;
-      }
+      isActive = false;
     };
-  }, [iterations, maxTime, isMobile]);
+  }, []);
 
   return {
     result,

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import SendMessage from "./SendMessage";
 
 const channels = [
   {
@@ -24,7 +25,7 @@ const channels = [
 
 export default function ContactOpportunities() {
   return (
-    <section id="contact" className="relative px-4 py-20">
+    <section id="contact-opp" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 max-w-3xl space-y-4">
           <p className="text-sm tracking-wide text-zinc-500">Contacto</p>
@@ -87,13 +88,7 @@ export default function ContactOpportunities() {
               Respuesta clara y directa para que puedas decidir rápido los
               siguientes pasos.
             </p>
-            <a
-              href="#"
-              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
-            >
-              Enviar mensaje
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            <SendMessage />
           </aside>
         </div>
       </div>
