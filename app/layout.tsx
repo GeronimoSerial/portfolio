@@ -144,6 +144,14 @@ export default async function RootLayout({
         "dark",
       ].join(" ")}
     >
+      <head>
+        <link
+          rel="preload"
+          href="/assets/spline/scene.splinecode"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${
           process.env.NODE_ENV === "development" ? "debug-screens" : undefined

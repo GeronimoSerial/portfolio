@@ -5,9 +5,10 @@ import { Application } from "@splinetool/runtime";
 
 type RobotProps = {
   onPerformanceIssue?: () => void;
+  onReady?: () => void;
 };
 
-export default function Robot({ onPerformanceIssue }: RobotProps) {
+export default function Robot({ onPerformanceIssue, onReady }: RobotProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const appRef = useRef<Application | null>(null);
@@ -21,6 +22,8 @@ export default function Robot({ onPerformanceIssue }: RobotProps) {
   const isIOSRef = useRef(false);
   const idleCallbackIdRef = useRef<number | null>(null);
   const timeoutIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const onReadyRef = useRef(onReady);
+  onReadyRef.current = onReady;
   const [isMobile, setIsMobile] = useState(false);
   const [isSceneReady, setIsSceneReady] = useState(false);
 
@@ -119,6 +122,17 @@ export default function Robot({ onPerformanceIssue }: RobotProps) {
           hasReportedPerfIssueRef.current = false;
           setIsSceneReady(true);
           optimizarResolucion();
+
+          // Notify parent that scene is ready after a short stabilization
+          if (onReadyRef.current) {
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                if (!isUnmountedRef.current && onReadyRef.current) {
+                  onReadyRef.current();
+                }
+              });
+            });
+          }
         })
         .catch((error) => {
           if (!isUnmountedRef.current) {

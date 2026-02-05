@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useHardwareTier } from "@/hooks/useHardwareTier";
+import { useCpuBenchmark } from "@/hooks/useCpuBenchmark";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import Robot from "@/components/shared/SplineScene";
 import { ArrowUpRight } from "lucide-react";
@@ -27,9 +28,18 @@ const VideoFallback = () => (
   </div>
 );
 
-const LoadingBackdrop = () => (
-  <div className="absolute inset-0 pointer-events-none">
-    <div className="h-full w-full bg-zinc-950" />
+const LoadingSpinner = () => (
+  <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-zinc-950">
+    <div className="relative h-10 w-10">
+      <div
+        className="absolute inset-0 rounded-full border-2 border-zinc-800"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 rounded-full border-2 border-transparent border-t-zinc-600 animate-spin"
+        aria-hidden="true"
+      />
+    </div>
   </div>
 );
 
@@ -38,10 +48,8 @@ export default function Hero() {
   const { tier } = useHardwareTier();
   const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [runtimeCanRender3d, setRuntimeCanRender3d] = useState<boolean | null>(
-    null
-  );
   const [forceVideoFallback, setForceVideoFallback] = useState(false);
+  const [splineReady, setSplineReady] = useState(false);
 
   useEffect(() => {
     const updateMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -68,116 +76,32 @@ export default function Hero() {
     [isMobile, canRender3dDesktop, canRender3dMobile]
   );
 
-  useEffect(() => {
-    let rafId = 0;
-    let cancelled = false;
-    let observer: PerformanceObserver | null = null;
+  const { canRender3d: cpuCanRender3d, isRunning: cpuBenchmarkRunning } =
+    useCpuBenchmark({
+      isMobile,
+    });
 
-    const benchmarkRuntime = async () => {
-      if (tier === null) {
-        setRuntimeCanRender3d(null);
-        return;
-      }
+  const isLoading =
+    tier === null || (hardwareEligible && cpuCanRender3d === null);
 
-      if (!hardwareEligible || prefersReducedMotion) {
-        setRuntimeCanRender3d(false);
-        return;
-      }
-
-      setRuntimeCanRender3d(null);
-
-      const sampleDuration = 900;
-      const minFps = isMobile ? 50 : 52;
-      const workIterations = isMobile ? 70000 : 90000;
-      const cpuCheckIterations = isMobile ? 1200000 : 1500000;
-      const maxCpuCheckTime = isMobile ? 95 : 85;
-      let frames = 0;
-      let slowFrames = 0;
-      let longTaskTime = 0;
-      let last = performance.now();
-      const start = last;
-      let sink = 0;
-
-      if (
-        "PerformanceObserver" in window &&
-        PerformanceObserver.supportedEntryTypes?.includes("longtask")
-      ) {
-        observer = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries()) {
-            longTaskTime += entry.duration;
-          }
-        });
-        observer.observe({ entryTypes: ["longtask"] });
-      }
-
-      const syntheticWork = () => {
-        let acc = 0;
-        for (let i = 0; i < workIterations; i += 1) {
-          acc += Math.sqrt(i + (acc % 7));
-        }
-        sink = acc;
-      };
-
-      const done = (ok: boolean) => {
-        if (observer) {
-          observer.disconnect();
-          observer = null;
-        }
-        if (!cancelled) {
-          setRuntimeCanRender3d(ok);
-        }
-      };
-
-      const cpuStart = performance.now();
-      for (let i = 0; i < cpuCheckIterations; i += 1) {
-        sink += Math.sqrt(i + (sink % 13));
-      }
-      const cpuDuration = performance.now() - cpuStart;
-      if (cpuDuration > maxCpuCheckTime) {
-        done(false);
-        return;
-      }
-
-      const tick = (now: number) => {
-        if (cancelled) return;
-
-        const delta = now - last;
-        last = now;
-        frames += 1;
-        syntheticWork();
-        void sink;
-        if (delta > 32) slowFrames += 1;
-
-        if (now - start >= sampleDuration) {
-          const elapsed = now - start;
-          const fps = (frames * 1000) / elapsed;
-          const slowRatio = slowFrames / Math.max(frames, 1);
-          const hasLongTasks = longTaskTime > 120;
-          done(fps >= minFps && slowRatio < 0.2 && !hasLongTasks);
-          return;
-        }
-
-        rafId = requestAnimationFrame(tick);
-      };
-
-      rafId = requestAnimationFrame(tick);
-    };
-
-    benchmarkRuntime();
-
-    return () => {
-      cancelled = true;
-      if (observer) observer.disconnect();
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [tier, hardwareEligible, prefersReducedMotion, isMobile]);
+  const shouldRender3d =
+    !forceVideoFallback &&
+    !prefersReducedMotion &&
+    hardwareEligible &&
+    cpuCanRender3d === true;
 
   const handleSplinePerformanceIssue = useCallback(() => {
     setForceVideoFallback(true);
   }, []);
 
-  const shouldRender3d =
-    !forceVideoFallback && !prefersReducedMotion && runtimeCanRender3d === true;
+  const handleSplineReady = useCallback(() => {
+    setSplineReady(true);
+  }, []);
+
+  // Determine what to show
+  const showSpinner = isLoading || (shouldRender3d && !splineReady);
+  const showSpline = shouldRender3d;
+  const showVideo = !isLoading && !shouldRender3d;
 
   return (
     <section
@@ -187,13 +111,25 @@ export default function Hero() {
       {/* Background/Robot Layer */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 lg:left-[35%] lg:w-[65%]">
-          {tier === null || runtimeCanRender3d === null ? (
-            <LoadingBackdrop />
-          ) : shouldRender3d ? (
-            <Robot onPerformanceIssue={handleSplinePerformanceIssue} />
-          ) : (
-            <VideoFallback />
+          {/* Spinner - shown while loading or waiting for Spline */}
+          {showSpinner && <LoadingSpinner />}
+
+          {/* Spline - mounted when eligible, fades in when ready */}
+          {showSpline && (
+            <div
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                splineReady ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <Robot
+                onPerformanceIssue={handleSplinePerformanceIssue}
+                onReady={handleSplineReady}
+              />
+            </div>
           )}
+
+          {/* Video fallback */}
+          {showVideo && <VideoFallback />}
         </div>
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/60 to-zinc-950/10 lg:w-[60%]" />
       </div>
