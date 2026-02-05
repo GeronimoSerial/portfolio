@@ -5,7 +5,7 @@ import { useHardwareTier } from "@/hooks/useHardwareTier";
 import { useCpuBenchmark } from "@/hooks/useCpuBenchmark";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import Robot from "@/components/shared/SplineScene";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
 import Link from "next/link";
 
 const VideoFallback = () => (
@@ -73,7 +73,7 @@ export default function Hero() {
   const canRender3dMobile = tier !== null && tier >= 3;
   const hardwareEligible = useMemo(
     () => (isMobile ? canRender3dMobile : canRender3dDesktop),
-    [isMobile, canRender3dDesktop, canRender3dMobile]
+    [isMobile, canRender3dDesktop, canRender3dMobile],
   );
 
   const { canRender3d: cpuCanRender3d, isRunning: cpuBenchmarkRunning } =
@@ -106,7 +106,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative -mt-20 flex min-h-[100svh] w-full items-center overflow-hidden bg-zinc-950"
+      className="relative -mt-20 flex min-h-[100svh] w-full items-center overflow-hidden bg-transparent"
     >
       {/* Background/Robot Layer */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -175,9 +175,10 @@ export default function Hero() {
                     .getElementById("services")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="pointer-events-auto text-sm text-zinc-600 transition-colors hover:text-zinc-400"
+                className="pointer-events-auto group inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-zinc-400"
               >
                 {t("cta")}
+                <ArrowDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5 " />
               </button>
             </div>
           </div>
