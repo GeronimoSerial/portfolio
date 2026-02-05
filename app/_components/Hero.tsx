@@ -17,7 +17,7 @@ const VideoFallback = () => (
       loop
       preload="none"
       poster="/assets/images/poster.png"
-      className="h-full w-full object-cover opacity-60"
+      className="h-full w-full object-cover "
     >
       <source
         src="https://res.cloudinary.com/dmitnt8de/video/upload/v1770236274/video_mf0fdh.mp4"
@@ -90,6 +90,15 @@ export default function Hero() {
     hardwareEligible &&
     cpuCanRender3d === true;
 
+  useEffect(() => {
+    if (!shouldRender3d || splineReady) return;
+    const timeoutId = window.setTimeout(() => {
+      setForceVideoFallback(true);
+    }, 7000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [shouldRender3d, splineReady]);
+
   const handleSplinePerformanceIssue = useCallback(() => {
     setForceVideoFallback(true);
   }, []);
@@ -108,7 +117,7 @@ export default function Hero() {
       id="hero"
       className="relative -mt-20 flex min-h-[100svh] w-full items-center overflow-hidden bg-transparent"
     >
-      {/* Background/Robot Layer */}
+      {showVideo && <div className="absolute inset-0 bg-black/40" />}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 lg:left-[35%] lg:w-[65%]">
           {/* Spinner - shown while loading or waiting for Spline */}
@@ -128,10 +137,12 @@ export default function Hero() {
             </div>
           )}
 
-          {/* Video fallback */}
+          {/* Video fallback*/}
           {showVideo && <VideoFallback />}
         </div>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/60 to-zinc-950/10 lg:w-[60%]" />
+        {isMobile && (
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-zinc-950/20 lg:w-[60%]" />
+        )}
       </div>
 
       <div className="container relative z-10 mx-auto max-w-6xl px-8 pointer-events-none">

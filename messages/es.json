@@ -231,7 +231,7 @@
   },
   "development": {
     "title": "Sitio en desarrollo",
-    "description": "Esta página está en construcción activa. Puede contener errores o funcionalidades incompletas.",
+    "description": "Esta página está en construcción activa. Puede contener errores de traducción o funcionalidades incompletas.",
     "close": "Cerrar aviso"
   },
   "footer": {
