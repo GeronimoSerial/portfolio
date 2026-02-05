@@ -3,6 +3,30 @@ import { getGPUTier } from "detect-gpu";
 
 let cachedTier: number | null = null;
 let tierPromise: Promise<number> | null = null;
+const TIER_TIMEOUT_MS = 4000;
+
+const resolveTier = () =>
+  new Promise<number>((resolve) => {
+    let settled = false;
+    const timeoutId = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      resolve(1);
+    }, TIER_TIMEOUT_MS);
+
+    getGPUTier()
+      .then((gpuTier) => gpuTier.tier)
+      .catch((error) => {
+        console.error(error);
+        return 1;
+      })
+      .then((value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeoutId);
+        resolve(value);
+      });
+  });
 
 export const useHardwareTier = () => {
   // null =  no sabemos, 0 = muy malo, 1 = bajo, 2 = medio, 3 = alto
@@ -21,16 +45,13 @@ export const useHardwareTier = () => {
     }
 
     if (!tierPromise) {
-      tierPromise = getGPUTier()
-        .then((gpuTier) => gpuTier.tier)
-        .catch((error) => {
-          console.error(error);
-          return 1;
-        })
+      tierPromise = resolveTier()
         .then((value) => {
           cachedTier = value;
-          tierPromise = null;
           return value;
+        })
+        .finally(() => {
+          tierPromise = null;
         });
     }
 

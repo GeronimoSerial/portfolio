@@ -16,6 +16,7 @@ type UseCpuBenchmarkOptions = {
 
 const benchmarkCache = new Map<string, BenchmarkResult>();
 const benchmarkPromises = new Map<string, Promise<BenchmarkResult>>();
+const BENCHMARK_TIMEOUT_MS = 4500;
 
 const DEFAULT_ITERATIONS_DESKTOP = 800000;
 const DEFAULT_ITERATIONS_MOBILE = 600000;
@@ -93,6 +94,20 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
     setIsRunning(true);
 
     const benchmarkPromise = new Promise<BenchmarkResult>((resolve) => {
+      let resolved = false;
+      const timeoutId = window.setTimeout(() => {
+        if (resolved) return;
+        resolved = true;
+        resolve({ passed: false, duration: BENCHMARK_TIMEOUT_MS, source: "main" });
+      }, BENCHMARK_TIMEOUT_MS);
+
+      const finalize = (value: BenchmarkResult) => {
+        if (resolved) return;
+        resolved = true;
+        window.clearTimeout(timeoutId);
+        resolve(value);
+      };
+
       // First: quick main-thread check (catches DevTools throttling)
       const mainResult = runMainThreadBenchmark(
         resolvedIterations / 4,
@@ -100,7 +115,7 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
       );
 
       if (!mainResult.passed) {
-        resolve({
+        finalize({
           passed: false,
           duration: mainResult.duration,
           source: "main",
@@ -110,7 +125,7 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
 
       // Then: worker benchmark for more accurate off-thread measurement
       if (typeof window === "undefined" || !window.Worker) {
-        resolve({ passed: true, duration: 0, source: "main" });
+        finalize({ passed: true, duration: 0, source: "main" });
         return;
       }
 
@@ -118,12 +133,12 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
 
       worker.onmessage = (e: MessageEvent) => {
         const { passed, duration } = e.data;
-        resolve({ passed, duration, source: "worker" });
+        finalize({ passed, duration, source: "worker" });
         worker.terminate();
       };
 
       worker.onerror = () => {
-        resolve({ passed: true, duration: 0, source: "main" });
+        finalize({ passed: true, duration: 0, source: "main" });
         worker.terminate();
       };
 

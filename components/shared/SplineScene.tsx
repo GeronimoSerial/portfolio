@@ -24,6 +24,8 @@ export default function Robot({ onPerformanceIssue, onReady }: RobotProps) {
   const timeoutIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const onReadyRef = useRef(onReady);
   onReadyRef.current = onReady;
+  const onPerformanceIssueRef = useRef(onPerformanceIssue);
+  onPerformanceIssueRef.current = onPerformanceIssue;
   const [isMobile, setIsMobile] = useState(false);
   const [isSceneReady, setIsSceneReady] = useState(false);
 
@@ -137,6 +139,10 @@ export default function Robot({ onPerformanceIssue, onReady }: RobotProps) {
         .catch((error) => {
           if (!isUnmountedRef.current) {
             console.error("Error loading Spline scene:", error);
+            if (!hasReportedPerfIssueRef.current && onPerformanceIssueRef.current) {
+              hasReportedPerfIssueRef.current = true;
+              onPerformanceIssueRef.current();
+            }
           }
           isLoadingRef.current = false;
         });
