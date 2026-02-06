@@ -194,9 +194,6 @@ export const useServicesAnimations = () => {
       // Cleanup
       return () => {
         mm.revert();
-        ScrollTrigger.getAll().forEach((trigger) => {
-          trigger.kill();
-        });
       };
     },
     { scope: containerRef }

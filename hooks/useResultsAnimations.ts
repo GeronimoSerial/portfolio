@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, RefObject } from "react";
+import { RefObject } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
@@ -365,12 +365,4 @@ export function useResultsAnimations(
 		{ scope: containerRef, dependencies: [] },
 	);
 
-	// Cleanup on unmount
-	useLayoutEffect(() => {
-		return () => {
-			ScrollTrigger.getAll().forEach((trigger) => {
-				trigger.kill();
-			});
-		};
-	}, []);
 }
