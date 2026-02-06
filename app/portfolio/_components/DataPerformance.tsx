@@ -2,7 +2,7 @@ import { Database, Gauge } from "lucide-react";
 import type { ComponentType } from "react";
 
 const metricSnapshots = [
-  { label: "Query critica", from: "850 ms", to: "45 ms" },
+  { label: "Query crítica", from: "850 ms", to: "45 ms" },
   { label: "Respuesta API", from: "320 ms", to: "85 ms" },
 ];
 

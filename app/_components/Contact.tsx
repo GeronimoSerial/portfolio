@@ -49,7 +49,7 @@ export default function Contact() {
 
       setSubmitStatus({
         type: "success",
-        message: t("form.success") || "Mensaje enviado con exito.",
+        message: t("form.success") || "Mensaje enviado con éxito.",
       });
 
       setFormData({ name: "", email: "", company: "", message: "" });

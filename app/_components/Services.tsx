@@ -16,8 +16,8 @@ export default function Services() {
   ];
 
   return (
-    <section ref={containerRef} id="services" className="relative px-4 py-20">
-      <div className="container mx-auto max-w-6xl">
+    <section ref={containerRef} id="services" className="relative px-4 pt-10">
+      <div className="container mx-auto max-w-7xl">
         <div ref={headerRef} className="mb-12 max-w-3xl space-y-4">
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
             {t("title")}

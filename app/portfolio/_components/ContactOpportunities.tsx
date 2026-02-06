@@ -30,7 +30,7 @@ export default function ContactOpportunities() {
         <div className="mb-12 max-w-3xl space-y-4">
           <p className="text-sm tracking-wide text-zinc-500">Contacto</p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Estoy disponible para nuevos desafios
+            Estoy disponible para nuevos desafíos
           </h2>
           <p className="text-zinc-400">
             Si queres conversar una colaboración, consultoría o posición,

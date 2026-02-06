@@ -115,7 +115,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative -mt-20 flex min-h-[100svh] w-full items-center overflow-hidden bg-transparent"
+      className="relative -mt-20 flex min-h-auto lg:min-h-[100svh] w-full pt-[500px] sm:pt-2 sm:items-center overflow-hidden bg-transparent"
     >
       {showVideo && <div className="absolute inset-0 bg-black/40" />}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -145,7 +145,7 @@ export default function Hero() {
         )}
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-6xl px-8 pointer-events-none">
+      <div className="container relative z-10 mx-auto max-w-7xl px-4 lg:px-0 pointer-events-none">
         <div className="flex flex-col items-end lg:flex-row lg:items-center">
           <div className="w-full space-y-10 lg:w-1/2">
             <div className="space-y-5">
