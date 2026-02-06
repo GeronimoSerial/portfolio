@@ -12,6 +12,8 @@ import ResumeDownload from "./_components/ResumeDownload";
 import ContactOpportunities from "./_components/ContactOpportunities";
 import { getProjects } from "@/lib/get-projects";
 
+import { AppleStyleSection } from "./_components/ui/AppleStyleSection";
+
 export const metadata: Metadata = {
   title: "Portfolio | Geronimo Serial",
   description:
@@ -30,16 +32,43 @@ export default async function PortfolioPage() {
     <div className="dark contents">
       <main className="relative">
         <Background>
-          <PortfolioHero />
-          <ExperienceTimeline />
+          <AppleStyleSection>
+            <PortfolioHero />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <ExperienceTimeline />
+          </AppleStyleSection>
+          
           <Projects projectsData={projects} />
-          <ArchitectureDevOps />
-          <APIsIntegrations />
-          <DataPerformance />
-          <SoftwareArchitecture />
-          <EducationSection />
-          <ContactOpportunities />
-          <ResumeDownload />
+          
+          <AppleStyleSection>
+            <ArchitectureDevOps />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <APIsIntegrations />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <DataPerformance />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <SoftwareArchitecture />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <EducationSection />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <ContactOpportunities />
+          </AppleStyleSection>
+          
+          <AppleStyleSection>
+            <ResumeDownload />
+          </AppleStyleSection>
         </Background>
       </main>
     </div>

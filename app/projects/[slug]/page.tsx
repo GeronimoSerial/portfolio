@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { ImpactGrid } from "@/components/projects/consejo-mec/impact";
 import { TechStackSection } from "@/components/projects/consejo-mec/stack";
 import Image from "next/image";
-
+import { AppleStyleSection } from "@/app/portfolio/_components/ui/AppleStyleSection";
 async function getLocale() {
   const cookieStore = await cookies();
   const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
@@ -33,7 +33,7 @@ export async function generateStaticParams() {
   }
   // Remove duplicates based on slug
   const uniqueParams = Array.from(
-    new Map(allParams.map((p) => [p.slug, p])).values()
+    new Map(allParams.map((p) => [p.slug, p])).values(),
   );
   return uniqueParams;
 }
@@ -82,7 +82,7 @@ export default async function Page({
     process.cwd(),
     "content/projects",
     locale as string,
-    `${slug}.mdx`
+    `${slug}.mdx`,
   );
   const fileContents = await fs.readFile(filePath, "utf8");
   const { content } = matter(fileContents);
@@ -115,28 +115,29 @@ export default async function Page({
           </Link>
 
           {/* Project header */}
-          <header className="mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50 mb-4">
-              {project.title}
-            </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400">
-              {project.description}
-            </p>
-            {project.date && (
-              <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
-                {new Date(project.date).toLocaleDateString(dateLocale, {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+          <AppleStyleSection>
+            <header className="mb-12">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-zinc-900 dark:text-zinc-50 mb-4">
+                {project.title}
+              </h1>
+              <p className="text-lg text-zinc-600 dark:text-zinc-400">
+                {project.description}
               </p>
-            )}
-            <hr className="mt-8 border-zinc-200 dark:border-zinc-800" />
-          </header>
+              {project.date && (
+                <p className="text-sm text-zinc-500 dark:text-zinc-500 mt-2">
+                  {new Date(project.date).toLocaleDateString(dateLocale, {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              )}
+              <hr className="mt-8 border-zinc-200 dark:border-zinc-800" />
+            </header>
 
-          {/* MDX Content */}
-          <article
-            className="prose prose-zinc dark:prose-invert prose-lg max-w-none
+            {/* MDX Content */}
+            <article
+              className="prose prose-zinc dark:prose-invert prose-lg max-w-none
             prose-headings:font-display prose-headings:font-bold
             prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6
             prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
@@ -145,9 +146,10 @@ export default async function Page({
             prose-strong:text-zinc-900 dark:prose-strong:text-zinc-50
             prose-ul:text-zinc-600 dark:prose-ul:text-zinc-400
             prose-li:marker:text-zinc-500 dark:prose-li:marker:text-zinc-500"
-          >
-            {MDXContent}
-          </article>
+            >
+              {MDXContent}
+            </article>
+          </AppleStyleSection>
         </div>
       </div>
     </Background>
