@@ -1,35 +1,23 @@
+"use client";
+
 import { Bot, Link2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ComponentType } from "react";
 
-const integrationCases = [
-  {
-    title: "Webhooks para flujo continuo",
-    summary:
-      "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automática.",
-    impact:
-      "Menor tiempo entre merge y disponibilidad en producción, con trazabilidad de punta a punta.",
-    icon: Link2,
-  },
-  {
-    title: "Bots para monitoreo diario",
-    summary:
-      "Desarrollo bots de Telegram para consultar salud de servicios, procesos y eventos de despliegue.",
-    impact:
-      "Detección de desvíos más rápida, sin depender de paneles aislados.",
-    icon: Bot,
-  },
-];
+const icons = [Link2, Bot];
 
 function IntegrationPanel({
   title,
   summary,
   impact,
   icon: Icon,
+  impactLabel,
 }: {
   title: string;
   summary: string;
   impact: string;
   icon: ComponentType<{ className?: string }>;
+  impactLabel: string;
 }) {
   return (
     <article className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -42,33 +30,36 @@ function IntegrationPanel({
 
       <div className="space-y-3 text-sm leading-relaxed">
         <p className="text-zinc-300">{summary}</p>
-        <p className="text-zinc-200">Impacto: {impact}</p>
+        <p className="text-zinc-200">{impactLabel} {impact}</p>
       </div>
     </article>
   );
 }
 
 export default function APIsIntegrations() {
+  const t = useTranslations("portfolio.apis");
+
+  const cases = [0, 1].map((index) => ({
+    title: t(`cases.${index}.title`),
+    summary: t(`cases.${index}.summary`),
+    impact: t(`cases.${index}.impact`),
+    icon: icons[index],
+  }));
+
   return (
     <section id="apis" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">
-            APIs e integraciones
-          </p>
+          <p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Diseño e implemento integraciones sin perder control técnico ni
-            operabilidad.
+            {t("title")}
           </h2>
-          <p className="text-zinc-400">
-            Trabajo APIs y eventos con foco en contratos claros, errores
-            trazables y operación continua.
-          </p>
+          <p className="text-zinc-400">{t("subtitle")}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {integrationCases.map((item) => (
-            <IntegrationPanel key={item.title} {...item} />
+          {cases.map((item, index) => (
+            <IntegrationPanel key={index} {...item} impactLabel={t("impactLabel", { fallback: "Impacto:" })} />
           ))}
         </div>
       </div>

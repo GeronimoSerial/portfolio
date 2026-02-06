@@ -1,47 +1,64 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { ArrowUpRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
 import SendMessage from "./SendMessage";
 
-const channels = [
-  {
-    label: "Correo",
-    value: "contacto@geroserial.com",
-    href: "mailto:contacto@geroserial.com",
-    icon: Mail,
-  },
-  {
-    label: "GitHub",
-    value: "@geroserial",
-    href: "https://github.com/geroserial",
-    icon: Github,
-  },
-  {
-    label: "LinkedIn",
-    value: "Geronimo Serial",
-    href: "https://linkedin.com/in/geroserial",
-    icon: Linkedin,
-  },
-];
+const icons = [Mail, Github, Linkedin];
 
 export default function ContactOpportunities() {
+  const t = useTranslations("portfolio.contact");
+
+  const channels = [
+    {
+      label: t("channels.email.label"),
+      value: t("channels.email.value"),
+      href: "mailto:contacto@geroserial.com",
+      icon: icons[0],
+    },
+    {
+      label: t("channels.github.label"),
+      value: t("channels.github.value"),
+      href: "https://github.com/geroserial",
+      icon: icons[1],
+    },
+    {
+      label: t("channels.linkedin.label"),
+      value: t("channels.linkedin.value"),
+      href: "https://linkedin.com/in/geroserial",
+      icon: icons[2],
+    },
+  ];
+
   return (
     <section id="contact-opp" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">Contacto</p>
+          <p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Estoy disponible para nuevos desafíos
+            {t("title")}
           </h2>
           <p className="text-zinc-400">
-            Si queres conversar una colaboración, consultoría o posición,
-            escribíme por{" "}
-            <span>
-              <a href="mailto:contacto@geroserial.com">correo</a>
-            </span>{" "}
-            o{" "}
-            <span>
-              <a href="https://www.linkedin.com/in/geronimoserial/">LinkedIn</a>
-            </span>
+            {t.rich("subtitle", {
+              email: (chunks) => (
+                <a
+                  href="mailto:contacto@geroserial.com"
+                  className="text-zinc-300 hover:text-white transition-colors underline"
+                >
+                  {chunks}
+                </a>
+              ),
+              linkedin: (chunks) => (
+                <a
+                  href="https://www.linkedin.com/in/geronimoserial/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-300 hover:text-white transition-colors underline"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
           </p>
         </div>
 
@@ -82,11 +99,10 @@ export default function ContactOpportunities() {
           <aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
             <div className="mb-4 flex items-center gap-2 text-zinc-300">
               <MapPin className="h-4 w-4" />
-              <span className="text-sm">Corrientes, Argentina</span>
+              <span className="text-sm">{t("location")}</span>
             </div>
             <p className="text-sm leading-relaxed text-zinc-400">
-              Respuesta clara y directa para que puedas decidir rápido los
-              siguientes pasos.
+              {t("description")}
             </p>
             <SendMessage />
           </aside>

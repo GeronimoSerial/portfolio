@@ -1,33 +1,23 @@
+"use client";
+
 import { Workflow, Wrench } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ComponentType } from "react";
 
-const architectureCases = [
-  {
-    title: "CI/CD con cero fricción",
-    summary:
-      "Diseño pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
-    impact: "Releases más predecibles y menor riesgo operativo.",
-    icon: Workflow,
-  },
-  {
-    title: "Infraestructura mantenible",
-    summary:
-      "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios críticos.",
-    impact: "Entornos previsibles y recuperación más rápida ante incidentes.",
-    icon: Wrench,
-  },
-];
+const icons = [Workflow, Wrench];
 
 function KnowledgePanel({
   title,
   summary,
   impact,
   icon: Icon,
+  impactLabel,
 }: {
   title: string;
   summary: string;
   impact: string;
   icon: ComponentType<{ className?: string }>;
+  impactLabel: string;
 }) {
   return (
     <article className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6">
@@ -40,32 +30,36 @@ function KnowledgePanel({
 
       <div className="space-y-3 text-sm leading-relaxed">
         <p className="text-zinc-300">{summary}</p>
-        <p className="text-zinc-200">Impacto: {impact}</p>
+        <p className="text-zinc-200">{impactLabel} {impact}</p>
       </div>
     </article>
   );
 }
 
 export default function ArchitectureDevOps() {
+  const t = useTranslations("portfolio.architecture");
+
+  const cases = [0, 1].map((index) => ({
+    title: t(`cases.${index}.title`),
+    summary: t(`cases.${index}.summary`),
+    impact: t(`cases.${index}.impact`),
+    icon: icons[index],
+  }));
+
   return (
     <section id="architecture" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">
-            Arquitectura y operaciones
-          </p>
+          <p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Diseño infraestructura para sostener carga real en producción
+            {t("title")}
           </h2>
-          <p className="text-zinc-400">
-            Estas son prácticas que aplico para desplegar, operar y escalar
-            sistemas sin sumar fricción al equipo.
-          </p>
+          <p className="text-zinc-400">{t("subtitle")}</p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {architectureCases.map((item) => (
-            <KnowledgePanel key={item.title} {...item} />
+          {cases.map((item, index) => (
+            <KnowledgePanel key={index} {...item} impactLabel={t("impactLabel")} />
           ))}
         </div>
       </div>

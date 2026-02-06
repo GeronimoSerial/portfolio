@@ -237,6 +237,197 @@
   "footer": {
     "rights": ""
   },
+  "portfolio": {
+    "hero": {
+      "label": "Perfil profesional",
+      "role": "IT Specialist | Web Systems, Automation & Infrastructure",
+      "currentWork": "Actualmente trabajando un sistema de gestión de reservas multi-tenant:",
+      "cta": {
+        "howIWork": "Ver cómo trabajo",
+        "goToCV": "Ir al CV"
+      },
+      "stats": {
+        "projectsDelivered": "Proyectos entregados",
+        "organizations": "Organizaciones",
+        "yearsExperience": "Años de experiencia"
+      },
+      "currentRole": {
+        "label": "Rol actual",
+        "title": "Coordinador Tecnológico Institucional",
+        "organization": "Consejo General de Educación"
+      },
+      "location": "Corrientes, Argentina"
+    },
+    "experience": {
+      "label": "Trayectoria",
+      "title": "Mi experiencia está enfocada en resolver problemas reales",
+      "subtitle": "En cada etapa asumí contexto, ejecuté soluciones y dejé sistemas más estables para el equipo.",
+      "items": [
+        {
+          "title": "Coordinación Tecnológica Institucional",
+          "organization": "Consejo General de Educación de Corrientes",
+          "period": "2022 - Actualidad",
+          "summary": "Coordino iniciativas de transformación digital a escala provincial, con foco en infraestructura, arquitectura y continuidad operativa.",
+          "highlight": "Implementé flujos de trabajo automatizados para mejorar la eficiencia y reducir errores."
+        },
+        {
+          "title": "Desarrollo y consultoría independiente",
+          "organization": "Proyectos freelance",
+          "period": "2020 - Actualidad",
+          "summary": "Diseño y construyo productos web para organizaciones con necesidades de integración, rendimiento y escalabilidad.",
+          "highlight": "Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en producción."
+        }
+      ]
+    },
+    "architecture": {
+      "label": "Arquitectura y operaciones",
+      "title": "Diseño infraestructura para sostener carga real en producción",
+      "subtitle": "Estas son prácticas que aplico para desplegar, operar y escalar sistemas sin sumar fricción al equipo.",
+      "impactLabel": "Impacto:",
+      "cases": [
+        {
+          "title": "CI/CD con cero fricción",
+          "summary": "Diseño pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
+          "impact": "Releases más predecibles y menor riesgo operativo."
+        },
+        {
+          "title": "Infraestructura mantenible",
+          "summary": "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios críticos.",
+          "impact": "Entornos previsibles y recuperación más rápida ante incidentes."
+        }
+      ]
+    },
+    "apis": {
+      "label": "APIs e integraciones",
+      "title": "Diseño e implemento integraciones sin perder control técnico ni operabilidad.",
+      "subtitle": "Trabajo APIs y eventos con foco en contratos claros, errores trazables y operación continua.",
+      "cases": [
+        {
+          "title": "Webhooks para flujo continuo",
+          "summary": "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automática.",
+          "impact": "Menor tiempo entre merge y disponibilidad en producción, con trazabilidad de punta a punta."
+        },
+        {
+          "title": "Bots para monitoreo diario",
+          "summary": "Desarrollo bots de Telegram para consultar salud de servicios, procesos y eventos de despliegue.",
+          "impact": "Detección de desvíos más rápida, sin depender de paneles aislados."
+        }
+      ]
+    },
+    "data": {
+      "label": "Data y performance",
+      "title": "Optimizo datos y performance con foco en producción real.",
+      "subtitle": "Mido, ajusto y vuelvo a medir para reducir latencia y sostener estabilidad en producción.",
+      "metrics": [
+        {
+          "label": "Query crítica",
+          "from": "850 ms",
+          "to": "45 ms"
+        },
+        {
+          "label": "Respuesta API",
+          "from": "320 ms",
+          "to": "85 ms"
+        }
+      ],
+      "cases": [
+        {
+          "title": "Datos con aislamiento real",
+          "summary": "Aplico Row Level Security en PostgreSQL con políticas alineadas al contexto de cada organización.",
+          "impact": "Menor riesgo de fuga de datos y mayor confianza operativa en entornos multi-tenant."
+        },
+        {
+          "title": "Performance guiada por medición",
+          "summary": "Analizo planes de ejecución, ajusto índices y aplico cache según el patrón de consumo.",
+          "impact": "Reducción sostenida de latencia en consultas y endpoints de alto tráfico."
+        }
+      ]
+    },
+    "software": {
+      "label": "Arquitectura de software",
+      "title": "Estructuro el código para iterar rápido sin perder claridad.",
+      "subtitle": "Defino estructuras que permiten probar, desplegar y evolucionar el sistema con menor riesgo.",
+      "impactLabel": "Impacto:",
+      "cases": [
+        {
+          "title": "Arquitectura por capas",
+          "summary": "Organizo actions, services y repositories con contratos claros y dependencias controladas.",
+          "impact": "Código legible y mantenible, preparado para escalar funcional y técnicamente."
+        },
+        {
+          "title": "Modelado de dominio",
+          "summary": "Aplico principios de Domain-Driven Design en entidades, objetos de valor y límites de contexto.",
+          "impact": "Menor deuda conceptual y una representación más fiel de las reglas del negocio."
+        }
+      ]
+    },
+    "education": {
+      "label": "Formación",
+      "title": "Sostengo base académica y aprendizaje continuo",
+      "subtitle": "Combino formación formal con aprendizaje práctico para tomar mejores decisiones técnicas en proyectos reales.",
+      "formal": [
+        {
+          "title": "Analista Programador Universitario / Licenciatura en Sistemas",
+          "institution": "Universidad Nacional del Nordeste (UNNE)",
+          "period": "En curso - finalización estimada 2026",
+          "summary": "Me formé en diseño de sistemas, modelado de datos, arquitectura de software y metodologías de desarrollo."
+        },
+        {
+          "title": "Talentos Digitales - Full Stack",
+          "institution": "Gobierno de la Provincia de Corrientes - TelCo - UNNE - PoloIT",
+          "period": "2022",
+          "summary": "Hice entrenamiento intensivo en desarrollo web moderno, trabajo colaborativo y ciclos de entrega ágiles."
+        }
+      ],
+      "continuous": {
+        "title": "Aprendizaje continuo",
+        "items": [
+          "Gestión de proyectos ágiles",
+          "Arquitectura de software y patrones",
+          "Infraestructura cloud y despliegue",
+          "Modelado y administración de datos",
+          "Aplicación de inteligencia artificial en procesos manuales."
+        ]
+      }
+    },
+    "contact": {
+      "label": "Contacto",
+      "title": "Estoy disponible para nuevos desafios",
+      "subtitle": "Si queres conversar una colaboración, consultoría o posición, escribíme por <email>correo</email> o <linkedin>LinkedIn</linkedin>",
+      "channels": {
+        "email": {
+          "label": "Correo",
+          "value": "contacto@geroserial.com"
+        },
+        "github": {
+          "label": "GitHub",
+          "value": "@geroserial"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "value": "Geronimo Serial"
+        }
+      },
+      "location": "Corrientes, Argentina",
+      "description": "Respuesta clara y directa para que puedas decidir rápido los siguientes pasos."
+    },
+    "resume": {
+      "label": "Currículum Vitae",
+      "title": "Descarga de CV",
+      "subtitle": "Podés ver o descargar mi currículum formato PDF en español e ingles.",
+      "documents": [
+        {
+          "title": "CV (EN)",
+          "cta": "Descargar PDF"
+        },
+        {
+          "title": "CV (ES)",
+          "cta": "Descargar PDF"
+        }
+      ],
+      "updated": "Actualizado: septiembre 2025."
+    }
+  },
   "meta": {
     "home": {
       "title": "geroserial.com",

@@ -11,8 +11,16 @@ import Projects from "../_components/FeaturedProjects";
 import ResumeDownload from "./_components/ResumeDownload";
 import ContactOpportunities from "./_components/ContactOpportunities";
 import { getProjects } from "@/lib/get-projects";
+import { cookies } from "next/headers";
+import { defaultLocale, locales } from "@/lib/i18n/config";
 
 import { AppleStyleSection } from "./_components/ui/AppleStyleSection";
+
+async function getLocale() {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
+  return locales.includes(localeCookie as any) ? localeCookie : defaultLocale;
+}
 
 export const metadata: Metadata = {
   title: "Portfolio | Geronimo Serial",
@@ -26,7 +34,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PortfolioPage() {
-  const projects = await getProjects();
+  const locale = await getLocale();
+  const projects = await getProjects(locale);
 
   return (
     <div className="dark contents">

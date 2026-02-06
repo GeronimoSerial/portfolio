@@ -1,28 +1,10 @@
+"use client";
+
 import { Briefcase, Calendar } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { ComponentType } from "react";
 
-const experiences = [
-  {
-    title: "Coordinación Tecnológica Institucional",
-    organization: "Consejo General de Educación de Corrientes",
-    period: "2022 - Actualidad",
-    summary:
-      "Coordino iniciativas de transformación digital a escala provincial, con foco en infraestructura, arquitectura y continuidad operativa.",
-    highlight:
-      "Implementé flujos de trabajo automatizados para mejorar la eficiencia y reducir errores.",
-    icon: Briefcase,
-  },
-  {
-    title: "Desarrollo y consultoría independiente",
-    organization: "Proyectos freelance",
-    period: "2020 - Actualidad",
-    summary:
-      "Diseño y construyo productos web para organizaciones con necesidades de integración, rendimiento y escalabilidad.",
-    highlight:
-      "Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en producción.",
-    icon: Briefcase,
-  },
-];
+const icons = [Briefcase, Briefcase];
 
 function ExperienceCard({
   title,
@@ -64,23 +46,33 @@ function ExperienceCard({
 }
 
 export default function ExperienceTimeline() {
+  const t = useTranslations("portfolio.experience");
+
+  const experiences = [0, 1].map((index) => ({
+    title: t(`items.${index}.title`),
+    organization: t(`items.${index}.organization`),
+    period: t(`items.${index}.period`),
+    summary: t(`items.${index}.summary`),
+    highlight: t(`items.${index}.highlight`),
+    icon: icons[index],
+  }));
+
   return (
     <section id="experience" className="relative px-4 py-20">
       <div className="container mx-auto max-w-6xl">
         <div className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">Trayectoria</p>
+          <p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
           <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            Mi experiencia está enfocada en resolver problemas reales
+            {t("title")}
           </h2>
           <p className="text-zinc-400">
-            En cada etapa asumí contexto, ejecuté soluciones y dejé sistemas más
-            estables para el equipo.
+            {t("subtitle")}
           </p>
         </div>
 
         <div className="space-y-5">
-          {experiences.map((item) => (
-            <ExperienceCard key={item.title} {...item} />
+          {experiences.map((item, index) => (
+            <ExperienceCard key={index} {...item} />
           ))}
         </div>
       </div>

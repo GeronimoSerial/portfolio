@@ -1,34 +1,38 @@
-import { Download, FileText } from "lucide-react";
+"use client";
 
-const documents = [
+import { Download, FileText } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+const documentsData = [
   {
-    title: "CV (EN)",
     href: "https://geronimoserial.github.io/pdf-cge/english_resume.pdf",
-    cta: "Descargar PDF",
   },
   {
-    title: "CV (ES)",
     href: "https://geronimoserial.github.io/pdf-cge/Curriculum%2027-10.pdf",
-    cta: "Descargar PDF",
   },
 ];
 
 export default function ResumeDownload() {
+  const t = useTranslations("portfolio.resume");
+
+  const documents = [0, 1].map((index) => ({
+    title: t(`documents.${index}.title`),
+    href: documentsData[index].href,
+    cta: t(`documents.${index}.cta`),
+  }));
+
   return (
     <section id="resume" className="relative px-4 pt-20 pb-28">
       <div className="container mx-auto max-w-6xl">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
           <div className="mb-8 max-w-3xl space-y-4">
             <p className="text-sm tracking-wide text-zinc-500">
-              Currículum Vitae
+              {t("label")}
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-              Descarga de CV
+              {t("title")}
             </h2>
-            <p className="text-zinc-400">
-              Podés ver o descargar mi currículum formato PDF en español e
-              ingles.
-            </p>
+            <p className="text-zinc-400">{t("subtitle")}</p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -60,9 +64,7 @@ export default function ResumeDownload() {
             ))}
           </div>
 
-          <p className="mt-8 text-xs text-zinc-500">
-            Actualizado: septiembre 2025.
-          </p>
+          <p className="mt-8 text-xs text-zinc-500">{t("updated")}</p>
         </div>
       </div>
     </section>

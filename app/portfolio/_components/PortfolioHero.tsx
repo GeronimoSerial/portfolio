@@ -1,34 +1,38 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowDown, Mail, MapPin } from "lucide-react";
-
-const highlights = [
-  { label: "Proyectos entregados", value: "15+" },
-  { label: "Organizaciones", value: "3+" },
-  { label: "Años de experiencia", value: "2+" },
-];
+import { useTranslations } from "next-intl";
 
 export default function PortfolioHero() {
+  const t = useTranslations("portfolio.hero");
+
+  const highlights = [
+    { label: t("stats.projectsDelivered"), value: "15+" },
+    { label: t("stats.organizations"), value: "3+" },
+    { label: t("stats.yearsExperience"), value: "2+" },
+  ];
+
   return (
     <section id="hero" className="relative px-4 pt-28 pb-20">
       <div className="container mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start">
           <div className="space-y-8">
             <p className="text-sm tracking-wide text-zinc-500">
-              Perfil profesional
+              {t("label")}
             </p>
             <div className="space-y-4">
               <h1 className="text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
                 Geronimo Serial
               </h1>
               <p className="max-w-2xl text-xl text-zinc-300 md:text-2xl">
-                IT Specialist | Web Systems, Automation & Infrastructure
+                {t("role")}
               </p>
             </div>
 
             <div className="max-w-2xl text-zinc-400">
               <p>
-                Actualmente trabajando un sistema de gestión de reservas
-                multi-tenant:{" "}
+                {t("currentWork")}{" "}
                 <span className="font-bold text-zinc-100">
                   <a
                     href="https://turnero.geroserial.com/login"
@@ -44,7 +48,7 @@ export default function PortfolioHero() {
             <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
                 <MapPin className="h-4 w-4" />
-                Corrientes, Argentina
+                {t("location")}
               </span>
               <a
                 href="mailto:contacto@geroserial.com"
@@ -60,14 +64,14 @@ export default function PortfolioHero() {
                 href="#architecture"
                 className="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
               >
-                Ver cómo trabajo
+                {t("cta.howIWork")}
                 <ArrowDown className="h-4 w-4" />
               </a>
               <a
                 href="#resume"
                 className="inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
               >
-                Ir al CV
+                {t("cta.goToCV")}
               </a>
             </div>
           </div>
@@ -82,12 +86,12 @@ export default function PortfolioHero() {
                 className="h-24 w-24 rounded-xl object-cover"
               />
               <div>
-                <p className="text-sm text-zinc-500">Rol actual</p>
+                <p className="text-sm text-zinc-500">{t("currentRole.label")}</p>
                 <p className="text-zinc-200">
-                  Coordinador Tecnológico Institucional
+                  {t("currentRole.title")}
                 </p>
                 <p className="text-sm text-zinc-500">
-                  Consejo General de Educación
+                  {t("currentRole.organization")}
                 </p>
               </div>
             </div>
