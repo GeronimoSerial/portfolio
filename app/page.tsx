@@ -7,7 +7,7 @@ import { getProjects } from "@/lib/get-projects";
 import { cookies } from "next/headers";
 import { defaultLocale, locales } from "@/lib/i18n/config";
 import FeaturedProjects from "@/app/_components/FeaturedProjects";
-import { AppleStyleSection } from "./portfolio/_components/ui/AppleStyleSection";
+
 async function getLocale() {
   const cookieStore = await cookies();
   const localeCookie = cookieStore.get("NEXT_LOCALE")?.value;
@@ -23,14 +23,10 @@ export default async function Home() {
       <Background>
         <main className="relative">
           <Hero />
-          <AppleStyleSection>
-            <Services />
-          </AppleStyleSection>
+          <Services />
           <Process />
-          <AppleStyleSection>
-            <FeaturedProjects projectsData={projects} />
-          </AppleStyleSection>
-          <Results /> 
+          <FeaturedProjects projectsData={projects} />
+          <Results />
         </main>
       </Background>
     </>

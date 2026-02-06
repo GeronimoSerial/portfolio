@@ -16,7 +16,7 @@ const documents = [
 export default function ResumeDownload() {
   return (
     <section id="resume" className="relative px-4 pt-20 pb-28">
-      <div className="container mx-auto max-w-5xl">
+      <div className="container mx-auto max-w-6xl">
         <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
           <div className="mb-8 max-w-3xl space-y-4">
             <p className="text-sm tracking-wide text-zinc-500">

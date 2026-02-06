@@ -35,37 +35,37 @@ export default async function PortfolioPage() {
           <AppleStyleSection>
             <PortfolioHero />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <ExperienceTimeline />
           </AppleStyleSection>
-          
-          <Projects projectsData={projects} />
-          
+
+          <Projects projectsData={projects} maxWidth="6xl" />
+
           <AppleStyleSection>
             <ArchitectureDevOps />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <APIsIntegrations />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <DataPerformance />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <SoftwareArchitecture />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <EducationSection />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <ContactOpportunities />
           </AppleStyleSection>
-          
+
           <AppleStyleSection>
             <ResumeDownload />
           </AppleStyleSection>

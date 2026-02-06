@@ -8,9 +8,13 @@ import ProjectCard from "../projects/_components/ProjectCard";
 
 interface ProjectsProps {
   projectsData: Project[];
+  maxWidth?: "7xl" | "6xl";
 }
 
-export default function FeaturedProjects({ projectsData }: ProjectsProps) {
+export default function FeaturedProjects({
+  projectsData,
+  maxWidth = "7xl",
+}: ProjectsProps) {
   const t = useTranslations("featuredProjects");
   const { containerRef, headlineRef } = useProjectsAnimations();
 
@@ -30,7 +34,7 @@ export default function FeaturedProjects({ projectsData }: ProjectsProps) {
       ref={containerRef}
       className="relative px-4 py-20 overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className={`container mx-auto max-w-${maxWidth} relative z-10`}>
         <div ref={headlineRef} className="mb-12 max-w-3xl space-y-4">
           <p className="text-sm tracking-wide text-zinc-500">Proyectos</p>
           <h2 className="word text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
