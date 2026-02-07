@@ -29,7 +29,7 @@ export default function Process() {
         {/* Header */}
         <div className="process-header mb-20 max-w-3xl space-y-4">
           <p className="text-sm font-medium tracking-widest uppercase text-zinc-500">
-            Metodología
+            {t("pretitle")}
           </p>
           <h2 className="text-4xl font-semibold tracking-tight text-zinc-100 md:text-5xl">
             {t("title")}
@@ -71,12 +71,12 @@ export default function Process() {
                   </div>
 
                   <div className={index % 2 === 1 ? "lg:text-right" : ""}>
-                    <p className="text-lg leading-relaxed text-zinc-400">
+                    <p className="text-lg leading-relaxed px-8 md:px-0 text-zinc-400">
                       {t(`steps.${step.key}.description`)}
                     </p>
 
                     <ul
-                      className={`mt-8 space-y-4 ${
+                      className={`mt-8 space-y-4 px-7 md:px-0 ${
                         index % 2 === 1
                           ? "lg:flex lg:flex-col lg:items-end"
                           : ""

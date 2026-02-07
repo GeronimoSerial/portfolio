@@ -96,6 +96,7 @@
     }
   },
   "process": {
+    "pretitle": "De la idea a la realidad",
     "title": "Metodología",
     "subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",
     "tagline": "Descubrir · Diseñar · Construir · Lanzar",

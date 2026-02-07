@@ -95,6 +95,7 @@
     }
   },
   "process": {
+    "pretitle": "From idea to reality",
     "title": "Process",
     "subtitle": "A clear and collaborative way to build technology that works.",
     "tagline": "Discover · Design · Build · Launch",
@@ -138,6 +139,7 @@
     }
   },
   "featuredProjects": {
+    "pretitle": "CASE STUDIES",
     "title": "Featured Projects",
     "subtitle": "Digital transformation business solutions, from critical analysis to large-scale implementation.",
     "cta": "View all projects"
