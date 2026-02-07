@@ -317,3 +317,60 @@
   contain: layout style paint;
   transform: translateZ(0);
 }
+
+/* ============================================ */
+/* DISABLE HOVER ON TOUCH DEVICES (MOBILE) */
+/* ============================================ */
+@media (hover: none) {
+  /* Disable all hover effects globally */
+  *:hover {
+    /* Reset background, border, text colors that might be set by hover */
+    background-color: inherit !important;
+    border-color: inherit !important;
+    color: inherit !important;
+    opacity: inherit !important;
+    transform: none !important;
+  }
+
+  /* Keep pointer-events for interactive elements */
+  a:hover,
+  button:hover,
+  [role="button"]:hover,
+  input:hover,
+  textarea:hover,
+  select:hover {
+    pointer-events: auto;
+  }
+
+  /* Add tactile feedback with :active instead */
+  a:active,
+  button:active,
+  [role="button"]:active {
+    opacity: 0.7;
+    transform: scale(0.98);
+    transition: all 0.1s ease;
+  }
+
+  /* Remove group-hover effects */
+  .group:hover .group-hover\:opacity-100,
+  .group:hover .group-hover\:translate-y-0,
+  .group:hover .group-hover\:translate-x-0,
+  .group:hover .group-hover\:scale-110,
+  .group:hover .group-hover\:rotate-12 {
+    opacity: inherit !important;
+    transform: none !important;
+  }
+
+  /* Preserve focus states for accessibility */
+  *:focus {
+    outline: revert;
+  }
+
+  /* Mobile cards - cleaner without hover state */
+  .project-card:active,
+  .service-card:active,
+  .process-card:active {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+}
