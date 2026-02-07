@@ -236,6 +236,199 @@
   "footer": {
     "rights": ""
   },
+  "portfolio": {
+    "hero": {
+      "label": "Professional Profile",
+      "role": "IT Specialist | Web Systems, Automation & Infrastructure",
+      "currentWork": "Currently working on a multi-tenant reservation management system:",
+      "cta": {
+        "howIWork": "See how I work",
+        "goToCV": "Go to CV"
+      },
+      "stats": {
+        "projectsDelivered": "Projects Delivered",
+        "organizations": "Organizations",
+        "yearsExperience": "Years of Experience"
+      },
+      "currentRole": {
+        "label": "Current Role",
+        "title": "Institutional Technology Coordinator",
+        "organization": "General Education Council"
+      },
+      "location": "Corrientes, Argentina"
+    },
+    "experience": {
+      "label": "Trajectory",
+      "title": "My experience is focused on solving real problems",
+      "subtitle": "At each stage I took on context, executed solutions, and left more stable systems for the team.",
+      "items": [
+        {
+          "title": "Institutional Technology Coordination",
+          "organization": "General Education Council of Corrientes",
+          "period": "2022 - Present",
+          "summary": "I coordinate digital transformation initiatives at the provincial level, focusing on infrastructure, architecture, and operational continuity.",
+          "highlight": "I implemented automated workflows to improve efficiency and reduce errors."
+        },
+        {
+          "title": "Independent Development and Consulting",
+          "organization": "Freelance Projects",
+          "period": "2020 - Present",
+          "summary": "I design and build web products for organizations with integration, performance, and scalability needs.",
+          "highlight": "I deliver end-to-end solutions, from architecture to production deployment."
+        }
+      ]
+    },
+    "architecture": {
+      "label": "Architecture & Operations",
+      "title": "I design infrastructure to sustain real production load",
+      "subtitle": "These are practices I apply to deploy, operate, and scale systems without adding friction to the team.",
+      "impactLabel": "Impact:",
+      "cases": [
+        {
+          "title": "CI/CD with Zero Friction",
+          "summary": "I design pipelines with GitHub Actions, pre-validations, and automated deployment on Linux VPS.",
+          "impact": "More predictable releases and lower operational risk."
+        },
+        {
+          "title": "Maintainable Infrastructure",
+          "summary": "I work with Docker, Nginx as a reverse proxy, automated SSL, and monitoring of critical services.",
+          "impact": "Predictable environments and faster recovery from incidents."
+        }
+      ]
+    },
+    "apis": {
+      "label": "APIs & Integrations",
+      "title": "I design and implement integrations without losing technical control or operability.",
+      "subtitle": "I work with APIs and events focusing on clear contracts, traceable errors, and continuous operation.",
+      "impactLabel": "Impact:",
+      "cases": [
+        {
+          "title": "Webhooks for Continuous Flow",
+          "summary": "I use webhooks to trigger validations, deployments, and operational notifications automatically.",
+          "impact": "Less time between merge and production availability, with end-to-end traceability."
+        },
+        {
+          "title": "Bots for Daily Monitoring",
+          "summary": "I develop Telegram bots to query service health, processes, and deployment events.",
+          "impact": "Faster deviation detection, without relying on isolated dashboards."
+        }
+      ]
+    },
+    "data": {
+      "label": "Data & Performance",
+      "title": "I optimize data and performance with a focus on real production.",
+      "subtitle": "I measure, adjust, and re-measure to reduce latency and sustain stability in production.",
+      "impactLabel": "Impact:",
+      "metrics": [
+        {
+          "label": "Critical Query",
+          "from": "850 ms",
+          "to": "45 ms"
+        },
+        {
+          "label": "API Response",
+          "from": "320 ms",
+          "to": "85 ms"
+        }
+      ],
+      "cases": [
+        {
+          "title": "Data with Real Isolation",
+          "summary": "I apply Row Level Security in PostgreSQL with policies aligned to each organization's context.",
+          "impact": "Lower risk of data leakage and greater operational confidence in multi-tenant environments."
+        },
+        {
+          "title": "Performance Guided by Measurement",
+          "summary": "I analyze execution plans, adjust indexes, and apply caching based on consumption patterns.",
+          "impact": "Sustained reduction in latency for queries and high-traffic endpoints."
+        }
+      ]
+    },
+    "software": {
+      "label": "Software Architecture",
+      "title": "I structure code to iterate quickly without losing clarity.",
+      "subtitle": "I define structures that allow testing, deploying, and evolving the system with less risk.",
+      "impactLabel": "Impact:",
+      "cases": [
+        {
+          "title": "Layered Architecture",
+          "summary": "I organize actions, services, and repositories with clear contracts and controlled dependencies.",
+          "impact": "Readable and maintainable code, prepared to scale functionally and technically."
+        },
+        {
+          "title": "Domain Modeling",
+          "summary": "I apply Domain-Driven Design principles to entities, value objects, and context boundaries.",
+          "impact": "Less conceptual debt and a more faithful representation of business rules."
+        }
+      ]
+    },
+    "education": {
+      "label": "Education",
+      "title": "I maintain academic foundation and continuous learning",
+      "subtitle": "I combine formal education with practical learning to make better technical decisions in real projects.",
+      "formal": [
+        {
+          "title": "University Programmer Analyst / Systems Degree",
+          "institution": "National University of the Northeast (UNNE)",
+          "period": "In progress - estimated completion 2026",
+          "summary": "I trained in system design, data modeling, software architecture, and development methodologies."
+        },
+        {
+          "title": "Digital Talents - Full Stack",
+          "institution": "Government of the Province of Corrientes - TelCo - UNNE - PoloIT",
+          "period": "2022",
+          "summary": "I completed intensive training in modern web development, collaborative work, and agile delivery cycles."
+        }
+      ],
+      "continuous": {
+        "title": "Continuous Learning",
+        "items": [
+          "Agile project management",
+          "Software architecture and patterns",
+          "Cloud infrastructure and deployment",
+          "Data modeling and administration",
+          "Application of artificial intelligence in manual processes."
+        ]
+      }
+    },
+    "contact": {
+      "label": "Contact",
+      "title": "I'm available for new challenges",
+      "subtitle": "If you want to discuss a collaboration, consulting, or position, write to me via <email>email</email> or <linkedin>LinkedIn</linkedin>",
+      "channels": {
+        "email": {
+          "label": "Email",
+          "value": "contacto@geroserial.com"
+        },
+        "github": {
+          "label": "GitHub",
+          "value": "@geroserial"
+        },
+        "linkedin": {
+          "label": "LinkedIn",
+          "value": "Geronimo Serial"
+        }
+      },
+      "location": "Corrientes, Argentina",
+      "description": "Clear and direct response so you can quickly decide the next steps."
+    },
+    "resume": {
+      "label": "Curriculum Vitae",
+      "title": "CV Download",
+      "subtitle": "You can view or download my resume in PDF format in Spanish and English.",
+      "documents": [
+        {
+          "title": "CV (EN)",
+          "cta": "Download PDF"
+        },
+        {
+          "title": "CV (ES)",
+          "cta": "Download PDF"
+        }
+      ],
+      "updated": "Updated: September 2025."
+    }
+  },
   "meta": {
     "home": {
       "title": "geroserial.com",
