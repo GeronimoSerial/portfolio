@@ -1,5 +1,11 @@
 import "../global.css";
-import { Geist, Inter, Space_Grotesk, JetBrains_Mono, Outfit } from "next/font/google";
+import {
+  Geist,
+  Inter,
+  Space_Grotesk,
+  JetBrains_Mono,
+  Outfit,
+} from "next/font/google";
 import { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
@@ -7,7 +13,7 @@ import { getMessages, getLocale } from "next-intl/server";
 import AnimatedNav from "@/components/layout/AnimatedNav";
 import Contact from "./_components/Contact";
 import Link from "next/link";
-import DevelopmentToast from "@/components/DevelopmentToast";
+// import DevelopmentToast from "@/components/DevelopmentToast";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://geroserial.com"),
@@ -180,7 +186,7 @@ export default async function RootLayout({
               </footer>
 
               {/* Development notice toast */}
-              <DevelopmentToast />
+              {/* <DevelopmentToast />k */}
             </NextIntlClientProvider>
           </div>
         </div>
