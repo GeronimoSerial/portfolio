@@ -417,7 +417,7 @@
     "resume": {
       "label": "Curriculum Vitae",
       "title": "CV Download",
-      "subtitle": "You can view or download my resume in PDF format in Spanish and English.",
+      "subtitle": "You can view my ATS HTML version or download my resume in PDF format in Spanish and English.",
       "documents": [
         {
           "title": "CV (EN)",
@@ -426,6 +426,10 @@
         {
           "title": "CV (ES)",
           "cta": "Download PDF"
+        },
+        {
+          "title": "CV ATS (HTML)",
+          "cta": "View web version"
         }
       ],
       "updated": "Updated: September 2025."

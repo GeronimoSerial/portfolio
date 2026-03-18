@@ -6,18 +6,25 @@ import { useTranslations } from "next-intl";
 const documentsData = [
   {
     href: "https://geronimoserial.github.io/pdf-cge/english_resume.pdf",
+    download: true,
   },
   {
     href: "https://geronimoserial.github.io/pdf-cge/Curriculum%2027-10.pdf",
+    download: true,
+  },
+  {
+    href: "/cv",
+    download: false,
   },
 ];
 
 export default function ResumeDownload() {
   const t = useTranslations("portfolio.resume");
 
-  const documents = [0, 1].map((index) => ({
+  const documents = documentsData.map((doc, index) => ({
     title: t(`documents.${index}.title`),
-    href: documentsData[index].href,
+    href: doc.href,
+    download: doc.download,
     cta: t(`documents.${index}.cta`),
   }));
 
@@ -54,7 +61,7 @@ export default function ResumeDownload() {
 
                 <a
                   href={doc.href}
-                  download
+                  download={doc.download || undefined}
                   className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-4 py-2 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
                 >
                   <Download className="h-4 w-4" />

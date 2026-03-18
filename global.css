@@ -374,3 +374,45 @@
     border-color: rgba(255, 255, 255, 0.15) !important;
   }
 }
+
+/* ============================================ */
+/* ATS CV PRINT STYLES */
+/* ============================================ */
+@media print {
+  html,
+  body {
+    background: #ffffff;
+    color: #111827;
+  }
+
+  nav,
+  #contact,
+  footer {
+    display: none;
+  }
+
+  #smooth-wrapper,
+  #smooth-content {
+    overflow: visible;
+    transform: none;
+  }
+
+  .cv-ats {
+    border: 0;
+    box-shadow: none;
+    max-width: none;
+    margin: 0;
+  }
+
+  .cv-ats section,
+  .cv-ats article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv-ats a {
+    color: #111827;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}

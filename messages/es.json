@@ -415,7 +415,7 @@
     "resume": {
       "label": "Currículum Vitae",
       "title": "Descarga de CV",
-      "subtitle": "Podés ver o descargar mi currículum formato PDF en español e ingles.",
+      "subtitle": "Podés ver mi version ATS en HTML o descargar mi currículum en PDF (español e ingles).",
       "documents": [
         {
           "title": "CV (EN)",
@@ -424,6 +424,10 @@
         {
           "title": "CV (ES)",
           "cta": "Descargar PDF"
+        },
+        {
+          "title": "CV ATS (HTML)",
+          "cta": "Ver version web"
         }
       ],
       "updated": "Actualizado: septiembre 2025."

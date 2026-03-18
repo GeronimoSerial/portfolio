@@ -1,155 +1,159 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
 import { Github, Menu } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-
-import { LocaleSwitcher } from "./LocaleSwitcher";
-import { SITE_CONFIG } from "@/config/site";
-import { NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
-import { MobileMenu } from "./MobileMenu";
+import { useRef, useState } from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
+import { SITE_CONFIG } from "@/config/site";
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import { MobileMenu } from "./MobileMenu";
 
 export default function AnimatedNav() {
-  const t = useTranslations("nav");
-  const navRef = useRef<HTMLElement>(null!);
-  const logoRef = useRef<HTMLAnchorElement>(null!);
-  const navItemsRef = useRef<HTMLDivElement>(null!);
-  const actionsRef = useRef<HTMLDivElement>(null!);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const t = useTranslations("nav");
+	const navRef = useRef<HTMLElement>(null!);
+	const logoRef = useRef<HTMLAnchorElement>(null!);
+	const navItemsRef = useRef<HTMLDivElement>(null!);
+	const actionsRef = useRef<HTMLDivElement>(null!);
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const isPortfolio = pathname === "/portfolio";
+	const router = useRouter();
+	const pathname = usePathname();
+	const isPortfolio = pathname === "/portfolio";
+	const hiddenPages = ["/cv"];
 
-  // Use different nav items based on current page
-  // Portfolio items use direct labels (no translations yet)
-  // Home items use translations
-  const navItems = isPortfolio
-    ? PORTFOLIO_ITEMS.slice(1)
-    : NAVIGATION_ITEMS.slice(1).map((item) => ({ ...item, label: t(item.id) }));
-  return (
-    <nav
-      ref={navRef}
-      className="sticky top-0 left-0 right-0 z-50 will-change-transform"
-      style={{ height: "5rem" }}
-    >
-      <div className="container mx-auto px-4 sm:px-6 h-full">
-        <div className="relative flex items-center justify-between h-full">
-          <Link
-            ref={logoRef}
-            href="/"
-            className="mr-auto ml-4 md:mr-0 md:ml-0
+	if (hiddenPages.includes(pathname)) {
+		return null; // No renderizar la barra de navegación en estas rutas
+	}
+
+	// Use different nav items based on current page
+	// Portfolio items use direct labels (no translations yet)
+	// Home items use translations
+	const navItems = isPortfolio
+		? PORTFOLIO_ITEMS.slice(1)
+		: NAVIGATION_ITEMS.slice(1).map((item) => ({ ...item, label: t(item.id) }));
+	return (
+		<nav
+			ref={navRef}
+			className="sticky top-0 left-0 right-0 z-50 will-change-transform"
+			style={{ height: "5rem" }}
+		>
+			<div className="container mx-auto px-4 sm:px-6 h-full">
+				<div className="relative flex items-center justify-between h-full">
+					<Link
+						ref={logoRef}
+						href="/"
+						className="mr-auto ml-4 md:mr-0 md:ml-0
                          text-xl sm:text-2xl font-display font-bold
                          text-zinc-950 dark:text-zinc-50
                          hover:text-zinc-700 dark:hover:text-zinc-300
                          transition-colors duration-300
                          relative group
                          will-change-transform"
-          >
-            <span className="relative z-10">geroserial</span>
-            <span className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 dark:from-zinc-500/20 dark:to-zinc-300/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </Link>
+					>
+						<span className="relative z-10">geroserial</span>
+						<span className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 dark:from-zinc-500/20 dark:to-zinc-300/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+					</Link>
 
-          {/* Desktop Nav Items */}
-          <div ref={navItemsRef} className="hidden md:flex items-center gap-1">
-            {/* Portfolio button - shown on home page */}
-            {!isPortfolio && (
-              <Link
-                href="/portfolio"
-                scroll={false}
-                className="px-4 py-2 text-sm font-medium
+					{/* Desktop Nav Items */}
+					<div ref={navItemsRef} className="hidden md:flex items-center gap-1">
+						{/* Portfolio button - shown on home page */}
+						{!isPortfolio && (
+							<Link
+								href="/portfolio"
+								scroll={false}
+								className="px-4 py-2 text-sm font-medium
                              text-zinc-600 dark:text-zinc-400
                              hover:text-zinc-900 dark:hover:text-zinc-100
                              hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80
                              rounded-lg
                              relative group overflow-hidden
                              will-change-transform"
-              >
-                <span className="relative z-10">{t("portfolio")}</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              </Link>
-            )}
-            {navItems.map((item, index) => (
-              <button
-                type="button"
-                onClick={() => {
-                  const element = document.getElementById(item.id);
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
-                  } else {
-                    router.push(`/#${item.id}`);
-                  }
-                }}
-                key={item.id}
-                className="px-4 py-2 text-sm font-medium
+							>
+								<span className="relative z-10">{t("portfolio")}</span>
+								<span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+							</Link>
+						)}
+						{navItems.map((item, index) => (
+							<button
+								type="button"
+								onClick={() => {
+									const element = document.getElementById(item.id);
+									if (element) {
+										element.scrollIntoView({ behavior: "smooth" });
+									} else {
+										router.push(`/#${item.id}`);
+									}
+								}}
+								key={item.id}
+								className="px-4 py-2 text-sm font-medium
                              text-zinc-600 dark:text-zinc-400
                              hover:text-zinc-900 dark:hover:text-zinc-100
                              hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80
                              rounded-lg
                              relative group overflow-hidden
                              will-change-transform"
-                style={{
-                  animationDelay: `${index * 50}ms`,
-                }}
-              >
-                <span className="relative z-10">{item.label}</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              </button>
-            ))}
-          </div>
+								style={{
+									animationDelay: `${index * 50}ms`,
+								}}
+							>
+								<span className="relative z-10">{item.label}</span>
+								<span className="absolute inset-0 bg-gradient-to-r from-zinc-200 to-zinc-300 dark:from-zinc-700 dark:to-zinc-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+							</button>
+						))}
+					</div>
 
-          {/* Mobile Actions */}
-          <div className="flex md:hidden items-center gap-2">
-            <LocaleSwitcher />
+					{/* Mobile Actions */}
+					<div className="flex md:hidden items-center gap-2">
+						<LocaleSwitcher />
 
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <button
-                  type="button"
-                  className="p-2
+						<Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+							<SheetTrigger asChild>
+								<button
+									type="button"
+									className="p-2
                   text-zinc-600 dark:text-zinc-400
                   rounded-lg
                   transition-all duration-300
                   hover:scale-110 active:scale-95"
-                  aria-label="Toggle mobile menu"
-                >
-                  <Menu className="w-6 h-6" />
-                </button>
-              </SheetTrigger>
-              <MobileMenu />
-            </Sheet>
-          </div>
+									aria-label="Toggle mobile menu"
+								>
+									<Menu className="w-6 h-6" />
+								</button>
+							</SheetTrigger>
+							<MobileMenu />
+						</Sheet>
+					</div>
 
-          {/* Desktop Actions */}
-          <div ref={actionsRef} className="hidden md:flex items-center gap-3">
-            {/* <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
+					{/* Desktop Actions */}
+					<div ref={actionsRef} className="hidden md:flex items-center gap-3">
+						{/* <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
               {isHome ? t("portfolio") : t("home")}{" "}
             </MirrorButton> */}
 
-            <LocaleSwitcher />
+						<LocaleSwitcher />
 
-            {/* <ThemeToggle /> */}
+						{/* <ThemeToggle /> */}
 
-            <Link
-              href={SITE_CONFIG.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-zinc-600 dark:text-zinc-400
+						<Link
+							href={SITE_CONFIG.links.github}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="p-2 text-zinc-600 dark:text-zinc-400
                 hover:text-zinc-900 dark:hover:text-zinc-100
                 hover:bg-zinc-100 dark:hover:bg-zinc-800
                 rounded-lg
                 hover:scale-110 active:scale-95
                 will-change-transform"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+							aria-label="GitHub"
+						>
+							<Github className="w-5 h-5" />
+						</Link>
+					</div>
+				</div>
+			</div>
+		</nav>
+	);
 }
