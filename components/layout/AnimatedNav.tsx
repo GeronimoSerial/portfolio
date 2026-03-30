@@ -1,12 +1,16 @@
 "use client";
 
-import { Github, Menu } from "lucide-react";
+import { Github, Home, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import { NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
+import {
+	NAVIGATION_ITEMS,
+	PORTFOLIO_ITEMS,
+	PORTFOLIO_VISIBLE_NAV_IDS,
+} from "@/config/navigation";
 import { SITE_CONFIG } from "@/config/site";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
@@ -21,10 +25,13 @@ export default function AnimatedNav() {
 
 	const router = useRouter();
 	const pathname = usePathname();
-	const isPortfolio = pathname === "/portfolio";
-	const hiddenPages = ["/cv"];
+	const normalizedPath = pathname.replace(/\/+$/, "") || "/";
+	const isPortfolio =
+		normalizedPath === "/portfolio" || normalizedPath.endsWith("/portfolio");
+	const isCvPage = normalizedPath === "/cv" || normalizedPath.endsWith("/cv");
+	const visiblePortfolioIds = new Set<string>(PORTFOLIO_VISIBLE_NAV_IDS);
 
-	if (hiddenPages.includes(pathname)) {
+	if (isCvPage) {
 		return null; // No renderizar la barra de navegación en estas rutas
 	}
 
@@ -32,7 +39,7 @@ export default function AnimatedNav() {
 	// Portfolio items use direct labels (no translations yet)
 	// Home items use translations
 	const navItems = isPortfolio
-		? PORTFOLIO_ITEMS.slice(1)
+		? PORTFOLIO_ITEMS.filter((item) => visiblePortfolioIds.has(item.id))
 		: NAVIGATION_ITEMS.slice(1).map((item) => ({ ...item, label: t(item.id) }));
 	return (
 		<nav
@@ -59,6 +66,22 @@ export default function AnimatedNav() {
 
 					{/* Desktop Nav Items */}
 					<div ref={navItemsRef} className="hidden md:flex items-center gap-1">
+						{isPortfolio && (
+							<Link
+								href="/"
+								className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold
+                             text-zinc-700 dark:text-zinc-200
+                             hover:text-zinc-950 dark:hover:text-zinc-50
+                             hover:bg-zinc-100/80 dark:hover:bg-zinc-800/80
+                             rounded-lg
+                         
+                             transition-colors duration-300"
+							>
+								<Home className="w-4 h-4" />
+								<span>Inicio</span>
+							</Link>
+						)}
+
 						{/* Portfolio button - shown on home page */}
 						{!isPortfolio && (
 							<Link

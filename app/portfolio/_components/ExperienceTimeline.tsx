@@ -4,7 +4,7 @@ import { Briefcase, Calendar } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { ComponentType } from "react";
 
-const icons = [Briefcase, Briefcase];
+const icons = [Briefcase, Briefcase, Briefcase];
 
 function ExperienceCard({
   title,
@@ -48,7 +48,7 @@ function ExperienceCard({
 export default function ExperienceTimeline() {
   const t = useTranslations("portfolio.experience");
 
-  const experiences = [0, 1].map((index) => ({
+  const experiences = [0, 1, 2].map((index) => ({
     title: t(`items.${index}.title`),
     organization: t(`items.${index}.organization`),
     period: t(`items.${index}.period`),
@@ -71,8 +71,8 @@ export default function ExperienceTimeline() {
         </div>
 
         <div className="space-y-5">
-          {experiences.map((item, index) => (
-            <ExperienceCard key={index} {...item} />
+          {experiences.map((item) => (
+            <ExperienceCard key={item.title} {...item} />
           ))}
         </div>
       </div>

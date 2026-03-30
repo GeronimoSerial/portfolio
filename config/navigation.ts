@@ -15,14 +15,25 @@ export const NAVIGATION_ITEMS = [
 
 // Navigation items for the portfolio page
 export const PORTFOLIO_ITEMS = [
-	{ id: "hero", label: "Overview" },
+	{ id: "hero", label: "Inicio" },
+	{ id: "experience", label: "Experiencia" },
+	{ id: "projects", label: "Proyectos" },
 	{ id: "architecture", label: "Arquitectura" },
 	{ id: "apis", label: "APIs" },
 	{ id: "performance", label: "Data" },
-	{ id: "experience", label: "Experiencia" },
+	{ id: "software", label: "Software" },
 	{ id: "education", label: "Educación" },
-	{ id: "projects", label: "Proyectos" },
-	{ id: "contact", label: "Contacto" },
+	{ id: "contact-opp", label: "Contacto" },
+	{ id: "resume", label: "CV" },
 ] as NavItem[];
+
+export const PORTFOLIO_VISIBLE_NAV_IDS = [
+	"experience",
+	"projects",
+	"architecture",
+	"apis",
+	"performance",
+	"contact-opp",
+] as const;
 
 export const SECTION_IDS = NAVIGATION_ITEMS.map((item) => item.id);

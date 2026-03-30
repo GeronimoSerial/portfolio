@@ -1,19 +1,23 @@
 "use client";
 
+import { Github, Home } from "lucide-react";
 import Link from "next/link";
-import { Github } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-
-import { SITE_CONFIG } from "@/config/site";
-import { NavItem, NAVIGATION_ITEMS, PORTFOLIO_ITEMS } from "@/config/navigation";
 import {
+	SheetClose,
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
 	SheetTitle,
-	SheetClose,
 } from "@/components/ui/sheet";
+import type { NavItem } from "@/config/navigation";
+import {
+	NAVIGATION_ITEMS,
+	PORTFOLIO_ITEMS,
+	PORTFOLIO_VISIBLE_NAV_IDS,
+} from "@/config/navigation";
+import { SITE_CONFIG } from "@/config/site";
 
 interface MobileMenuProps {
 	navigationItems?: NavItem[];
@@ -22,10 +26,17 @@ interface MobileMenuProps {
 export function MobileMenu({ navigationItems }: MobileMenuProps) {
 	const t = useTranslations("nav");
 	const pathname = usePathname();
-	const isPortfolio = pathname === "/portfolio";
+	const normalizedPath = pathname.replace(/\/+$/, "") || "/";
+	const isPortfolio =
+		normalizedPath === "/portfolio" || normalizedPath.endsWith("/portfolio");
+	const visiblePortfolioIds = new Set<string>(PORTFOLIO_VISIBLE_NAV_IDS);
 
 	// Use navigation items based on current page
-	const items = navigationItems || (isPortfolio ? PORTFOLIO_ITEMS : NAVIGATION_ITEMS);
+	const items =
+		navigationItems || (isPortfolio ? PORTFOLIO_ITEMS : NAVIGATION_ITEMS);
+	const visiblePortfolioItems = items.filter((item) =>
+		visiblePortfolioIds.has(item.id),
+	);
 
 	return (
 		<SheetContent
@@ -52,21 +63,22 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 					<SheetClose asChild>
 						<Link
 							href="/"
-							className="text-lg font-semibold 
-                         text-zinc-700 dark:text-zinc-300
+							className="inline-flex items-center gap-2 text-lg font-semibold 
+                         text-zinc-900 dark:text-zinc-100
                          px-6 py-3
                          transition-colors duration-200
                          border-l-4 border-transparent
                          hover:bg-zinc-100 dark:hover:bg-zinc-800"
 						>
-							{t("home")}
+							<Home className="w-5 h-5" />
+							<span>{t("home")}</span>
 						</Link>
 					</SheetClose>
 				</div>
 			)}
 
 			<div className="flex flex-col py-6 space-y-1">
-				{items.slice(1).map((item) => (
+				{(isPortfolio ? visiblePortfolioItems : items.slice(1)).map((item) => (
 					<SheetClose key={item.id} asChild>
 						<a
 							href={`#${item.id}`}
@@ -77,7 +89,7 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
                          border-l-4 border-transparent
                          hover:bg-zinc-100 dark:hover:bg-zinc-800"
 						>
-							{isPortfolio ? item.label : (t(item.id) || item.label)}
+							{isPortfolio ? item.label : t(item.id) || item.label}
 						</a>
 					</SheetClose>
 				))}

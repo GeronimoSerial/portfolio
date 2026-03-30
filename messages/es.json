@@ -1,446 +1,451 @@
 {
-  "nav": {
-    "home": "Inicio",
-    "services": "Servicios",
-    "process": "Metodología",
-    "projects": "Proyectos",
-    "results": "Resultados",
-    "contact": "Contacto",
-    "portfolio": "Portfolio"
-  },
-  "hero": {
-    "title": "Soluciones tecnológicas empresariales que",
-    "midtitle": "escalan tu negocio",
-    "subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
-    "description": "Enfoque metódico. Soluciones reales.",
-    "cta": "Ver servicios",
-    "portfolio_cta": "Ver portfolio"
-  },
+	"nav": {
+		"home": "Inicio",
+		"services": "Servicios",
+		"process": "Metodología",
+		"projects": "Proyectos",
+		"results": "Resultados",
+		"contact": "Contacto",
+		"portfolio": "Portfolio"
+	},
+	"hero": {
+		"title": "Soluciones tecnológicas empresariales que",
+		"midtitle": "escalan tu negocio",
+		"subtitle": "Especialista en IT · Infraestructura, Automatización y Gestión de Sistemas",
+		"description": "Enfoque metódico. Soluciones reales.",
+		"cta": "Ver servicios",
+		"portfolio_cta": "Ver portfolio"
+	},
 
-  "services": {
-    "title": "Servicios",
-    "subtitle": "Soluciones inteligentes para crecer en digital",
-    "items": {
-      "consulting": {
-        "title": "Estrategia y dirección tecnológica",
-        "description": "Acompañamiento estratégico para definir, planificar y ejecutar decisiones tecnológicas de alto impacto.",
-        "features": [
-          "Diagnóstico integral de madurez tecnológica",
-          "Diseño de hoja de ruta digital personalizada",
-          "Análisis de inversión y retorno (ROI tecnológico)",
-          "Acompañamiento ejecutivo en decisiones críticas"
-        ],
-        "price": "Desde $2000 USD"
-      },
-      "support": {
-        "title": "Modernización y automatización",
-        "description": "Optimización de procesos mediante automatización, integraciones y análisis de reglas de negocio.",
-        "features": [
-          "Mapeo y modelado de procesos clave",
-          "Análisis y formalización de reglas de negocio",
-          "Implementación de flujos automatizados y conectores",
-          "Dashboards y reportes en tiempo real"
-        ],
-        "price": "Presupuesto personalizado"
-      },
-      "transformation": {
-        "title": "Mantenimiento y soporte evolutivo",
-        "description": "Cuidado continuo de sistemas para mantener rendimiento, estabilidad y mejora constante.",
-        "features": [
-          "Monitoreo proactivo y resolución de incidencias",
-          "Actualizaciones y optimización de rendimiento",
-          "Copias de seguridad y mantenimiento preventivo",
-          "Reportes periódicos y sugerencias de mejora"
-        ],
-        "price": "Desde $500 USD"
-      },
-      "development": {
-        "title": "Desarrollo web y plataformas",
-        "description": "Diseño y desarrollo de sitios y plataformas centrados en experiencia, velocidad y escalabilidad.",
-        "features": [
-          "Diseño moderno y responsive enfocado en conversión",
-          "Integraciones y funcionalidades a medida",
-          "SEO técnico, analítica y seguridad integradas",
-          "Panel de gestión y soporte de evolución continua"
-        ],
-        "price": "Desde $1000 USD"
-      }
-    },
-    "cta": "Solicitar presupuesto"
-  },
-  "skills": {
-    "title": "Stack Técnico",
-    "subtitle": "Arquitectura, infraestructura y herramientas de desarrollo",
-    "categories": {
-      "architecture": {
-        "title": "Arquitectura & Rendering"
-      },
-      "data": {
-        "title": "Data & Persistence"
-      },
-      "backend": {
-        "title": "Backend & APIs"
-      },
-      "infrastructure": {
-        "title": "Infrastructure & DevOps"
-      },
-      "performance": {
-        "title": "Performance & Optimization"
-      },
-      "software": {
-        "title": "Software Architecture"
-      },
-      "security": {
-        "title": "Security & Integrations"
-      }
-    }
-  },
-  "process": {
-    "pretitle": "De la idea a la realidad",
-    "title": "Metodología",
-    "subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",
-    "tagline": "Descubrir · Diseñar · Construir · Lanzar",
-    "steps": {
-      "1": {
-        "title": "Descubrir",
-        "description": "Definimos objetivos, necesidades y oportunidades a través del análisis y la estrategia.",
-        "items": [
-          "Comprender el contexto de tu negocio",
-          "Auditar sistemas y flujos de trabajo",
-          "Marcar una dirección clara para el proyecto"
-        ]
-      },
-      "2": {
-        "title": "Diseñar",
-        "description": "Damos forma a la estructura, experiencia e identidad visual de tu solución.",
-        "items": [
-          "Arquitectura de información y diseño UX",
-          "Wireframes y sistema visual",
-          "Plan funcional y revisión constante"
-        ]
-      },
-      "3": {
-        "title": "Construir",
-        "description": "Desarrollamos e integramos con precisión y total transparencia.",
-        "items": [
-          "Desarrollo iterativo con revisiones frecuentes",
-          "Implementación segura y escalable",
-          "Pruebas de rendimiento y calidad"
-        ]
-      },
-      "4": {
-        "title": "Lanzar",
-        "description": "Publicamos tu solución y garantizamos una transición fluida con soporte real.",
-        "items": [
-          "Despliegue controlado y documentación",
-          "Monitoreo y ajustes iniciales",
-          "Soporte post-lanzamiento y plan de evolución"
-        ]
-      }
-    }
-  },
-  "featuredProjects": {
-    "title": "Proyectos destacados",
-    "subtitle": "Soluciones empresariales de transformación digital, del análisis crítico a la implementación a gran escala.",
-    "cta": "Ver todos los proyectos"
-  },
-  "projectsPage": {
-    "title": "Todos los proyectos",
-    "subtitle": "Explorá mi portfolio completo de proyectos que demuestran habilidades técnicas y creatividad."
-  },
-  "results": {
-    "title": "Resultados que hablan",
-    "subtitle": "Cada entrega refleja precisión, estrategia y resultados que hablan por sí mismos",
-    "stats": {
-      "visits": {
-        "label": "Visitas al sitio",
-        "period": "en 20 días"
-      },
-      "performance": {
-        "label": "Tiempos de carga",
-        "period": "más rápidos tras la optimización"
-      },
-      "projects": {
-        "label": "Proyectos finalizados",
-        "period": "con éxito"
-      },
-      "uptime": {
-        "label": "Promedio de",
-        "period": "disponibilidad"
-      }
-    },
-    "cta": {
-      "text": "¿Querés lograr resultados similares?",
-      "link": "Hablemos"
-    }
-  },
-  "contact": {
-    "heading": {
-      "line1": "Hablemos de tu",
-      "line2": "próximo proyecto"
-    },
-    "description": "Compartí tu visión y hagámosla realidad.",
-    "info": {
-      "directContact": "Contacto directo",
-      "basedIn": "Con base en"
-    },
-    "form": {
-      "name": {
-        "label": "Tu nombre",
-        "placeholder": "Ingresá tu nombre completo"
-      },
-      "email": {
-        "label": "Correo electrónico",
-        "placeholder": "tu@email.com"
-      },
-      "company": {
-        "label": "Empresa",
-        "optional": "(Opcional)",
-        "placeholder": "Nombre de tu empresa"
-      },
-      "message": {
-        "label": "Detalles del proyecto",
-        "placeholder": "Contame sobre tu proyecto, objetivos y plazos..."
-      },
-      "success": "¡Gracias por contactarme! Te responderé lo antes posible.",
-      "error": "¡Ups! Algo salió mal. Por favor, intentá nuevamente más tarde.",
-      "submit": "Enviar mensaje",
-      "privacy": "Tu información es confidencial y será utilizada solo para responder a tu consulta. No compartimos datos con terceros."
-    },
-    "availability": "DISPONIBLE PARA PROYECTOS SELECCIONADOS"
-  },
-  "testimonials": {
-    "title": "Opiniones de clientes",
-    "subtitle": "Experiencias de quienes confiaron en mi trabajo",
-    "items": {
-      "client1": {
-        "name": "Juan Pérez",
-        "role": "CEO, Tech Solutions",
-        "content": "Excelente trabajo con el sitio web de nuestra empresa. Profesional, puntual y superó las expectativas."
-      },
-      "client2": {
-        "name": "María González",
-        "role": "Product Manager, StartupXYZ",
-        "content": "Las herramientas de automatización nos ahorran horas de trabajo. Altamente recomendado."
-      },
-      "client3": {
-        "name": "Carlos Rodríguez",
-        "role": "CTO, Innovation Labs",
-        "content": "Gran conocimiento técnico y capacidad para resolver problemas complejos. Un gusto colaborar."
-      }
-    }
-  },
-  "development": {
-    "title": "Sitio en desarrollo",
-    "description": "Esta página está en construcción activa. Puede contener errores de traducción o funcionalidades incompletas.",
-    "close": "Cerrar aviso"
-  },
-  "footer": {
-    "rights": ""
-  },
-  "portfolio": {
-    "hero": {
-      "label": "Perfil profesional",
-      "role": "IT Specialist | Web Systems, Automation & Infrastructure",
-      "currentWork": "Actualmente trabajando un sistema de gestión de reservas multi-tenant:",
-      "cta": {
-        "howIWork": "Ver cómo trabajo",
-        "goToCV": "Ir al CV"
-      },
-      "stats": {
-        "projectsDelivered": "Proyectos entregados",
-        "organizations": "Organizaciones",
-        "yearsExperience": "Años de experiencia"
-      },
-      "currentRole": {
-        "label": "Rol actual",
-        "title": "Coordinador Tecnológico Institucional",
-        "organization": "Consejo General de Educación"
-      },
-      "location": "Corrientes, Argentina"
-    },
-    "experience": {
-      "label": "Trayectoria",
-      "title": "Mi experiencia está enfocada en resolver problemas reales",
-      "subtitle": "En cada etapa asumí contexto, ejecuté soluciones y dejé sistemas más estables para el equipo.",
-      "items": [
-        {
-          "title": "Coordinación Tecnológica Institucional",
-          "organization": "Consejo General de Educación de Corrientes",
-          "period": "2022 - Actualidad",
-          "summary": "Coordino iniciativas de transformación digital a escala provincial, con foco en infraestructura, arquitectura y continuidad operativa.",
-          "highlight": "Implementé flujos de trabajo automatizados para mejorar la eficiencia y reducir errores."
-        },
-        {
-          "title": "Desarrollo y consultoría independiente",
-          "organization": "Proyectos freelance",
-          "period": "2020 - Actualidad",
-          "summary": "Diseño y construyo productos web para organizaciones con necesidades de integración, rendimiento y escalabilidad.",
-          "highlight": "Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en producción."
-        }
-      ]
-    },
-    "architecture": {
-      "label": "Arquitectura y operaciones",
-      "title": "Diseño infraestructura para sostener carga real en producción",
-      "subtitle": "Estas son prácticas que aplico para desplegar, operar y escalar sistemas sin sumar fricción al equipo.",
-      "impactLabel": "Impacto:",
-      "cases": [
-        {
-          "title": "CI/CD con cero fricción",
-          "summary": "Diseño pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
-          "impact": "Releases más predecibles y menor riesgo operativo."
-        },
-        {
-          "title": "Infraestructura mantenible",
-          "summary": "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios críticos.",
-          "impact": "Entornos previsibles y recuperación más rápida ante incidentes."
-        }
-      ]
-    },
-    "apis": {
-      "label": "APIs e integraciones",
-      "title": "Diseño e implemento integraciones sin perder control técnico ni operabilidad.",
-      "subtitle": "Trabajo APIs y eventos con foco en contratos claros, errores trazables y operación continua.",
-      "cases": [
-        {
-          "title": "Webhooks para flujo continuo",
-          "summary": "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automática.",
-          "impact": "Menor tiempo entre merge y disponibilidad en producción, con trazabilidad de punta a punta."
-        },
-        {
-          "title": "Bots para monitoreo diario",
-          "summary": "Desarrollo bots de Telegram para consultar salud de servicios, procesos y eventos de despliegue.",
-          "impact": "Detección de desvíos más rápida, sin depender de paneles aislados."
-        }
-      ]
-    },
-    "data": {
-      "label": "Data y performance",
-      "title": "Optimizo datos y performance con foco en producción real.",
-      "subtitle": "Mido, ajusto y vuelvo a medir para reducir latencia y sostener estabilidad en producción.",
-      "metrics": [
-        {
-          "label": "Query crítica",
-          "from": "850 ms",
-          "to": "45 ms"
-        },
-        {
-          "label": "Respuesta API",
-          "from": "320 ms",
-          "to": "85 ms"
-        }
-      ],
-      "cases": [
-        {
-          "title": "Datos con aislamiento real",
-          "summary": "Aplico Row Level Security en PostgreSQL con políticas alineadas al contexto de cada organización.",
-          "impact": "Menor riesgo de fuga de datos y mayor confianza operativa en entornos multi-tenant."
-        },
-        {
-          "title": "Performance guiada por medición",
-          "summary": "Analizo planes de ejecución, ajusto índices y aplico cache según el patrón de consumo.",
-          "impact": "Reducción sostenida de latencia en consultas y endpoints de alto tráfico."
-        }
-      ]
-    },
-    "software": {
-      "label": "Arquitectura de software",
-      "title": "Estructuro el código para iterar rápido sin perder claridad.",
-      "subtitle": "Defino estructuras que permiten probar, desplegar y evolucionar el sistema con menor riesgo.",
-      "impactLabel": "Impacto:",
-      "cases": [
-        {
-          "title": "Arquitectura por capas",
-          "summary": "Organizo actions, services y repositories con contratos claros y dependencias controladas.",
-          "impact": "Código legible y mantenible, preparado para escalar funcional y técnicamente."
-        },
-        {
-          "title": "Modelado de dominio",
-          "summary": "Aplico principios de Domain-Driven Design en entidades, objetos de valor y límites de contexto.",
-          "impact": "Menor deuda conceptual y una representación más fiel de las reglas del negocio."
-        }
-      ]
-    },
-    "education": {
-      "label": "Formación",
-      "title": "Sostengo base académica y aprendizaje continuo",
-      "subtitle": "Combino formación formal con aprendizaje práctico para tomar mejores decisiones técnicas en proyectos reales.",
-      "formal": [
-        {
-          "title": "Analista Programador Universitario / Licenciatura en Sistemas",
-          "institution": "Universidad Nacional del Nordeste (UNNE)",
-          "period": "En curso - finalización estimada 2026",
-          "summary": "Me formé en diseño de sistemas, modelado de datos, arquitectura de software y metodologías de desarrollo."
-        },
-        {
-          "title": "Talentos Digitales - Full Stack",
-          "institution": "Gobierno de la Provincia de Corrientes - TelCo - UNNE - PoloIT",
-          "period": "2022",
-          "summary": "Hice entrenamiento intensivo en desarrollo web moderno, trabajo colaborativo y ciclos de entrega ágiles."
-        }
-      ],
-      "continuous": {
-        "title": "Aprendizaje continuo",
-        "items": [
-          "Gestión de proyectos ágiles",
-          "Arquitectura de software y patrones",
-          "Infraestructura cloud y despliegue",
-          "Modelado y administración de datos",
-          "Aplicación de inteligencia artificial en procesos manuales."
-        ]
-      }
-    },
-    "contact": {
-      "label": "Contacto",
-      "title": "Estoy disponible para nuevos desafios",
-      "subtitle": "Si queres conversar una colaboración, consultoría o posición, escribíme por <email>correo</email> o <linkedin>LinkedIn</linkedin>",
-      "channels": {
-        "email": {
-          "label": "Correo",
-          "value": "contacto@geroserial.com"
-        },
-        "github": {
-          "label": "GitHub",
-          "value": "@geroserial"
-        },
-        "linkedin": {
-          "label": "LinkedIn",
-          "value": "Geronimo Serial"
-        }
-      },
-      "location": "Corrientes, Argentina",
-      "description": "Respuesta clara y directa para que puedas decidir rápido los siguientes pasos."
-    },
-    "resume": {
-      "label": "Currículum Vitae",
-      "title": "Descarga de CV",
-      "subtitle": "Podés ver mi version ATS en HTML o descargar mi currículum en PDF (español e ingles).",
-      "documents": [
-        {
-          "title": "CV (EN)",
-          "cta": "Descargar PDF"
-        },
-        {
-          "title": "CV (ES)",
-          "cta": "Descargar PDF"
-        },
-        {
-          "title": "CV ATS (HTML)",
-          "cta": "Ver version web"
-        }
-      ],
-      "updated": "Actualizado: septiembre 2025."
-    }
-  },
-  "meta": {
-    "home": {
-      "title": "geroserial.com",
-      "description": "Soluciones tecnológicas que simplifican y potencian tus proyectos."
-    },
-    "portfolio": {
-      "title": "Portfolio | Geronimo Serial",
-      "description": "Portfolio y experiencia profesional de Geronimo Serial — Desarrollador Full-stack y Consultor Técnico especializado en Next.js, React y tecnologías web modernas."
-    }
-  }
+	"services": {
+		"title": "Servicios",
+		"subtitle": "Soluciones inteligentes para crecer en digital",
+		"items": {
+			"consulting": {
+				"title": "Estrategia y dirección tecnológica",
+				"description": "Acompañamiento estratégico para definir, planificar y ejecutar decisiones tecnológicas de alto impacto.",
+				"features": [
+					"Diagnóstico integral de madurez tecnológica",
+					"Diseño de hoja de ruta digital personalizada",
+					"Análisis de inversión y retorno (ROI tecnológico)",
+					"Acompañamiento ejecutivo en decisiones críticas"
+				],
+				"price": "Desde $2000 USD"
+			},
+			"support": {
+				"title": "Modernización y automatización",
+				"description": "Optimización de procesos mediante automatización, integraciones y análisis de reglas de negocio.",
+				"features": [
+					"Mapeo y modelado de procesos clave",
+					"Análisis y formalización de reglas de negocio",
+					"Implementación de flujos automatizados y conectores",
+					"Dashboards y reportes en tiempo real"
+				],
+				"price": "Presupuesto personalizado"
+			},
+			"transformation": {
+				"title": "Mantenimiento y soporte evolutivo",
+				"description": "Cuidado continuo de sistemas para mantener rendimiento, estabilidad y mejora constante.",
+				"features": [
+					"Monitoreo proactivo y resolución de incidencias",
+					"Actualizaciones y optimización de rendimiento",
+					"Copias de seguridad y mantenimiento preventivo",
+					"Reportes periódicos y sugerencias de mejora"
+				],
+				"price": "Desde $500 USD"
+			},
+			"development": {
+				"title": "Desarrollo web y plataformas",
+				"description": "Diseño y desarrollo de sitios y plataformas centrados en experiencia, velocidad y escalabilidad.",
+				"features": [
+					"Diseño moderno y responsive enfocado en conversión",
+					"Integraciones y funcionalidades a medida",
+					"SEO técnico, analítica y seguridad integradas",
+					"Panel de gestión y soporte de evolución continua"
+				],
+				"price": "Desde $1000 USD"
+			}
+		},
+		"cta": "Solicitar presupuesto"
+	},
+	"skills": {
+		"title": "Stack Técnico",
+		"subtitle": "Arquitectura, infraestructura y herramientas de desarrollo",
+		"categories": {
+			"architecture": {
+				"title": "Arquitectura & Rendering"
+			},
+			"data": {
+				"title": "Data & Persistence"
+			},
+			"backend": {
+				"title": "Backend & APIs"
+			},
+			"infrastructure": {
+				"title": "Infrastructure & DevOps"
+			},
+			"performance": {
+				"title": "Performance & Optimization"
+			},
+			"software": {
+				"title": "Software Architecture"
+			},
+			"security": {
+				"title": "Security & Integrations"
+			}
+		}
+	},
+	"process": {
+		"pretitle": "De la idea a la realidad",
+		"title": "Metodología",
+		"subtitle": "Una forma clara y colaborativa de crear tecnología que funciona.",
+		"tagline": "Descubrir · Diseñar · Construir · Lanzar",
+		"steps": {
+			"1": {
+				"title": "Descubrir",
+				"description": "Definimos objetivos, necesidades y oportunidades a través del análisis y la estrategia.",
+				"items": [
+					"Comprender el contexto de tu negocio",
+					"Auditar sistemas y flujos de trabajo",
+					"Marcar una dirección clara para el proyecto"
+				]
+			},
+			"2": {
+				"title": "Diseñar",
+				"description": "Damos forma a la estructura, experiencia e identidad visual de tu solución.",
+				"items": [
+					"Arquitectura de información y diseño UX",
+					"Wireframes y sistema visual",
+					"Plan funcional y revisión constante"
+				]
+			},
+			"3": {
+				"title": "Construir",
+				"description": "Desarrollamos e integramos con precisión y total transparencia.",
+				"items": [
+					"Desarrollo iterativo con revisiones frecuentes",
+					"Implementación segura y escalable",
+					"Pruebas de rendimiento y calidad"
+				]
+			},
+			"4": {
+				"title": "Lanzar",
+				"description": "Publicamos tu solución y garantizamos una transición fluida con soporte real.",
+				"items": [
+					"Despliegue controlado y documentación",
+					"Monitoreo y ajustes iniciales",
+					"Soporte post-lanzamiento y plan de evolución"
+				]
+			}
+		}
+	},
+	"featuredProjects": {
+		"title": "Proyectos destacados",
+		"subtitle": "Soluciones empresariales de transformación digital, del análisis crítico a la implementación a gran escala.",
+		"cta": "Ver todos los proyectos"
+	},
+	"projectsPage": {
+		"title": "Todos los proyectos",
+		"subtitle": "Explorá mi portfolio completo de proyectos que demuestran habilidades técnicas y creatividad."
+	},
+	"results": {
+		"title": "Resultados que hablan",
+		"subtitle": "Cada entrega refleja precisión, estrategia y resultados que hablan por sí mismos",
+		"stats": {
+			"visits": {
+				"label": "Visitas al sitio",
+				"period": "en 20 días"
+			},
+			"performance": {
+				"label": "Tiempos de carga",
+				"period": "más rápidos tras la optimización"
+			},
+			"projects": {
+				"label": "Proyectos finalizados",
+				"period": "con éxito"
+			},
+			"uptime": {
+				"label": "Promedio de",
+				"period": "disponibilidad"
+			}
+		},
+		"cta": {
+			"text": "¿Querés lograr resultados similares?",
+			"link": "Hablemos"
+		}
+	},
+	"contact": {
+		"heading": {
+			"line1": "Hablemos de tu",
+			"line2": "próximo proyecto"
+		},
+		"description": "Compartí tu visión y hagámosla realidad.",
+		"info": {
+			"directContact": "Contacto directo",
+			"basedIn": "Con base en"
+		},
+		"form": {
+			"name": {
+				"label": "Tu nombre",
+				"placeholder": "Ingresá tu nombre completo"
+			},
+			"email": {
+				"label": "Correo electrónico",
+				"placeholder": "tu@email.com"
+			},
+			"company": {
+				"label": "Empresa",
+				"optional": "(Opcional)",
+				"placeholder": "Nombre de tu empresa"
+			},
+			"message": {
+				"label": "Detalles del proyecto",
+				"placeholder": "Contame sobre tu proyecto, objetivos y plazos..."
+			},
+			"success": "¡Gracias por contactarme! Te responderé lo antes posible.",
+			"error": "¡Ups! Algo salió mal. Por favor, intentá nuevamente más tarde.",
+			"submit": "Enviar mensaje",
+			"privacy": "Tu información es confidencial y será utilizada solo para responder a tu consulta. No compartimos datos con terceros."
+		},
+		"availability": "DISPONIBLE PARA PROYECTOS SELECCIONADOS"
+	},
+	"testimonials": {
+		"title": "Opiniones de clientes",
+		"subtitle": "Experiencias de quienes confiaron en mi trabajo",
+		"items": {
+			"client1": {
+				"name": "Juan Pérez",
+				"role": "CEO, Tech Solutions",
+				"content": "Excelente trabajo con el sitio web de nuestra empresa. Profesional, puntual y superó las expectativas."
+			},
+			"client2": {
+				"name": "María González",
+				"role": "Product Manager, StartupXYZ",
+				"content": "Las herramientas de automatización nos ahorran horas de trabajo. Altamente recomendado."
+			},
+			"client3": {
+				"name": "Carlos Rodríguez",
+				"role": "CTO, Innovation Labs",
+				"content": "Gran conocimiento técnico y capacidad para resolver problemas complejos. Un gusto colaborar."
+			}
+		}
+	},
+	"development": {
+		"title": "Sitio en desarrollo",
+		"description": "Esta página está en construcción activa. Puede contener errores de traducción o funcionalidades incompletas.",
+		"close": "Cerrar aviso"
+	},
+	"footer": {
+		"rights": ""
+	},
+	"portfolio": {
+		"hero": {
+			"label": "Perfil profesional",
+			"role": "IT Specialist | Web Systems, Automation & Infrastructure",
+			"currentWork": "Actualmente trabajando un sistema de gestión de reservas multi-tenant:",
+			"cta": {
+				"howIWork": "Ver cómo trabajo",
+				"goToCV": "Ir al CV"
+			},
+			"stats": {
+				"projectsDelivered": "Proyectos entregados",
+				"organizations": "Organizaciones",
+				"yearsExperience": "Años de experiencia"
+			},
+			"currentRole": {
+				"label": "Rol actual",
+				"title": "Coordinador Tecnológico Institucional",
+				"organization": "Consejo General de Educación"
+			},
+			"location": "Corrientes, Argentina"
+		},
+		"experience": {
+			"label": "Trayectoria",
+			"title": "Mi experiencia está enfocada en resolver problemas reales",
+			"subtitle": "En cada etapa asumí contexto, ejecuté soluciones y dejé sistemas más estables para el equipo.",
+			"items": [
+				{
+					"title": "Dirección de Sistemas",
+					"organization": "Centro Administrativo del Ministerio de Educación",
+					"period": "2026 - Actualidad",
+					"summary": "Software Engineer | Analista de Sistemas.",
+					"highlight": "Lidero el proyecto de modernización y digitalización de las novedades laborales docentes de toda la provincia."
+				},
+				{
+					"title": "Coordinación Tecnológica Institucional",
+					"organization": "Consejo General de Educación de Corrientes",
+					"period": "2022 - Actualidad",
+					"summary": "Coordino iniciativas de transformación digital a escala provincial, con foco en infraestructura, arquitectura y continuidad operativa.",
+					"highlight": "Implementé flujos de trabajo automatizados para mejorar la eficiencia y reducir errores."
+				},
+				{
+					"title": "Desarrollo y consultoría independiente",
+					"organization": "Proyectos freelance",
+					"period": "2020 - Actualidad",
+					"summary": "Diseño y construyo productos web para organizaciones con necesidades de integración, rendimiento y escalabilidad.",
+					"highlight": "Entrego soluciones de punta a punta, desde arquitectura hasta despliegue en producción."
+				}
+			]
+		},
+		"architecture": {
+			"label": "Arquitectura y operaciones",
+			"title": "Diseño infraestructura para sostener carga real en producción",
+			"subtitle": "Estas son prácticas que aplico para desplegar, operar y escalar sistemas sin sumar fricción al equipo.",
+			"impactLabel": "Impacto:",
+			"cases": [
+				{
+					"title": "CI/CD con cero fricción",
+					"summary": "Diseño pipelines con GitHub Actions, validaciones previas y despliegue automatizado sobre VPS Linux.",
+					"impact": "Releases más predecibles y menor riesgo operativo."
+				},
+				{
+					"title": "Infraestructura mantenible",
+					"summary": "Trabajo con Docker, Nginx como reverse proxy, SSL automatizado y monitoreo de servicios críticos.",
+					"impact": "Entornos previsibles y recuperación más rápida ante incidentes."
+				}
+			]
+		},
+		"apis": {
+			"label": "APIs e integraciones",
+			"title": "Diseño e implemento integraciones sin perder control técnico ni operabilidad.",
+			"subtitle": "Trabajo APIs y eventos con foco en contratos claros, errores trazables y operación continua.",
+			"impactLabel": "Impacto:",
+			"cases": [
+				{
+					"title": "Webhooks para flujo continuo",
+					"summary": "Uso webhooks para disparar validaciones, despliegues y notificaciones operativas de forma automática.",
+					"impact": "Menor tiempo entre merge y disponibilidad en producción, con trazabilidad de punta a punta."
+				},
+				{
+					"title": "Bots para monitoreo diario",
+					"summary": "Desarrollo bots de Telegram para consultar salud de servicios, procesos y eventos de despliegue.",
+					"impact": "Detección de desvíos más rápida, sin depender de paneles aislados."
+				}
+			]
+		},
+		"data": {
+			"label": "Data y performance",
+			"title": "Optimizo datos y performance con foco en producción real.",
+			"subtitle": "Mido, ajusto y vuelvo a medir para reducir latencia y sostener estabilidad en producción.",
+			"impactLabel": "Impacto:",
+			"metrics": [
+				{
+					"label": "Query crítica",
+					"from": "850 ms",
+					"to": "45 ms"
+				},
+				{
+					"label": "Respuesta API",
+					"from": "320 ms",
+					"to": "85 ms"
+				}
+			],
+			"cases": [
+				{
+					"title": "Datos con aislamiento real",
+					"summary": "Aplico Row Level Security en PostgreSQL con políticas alineadas al contexto de cada organización.",
+					"impact": "Menor riesgo de fuga de datos y mayor confianza operativa en entornos multi-tenant."
+				},
+				{
+					"title": "Performance guiada por medición",
+					"summary": "Analizo planes de ejecución, ajusto índices y aplico cache según el patrón de consumo.",
+					"impact": "Reducción sostenida de latencia en consultas y endpoints de alto tráfico."
+				}
+			]
+		},
+		"software": {
+			"label": "Arquitectura de software",
+			"title": "Estructuro el código para iterar rápido sin perder claridad.",
+			"subtitle": "Defino estructuras que permiten probar, desplegar y evolucionar el sistema con menor riesgo.",
+			"impactLabel": "Impacto:",
+			"cases": [
+				{
+					"title": "Arquitectura por capas",
+					"summary": "Organizo actions, services y repositories con contratos claros y dependencias controladas.",
+					"impact": "Código legible y mantenible, preparado para escalar funcional y técnicamente."
+				},
+				{
+					"title": "Modelado de dominio",
+					"summary": "Aplico principios de Domain-Driven Design en entidades, objetos de valor y límites de contexto.",
+					"impact": "Menor deuda conceptual y una representación más fiel de las reglas del negocio."
+				}
+			]
+		},
+		"education": {
+			"label": "Formación",
+			"title": "Sostengo base académica y aprendizaje continuo",
+			"subtitle": "Combino formación formal con aprendizaje práctico para tomar mejores decisiones técnicas en proyectos reales.",
+			"formal": [
+				{
+					"title": "Analista Programador Universitario / Licenciatura en Sistemas",
+					"institution": "Universidad Nacional del Nordeste (UNNE)",
+					"period": "En curso - finalización estimada 2026",
+					"summary": "Me formé en diseño de sistemas, modelado de datos, arquitectura de software y metodologías de desarrollo."
+				},
+				{
+					"title": "Talentos Digitales - Full Stack",
+					"institution": "Gobierno de la Provincia de Corrientes - TelCo - UNNE - PoloIT",
+					"period": "2022",
+					"summary": "Hice entrenamiento intensivo en desarrollo web moderno, trabajo colaborativo y ciclos de entrega ágiles."
+				}
+			],
+			"continuous": {
+				"title": "Aprendizaje continuo",
+				"items": [
+					"Gestión de proyectos ágiles",
+					"Arquitectura de software y patrones",
+					"Infraestructura cloud y despliegue",
+					"Modelado y administración de datos",
+					"Aplicación de inteligencia artificial en procesos manuales."
+				]
+			}
+		},
+		"contact": {
+			"label": "Contacto",
+			"title": "Estoy disponible para nuevos desafios",
+			"subtitle": "Si queres conversar una colaboración, consultoría o posición, escribíme por <email>correo</email> o <linkedin>LinkedIn</linkedin>",
+			"channels": {
+				"email": {
+					"label": "Correo",
+					"value": "contacto@geroserial.com"
+				},
+				"github": {
+					"label": "GitHub",
+					"value": "@geroserial"
+				},
+				"linkedin": {
+					"label": "LinkedIn",
+					"value": "Geronimo Serial"
+				}
+			},
+			"location": "Corrientes, Argentina",
+			"description": "Respuesta clara y directa para que puedas decidir rápido los siguientes pasos."
+		},
+		"resume": {
+			"label": "Currículum Vitae",
+			"title": "Descarga de CV",
+			"subtitle": "Podés ver mi version ATS en HTML o descargar mi currículum en PDF (español e ingles).",
+			"documents": [
+				{
+					"title": "CV (Español)",
+					"cta": "Descargar PDF"
+				},
+				{
+					"title": "CV (English)",
+					"cta": "Descargar PDF"
+				}
+			],
+			"updated": "Actualizado: abril 2026."
+		}
+	},
+	"meta": {
+		"home": {
+			"title": "geroserial.com",
+			"description": "Soluciones tecnológicas que simplifican y potencian tus proyectos."
+		},
+		"portfolio": {
+			"title": "Portfolio | Geronimo Serial",
+			"description": "Portfolio y experiencia profesional de Geronimo Serial — Desarrollador Full-stack y Consultor Técnico especializado en Next.js, React y tecnologías web modernas."
+		}
+	}
 }
