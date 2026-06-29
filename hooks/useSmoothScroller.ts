@@ -1,20 +1,27 @@
 import { useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ensureGsapPlugins, gsap, ScrollTrigger } from "@/lib/gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+ensureGsapPlugins();
+gsap.registerPlugin(ScrollSmoother);
 
 export const useSmoothScroll = () => {
 	useLayoutEffect(() => {
-		if (!ScrollSmoother.get()) {
-			ScrollSmoother.create({
-				wrapper: "#smooth-wrapper", // usa IDs, no clases
-				content: "#smooth-content",
-				smooth: 1.5,
-				normalizeScroll: true,
-				effects: true,
-			});
-		}
+		const wrapper = document.querySelector("#smooth-wrapper");
+		const content = document.querySelector("#smooth-content");
+		if (!wrapper || !content || ScrollSmoother.get()) return;
+
+		const smoother = ScrollSmoother.create({
+			wrapper: "#smooth-wrapper",
+			content: "#smooth-content",
+			smooth: 1.5,
+			normalizeScroll: true,
+			effects: true,
+		});
+
+		return () => {
+			smoother.kill();
+			ScrollTrigger.refresh();
+		};
 	}, []);
 };

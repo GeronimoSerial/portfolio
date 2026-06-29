@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ensureGsapPlugins, gsap } from "@/lib/gsap";
+import { EASE, EASE2, MOBILE, SCROLL, clearMotionProps, getMotionPrefs } from "@/lib/motion";
 
-gsap.registerPlugin(ScrollTrigger);
+ensureGsapPlugins();
 
 export const useProcessAnimations = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,12 +14,9 @@ export const useProcessAnimations = () => {
     () => {
       if (!containerRef.current) return;
 
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const { reduceMotion, isMobile } = getMotionPrefs();
       if (reduceMotion) {
-        gsap.set(containerRef.current.querySelectorAll("*"), {
-          clearProps: "all",
-        });
+        clearMotionProps(containerRef.current);
         return;
       }
 
@@ -28,49 +25,51 @@ export const useProcessAnimations = () => {
       // Header Animation
       gsap.from(".process-header > *", {
         opacity: 0,
-        y: 20,
-        stagger: 0.1,
-        duration: 1,
-        ease: "power2.out",
+        y: isMobile ? MOBILE.y : 20,
+        stagger: isMobile ? MOBILE.stagger : 0.1,
+        duration: isMobile ? MOBILE.duration.reveal : 1,
+        ease: isMobile ? EASE2.sharp : "power2.out",
         scrollTrigger: {
           trigger: ".process-header",
-          start: "top 80%",
-        }
+          start: SCROLL.header,
+          once: true,
+        },
       });
 
       rows.forEach((row, i) => {
         const textContent = row.querySelector(".process-text-content");
         const visual = row.querySelector(".process-visual-container");
-        
-        // Text Entrance
+
+        // Text Entrance — vertical rhythm + snappier on mobile
         gsap.from(textContent, {
           opacity: 0,
-          x: -30,
-          duration: 1,
-          ease: "power2.out",
+          x: isMobile ? 0 : -30,
+          y: isMobile ? MOBILE.y : 0,
+          duration: isMobile ? MOBILE.duration.reveal : 1,
+          ease: isMobile ? EASE.reveal : "power2.out",
           scrollTrigger: {
             trigger: row,
-            start: "top 70%",
-          }
+            start: SCROLL.row,
+            once: true,
+          },
         });
 
-        // Visual Container Entrance
         gsap.from(visual, {
           opacity: 0,
-          scale: 0.9,
-          duration: 1.2,
-          ease: "power3.out",
+          scale: isMobile ? 0.92 : 0.9,
+          duration: isMobile ? MOBILE.duration.reveal : 1.2,
+          ease: isMobile ? EASE2.pop : "power3.out",
           scrollTrigger: {
             trigger: row,
-            start: "top 70%",
-          }
+            start: SCROLL.row,
+            once: true,
+          },
         });
 
-        // Specific SVG Animations based on step index
         const triggerOptions = {
           trigger: row,
           start: "top 60%",
-          toggleActions: "play none none reverse"
+          once: true,
         };
 
         if (i === 0) { // Discover
@@ -266,20 +265,22 @@ export const useProcessAnimations = () => {
               scrollTrigger: triggerOptions
             });
             
-            // Sketching motion loop
-            gsap.to(rightArm, {
-              rotation: 3,
-              transformOrigin: "90% 20%",
-              duration: 1.5,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-              delay: 1
-            });
+            // Sketching motion loop (desktop only — no continuous loops on mobile)
+            if (!isMobile) {
+              gsap.to(rightArm, {
+                rotation: 3,
+                transformOrigin: "90% 20%",
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut",
+                delay: 1
+              });
+            }
           }
-          
-          // Marker subtle movement
-          if (marker) {
+
+          // Marker subtle movement (desktop only)
+          if (marker && !isMobile) {
             gsap.to(marker, {
               x: -2,
               y: 1,
@@ -328,7 +329,7 @@ export const useProcessAnimations = () => {
 
         if (i === 2) { // Build
           const flow = row.querySelector(".build-flow");
-          if (flow) {
+          if (flow && !isMobile) {
             gsap.to(flow, {
               strokeDashoffset: -20,
               duration: 2,
@@ -359,14 +360,16 @@ export const useProcessAnimations = () => {
             );
           }
           
-          gsap.to(waves, {
-            scale: 1.5,
-            opacity: 0,
-            stagger: 0.4,
-            duration: 2,
-            repeat: -1,
-            ease: "power1.out"
-          });
+          if (!isMobile) {
+            gsap.to(waves, {
+              scale: 1.5,
+              opacity: 0,
+              stagger: 0.4,
+              duration: 2,
+              repeat: -1,
+              ease: "power1.out"
+            });
+          }
         }
       });
 
@@ -377,8 +380,9 @@ export const useProcessAnimations = () => {
         duration: 1,
         scrollTrigger: {
           trigger: ".process-footer",
-          start: "top 90%",
-        }
+          start: SCROLL.section,
+          once: true,
+        },
       });
     },
     { scope: containerRef }

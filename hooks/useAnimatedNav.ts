@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ensureGsapPlugins, gsap } from "@/lib/gsap";
+import { getMotionPrefs } from "@/lib/motion";
 import { useIsMobile } from "./useIsMobile";
 
-gsap.registerPlugin(ScrollTrigger);
+ensureGsapPlugins();
 
 export const useAnimatedNav = (
 	navRef: React.RefObject<HTMLElement>,
@@ -23,7 +23,7 @@ export const useAnimatedNav = (
 	const isMobile = useIsMobile();
 
 	useLayoutEffect(() => {
-		if (isMobile) return;
+		if (isMobile || getMotionPrefs().reduceMotion) return;
 		const nav = navRef.current;
 		const navItems = navItemsRef.current;
 		const actions = actionsRef.current;

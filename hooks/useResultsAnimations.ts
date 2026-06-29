@@ -1,10 +1,13 @@
 "use client";
 import { RefObject } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ensureGsapPlugins, gsap, ScrollTrigger } from "@/lib/gsap";
+import { EASE, EASE2, MOBILE, SCROLL, clearMotionProps, getMotionPrefs } from "@/lib/motion";
 
-gsap.registerPlugin(ScrollTrigger);
+ensureGsapPlugins();
+
+// Counter animations need legible read time; a touch shorter on mobile.
+const COUNTER_DUR = (isMobile: boolean) => (isMobile ? 1.4 : 2);
 
 export function useResultsAnimations(
   containerRef: RefObject<HTMLElement | null>,
@@ -14,12 +17,9 @@ export function useResultsAnimations(
     () => {
       if (!containerRef.current) return;
 
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const { reduceMotion, isMobile } = getMotionPrefs();
       if (reduceMotion) {
-        gsap.set(containerRef.current.querySelectorAll("*"), {
-          clearProps: "all",
-        });
+        clearMotionProps(containerRef.current);
         return;
       }
 
@@ -28,14 +28,15 @@ export function useResultsAnimations(
         if (headerRef.current) {
           const words = headerRef.current.querySelectorAll(".result-word");
           gsap.from(words, {
-            y: 30,
+            y: isMobile ? MOBILE.y : 30,
             opacity: 0,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power2.out",
+            duration: isMobile ? MOBILE.duration.reveal : 1,
+            stagger: isMobile ? MOBILE.stagger : 0.1,
+            ease: isMobile ? EASE2.sharp : "power2.out",
             scrollTrigger: {
               trigger: headerRef.current,
-              start: "top 80%",
+              start: SCROLL.header,
+              once: true,
             },
           });
 
@@ -49,7 +50,8 @@ export function useResultsAnimations(
               delay: 0.2,
               scrollTrigger: {
                 trigger: headerRef.current,
-                start: "top 80%",
+                start: SCROLL.header,
+                once: true,
               },
             });
           }
@@ -59,14 +61,16 @@ export function useResultsAnimations(
         const cards = containerRef.current?.querySelectorAll(".result-card");
         if (cards && cards.length > 0) {
           gsap.from(cards, {
-            y: 30,
+            y: isMobile ? MOBILE.y : 30,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
+            scale: isMobile ? 0.97 : 1,
+            duration: isMobile ? MOBILE.duration.reveal : 0.8,
+            stagger: isMobile ? MOBILE.stagger : 0.15,
+            ease: EASE.reveal,
             scrollTrigger: {
-              trigger: cards[0], // Trigger first card
-              start: "top 85%",
+              trigger: cards[0],
+              start: SCROLL.enter,
+              once: true,
             },
           });
         }
@@ -78,13 +82,14 @@ export function useResultsAnimations(
         if (card1) {
           ScrollTrigger.create({
             trigger: card1,
-            start: "top 85%",
+            start: SCROLL.enter,
+            once: true,
             onEnter: () => {
                 const counter = card1.querySelector(".result-number");
                 if (counter) {
                     gsap.from(counter, {
                         textContent: 0,
-                        duration: 2,
+                        duration: COUNTER_DUR(isMobile),
                         ease: "expo.out",
                         snap: { textContent: 1 },
                         onUpdate: function() {
@@ -116,13 +121,14 @@ export function useResultsAnimations(
         if (card2) {
            ScrollTrigger.create({
             trigger: card2,
-            start: "top 85%",
+            start: SCROLL.enter,
+            once: true,
             onEnter: () => {
                 const counter = card2.querySelector(".result-number");
                 if (counter) {
                     gsap.from(counter, {
                         textContent: 0,
-                        duration: 2,
+                        duration: COUNTER_DUR(isMobile),
                         ease: "expo.out",
                         snap: { textContent: 0.1 },
                          onUpdate: function() {
@@ -157,13 +163,14 @@ export function useResultsAnimations(
         if (card3) {
             ScrollTrigger.create({
                 trigger: card3,
-                start: "top 85%",
+                start: SCROLL.enter,
+                once: true,
                 onEnter: () => {
                      const digits = card3.querySelectorAll(".result-digit");
                      digits.forEach((digit, i) => {
                          gsap.from(digit, {
                              textContent: 0,
-                             duration: 2,
+                             duration: COUNTER_DUR(isMobile),
                              delay: i * 0.1,
                              ease: "expo.out",
                              snap: { textContent: 1 },
@@ -210,13 +217,14 @@ export function useResultsAnimations(
         if (card4) {
              ScrollTrigger.create({
                 trigger: card4,
-                start: "top 85%",
+                start: SCROLL.enter,
+                once: true,
                 onEnter: () => {
                     const percent = card4.querySelector(".result-percentage");
                      if (percent) {
                         gsap.from(percent, {
                             textContent: 0,
-                            duration: 2,
+                            duration: COUNTER_DUR(isMobile),
                             ease: "expo.out",
                             snap: { textContent: 0.1 },
                             onUpdate: function() {
@@ -246,14 +254,31 @@ export function useResultsAnimations(
                     }
 
                     const dot = card4.querySelector(".pulse-dot");
-                    if (dot && !isMobile) {
-                      gsap.to(dot, {
-                        opacity: 0.2,
-                        duration: 0.5,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: "power2.inOut"
-                      });
+                    if (dot) {
+                      if (isMobile) {
+                        // Single accent breathe — life without a continuous loop.
+                        gsap.fromTo(
+                          dot,
+                          { opacity: 1, scale: 1 },
+                          {
+                            opacity: 0.35,
+                            scale: 1.15,
+                            duration: 0.55,
+                            yoyo: true,
+                            repeat: 1,
+                            transformOrigin: "center center",
+                            ease: EASE2.pop,
+                          }
+                        );
+                      } else {
+                        gsap.to(dot, {
+                          opacity: 0.2,
+                          duration: 0.5,
+                          repeat: -1,
+                          yoyo: true,
+                          ease: "power2.inOut"
+                        });
+                      }
                     }
                 }
              });

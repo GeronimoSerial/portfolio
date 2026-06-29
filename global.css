@@ -122,11 +122,9 @@
 		transform: translateZ(0);
 	}
 
-	/* Project cards - GPU acceleration */
+	/* Project cards — promote layer only while GSAP animates (via inline will-change) */
 	.project-card {
-		will-change: transform, opacity;
 		backface-visibility: hidden;
-		transform: translateZ(0);
 		-webkit-font-smoothing: antialiased;
 	}
 
@@ -157,11 +155,10 @@
 	}
 
 	/* Projects section text elements */
-	.word,
+	.projects-pretitle,
+	.projects-title,
 	.projects-subtitle {
-		will-change: transform, opacity;
 		backface-visibility: hidden;
-		transform: translateZ(0);
 	}
 
 	/* Mobile-specific optimizations */
@@ -319,29 +316,11 @@
 }
 
 /* ============================================ */
-/* DISABLE HOVER ON TOUCH DEVICES (MOBILE) */
+/* TOUCH FEEDBACK — hover is gated via Tailwind */
+/* future.hoverOnlyWhenSupported in tailwind.config */
 /* ============================================ */
 @media (hover: none) {
-	/* Disable all hover effects globally */
-	*:hover {
-		/* Reset background, border, text colors that might be set by hover */
-		background-color: inherit !important;
-		border-color: inherit !important;
-		color: inherit !important;
-		opacity: inherit !important;
-	}
-
-	/* Keep pointer-events for interactive elements */
-	a:hover,
-	button:hover,
-	[role="button"]:hover,
-	input:hover,
-	textarea:hover,
-	select:hover {
-		pointer-events: auto;
-	}
-
-	/* Add tactile feedback with :active instead */
+	/* Tactile feedback with :active instead of sticky :hover on touch */
 	a:active,
 	button:active,
 	[role="button"]:active {
@@ -350,22 +329,6 @@
 		transition: transform 0.12s ease, opacity 0.12s ease;
 	}
 
-	/* Remove group-hover effects */
-	.group:hover .group-hover\:opacity-100,
-	.group:hover .group-hover\:translate-y-0,
-	.group:hover .group-hover\:translate-x-0,
-	.group:hover .group-hover\:scale-110,
-	.group:hover .group-hover\:rotate-12 {
-		opacity: inherit !important;
-		transform: none !important;
-	}
-
-	/* Preserve focus states for accessibility */
-	*:focus {
-		outline: revert;
-	}
-
-	/* Mobile cards - cleaner without hover state */
 	.project-card:active,
 	.service-card:active,
 	.process-card:active {
@@ -429,4 +392,66 @@
 		text-decoration: underline;
 		text-underline-offset: 2px;
 	}
+}
+
+/* ============================================ */
+/* HOME MOTION PASS — hero + touch ripple */
+/* ============================================ */
+
+/* Hero entrance/scroll-linked targets: keep them on their own GPU layer. */
+.hero-content,
+.hero-title,
+.hero-title .word {
+	will-change: transform, opacity;
+	backface-visibility: hidden;
+}
+
+/* Scroll-down hint — CSS only so GSAP never owns the arrow's transform. */
+@keyframes hero-arrow-hint {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(4px);
+	}
+}
+
+.hero-arrow-hint {
+	animation: hero-arrow-hint 1.4s ease-in-out infinite;
+}
+
+/*
+ * Lightweight tap ripple — pure CSS, no JS per tap. A soft radial glow scales
+ * in on press and fades back out on release (transform/opacity only). The
+ * reduced-motion block above collapses its transitions to ~0ms.
+ */
+.tap-ripple {
+	position: relative;
+	overflow: hidden;
+}
+
+.tap-ripple::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	width: 130%;
+	aspect-ratio: 1;
+	border-radius: 9999px;
+	background: radial-gradient(
+		circle,
+		rgba(255, 255, 255, 0.18) 0%,
+		rgba(255, 255, 255, 0) 60%
+	);
+	opacity: 0;
+	transform: scale(0.55);
+	pointer-events: none;
+	transition: transform 0.5s ease, opacity 0.45s ease;
+}
+
+.tap-ripple:active::after {
+	opacity: 0.9;
+	transform: scale(1);
+	transition-duration: 0s, 0s;
 }

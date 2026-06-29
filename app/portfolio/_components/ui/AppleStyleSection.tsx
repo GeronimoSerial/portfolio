@@ -1,13 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ensureGsapPlugins, gsap, ScrollTrigger } from "@/lib/gsap";
+import {
+  EASE,
+  SCROLL,
+  clearMotionProps,
+  getMotionPrefs,
+} from "@/lib/motion";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+ensureGsapPlugins();
 
 interface AppleStyleSectionProps {
   children: React.ReactNode;
@@ -24,96 +27,74 @@ export const AppleStyleSection = ({
 
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      const root = containerRef.current;
+      if (!root) return;
 
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      const { reduceMotion, canHover } = getMotionPrefs();
 
       if (reduceMotion) {
-        gsap.set(containerRef.current.querySelectorAll("*"), {
-          clearProps: "all",
-        });
+        clearMotionProps(root);
         return;
       }
 
-      // Select meaningful content elements to animate
-      // We look for common block-level and text elements
-      const selector = "h1, h2, h3, p, a, button, span.inline-flex, .rounded-2xl, article, li, .animate-target";
+      const selector =
+        "h1, h2, h3, p, a, button, span.inline-flex, .rounded-2xl, article, li, .animate-target";
       const targets = gsap.utils.toArray<HTMLElement>(
-        containerRef.current.querySelectorAll(selector)
+        root.querySelectorAll(selector),
       );
 
-      // Filter out elements that are nested within other selected elements
-      // to avoid double-animating (e.g., a <p> inside a <article>)
-      // This is a simple heuristic: if the parent is also in the list, skip this one.
-      // However, sometimes we WANT to animate the children of a card separately.
-      // Let's refine: If it's a 'card' (article, .rounded-2xl), we might want to animate IT, 
-      // but maybe not its internal text separately if that looks too busy.
-      // For an "Apple" feel, moving the container is often cleaner than moving every line of text inside it.
-      // But user asked for "stagger... elements inside".
-      // Let's try to keep it simple: animate the direct semantic children if possible, or leaf nodes.
-      // A better approach for general sections is to animate the direct children of the grid/flex containers.
-      // But since we can't easily know the structure, let's stick to the list but filter out *deeply* nested ones if needed.
-      // For now, I'll animate them all but with a very tight stagger.
-      
-      // Let's rely on the user's "Hierachy of Layers" rule:
-      // "El contenedor debe empezar a moverse un 10% antes que su contenido."
-      // This is hard to do generically without knowing the structure.
-      // I will implement a robust default: animate distinct blocks.
-      
       const uniqueTargets = targets.filter((el) => {
-         if (el.tagName === "SVG") return false;
-         if (el.parentElement?.tagName === "BUTTON" && el.closest("button") !== el.parentElement) return false;
-         return true;
-       });
+        if (el.tagName === "SVG") return false;
+        if (
+          el.parentElement?.tagName === "BUTTON" &&
+          el.closest("button") !== el.parentElement
+        ) {
+          return false;
+        }
+        return true;
+      });
 
-      // Initial State - Apple Style
       gsap.set(uniqueTargets, {
-        opacity: 0,
-        y: 20, // Reduced from 20 to 20 (user asked for "scale 0.92 to 1")
-        scale: 0.96, // Subtle scale
-        filter: "blur(10px)", // Blur effect
-        rotationX: 3, // Slight 3D tilt
-        transformPerspective: 1000,
+        autoAlpha: 0,
+        y: 24,
+        scale: 0.96,
         transformOrigin: "center center",
-        willChange: "transform, opacity, filter",
+        willChange: "transform, opacity",
       });
 
       ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top 85%", // Trigger slightly earlier
-        end: "bottom 10%",
-        toggleActions: "play none none reverse",
+        trigger: root,
+        start: SCROLL.enter,
+        once: true,
         onEnter: () => {
           gsap.to(uniqueTargets, {
-            opacity: 1,
+            autoAlpha: 1,
             y: 0,
             scale: 1,
-            filter: "blur(0px)",
-            rotationX: 0,
-            duration: 1.2, // Slower, more cinematic
-            stagger: 0.04, // Fast ripple
-            ease: "expo.out", // Sharp entrance, smooth landing
-            delay: delay,
-            clearProps: "willChange,transformPerspective,filter", // Cleanup for performance
+            duration: 0.9,
+            stagger: 0.04,
+            ease: EASE.reveal,
+            delay,
+            clearProps: "willChange",
           });
         },
       });
 
-      if (!supportsHover) {
-        return;
-      }
+      if (!canHover) return;
 
-      const interactiveElements = containerRef.current.querySelectorAll<HTMLElement>("a, button, .interactive");
+      const interactiveElements =
+        root.querySelectorAll<HTMLElement>("a, button, .interactive");
       const cleanups: Array<() => void> = [];
 
       interactiveElements.forEach((el) => {
+        const setTransform = gsap.quickSetter(el, "transform");
+
         const handleMouseEnter = () => {
           gsap.to(el, {
             scale: 1.01,
             duration: 0.22,
             ease: "power2.out",
-            overwrite: "auto"
+            overwrite: "auto",
           });
         };
 
@@ -121,15 +102,9 @@ export const AppleStyleSection = ({
           const rect = el.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
-
-          gsap.to(el, {
-            x: x * 0.06,
-            y: y * 0.06,
-            rotation: x * 0.01,
-            duration: 0.25,
-            ease: "power2.out",
-            overwrite: "auto"
-          });
+          setTransform(
+            `translate3d(${x * 0.06}px, ${y * 0.06}px, 0) rotate(${x * 0.01}deg) scale(1.01)`,
+          );
         };
 
         const handleMouseLeave = () => {
@@ -140,7 +115,7 @@ export const AppleStyleSection = ({
             rotation: 0,
             duration: 0.24,
             ease: "power2.out",
-            overwrite: "auto"
+            overwrite: "auto",
           });
         };
 
@@ -159,7 +134,7 @@ export const AppleStyleSection = ({
         cleanups.forEach((cleanup) => cleanup());
       };
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (

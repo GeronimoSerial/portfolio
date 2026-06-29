@@ -27,10 +27,12 @@ Last updated: 2026-06-29
 
 | Skill | Trigger / description | Scope | Path |
 | --- | --- | --- | --- |
+| `12-principles-of-animation` | Audit animation code against Disney's 12 principles adapted for web. Use when reviewing motion, implementing animations, or checking animation quality. Outputs file:line findings. | project | `/home/gero/Documents/05_Desarrollo/GitHub/portfolio/.agents/skills/12-principles-of-animation/SKILL.md` |
 | `branch-pr` | Create Gentle AI pull requests with issue-first checks. Trigger: creating, opening, or preparing PRs for review. | user | `/home/gero/.config/opencode/skills/branch-pr/SKILL.md` |
 | `chained-pr` | Trigger: PRs over 400 lines, stacked PRs, review slices. Split oversized changes into chained PRs that protect review focus. | user | `/home/gero/.config/opencode/skills/chained-pr/SKILL.md` |
 | `cognitive-doc-design` | Design docs that reduce cognitive load. Trigger: writing guides, READMEs, RFCs, onboarding, architecture, or review-facing docs. | user | `/home/gero/.config/opencode/skills/cognitive-doc-design/SKILL.md` |
 | `comment-writer` | Write warm, direct collaboration comments. Trigger: PR feedback, issue replies, reviews, Slack messages, or GitHub comments. | user | `/home/gero/.config/opencode/skills/comment-writer/SKILL.md` |
+| `design-lab` | Conduct design interviews, generate five distinct UI variations in a temporary design lab, collect feedback, and produce implementation plans. Use when the user wants to explore UI design options, redesign existing components, or create new UI with multiple approaches to compare. | project | `/home/gero/Documents/05_Desarrollo/GitHub/portfolio/.agents/skills/design-lab/SKILL.md` |
 | `find-skills` | Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill. | user | `/home/gero/.agents/skills/find-skills/SKILL.md` |
 | `go-testing` | Trigger: Go tests, go test coverage, Bubbletea teatest, golden files. Apply focused Go testing patterns. | user | `/home/gero/.config/opencode/skills/go-testing/SKILL.md` |
 | `gsap` | GSAP animations for JARVIS HUD transitions and effects | project | `/home/gero/Documents/05_Desarrollo/GitHub/portfolio/.agents/skills/gsap/SKILL.md` |

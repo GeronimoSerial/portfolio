@@ -1,12 +1,10 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useLayoutEffect } from "react";
+import { ensureGsapPlugins, gsap, ScrollTrigger } from "@/lib/gsap";
 
-// Registrar plugins
-gsap.registerPlugin(ScrollTrigger);
+ensureGsapPlugins();
 
 /**
  * Hook master para todas las animaciones - Solo GSAP

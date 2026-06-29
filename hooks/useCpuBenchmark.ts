@@ -12,6 +12,8 @@ type UseCpuBenchmarkOptions = {
   iterations?: number;
   maxTime?: number;
   isMobile?: boolean;
+  /** When false, defers the benchmark until enabled (e.g. after hero text entrance). */
+  enabled?: boolean;
 };
 
 const benchmarkCache = new Map<string, BenchmarkResult>();
@@ -52,7 +54,8 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
   optionsRef.current = options;
 
   useEffect(() => {
-    if (hasRunRef.current) return;
+    const enabled = optionsRef.current.enabled ?? true;
+    if (!enabled || hasRunRef.current) return;
     hasRunRef.current = true;
 
     let isActive = true;
@@ -166,7 +169,7 @@ export function useCpuBenchmark(options: UseCpuBenchmarkOptions = {}) {
     return () => {
       isActive = false;
     };
-  }, []);
+  }, [options.enabled]);
 
   return {
     result,

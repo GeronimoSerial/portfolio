@@ -1,57 +1,48 @@
 "use client";
-// Performance-Optimized Version
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { useGSAP } from "@gsap/react";
 
-if (typeof window !== "undefined") {
-	gsap.registerPlugin(ScrollTrigger, SplitText);
-	// Set global defaults for optimal performance
-	gsap.defaults({ lazy: false });
-}
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { ensureGsapPlugins, gsap, SplitText } from "@/lib/gsap";
+import { SCROLL, getMotionPrefs } from "@/lib/motion";
+
+ensureGsapPlugins();
 
 export function useContactAnimations() {
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
 		() => {
-			if (!containerRef.current) return;
-			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-				return;
-			}
+			const root = containerRef.current;
+			if (!root) return;
+
+			const { reduceMotion, isMobile } = getMotionPrefs();
+			if (reduceMotion) return;
 
 			let split: SplitText | null = null;
-			// ============================================
-			// TITLE CHARACTER REVEAL - "Let's Collaborate"
-			// ============================================
-			const titleElement = containerRef.current.querySelector(".gsap-title");
-			if (titleElement) {
-				split = new SplitText(titleElement, { type: "chars,words" });
+			const titleElement = root.querySelector(".gsap-title");
+			if (!titleElement) return;
 
-				gsap.from(split.chars, {
-					opacity: 0,
-					y: 24,
-					rotationX: -18,
-					stagger: 0.02,
-					duration: 0.55,
-					ease: "power2.out",
-					scrollTrigger: {
-						trigger: titleElement,
-						start: "top 75%",
-						toggleActions: "play none none reset",
-					},
-				});
-			}
+			split = new SplitText(titleElement, { type: "chars,words" });
 
-			ScrollTrigger.refresh();
+			gsap.from(split.chars, {
+				autoAlpha: 0,
+				y: isMobile ? 16 : 24,
+				rotationX: isMobile ? 0 : -18,
+				stagger: 0.02,
+				duration: isMobile ? 0.45 : 0.55,
+				ease: "power2.out",
+				scrollTrigger: {
+					trigger: titleElement,
+					start: SCROLL.header,
+					once: true,
+				},
+			});
 
 			return () => {
 				split?.revert();
 			};
 		},
-		{ scope: containerRef, dependencies: [] }
+		{ scope: containerRef, dependencies: [] },
 	);
 
 	return containerRef;
