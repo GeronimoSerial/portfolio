@@ -12,7 +12,6 @@ import {
 	PORTFOLIO_VISIBLE_NAV_IDS,
 } from "@/config/navigation";
 import { SITE_CONFIG } from "@/config/site";
-import { LocaleSwitcher } from "./LocaleSwitcher";
 import { MobileMenu } from "./MobileMenu";
 
 export default function AnimatedNav() {
@@ -32,7 +31,7 @@ export default function AnimatedNav() {
 	const visiblePortfolioIds = new Set<string>(PORTFOLIO_VISIBLE_NAV_IDS);
 
 	if (isCvPage) {
-		return null; // No renderizar la barra de navegación en estas rutas
+		return null; // Hide navigation on CV route
 	}
 
 	// Use different nav items based on current page
@@ -78,7 +77,7 @@ export default function AnimatedNav() {
                              transition-colors duration-300"
 							>
 								<Home className="w-4 h-4" />
-								<span>Inicio</span>
+								<span>{t("home")}</span>
 							</Link>
 						)}
 
@@ -130,8 +129,6 @@ export default function AnimatedNav() {
 
 					{/* Mobile Actions */}
 					<div className="flex md:hidden items-center gap-2">
-						<LocaleSwitcher />
-
 						<Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
 							<SheetTrigger asChild>
 								<button
@@ -155,8 +152,6 @@ export default function AnimatedNav() {
 						{/* <MirrorButton size="xs" href={isHome ? "/portfolio" : "/"}>
               {isHome ? t("portfolio") : t("home")}{" "}
             </MirrorButton> */}
-
-						<LocaleSwitcher />
 
 						{/* <ThemeToggle /> */}
 

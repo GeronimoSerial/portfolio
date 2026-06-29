@@ -13,7 +13,7 @@ export default function ContactOpportunities() {
     {
       label: t("channels.email.label"),
       value: t("channels.email.value"),
-      href: "mailto:contacto@geroserial.com",
+      href: "mailto:contact@geroserial.com",
       icon: icons[0],
     },
     {
@@ -42,7 +42,7 @@ export default function ContactOpportunities() {
             {t.rich("subtitle", {
               email: (chunks) => (
                 <a
-                  href="mailto:contacto@geroserial.com"
+                  href="mailto:contact@geroserial.com"
                   className="text-zinc-300 hover:text-white transition-colors underline"
                 >
                   {chunks}

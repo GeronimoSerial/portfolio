@@ -5,7 +5,7 @@ export default function Footer() {
 	const pathname = usePathname();
 
 	if (pathname === "/cv") {
-		return null; // No renderizar el pie de página en la ruta /cv
+		return null; // Hide footer on CV route
 	}
 
 	return (

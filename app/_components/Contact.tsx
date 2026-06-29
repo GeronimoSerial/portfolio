@@ -1,14 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useContactAnimations } from "@/hooks/useContactAnimations";
 import { cn } from "@/lib/utils";
 
 export default function Contact() {
 	const t = useTranslations("contact");
-	const locale = useLocale();
 	const pathname = usePathname();
 	const hiddenPages = ["/cv"];
 
@@ -41,19 +40,18 @@ export default function Contact() {
 					email: formData.email,
 					company: formData.company || undefined,
 					message: formData.message,
-					locale,
 				}),
 			});
 
 			const result = await response.json();
 
 			if (!response.ok) {
-				throw new Error(result.error || "Error al enviar el mensaje");
+				throw new Error(result.error || "Failed to send message");
 			}
 
 			setSubmitStatus({
 				type: "success",
-				message: t("form.success") || "Mensaje enviado con éxito.",
+				message: t("form.success"),
 			});
 
 			setFormData({ name: "", email: "", company: "", message: "" });
@@ -63,7 +61,7 @@ export default function Contact() {
 				message:
 					error instanceof Error
 						? error.message
-						: t("form.error") || "Hubo un error.",
+						: t("form.error"),
 			});
 		} finally {
 			setIsSubmitting(false);
@@ -84,7 +82,7 @@ export default function Contact() {
 			<div className="container mx-auto max-w-6xl">
 				<div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
 					<div className="space-y-6">
-						<p className="text-sm tracking-wide text-zinc-500">Contacto</p>
+						<p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
 						<h2 className="gsap-title text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
 							{t("heading.line1")} {t("heading.line2")}
 						</h2>
@@ -96,10 +94,10 @@ export default function Contact() {
 									{t("info.directContact")}
 								</p>
 								<a
-									href="mailto:contacto@geroserial.com"
+									href="mailto:contact@geroserial.com"
 									className="text-zinc-200 transition-colors hover:text-zinc-100"
 								>
-									contacto@geroserial.com
+									contact@geroserial.com
 								</a>
 							</div>
 							<div>
@@ -196,9 +194,7 @@ export default function Contact() {
 								disabled={isSubmitting}
 								className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-100 px-4 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-70"
 							>
-								{isSubmitting
-									? t("form.sending") || "Enviando"
-									: t("form.submit")}
+								{isSubmitting ? t("form.sending") : t("form.submit")}
 							</button>
 						</div>
 

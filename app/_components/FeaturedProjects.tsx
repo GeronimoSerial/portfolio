@@ -36,7 +36,7 @@ export default function FeaturedProjects({
     >
       <div className={`container mx-auto max-w-${maxWidth} relative z-10`}>
         <div ref={headlineRef} className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">Proyectos</p>
+          <p className="text-sm tracking-wide text-zinc-500">{t("pretitle")}</p>
           <h2 className="word text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
             {t("title")}
           </h2>

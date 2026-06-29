@@ -34,25 +34,25 @@ export function ImpactGrid() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <ImpactCard
         icon={<Zap className="w-6 h-6" />}
-        title="Reducción de Carga Operativa"
+        title="Operational Load Reduction"
       >
-        La automatización de consultas frecuentes liberó{" "}
-        <strong>40% del tiempo</strong> del equipo administrativo para tareas
-        estratégicas
+        Automating frequent inquiries freed up{" "}
+        <strong>40% of the time</strong> of the administrative team for
+        strategic tasks
       </ImpactCard>
       <ImpactCard
         icon={<Target className="w-6 h-6" />}
-        title="Acceso Equitativo"
+        title="Equitable Access"
       >
-        Disponibilidad <strong>24/7</strong> para más de 1,200 escuelas en toda
-        la provincia de Corrientes
+        <strong>24/7</strong> availability for more than 1,200 schools across
+        the province of Corrientes
       </ImpactCard>
       <ImpactCard
         icon={<TrendingUp className="w-6 h-6" />}
-        title="Transparencia Institucional"
+        title="Institutional Transparency"
       >
-        Portal consolidado como <strong>fuente única oficial</strong> de
-        información educativa provincial
+        Consolidated portal as the <strong>single official source</strong> of
+        provincial education information
       </ImpactCard>
     </div>
   );

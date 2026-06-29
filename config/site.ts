@@ -1,14 +1,14 @@
 export const SITE_CONFIG = {
 	name: "geroserial.com",
 	author: "Geronimo Serial",
-	title: "Desarrollador Full Stack & Especialista en TI",
-	description: "Transformando ideas en soluciones tecnológicas innovadoras",
+	title: "Full Stack Developer & IT Specialist",
+	description: "Turning ideas into innovative technology solutions",
 	url: "https://geroserial.com",
 	ogImage: "/assets/images/og.png",
 	links: {
 		github: "https://github.com/GeronimoSerial",
 		linkedin: "https://linkedin.com/in/geroserial",
-		email: "contacto@geroserial.com",
+		email: "contact@geroserial.com",
 	},
 	location: "Corrientes, Argentina",
 } as const;

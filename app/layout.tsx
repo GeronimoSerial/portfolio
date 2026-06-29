@@ -17,22 +17,22 @@ import Contact from "./_components/Contact";
 export const metadata: Metadata = {
 	metadataBase: new URL("https://geroserial.com"),
 	title: {
-		default: "Geronimo Serial | Soluciones tecnológicas",
+		default: "Geronimo Serial | Technology Solutions",
 		template: "%s | Geroserial",
 	},
 	description:
-		"Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas. Transformo ideas en productos digitales escalables.",
+		"Professional web development and custom technology solutions. Specialized in Next.js, React, TypeScript, and modern architectures. I turn ideas into scalable digital products.",
 	keywords: [
-		"desarrollo web",
+		"web development",
 		"Next.js",
 		"React",
 		"TypeScript",
-		"soluciones tecnológicas",
-		"programación",
+		"technology solutions",
+		"programming",
 		"full stack developer",
-		"diseño web",
-		"aplicaciones web",
-		"consultoría tecnológica",
+		"web design",
+		"web applications",
+		"technology consulting",
 		"corrientes",
 		"argentina",
 		"freelance",
@@ -47,28 +47,27 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		type: "website",
-		locale: "es_ES",
-		alternateLocale: ["en_US"],
+		locale: "en_US",
 		url: "https://geroserial.com",
 		siteName: "Geroserial",
-		title: "Geronimo Serial | Soluciones tecnológicas",
+		title: "Geronimo Serial | Technology Solutions",
 		description:
-			"Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas.",
+			"Professional web development and custom technology solutions. Specialized in Next.js, React, TypeScript, and modern architectures.",
 		images: [
 			{
 				url: "/assets/icons/portrait.png",
 				width: 1200,
 				height: 630,
-				alt: "Geroserial - Soluciones Tecnológicas",
+				alt: "Geroserial - Technology Solutions",
 				type: "image/webp",
 			},
 		],
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Geronimo Serial | Soluciones tecnológicas",
+		title: "Geronimo Serial | Technology Solutions",
 		description:
-			"Desarrollo web profesional y soluciones tecnológicas personalizadas. Especializado en Next.js, React, TypeScript y arquitecturas modernas.",
+			"Professional web development and custom technology solutions. Specialized in Next.js, React, TypeScript, and modern architectures.",
 		images: ["/assets/icons/portrait.png"],
 		creator: "@geroserial",
 		site: "@geroserial",
@@ -92,10 +91,6 @@ export const metadata: Metadata = {
 	manifest: "/site.webmanifest",
 	alternates: {
 		canonical: "https://geroserial.com",
-		languages: {
-			"es-ES": "https://geroserial.com/es",
-			"en-US": "https://geroserial.com/en",
-		},
 	},
 };
 

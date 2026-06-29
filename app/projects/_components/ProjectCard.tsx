@@ -14,7 +14,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
     <article className="project-card rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-white/20 hover:bg-white/[0.05]">
       <div className="flex h-full flex-col">
         <p className="mb-3 text-xs uppercase tracking-wide text-zinc-500">
-          Proyecto {String(project.index ?? index ?? 0).padStart(2, "0")}
+          Project {String(project.index ?? index ?? 0).padStart(2, "0")}
         </p>
 
         <h3 className="card-title text-xl font-semibold text-zinc-100 mb-3">
@@ -60,7 +60,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             onClick={(e) => e.stopPropagation()}
             className="ml-auto inline-flex items-center gap-1 text-sm text-zinc-300 transition-colors hover:text-zinc-100"
           >
-            Ver detalle
+            View details
             <ArrowRight className="w-4 h-4" />
           </Link>
           </div>

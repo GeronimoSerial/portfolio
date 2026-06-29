@@ -5,10 +5,6 @@ import { useTranslations } from "next-intl";
 
 const documentsData = [
 	{
-		href: "https://geronimoserial.github.io/pdf-cge/CV%2004-2026%20-%20Serial%20Geronimo.pdf",
-		download: true,
-	},
-	{
 		href: "https://geronimoserial.github.io/pdf-cge/english_resume.pdf",
 		download: true,
 	},

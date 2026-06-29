@@ -75,7 +75,7 @@ export const skillsData: SkillCategory[] = [
 		skills: [
 			{ name: "Domain-Driven Design", svglId: "ddd" },
 			{ name: "Layered Architecture", svglId: "architecture" },
-			{ name: "Modularización", svglId: "typescript" },
+			{ name: "Modularization", svglId: "typescript" },
 			{ name: "Unit Testing", svglId: "vitest" },
 		],
 	},

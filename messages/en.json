@@ -175,6 +175,7 @@
 		}
 	},
 	"contact": {
+		"label": "Contact",
 		"heading": {
 			"line1": "Let's",
 			"line2": "Collaborate"
@@ -407,7 +408,7 @@
 			"channels": {
 				"email": {
 					"label": "Email",
-					"value": "contacto@geroserial.com"
+					"value": "contact@geroserial.com"
 				},
 				"github": {
 					"label": "GitHub",
@@ -424,14 +425,10 @@
 		"resume": {
 			"label": "Curriculum Vitae",
 			"title": "CV Download",
-			"subtitle": "You can view my ATS HTML version or download my resume in PDF format in Spanish and English.",
+			"subtitle": "View my ATS-friendly HTML version or download my resume in PDF format.",
 			"documents": [
 				{
 					"title": "CV (EN)",
-					"cta": "Download PDF"
-				},
-				{
-					"title": "CV (ES)",
 					"cta": "Download PDF"
 				}
 			],

@@ -3,7 +3,6 @@ export interface NavItem {
 	label: string;
 }
 
-// Navigation items for the home page
 export const NAVIGATION_ITEMS = [
 	{ id: "hero", label: "Home" },
 	{ id: "services", label: "Services" },
@@ -13,18 +12,17 @@ export const NAVIGATION_ITEMS = [
 	{ id: "contact", label: "Contact" },
 ] as NavItem[];
 
-// Navigation items for the portfolio page
 export const PORTFOLIO_ITEMS = [
-	{ id: "hero", label: "Inicio" },
-	{ id: "experience", label: "Experiencia" },
-	{ id: "projects", label: "Proyectos" },
-	{ id: "architecture", label: "Arquitectura" },
+	{ id: "hero", label: "Home" },
+	{ id: "experience", label: "Experience" },
+	{ id: "projects", label: "Projects" },
+	{ id: "architecture", label: "Architecture" },
 	{ id: "apis", label: "APIs" },
 	{ id: "performance", label: "Data" },
 	{ id: "software", label: "Software" },
-	{ id: "education", label: "Educación" },
-	{ id: "contact-opp", label: "Contacto" },
-	{ id: "resume", label: "CV" },
+	{ id: "education", label: "Education" },
+	{ id: "contact-opp", label: "Contact" },
+	{ id: "resume", label: "Resume" },
 ] as NavItem[];
 
 export const PORTFOLIO_VISIBLE_NAV_IDS = [
