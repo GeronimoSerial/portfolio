@@ -101,7 +101,7 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 				<div className="px-5 pt-2 sm:px-6">
 					<SheetClose asChild>
 						<Link
-							href="/portfolio"
+							href="/portfolio#hero"
 							className="flex min-h-11 w-full items-center justify-center rounded-xl px-6 py-3 text-center text-base font-bold
                          bg-zinc-950 dark:bg-zinc-100
                          text-zinc-50 dark:text-zinc-950

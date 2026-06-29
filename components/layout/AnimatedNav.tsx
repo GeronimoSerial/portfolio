@@ -84,8 +84,7 @@ export default function AnimatedNav() {
 						{/* Portfolio button - shown on home page */}
 						{!isPortfolio && (
 							<Link
-								href="/portfolio"
-								scroll={false}
+								href="/portfolio#hero"
 								className="px-4 py-2 text-sm font-medium
                              text-zinc-600 dark:text-zinc-400
                              hover:text-zinc-900 dark:hover:text-zinc-100
