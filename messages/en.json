@@ -255,10 +255,10 @@
 			},
 			"currentRole": {
 				"label": "Current Role",
-				"title": "Institutional Technology Coordinator",
-				"organization": "General Education Council"
+				"title": "Full Stack Developer",
+				"organization": "ICVM Hawk"
 			},
-			"location": "Corrientes, Argentina"
+			"location": "Miami, Florida"
 		},
 		"experience": {
 			"label": "Trajectory",
@@ -266,16 +266,23 @@
 			"subtitle": "At each stage I took on context, executed solutions, and left more stable systems for the team.",
 			"items": [
 				{
+					"title": "Full Stack Developer",
+					"organization": "ICVM Hawk",
+					"period": "Jun 2026 - Present",
+					"summary": "Develop and maintain full-stack web applications at ICVM Hawk, a web design and digital marketing agency.",
+					"highlight": "DevOps support for staging/production workflows, SEO improvements, and cross-functional collaboration on innovative solutions."
+				},
+				{
 					"title": "Systems Management",
 					"organization": "Administrative Center of the Ministry of Education",
-					"period": "2026 - Present",
+					"period": "2026 - Jun 2026",
 					"summary": "Software Engineer | Systems Analyst.",
 					"highlight": "I lead the modernization and digitization project for teachers' employment updates across the entire province."
 				},
 				{
 					"title": "Institutional Technology Coordination",
 					"organization": "General Education Council of Corrientes",
-					"period": "2022 - Present",
+					"period": "2022 - Jun 2026",
 					"summary": "I coordinate digital transformation initiatives at the provincial level, focusing on infrastructure, architecture, and operational continuity.",
 					"highlight": "I implemented automated workflows to improve efficiency and reduce errors."
 				},
@@ -419,7 +426,7 @@
 					"value": "Geronimo Serial"
 				}
 			},
-			"location": "Corrientes, Argentina",
+			"location": "Miami, Florida",
 			"description": "Clear and direct response so you can quickly decide the next steps."
 		},
 		"resume": {
@@ -432,7 +439,7 @@
 					"cta": "Download PDF"
 				}
 			],
-			"updated": "Updated: April 2026."
+			"updated": "Updated: June 2026."
 		}
 	},
 	"meta": {

@@ -24,8 +24,8 @@ export default function CvPage() {
 						<p>Corrientes, Argentina</p>
 						<p>
 							Email:{" "}
-							<a href="mailto:serialgeronimo@gmail.com">
-								serialgeronimo@gmail.com
+							<a href="mailto:contact@geroserial.com">
+								contact@geroserial.com
 							</a>
 						</p>
 						<p>
@@ -145,13 +145,44 @@ export default function CvPage() {
 					<div className="mt-4 space-y-6">
 						<article className="space-y-2">
 							<h3 className="text-base font-semibold text-zinc-900 print:text-zinc-900">
+								ICVM Hawk
+							</h3>
+							<p className="text-sm font-medium text-zinc-700 print:text-zinc-800">
+								Full Stack Developer
+							</p>
+							<p className="text-xs uppercase tracking-[0.14em] text-zinc-600 print:text-zinc-600">
+								Jun 2026 - Present
+							</p>
+							<ul className="list-disc space-y-2 pl-5 text-sm leading-7 text-zinc-800 print:text-zinc-900">
+								<li>
+									Developed and maintained web applications, ensuring seamless
+									functionality across both frontend and backend.
+								</li>
+								<li>
+									Provided DevOps support, optimizing staging and production
+									workflows for efficient deployment processes.
+								</li>
+								<li>
+									Implemented SEO improvements to enhance website visibility and
+									user engagement.
+								</li>
+								<li>
+									Collaborated with cross-functional teams at ICVM Hawk, a dynamic
+									digital agency in Miami, Florida, to deliver innovative
+									solutions.
+								</li>
+							</ul>
+						</article>
+
+						<article className="space-y-2">
+							<h3 className="text-base font-semibold text-zinc-900 print:text-zinc-900">
 								General Council of Education (CGE) - Ministry of Education
 							</h3>
 							<p className="text-sm font-medium text-zinc-700 print:text-zinc-800">
 								Software Engineer | Systems Analyst | Solutions Architecture
 							</p>
 							<p className="text-xs uppercase tracking-[0.14em] text-zinc-600 print:text-zinc-600">
-								2021 - Present
+								2021 - Jun 2026
 							</p>
 							<p className="text-sm leading-7 text-zinc-800 print:text-zinc-900">
 								<span className="font-semibold text-zinc-900 print:text-zinc-900">
