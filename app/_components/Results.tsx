@@ -13,24 +13,24 @@ export default function Results() {
   useResultsAnimations(containerRef, headerRef);
 
   return (
-    <section id="results" ref={containerRef} className="relative overflow-hidden px-4 py-24">
+    <section id="results" ref={containerRef} className="relative overflow-hidden px-4 py-20 sm:py-24">
       <div className="container relative z-10 mx-auto max-w-7xl">
         {/* Header */}
-        <div ref={headerRef} className="mb-16 max-w-3xl space-y-4">
-          <p className="text-sm font-medium tracking-wide text-zinc-500">Resultados</p>
-          <h2 className="result-word text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+        <div ref={headerRef} className="mb-10 max-w-3xl space-y-4 sm:mb-16">
+          <p className="text-sm font-medium tracking-wide text-zinc-500">{t("pretitle")}</p>
+          <h2 className="result-word text-[1.9rem] font-semibold tracking-tight text-zinc-100 sm:text-3xl md:text-4xl">
             {t("title")}
           </h2>
-          <p className="result-subtitle text-zinc-400 max-w-xl">
+          <p className="result-subtitle max-w-xl text-sm leading-relaxed text-zinc-400 sm:text-base">
             {t("subtitle")}
           </p>
         </div>
 
         {/* Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
           
           {/* Card 1: Visits (Identity: Flow) */}
-          <article className="result-card result-card-1 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+          <article className="result-card result-card-1 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-6">
              {/* Background Pattern: Sparkline Schematic */}
              <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-20" preserveAspectRatio="none" viewBox="0 0 120 120" aria-hidden="true">
                 <defs>
@@ -58,7 +58,7 @@ export default function Results() {
               <div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-semibold text-zinc-500">+</span>
-                  <span className="result-number text-5xl font-semibold tracking-tight text-zinc-100">
+                  <span className="result-number text-[2.6rem] font-semibold tracking-tight text-zinc-100 sm:text-5xl">
                     150
                   </span>
                   <span className="text-2xl font-semibold text-zinc-500">k</span>
@@ -74,7 +74,7 @@ export default function Results() {
           </article>
 
           {/* Card 2: Performance (Identity: Velocity) */}
-          <article className="result-card result-card-2 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+           <article className="result-card result-card-2 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-6">
              {/* Background Pattern: Radial Accelerator */}
             <svg className="pointer-events-none absolute -right-4 -top-4 h-48 w-48 opacity-20" viewBox="0 0 100 100" aria-hidden="true">
                <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="0.5" fill="none" strokeDasharray="1 3" className="text-zinc-600" />
@@ -93,7 +93,7 @@ export default function Results() {
 
               <div>
                 <div className="flex items-baseline gap-1">
-                  <span className="result-number text-5xl font-semibold tracking-tight text-zinc-100">
+                   <span className="result-number text-[2.6rem] font-semibold tracking-tight text-zinc-100 sm:text-5xl">
                     5.0
                   </span>
                   <span className="text-2xl font-semibold text-zinc-500">x</span>
@@ -109,7 +109,7 @@ export default function Results() {
           </article>
 
           {/* Card 3: Projects (Identity: Structure) */}
-          <article className="result-card result-card-3 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+          <article className="result-card result-card-3 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-6">
              {/* Background Pattern: Isometric Blueprint */}
             <svg className="pointer-events-none absolute bottom-0 right-0 h-40 w-40 opacity-20" viewBox="0 0 100 100" aria-hidden="true">
                 <g className="grid-isometric text-zinc-600">
@@ -133,8 +133,8 @@ export default function Results() {
               <div>
                 <div className="flex items-baseline gap-1">
                   <div className="flex">
-                    <span className="result-digit text-5xl font-semibold tracking-tight text-zinc-100">2</span>
-                    <span className="result-digit text-5xl font-semibold tracking-tight text-zinc-100">0</span>
+                    <span className="result-digit text-[2.6rem] font-semibold tracking-tight text-zinc-100 sm:text-5xl">2</span>
+                    <span className="result-digit text-[2.6rem] font-semibold tracking-tight text-zinc-100 sm:text-5xl">0</span>
                   </div>
                   <span className="text-2xl font-semibold text-zinc-500">+</span>
                 </div>
@@ -149,7 +149,7 @@ export default function Results() {
           </article>
 
           {/* Card 4: Uptime (Identity: Stability) */}
-          <article className="result-card result-card-4 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+          <article className="result-card result-card-4 relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-6">
              {/* Background Pattern: Frequency Pulse */}
             <svg className="pointer-events-none absolute -bottom-10 -right-10 h-48 w-48 opacity-20" viewBox="0 0 100 100" aria-hidden="true">
                <path d="M0,50 L20,50 L25,30 L35,70 L40,50 L60,50 L65,20 L75,80 L80,50 L100,50" fill="none" stroke="currentColor" strokeWidth="1" className="text-zinc-500 pulse-path" />
@@ -167,7 +167,7 @@ export default function Results() {
 
               <div>
                  <div className="flex items-baseline gap-1">
-                    <span className="result-percentage text-5xl font-semibold tracking-tight text-zinc-100">99.9</span>
+                    <span className="result-percentage text-[2.6rem] font-semibold tracking-tight text-zinc-100 sm:text-5xl">99.9</span>
                     <span className="text-2xl font-semibold text-zinc-500">%</span>
                 </div>
                 <p className="mt-2 text-sm text-zinc-400 font-medium">
@@ -183,8 +183,8 @@ export default function Results() {
         </div>
         
         {/* Footer CTA */}
-        <div className="mt-16 text-center">
-            <p className="text-sm text-zinc-400">
+        <div className="mt-14 text-center sm:mt-16">
+            <p className="text-sm leading-relaxed text-zinc-400">
             {t("cta.text")} {" "}
             <a href="#contact" className="text-zinc-200 underline underline-offset-4 decoration-zinc-700 hover:decoration-zinc-300 transition-all">
                 {t("cta.link")}

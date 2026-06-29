@@ -115,7 +115,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative -mt-20 flex min-h-auto lg:min-h-[100svh] w-full pt-[500px] sm:pt-2 sm:items-center overflow-hidden bg-transparent"
+      className="relative -mt-20 flex min-h-[100svh] w-full items-end overflow-hidden bg-transparent pt-28 pb-12 sm:pt-32 sm:pb-16 lg:min-h-[100svh] lg:items-center lg:py-0"
     >
       {showVideo && <div className="absolute inset-0 bg-black/40" />}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -145,40 +145,40 @@ export default function Hero() {
         )}
       </div>
 
-      <div className="container relative z-10 mx-auto max-w-7xl px-4 lg:px-0 pointer-events-none">
-        <div className="flex flex-col items-end lg:flex-row lg:items-center">
-          <div className="w-full space-y-10 lg:w-1/2">
-            <div className="space-y-5">
-              <h1 className="text-3xl font-medium tracking-tight text-white/90 md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+      <div className="container pointer-events-none relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-0">
+        <div className="flex flex-col lg:flex-row lg:items-center">
+          <div className="w-full max-w-xl space-y-8 sm:space-y-10 lg:w-1/2">
+            <div className="space-y-4 sm:space-y-5">
+              <h1 className="text-3xl font-medium tracking-tight text-white/90 sm:text-[2.15rem] md:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
                 {t("title")}
               </h1>
-              <div className="flex items-center gap-5">
-                <div className="h-px w-16 bg-zinc-700" />
-                <span className="text-base font-light tracking-tight text-zinc-500 md:text-lg">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-5">
+                <div className="h-px w-12 bg-zinc-700 sm:w-16" />
+                <span className="text-sm font-light tracking-tight text-zinc-500 sm:text-base md:text-lg">
                   {t("midtitle")}
                 </span>
               </div>
             </div>
 
             <div className="max-w-md space-y-3">
-              <p className="text-sm leading-relaxed text-zinc-400 md:text-[0.9375rem]">
+              <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem]">
                 {t("subtitle")}
               </p>
-              <p className="text-xs leading-relaxed text-zinc-600 md:text-sm">
+              <p className="text-sm leading-relaxed text-zinc-500 md:text-sm">
                 {t("description")}
               </p>
             </div>
 
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-2">
               <Link
                 href="/portfolio"
                 scroll={false}
-                className="pointer-events-auto group inline-flex items-center gap-2 text-sm font-medium text-white/90 transition-colors hover:text-white"
+                className="pointer-events-auto group inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 text-sm font-medium text-white/90 transition-colors duration-200 hover:text-white"
               >
                 {t("portfolio_cta")}
                 <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
-              <span className="h-3 w-px bg-zinc-800" />
+              <span className="hidden h-3 w-px bg-zinc-800 sm:block" />
               <button
                 type="button"
                 onClick={() =>
@@ -186,7 +186,7 @@ export default function Hero() {
                     .getElementById("services")
                     ?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="pointer-events-auto group inline-flex items-center gap-2 text-sm text-white/60 transition-colors hover:text-zinc-400"
+                className="pointer-events-auto group inline-flex min-h-11 items-center gap-2 rounded-full border border-transparent px-1 text-sm text-white/70 transition-colors duration-200 hover:text-zinc-300"
               >
                 {t("cta")}
                 <ArrowDown className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5 " />

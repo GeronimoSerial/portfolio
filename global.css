@@ -24,7 +24,7 @@
 	}
 
 	body {
-		overflow-x: hidden;
+		overflow-x: clip;
 	}
 
 	.text-edge-outline {
@@ -167,13 +167,13 @@
 	/* Mobile-specific optimizations */
 	@media (max-width: 768px) {
 		#hero {
-			min-height: 1000;
+			min-height: 100svh;
 		}
 
 		.spline-scene {
 			inset: auto 0 0 0;
-			height: 70svh;
-			transform: translateY(6vh) scale(1.05);
+			height: min(68svh, 42rem);
+			transform: translateY(4vh) scale(1.02);
 			transform-origin: center bottom;
 		}
 
@@ -329,7 +329,6 @@
 		border-color: inherit !important;
 		color: inherit !important;
 		opacity: inherit !important;
-		transform: none !important;
 	}
 
 	/* Keep pointer-events for interactive elements */
@@ -348,7 +347,7 @@
 	[role="button"]:active {
 		opacity: 0.7;
 		transform: scale(0.98);
-		transition: all 0.1s ease;
+		transition: transform 0.12s ease, opacity 0.12s ease;
 	}
 
 	/* Remove group-hover effects */
@@ -372,6 +371,21 @@
 	.process-card:active {
 		background-color: rgba(255, 255, 255, 0.05) !important;
 		border-color: rgba(255, 255, 255, 0.15) !important;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
 	}
 }
 

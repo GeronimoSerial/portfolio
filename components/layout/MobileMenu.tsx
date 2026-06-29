@@ -41,14 +41,12 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 	return (
 		<SheetContent
 			side="left"
-			className="w-[300px] sm:w-[400px] 
-                 bg-white dark:bg-zinc-950 
-                 border-zinc-200 dark:border-zinc-800 sticky h-dvh"
+			className="w-[min(88vw,22rem)] overflow-y-auto bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800"
 			onOpenAutoFocus={(e) => {
 				e.preventDefault();
 			}}
 		>
-			<SheetHeader className="px-6 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+			<SheetHeader className="border-b border-zinc-200 px-5 pb-4 pr-12 dark:border-zinc-800 sm:px-6">
 				<SheetTitle className="text-2xl font-display text-zinc-950 dark:text-zinc-50">
 					{isPortfolio ? "Portfolio" : "Navigation"}
 				</SheetTitle>
@@ -59,16 +57,16 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 
 			{/* Home Link */}
 			{isPortfolio && (
-				<div className="flex flex-col pt-4 space-y-1">
+				<div className="flex flex-col space-y-1 pt-4">
 					<SheetClose asChild>
 						<Link
 							href="/"
-							className="inline-flex items-center gap-2 text-lg font-semibold 
+							className="inline-flex min-h-11 items-center gap-2 rounded-xl text-base font-semibold 
                          text-zinc-900 dark:text-zinc-100
-                         px-6 py-3
-                         transition-colors duration-200
-                         border-l-4 border-transparent
-                         hover:bg-zinc-100 dark:hover:bg-zinc-800"
+								 px-5 py-3 sm:px-6
+                          transition-colors duration-200
+                          border-l-4 border-transparent
+                          hover:bg-zinc-100 dark:hover:bg-zinc-800"
 						>
 							<Home className="w-5 h-5" />
 							<span>{t("home")}</span>
@@ -77,17 +75,17 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 				</div>
 			)}
 
-			<div className="flex flex-col py-6 space-y-1">
+			<div className="flex flex-col space-y-1 py-6">
 				{(isPortfolio ? visiblePortfolioItems : items.slice(1)).map((item) => (
 					<SheetClose key={item.id} asChild>
 						<a
 							href={`#${item.id}`}
-							className="text-lg font-semibold 
+							className="inline-flex min-h-11 items-center rounded-xl text-base font-semibold 
                          text-zinc-700 dark:text-zinc-300
-                         px-6 py-3
-                         transition-colors duration-200
-                         border-l-4 border-transparent
-                         hover:bg-zinc-100 dark:hover:bg-zinc-800"
+								 px-5 py-3 sm:px-6
+                          transition-colors duration-200
+                          border-l-4 border-transparent
+                          hover:bg-zinc-100 dark:hover:bg-zinc-800"
 						>
 							{isPortfolio ? item.label : t(item.id) || item.label}
 						</a>
@@ -96,20 +94,19 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 			</div>
 
 			{/* Divider */}
-			<div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
+			<div className="my-4 mx-5 h-px bg-zinc-200 dark:bg-zinc-800 sm:mx-6" />
 
 			{/* Portfolio CTA - shown when on home page */}
 			{!isPortfolio && (
-				<div className="px-6 pt-2">
+				<div className="px-5 pt-2 sm:px-6">
 					<SheetClose asChild>
 						<Link
 							href="/portfolio"
-							className="block w-full px-6 py-3 text-center text-base font-bold
+							className="flex min-h-11 w-full items-center justify-center rounded-xl px-6 py-3 text-center text-base font-bold
                          bg-zinc-950 dark:bg-zinc-100
                          text-zinc-50 dark:text-zinc-950
-                         rounded-lg
-                         shadow-md 
-                         hover:scale-105 active:scale-95 transition-transform"
+                          shadow-md 
+								 active:scale-[0.99] transition-transform"
 						>
 							{t("portfolio")}
 						</Link>
@@ -118,18 +115,17 @@ export function MobileMenu({ navigationItems }: MobileMenuProps) {
 			)}
 
 			{/* Divider */}
-			<div className="my-4 mx-6 h-px bg-zinc-200 dark:bg-zinc-800" />
+			<div className="my-4 mx-5 h-px bg-zinc-200 dark:bg-zinc-800 sm:mx-6" />
 
-			<div className="flex items-center justify-center gap-6 px-6 pt-2">
+			<div className="flex items-center justify-center gap-4 px-5 pt-2 sm:px-6">
 				<a
 					href={SITE_CONFIG.links.github}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="p-3 
-                         text-zinc-600 dark:text-zinc-400
-                         rounded-lg
-                         transition-all duration-200
-                         hover:bg-zinc-100 dark:hover:bg-zinc-800"
+					className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-200 p-0
+                          text-zinc-600 dark:text-zinc-400
+						  transition-colors duration-200
+                          hover:bg-zinc-100 dark:hover:bg-zinc-800"
 					aria-label="GitHub"
 				>
 					<Github className="w-6 h-6" />

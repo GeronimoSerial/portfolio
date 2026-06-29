@@ -18,6 +18,14 @@ export const useProjectsAnimations = () => {
     () => {
       if (!containerRef.current) return;
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) {
+        gsap.set(containerRef.current.querySelectorAll("*"), {
+          clearProps: "all",
+        });
+        return;
+      }
+
       // Configuración optimizada para GPU acceleration
       gsap.config({
         force3D: true,

@@ -26,6 +26,16 @@ export const AppleStyleSection = ({
     () => {
       if (!containerRef.current) return;
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+      if (reduceMotion) {
+        gsap.set(containerRef.current.querySelectorAll("*"), {
+          clearProps: "all",
+        });
+        return;
+      }
+
       // Select meaningful content elements to animate
       // We look for common block-level and text elements
       const selector = "h1, h2, h3, p, a, button, span.inline-flex, .rounded-2xl, article, li, .animate-target";
@@ -52,10 +62,10 @@ export const AppleStyleSection = ({
       // I will implement a robust default: animate distinct blocks.
       
       const uniqueTargets = targets.filter((el) => {
-         // Optimization: Skip icons inside buttons/badges to avoid clutter
-         if (el.tagName === 'SVG' || el.closest('button') !== el.parentElement && el.parentElement?.tagName === 'BUTTON') return false;
+         if (el.tagName === "SVG") return false;
+         if (el.parentElement?.tagName === "BUTTON" && el.closest("button") !== el.parentElement) return false;
          return true;
-      });
+       });
 
       // Initial State - Apple Style
       gsap.set(uniqueTargets, {
@@ -90,46 +100,64 @@ export const AppleStyleSection = ({
         },
       });
 
-      // Magnetic Hover Effect for interactive elements
+      if (!supportsHover) {
+        return;
+      }
+
       const interactiveElements = containerRef.current.querySelectorAll<HTMLElement>("a, button, .interactive");
-      
+      const cleanups: Array<() => void> = [];
+
       interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-             gsap.to(el, {
-                scale: 1.02,
-                duration: 0.3,
-                ease: "power2.out",
-                overwrite: "auto"
-             });
-        });
-        
-        el.addEventListener("mousemove", (e) => {
+        const handleMouseEnter = () => {
+          gsap.to(el, {
+            scale: 1.01,
+            duration: 0.22,
+            ease: "power2.out",
+            overwrite: "auto"
+          });
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
           const rect = el.getBoundingClientRect();
           const x = e.clientX - rect.left - rect.width / 2;
           const y = e.clientY - rect.top - rect.height / 2;
 
           gsap.to(el, {
-            x: x * 0.1, // Subtle magnetic pull
-            y: y * 0.1,
-            rotation: x * 0.02, // Slight tilt follow
-            duration: 0.4,
+            x: x * 0.06,
+            y: y * 0.06,
+            rotation: x * 0.01,
+            duration: 0.25,
             ease: "power2.out",
             overwrite: "auto"
           });
-        });
+        };
 
-        el.addEventListener("mouseleave", () => {
+        const handleMouseLeave = () => {
           gsap.to(el, {
             x: 0,
             y: 0,
             scale: 1,
             rotation: 0,
-            duration: 0.7,
-            ease: "elastic.out(1, 0.4)", // Bouncy return
+            duration: 0.24,
+            ease: "power2.out",
             overwrite: "auto"
           });
+        };
+
+        el.addEventListener("mouseenter", handleMouseEnter);
+        el.addEventListener("mousemove", handleMouseMove);
+        el.addEventListener("mouseleave", handleMouseLeave);
+
+        cleanups.push(() => {
+          el.removeEventListener("mouseenter", handleMouseEnter);
+          el.removeEventListener("mousemove", handleMouseMove);
+          el.removeEventListener("mouseleave", handleMouseLeave);
         });
       });
+
+      return () => {
+        cleanups.forEach((cleanup) => cleanup());
+      };
     },
     { scope: containerRef }
   );

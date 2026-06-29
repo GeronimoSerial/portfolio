@@ -14,21 +14,21 @@ export default function PortfolioHero() {
 	];
 
 	return (
-		<section id="hero" className="relative px-4 pt-28 pb-20">
+		<section id="hero" className="relative px-4 pb-20 pt-24 sm:pt-28">
 			<div className="container mx-auto max-w-6xl">
-				<div className="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start">
-					<div className="space-y-8">
+				<div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.3fr_0.9fr] lg:items-start">
+					<div className="space-y-7 sm:space-y-8">
 						<p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
 						<div className="space-y-4">
-							<h1 className="text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
+							<h1 className="text-4xl font-semibold tracking-tight text-zinc-100 sm:text-5xl md:text-6xl">
 								Geronimo Serial
 							</h1>
-							<p className="max-w-2xl text-xl text-zinc-300 md:text-2xl">
+							<p className="max-w-2xl text-lg text-zinc-300 sm:text-xl md:text-2xl">
 								{t("role")}
 							</p>
 						</div>
 
-						<div className="max-w-2xl text-zinc-400">
+						<div className="max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
 							<p>
 								{t("currentWork")}{" "}
 								<span className="font-bold text-zinc-100">
@@ -43,38 +43,38 @@ export default function PortfolioHero() {
 							</p>
 						</div>
 
-						<div className="flex flex-wrap items-center gap-4 text-sm text-zinc-400">
-							<span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
+						<div className="flex flex-wrap items-center gap-3 text-sm text-zinc-400">
+                            <span className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2">
 								<MapPin className="h-4 w-4" />
 								{t("location")}
 							</span>
 							<a
 								href="mailto:contact@geroserial.com"
-								className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 transition-colors hover:border-white/20 hover:bg-white/10"
+								className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 transition-colors hover:border-white/20 hover:bg-white/10"
 							>
 								<Mail className="h-4 w-4" />
-								contact@geroserial.com
+								<span className="truncate">contact@geroserial.com</span>
 							</a>
 						</div>
 
 						<div className="flex flex-wrap gap-3">
 							<a
 								href="#architecture"
-								className="inline-flex items-center gap-2 rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
+								className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-zinc-100 px-5 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200"
 							>
 								{t("cta.howIWork")}
 								<ArrowDown className="h-4 w-4" />
 							</a>
 							<a
 								href="#resume"
-								className="inline-flex items-center rounded-lg border border-white/15 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
+								className="inline-flex min-h-11 items-center rounded-lg border border-white/15 px-5 py-3 text-sm font-medium text-zinc-200 transition-colors hover:border-white/30 hover:bg-white/5"
 							>
 								{t("cta.goToCV")}
 							</a>
 						</div>
 					</div>
 
-					<div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+					<div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
 						<div className="mb-6 flex items-center gap-4">
 							<Image
 								src="/assets/images/profile_photo.jpeg"
@@ -94,7 +94,7 @@ export default function PortfolioHero() {
 							</div>
 						</div>
 
-						<div className="grid grid-cols-2 gap-3">
+						<div className="grid gap-3 sm:grid-cols-2">
 							{highlights.map((item) => (
 								<div
 									key={item.label}

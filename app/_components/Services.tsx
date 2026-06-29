@@ -16,16 +16,16 @@ export default function Services() {
   ];
 
   return (
-    <section ref={containerRef} id="services" className="relative px-4 pt-10">
+    <section ref={containerRef} id="services" className="relative px-4 pt-8 sm:pt-10">
       <div className="container mx-auto max-w-7xl">
-        <div ref={headerRef} className="mb-12 max-w-3xl space-y-4">
-          <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+        <div ref={headerRef} className="mb-10 max-w-3xl space-y-4 sm:mb-12">
+          <h2 className="text-[1.9rem] font-semibold tracking-tight text-zinc-100 sm:text-3xl md:text-4xl">
             {t("title")}
           </h2>
-          <p className="text-zinc-400">{t("subtitle")}</p>
+          <p className="max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">{t("subtitle")}</p>
         </div>
 
-        <div className="services-grid grid gap-6 md:grid-cols-2">
+        <div className="services-grid grid gap-5 sm:gap-6 md:grid-cols-2">
           {services.map((service) => {
             const Icon = service.icon;
             const title = t(`items.${service.key}.title`);
@@ -38,7 +38,7 @@ export default function Services() {
             return (
               <article
                 key={service.key}
-                className="service-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                className="service-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
               >
                 <svg
                   className="card-border-svg pointer-events-none absolute inset-0 h-full w-full"
@@ -65,7 +65,7 @@ export default function Services() {
                     <Icon className="h-5 w-5 text-zinc-300" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="mb-2 text-xl text-zinc-100">{title}</h3>
+                    <h3 className="mb-2 text-lg font-semibold text-zinc-100 sm:text-xl">{title}</h3>
                     <p className="mb-5 text-sm leading-relaxed text-zinc-400">
                       {description}
                     </p>

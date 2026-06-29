@@ -32,20 +32,20 @@ export default function FeaturedProjects({
     <section
       id="projects"
       ref={containerRef}
-      className="relative px-4 py-20 overflow-hidden"
+      className="relative overflow-hidden px-4 py-20"
     >
       <div className={`container mx-auto max-w-${maxWidth} relative z-10`}>
-        <div ref={headlineRef} className="mb-12 max-w-3xl space-y-4">
+        <div ref={headlineRef} className="mb-10 max-w-3xl space-y-4 sm:mb-12">
           <p className="text-sm tracking-wide text-zinc-500">{t("pretitle")}</p>
-          <h2 className="word text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
+          <h2 className="word text-[1.9rem] font-semibold tracking-tight text-zinc-100 sm:text-3xl md:text-4xl">
             {t("title")}
           </h2>
-          <p className="projects-subtitle text-zinc-400">{t("subtitle")}</p>
+          <p className="projects-subtitle max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">{t("subtitle")}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+        <div className="grid gap-5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} index={index + 1} />
           ))}
         </div>
 

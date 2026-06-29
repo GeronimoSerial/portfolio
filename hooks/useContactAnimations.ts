@@ -18,6 +18,9 @@ export function useContactAnimations() {
 	useGSAP(
 		() => {
 			if (!containerRef.current) return;
+			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+				return;
+			}
 
 			let split: SplitText | null = null;
 			// ============================================
@@ -29,11 +32,11 @@ export function useContactAnimations() {
 
 				gsap.from(split.chars, {
 					opacity: 0,
-					y: 50,
-					rotationX: -90,
-					stagger: 0.03,
-					duration: 0.8,
-					ease: "back.out(1.7)",
+					y: 24,
+					rotationX: -18,
+					stagger: 0.02,
+					duration: 0.55,
+					ease: "power2.out",
 					scrollTrigger: {
 						trigger: titleElement,
 						start: "top 75%",

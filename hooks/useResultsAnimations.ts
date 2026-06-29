@@ -14,6 +14,15 @@ export function useResultsAnimations(
     () => {
       if (!containerRef.current) return;
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (reduceMotion) {
+        gsap.set(containerRef.current.querySelectorAll("*"), {
+          clearProps: "all",
+        });
+        return;
+      }
+
       const ctx = gsap.context(() => {
         // --- 1. Header Animation ---
         if (headerRef.current) {
@@ -92,10 +101,10 @@ export function useResultsAnimations(
                      );
                 }
                 const dots = card1.querySelectorAll(".tech-dot");
-                gsap.from(dots, { scale: 0, opacity: 0, stagger: 0.2, duration: 0.5, ease: "back.out" });
+                gsap.from(dots, { scale: 0.92, opacity: 0, stagger: 0.08, duration: 0.35, ease: "power2.out" });
 
                 const scanLine = card1.querySelector(".scan-line");
-                if (scanLine) {
+                if (scanLine && !isMobile) {
                   gsap.to(scanLine, { x: 120, duration: 3, repeat: -1, ease: "none" });
                 }
             }
@@ -136,7 +145,7 @@ export function useResultsAnimations(
                 if (needle) {
                   gsap.fromTo(needle, 
                     { rotation: -90, transformOrigin: "bottom center" },
-                    { rotation: 45, duration: 2, ease: "elastic.out(1, 0.3)" }
+                    { rotation: 45, duration: 1.2, ease: "power2.out" }
                   );
                 }
             }
@@ -178,18 +187,20 @@ export function useResultsAnimations(
                        scale: 0,
                        stagger: 0.05,
                        duration: 0.5,
-                       ease: "back.out",
+                        ease: "power2.out",
                        delay: 0.5
                      });
 
                      // Subtle pulse for nodes
-                     gsap.to(nodes, {
-                       opacity: 0.4,
-                       duration: 1,
-                       repeat: -1,
-                       yoyo: true,
-                       stagger: 0.1
-                     });
+                      if (!isMobile) {
+                        gsap.to(nodes, {
+                          opacity: 0.4,
+                          duration: 1,
+                          repeat: -1,
+                          yoyo: true,
+                          stagger: 0.1
+                        });
+                      }
                 }
             });
         }
@@ -223,17 +234,19 @@ export function useResultsAnimations(
                       );
 
                       // Continuous "pulse" effect
-                      gsap.to(path, {
-                        strokeDashoffset: -len * 2,
-                        duration: 10,
-                        repeat: -1,
-                        ease: "none",
-                        delay: 2
-                      });
+                      if (!isMobile) {
+                        gsap.to(path, {
+                          strokeDashoffset: -len * 2,
+                          duration: 10,
+                          repeat: -1,
+                          ease: "none",
+                          delay: 2
+                        });
+                      }
                     }
 
                     const dot = card4.querySelector(".pulse-dot");
-                    if (dot) {
+                    if (dot && !isMobile) {
                       gsap.to(dot, {
                         opacity: 0.2,
                         duration: 0.5,

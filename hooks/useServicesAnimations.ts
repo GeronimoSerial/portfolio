@@ -14,6 +14,14 @@ export const useServicesAnimations = () => {
     () => {
       if (!containerRef.current) return;
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) {
+        gsap.set(containerRef.current.querySelectorAll(".service-card, h2, p"), {
+          clearProps: "all",
+        });
+        return;
+      }
+
       // Optimización 60fps: renderizado inmediato
       gsap.config({ force3D: true });
 
@@ -149,7 +157,7 @@ export const useServicesAnimations = () => {
                       scale: 1,
                       opacity: 1,
                       duration: 0.8,
-                      ease: "back.out(1.7)",
+                       ease: "power2.out",
                       clearProps: "willChange",
                     },
                     "-=1.0"

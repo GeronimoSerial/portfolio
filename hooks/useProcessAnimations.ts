@@ -14,6 +14,15 @@ export const useProcessAnimations = () => {
     () => {
       if (!containerRef.current) return;
 
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      if (reduceMotion) {
+        gsap.set(containerRef.current.querySelectorAll("*"), {
+          clearProps: "all",
+        });
+        return;
+      }
+
       const rows = gsap.utils.toArray<HTMLDivElement>(".process-step-row");
 
       // Header Animation
@@ -74,7 +83,7 @@ export const useProcessAnimations = () => {
           const waves = row.querySelectorAll(".discover-wave");
 
           // Scanner animation - scanning down the chart
-          if (scanner) {
+          if (scanner && !isMobile) {
             gsap.to(scanner, {
               y: 78,
               duration: 2.5,
@@ -139,14 +148,16 @@ export const useProcessAnimations = () => {
           });
 
           // Wave lines subtle animation
-          gsap.to(waves, {
-            y: -3,
-            duration: 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            stagger: 0.3
-          });
+          if (!isMobile) {
+            gsap.to(waves, {
+              y: -3,
+              duration: 2,
+              repeat: -1,
+              yoyo: true,
+              ease: "sine.inOut",
+              stagger: 0.3
+            });
+          }
         }
 
         if (i === 1) { // Design

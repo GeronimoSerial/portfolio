@@ -30,16 +30,16 @@ export default function ContactOpportunities() {
     },
   ];
 
-  return (
-    <section id="contact-opp" className="relative px-4 py-20">
-      <div className="container mx-auto max-w-6xl">
-        <div className="mb-12 max-w-3xl space-y-4">
-          <p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
-          <h2 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
-            {t("title")}
-          </h2>
-          <p className="text-zinc-400">
-            {t.rich("subtitle", {
+	return (
+		<section id="contact-opp" className="relative px-4 py-20">
+			<div className="container mx-auto max-w-6xl">
+				<div className="mb-10 max-w-3xl space-y-4 sm:mb-12">
+					<p className="text-sm tracking-wide text-zinc-500">{t("label")}</p>
+					<h2 className="text-[1.9rem] font-semibold tracking-tight text-zinc-100 sm:text-3xl md:text-4xl">
+						{t("title")}
+					</h2>
+					<p className="text-sm leading-relaxed text-zinc-400 sm:text-base">
+						{t.rich("subtitle", {
               email: (chunks) => (
                 <a
                   href="mailto:contact@geroserial.com"
@@ -62,9 +62,9 @@ export default function ContactOpportunities() {
           </p>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <div className="space-y-4">
+				<div className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+					<div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+						<div className="space-y-4">
               {channels.map((channel) => (
                 <a
                   key={channel.label}
@@ -77,27 +77,27 @@ export default function ContactOpportunities() {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.02] p-4 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
-                >
+								className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] p-4 transition-colors hover:border-white/20 hover:bg-white/[0.04]"
+							>
                   <div className="flex items-center gap-3">
                     <div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
                       <channel.icon className="h-5 w-5 text-zinc-300" />
                     </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-wide text-zinc-500">
-                        {channel.label}
-                      </p>
-                      <p className="text-sm text-zinc-200">{channel.value}</p>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="h-4 w-4 text-zinc-500" />
+									<div className="min-w-0">
+										<p className="text-xs uppercase tracking-wide text-zinc-500">
+											{channel.label}
+										</p>
+										<p className="truncate text-sm text-zinc-200">{channel.value}</p>
+									</div>
+								</div>
+								<ArrowUpRight className="h-4 w-4 text-zinc-500" />
                 </a>
               ))}
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-            <div className="mb-4 flex items-center gap-2 text-zinc-300">
+					<aside className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6">
+						<div className="mb-4 flex items-center gap-2 text-zinc-300">
               <MapPin className="h-4 w-4" />
               <span className="text-sm">{t("location")}</span>
             </div>

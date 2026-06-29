@@ -46,12 +46,12 @@ export default function AnimatedNav() {
 			className="sticky top-0 left-0 right-0 z-50 will-change-transform"
 			style={{ height: "5rem" }}
 		>
-			<div className="container mx-auto px-4 sm:px-6 h-full">
+			<div className="container mx-auto h-full px-4 sm:px-6">
 				<div className="relative flex items-center justify-between h-full">
 					<Link
 						ref={logoRef}
 						href="/"
-						className="mr-auto ml-4 md:mr-0 md:ml-0
+						className="mr-auto ml-1 md:mr-0 md:ml-0
                          text-xl sm:text-2xl font-display font-bold
                          text-zinc-950 dark:text-zinc-50
                          hover:text-zinc-700 dark:hover:text-zinc-300
@@ -133,14 +133,13 @@ export default function AnimatedNav() {
 							<SheetTrigger asChild>
 								<button
 									type="button"
-									className="p-2
+									className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-0
                   text-zinc-600 dark:text-zinc-400
-                  rounded-lg
-                  transition-all duration-300
-                  hover:scale-110 active:scale-95"
+								  transition-colors duration-200
+								  hover:bg-white/10 active:scale-[0.98]"
 									aria-label="Toggle mobile menu"
 								>
-									<Menu className="w-6 h-6" />
+									<Menu className="h-5 w-5" />
 								</button>
 							</SheetTrigger>
 							<MobileMenu />
