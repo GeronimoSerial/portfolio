@@ -82,7 +82,7 @@ export default async function ProjectsPage() {
 								<ProjectCard
 									key={project.slug}
 									project={project}
-									index={index}
+									index={index + 1}
 								/>
 							))}
 						</div>
