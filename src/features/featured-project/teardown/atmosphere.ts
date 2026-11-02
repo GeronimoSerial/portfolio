@@ -9,7 +9,7 @@ import { createWeather, type Weather, type WeatherTones } from './weather';
 // Wetness follows the storm with this rate (1/s): the ground is mostly wet ~2.5 s after the rain.
 const WET_RATE = 1.2;
 // Canvas brightness lost at the height of the storm. Subtle on purpose: no strobe, no flash.
-const DARKEN = 0.18;
+const DARKEN = 0.08;
 
 // The light theme is the one whose page ground is bright.
 const isLight = (p: Palette): boolean => (p.base.r + p.base.g + p.base.b) / 3 > 0.5;

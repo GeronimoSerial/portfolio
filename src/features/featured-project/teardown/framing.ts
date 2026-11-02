@@ -11,7 +11,7 @@ const MARGIN_Y = 0.06;
 const MARGIN_X_DESKTOP = 0.03;
 const MARGIN_X_MOBILE = 0.03;
 // Camera height per unit of horizontal distance, and the fixed starting azimuth.
-const ELEVATION = 0.52;
+const ELEVATION = 1.15;
 export const AZIMUTH = Math.PI / 4;
 // Highest slot of the stack: the framing covers it even when a layer is not on top yet.
 const TOP_SLOT = 2;

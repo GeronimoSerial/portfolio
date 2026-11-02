@@ -5,6 +5,8 @@ import { mulberry32 } from './slabs';
 // Rain over the province: ONE THREE.Points draw call. Thin streaks with a per-drop speed and
 // length; wind leans every streak, with slow gusts and more wind higher up. Density follows the
 // model's rain (rainNorm), and the colour is a neutral tone from the theme, never blue or glowing.
+// Overall rain strength. The streaks are a mood layer: they must never compete with the map.
+const RAIN_GAIN = 0.5;
 export const WEATHER_DESKTOP = 3000;
 export const WEATHER_MOBILE = 1200;
 
@@ -126,7 +128,7 @@ export function createWeather(mobile: boolean, tones: WeatherTones): Weather {
       geometry.setDrawRange(0, active);
       shown = active;
     }
-    material.uniforms.uOpacity.value = Math.max(OPACITY_FLOOR, s);
+    material.uniforms.uOpacity.value = Math.max(OPACITY_FLOOR, s) * RAIN_GAIN;
     clock += dt;
 
     // Gusts: one slow swell plus a faster flutter, so the lean never sits still.

@@ -21,14 +21,14 @@ export const FOCUS_GLSL = /* glsl */ `
   vec3 applyFocus(vec3 c) {
     float l = dot(c, vec3(0.299, 0.587, 0.114));
     vec3 desat = vec3(l) + (c - vec3(l)) * 0.25;
-    vec3 darkRecede = desat * 0.36;
+    vec3 darkRecede = desat * 0.52;
     vec3 lightRecede = mix(desat, uPage, ${RECEDE_TO_PAGE.toFixed(2)});
     vec3 receded = mix(darkRecede, lightRecede, uLight);
     return mix(receded, c, uFocus);
   }
 `;
 
-const RECEDED_GAIN = 0.40;
+const RECEDED_GAIN = 0.58;
 const RECEDED_SATURATION = 0.25;
 
 // Palette state the focus helpers need: the theme flag and the page colour in both spaces.
