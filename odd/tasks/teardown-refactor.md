@@ -19,7 +19,7 @@ Mapping (2026-11-02, Haiku read-only) found: `scene.ts` is a 501-line god file; 
 
 ## Tasks
 - [x] R1 Shared resources: build hillshade, footprint and satellite once and share via `LayerContext`; extract duplicated marker/rim constants into one shared module. Route: delegated writer (2+ non-trivial files).
-- [ ] R2 Split `scene.ts` into focused modules (framing solver, readouts, atmosphere wiring, resize/theme/data-load); `scene.ts` stays a thin orchestrator. Route: delegated writer.
+- [x] R2 Split `scene.ts` into focused modules (framing solver, readouts, atmosphere wiring, resize/theme/data-load); `scene.ts` stays a thin orchestrator. Route: delegated writer.
 - [ ] R3 Centralize palette: one module owns every hardcoded hex and the sRGB/linear conversions; layers consume it. Route: delegated writer.
 - [ ] R4 Lifecycle: dispose placeholder satellite always, remove media-query listener, avoid mounting before data resolves. Route: delegated writer.
 
@@ -33,5 +33,8 @@ Mapping (2026-11-02, Haiku read-only) found: `scene.ts` is a 501-line god file; 
 - Branch `refactor/teardown-structure` created from main 2026-11-02.
 - R1 (2026-11-02, delegated Haiku writer, trigger: 2+ non-trivial files): `pnpm check` 0 errors, `pnpm build` Complete (parent re-ran both). Shared hillshade/footprint/satellite via `layers/shared.ts`; constants in `layers/markers.ts`. Not yet browser-verified (deferred to final readback). Build logs "file not created, response body was empty" for /proyectos and /en/projects routes: outside this feature, not confirmed pre-existing. Risk noted: satellite placeholder colour now white (never sampled while uHasSat=0).
 
+- R2 (2026-11-02, delegated Haiku writer): `scene.ts` 507 -> 274 lines (target ~250 missed; palette and render loop kept in the orchestrator by brief). New `framing.ts`, `readouts.ts`, `atmosphere.ts`. Parent re-ran `pnpm check` (0 errors) and `pnpm build` (Complete). Browser readback still pending.
+- Open user request (2026-11-02): replace plain GSAP with `@bsmnt/scrollytelling`. Verified it is React-only (peer react>=18); project has no React. Awaiting user decision (React island as separate R5 vs. typed GSAP helper). Not in scope until decided.
+
 ## Next step
-R2.
+R3 (palette). Pending user decision on scrollytelling.
