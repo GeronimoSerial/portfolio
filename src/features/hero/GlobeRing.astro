@@ -1,0 +1,52 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+// No second globe.* phrase exists yet, so both arcs carry the same title.
+const phrase = t('globe.title');
+---
+
+<div class="globe-ring" data-particles-ring aria-hidden="true">
+  <svg viewBox="0 0 200 200" focusable="false">
+    <defs>
+      <path id="globe-ring-top" d="M20 100a80 80 0 0 1 160 0" />
+      <path id="globe-ring-bottom" d="M20 100a80 80 0 0 0 160 0" />
+    </defs>
+    <text><textPath href="#globe-ring-top" startOffset="50%">{phrase}</textPath></text>
+    <text><textPath href="#globe-ring-bottom" startOffset="50%">{phrase}</textPath></text>
+  </svg>
+</div>
+
+<style>
+  /* Placed by the particle controller: the box is centred on the projected globe and scaled to its size.
+     Not named `.ring`: Tailwind's `ring` utility would draw a box-shadow outline around the whole box. */
+  .globe-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    color: var(--ink);
+    font-family: inherit;
+    font-weight: 300;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: var(--ink);
+  }
+
+  text {
+    letter-spacing: 0.08em;
+  }
+</style>

@@ -27,6 +27,7 @@ export interface Frame {
   roll: number;
   opacity: number;
   arc: number;
+  spin: number; // globe pose weight: 1 only in the globe pose, so the spin and the ring follow it through morphs
 }
 
 // Measured view and shape sizes that the poses are fitted to.
@@ -77,6 +78,8 @@ export const CLOUD_CENTER_Y = PORTRAIT_H / 2;
 export const CENTERED_Y = -PORTRAIT_H / 2; // grp y that puts the cloud centre on the view centre
 const FIT = 0.92; // share of the view width a scaled-down figure may fill
 const GLOBE_TILT = -0.3; // rad around X, globe pose only; negative tilts the south toward the viewer
+// Globe spin about its own pole, globe pose only. The SVG ring turns at the same rate (controller.ts).
+export const GLOBE_SPIN_RAD_PER_S = (8 * Math.PI) / 180; // 8 deg/s, a full turn every 45 s
 const GLOBE_FIT = { h: 0.78, w: 0.9 }; // globe diameter as a share of view height and of view width
 // Arc midpoint (lat 6.7, lon -65.8) facing the viewer, so both endpoints sit on the front hemisphere.
 // Same sign convention as the rest pose: positive yaw brings a western longitude to the front.
@@ -136,14 +139,23 @@ export function fitLayout(layout: Layout, t: Tier) {
 }
 
 export function frameOf(pose: Framed, t: Tier, layout: Layout): Frame {
-  const base: Frame = { x: FIGURE_X[t], oy: 0, c: 0, s: 1, turnOut: 1, tilt: 0, yaw: 0, roll: 0, opacity: 1, arc: 0 };
+  const base: Frame = { x: FIGURE_X[t], oy: 0, c: 0, s: 1, turnOut: 1, tilt: 0, yaw: 0, roll: 0, opacity: 1, arc: 0, spin: 0 };
   switch (pose) {
     case 'portrait':
       return base;
     case 'field':
       return { ...base, oy: FIELD_OFFSET_Y, turnOut: 0 };
     case 'globe':
-      return { ...base, c: 1, x: GLOBE_X[t], oy: GLOBE_OY[t], s: layout.fitGlobe, turnOut: 0, tilt: GLOBE_TILT };
+      return {
+        ...base,
+        c: 1,
+        x: GLOBE_X[t],
+        oy: GLOBE_OY[t],
+        s: layout.fitGlobe,
+        turnOut: 0,
+        tilt: GLOBE_TILT,
+        spin: 1,
+      };
     case 'globe-north':
       return {
         ...base,
@@ -202,5 +214,6 @@ export function figureFrame(key: ShapeKey, shape: Shape, t: Tier, layout: Layout
     roll: rocket ? ROCKET.roll : 0,
     opacity: 1,
     arc: 0,
+    spin: 0,
   };
 }

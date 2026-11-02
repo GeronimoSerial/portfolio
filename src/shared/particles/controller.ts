@@ -10,12 +10,14 @@ import { createPointerHandler, createRig, fitRig, HEAD_Y } from './rig';
 import { loadBaseAssets, loadFigureShapes } from './assets';
 import { FIGURE_EVENT } from './events';
 import { setDisperse, setState } from './morph';
+import { GLOBE_CENTER_Y, GLOBE_RADIUS } from './shapes';
 import {
   CENTERED_Y,
   CLOUD_CENTER_Y,
   createLayout,
   fitLayout,
   FIGURE_X,
+  GLOBE_SPIN_RAD_PER_S,
   POSE_KEYS,
   tierOf,
   type Frame,
@@ -33,6 +35,9 @@ const TURN = { y: -0.6, x: 0.06, shiftX: 0.14 }; // scroll turn: rad, rad, view 
 const LOOK_EASE = 0.08;
 const ARC_COUNT = { desktop: 600, mobile: 300 };
 const MOBILE_TURN = { x: 0.2, y: 0.12 }; // mobile-only extra shift in the turned state: view widths right, view heights down
+// SVG ring in GlobeRing.astro: a 200 unit box with its text on arcs of radius 80. gap is the share of the sphere's
+// radius between its edge and the arc; fontPx is the text size in CSS px at any ring size.
+const RING = { box: 200, pathR: 80, gap: 0.2, fontPx: 14 };
 
 // The sampler and colour are tuned in raw sRGB, matching the mockup.
 THREE.ColorManagement.enabled = false;
@@ -71,6 +76,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     roll: 0,
     opacity: 1,
     arc: 0, // arc visibility, 1 only in the north-facing globe pose
+    spin: 0,
   };
   const state: ParticleState = {
     figureMode: false,
@@ -115,6 +121,12 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   const turn = { p: 0 };
   const look = { x: 0, y: 0 };
   const lookTarget = { x: 0, y: 0 };
+  // Globe spin angle, rad. It advances only while the globe pose holds and is kept when the pose leaves.
+  const spin = { angle: 0 };
+  const ringEl = document.querySelector<HTMLElement>('[data-particles-ring]');
+  const ringCentre = new THREE.Vector3();
+  const ringEdge = new THREE.Vector3();
+  let ringShown = false;
 
   if (import.meta.env.DEV) {
     (window as Window & { __particles?: unknown }).__particles = {
@@ -166,6 +178,35 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   }
   ctx.apply = apply;
 
+  // The ring hugs the projected sphere: its centre is the sphere's centre on screen and its arc sits a gap outside the
+  // sphere's silhouette, measured from the sphere's edge in the screen plane. Hidden unless the globe pose holds.
+  function placeRing(alpha: number) {
+    if (!ringEl) return;
+    if (alpha <= 0.001) {
+      if (ringShown) ringEl.style.opacity = '0';
+      ringShown = false;
+      return;
+    }
+    grp.updateMatrixWorld(true);
+    camera.updateMatrixWorld();
+    // The points hang from a node offset by -CLOUD_CENTER_Y (clouds.ts), so the sphere centre is that far from the group origin.
+    ringCentre.set(0, GLOBE_CENTER_Y - CLOUD_CENTER_Y, 0);
+    spinGroup.localToWorld(ringCentre);
+    ringEdge.copy(ringCentre).setX(ringCentre.x + GLOBE_RADIUS * view.s);
+    ringCentre.project(camera);
+    ringEdge.project(camera);
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    const cx = ((ringCentre.x + 1) / 2) * w;
+    const cy = ((1 - ringCentre.y) / 2) * h;
+    const radius = ((ringEdge.x - ringCentre.x) / 2) * w * (1 + RING.gap);
+    const k = radius / RING.pathR; // CSS px per SVG unit
+    ringEl.style.opacity = String(alpha);
+    ringEl.style.fontSize = `${RING.fontPx / k}px`;
+    ringEl.style.transform = `translate(${cx - RING.box / 2}px, ${cy - RING.box / 2}px) scale(${k}) rotate(${spin.angle}rad)`;
+    ringShown = true;
+  }
+
   function frame(now: number) {
     raf = requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - last) / 1000);
@@ -178,7 +219,12 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     // The scroll turn fades out with turnOut, so the framed poses end facing front.
     const k = view.turnOut;
     pivot.rotation.set(turn.p * TURN.x * k + look.y, turn.p * TURN.y * k + look.x, 0);
-    spinGroup.rotation.set(view.tilt, view.yaw, view.roll);
+    // The globe turns about its own pole (the spin group's Y axis, applied before the tilt). The angle is applied at the
+    // globe weight, so a morph in or out blends instead of snapping. A whole turn at full weight leaves the picture
+    // unchanged, so the angle is folded back there to keep it small.
+    if (!reduced) spin.angle += dt * GLOBE_SPIN_RAD_PER_S * view.spin;
+    if (view.spin >= 1) spin.angle %= 2 * Math.PI;
+    spinGroup.rotation.set(view.tilt, view.yaw + spin.angle * view.spin, view.roll);
     spinGroup.scale.setScalar(view.s);
     spinGroup.position.set(0, CLOUD_CENTER_Y - HEAD_Y, 0);
     // Mobile only: the turned head moves right and down, clear of the statement text.
@@ -193,6 +239,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     uniforms.uOpacity.value = view.opacity;
     arc.uniforms.uReveal.value = arcState.reveal;
     arc.uniforms.uAlpha.value = view.arc * view.opacity;
+    placeRing(view.spin * view.opacity);
     // Fully transparent frames draw nothing, so render one of them to clear the canvas and then skip the GPU work.
     if (view.opacity > 0.001) {
       drewEmpty = false;
