@@ -12,9 +12,10 @@ const words = t('work.mask').split('|');
 
 <section id="projects" aria-labelledby="projects-title" class="section">
   <!--
-    A still stage (sticky, 100svh): the video fills the screen and the area words sit centred over it, blended with
-    difference. Nothing moves on scroll; the stage holds briefly and the next section scrolls over it. The particle
-    layer stays off here through the page wrapper's data-particles="none".
+    A still stage: a sticky 100svh stage inside a tall track. The footage stays put; the area words converge
+    from the outside in as the track scrolls (scrubbed by GSAP ScrollTrigger), settle by CONVERGE_END of the
+    track, and then hold. Reduced motion skips the scrub and renders the words in their final places.
+    The particle layer stays off here through the page wrapper's data-particles="none".
   -->
   <h2 id="projects-title" class="sr-only">{t('work.title')}: {words.join(', ')}</h2>
 
@@ -37,7 +38,6 @@ const words = t('work.mask').split('|');
     </video>
     <div class="veil" aria-hidden="true"></div>
 
-    <!-- Inverts whatever footage passes behind it (mix-blend-mode: difference), so it reads over sky and rock alike. -->
     <p class="words" aria-hidden="true">
       {words.map((word) => <span>{word}</span>)}
     </p>
@@ -45,12 +45,12 @@ const words = t('work.mask').split('|');
 </section>
 
 <style>
-  /* The sticky stage plus a 30svh hold before the section scrolls away. Halved from 60svh so the
-     next section arrives sooner. */
   .section {
+    /* Scroll held beyond the 100svh stage, in svh. This is the one value to tune the track length. */
+    --hold: 300;
     position: relative;
     isolation: isolate;
-    height: calc(100svh + 30svh);
+    height: calc(100svh + var(--hold) * 1svh);
     /* Clips the sticky stage at the section's bottom edge. overflow: clip, unlike hidden, keeps sticky working. */
     overflow: clip;
     color: var(--ink);
@@ -74,22 +74,46 @@ const words = t('work.mask').split('|');
     overflow: hidden;
     background: var(--bg);
   }
+  /* 2px of flat --bg above and below the footage. The video sits on its own GPU layer and snaps to whole
+     pixels, while the section edge lands on fractions: without this margin the boundary row shows a hairline
+     of unveiled footage. */
   .bg {
     position: absolute;
-    inset: 0;
+    inset: 2px 0;
     display: block;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 4px);
     object-fit: cover;
   }
-  /* Softens the footage so the words keep their contrast. */
+  /* Token-based veil: 60% --bg darkens the footage in the dark theme and lightens it in the light theme,
+     so --ink reads in both. Flat on purpose: the stage stays clean while it is stuck. */
   .veil {
     position: absolute;
     inset: 0;
-    background: rgb(0 0 0 / 0.45);
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
     pointer-events: none;
   }
-  /* White text with difference blending inverts the footage behind each letter. */
+  /* Edge fades. They belong to the section, not to the sticky stage, so they travel with the section:
+     on entry the first rows of footage, and the words that start outside the frame, melt out of the flat
+     --bg of the previous section instead of being cut by the section edge; on exit the same in reverse. */
+  .section::before,
+  .section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 35svh;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .section::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg), transparent);
+  }
+  .section::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg), transparent);
+  }
   .words {
     position: absolute;
     inset: 0;
@@ -105,9 +129,11 @@ const words = t('work.mask').split('|');
     line-height: 0.92;
     letter-spacing: -0.01em;
     text-transform: uppercase;
-    color: #fff;
-    mix-blend-mode: difference;
+    color: var(--ink);
     pointer-events: none;
+  }
+  .words > span {
+    will-change: transform, opacity;
   }
 
   @media (max-width: 767px) {
@@ -128,7 +154,16 @@ const words = t('work.mask').split('|');
 </style>
 
 <script>
-  import { reduced } from '../../shared/motion/policy';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { reduced, MOBILE_QUERY } from '../../shared/motion/policy';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Share of the track by which every word has settled. The words hold from there to the end.
+  const CONVERGE_END = 0.7;
+  // Delay between neighbouring words, in timeline units (the whole timeline spans the track, 0 to 1).
+  const STAGGER = 0.04;
 
   const root = document.getElementById('projects');
   const video = document.querySelector<HTMLVideoElement>('[data-project-video]');
@@ -156,5 +191,34 @@ const words = t('work.mask').split('|');
       if (reduced.matches) video.pause();
       sync();
     });
+  }
+
+  // Convergence: each word starts pushed outward from the middle word (the further out, the further it travels)
+  // and slides to its resting place as the track scrolls. Reversible, because the scrub follows scroll both ways.
+  if (root && !reduced.matches) {
+    const words = Array.from(root.querySelectorAll<HTMLElement>('.words > span'));
+    const mobile = window.matchMedia(MOBILE_QUERY).matches;
+    const middle = (words.length - 1) / 2;
+    const travel = CONVERGE_END - (words.length - 1) * STAGGER;
+
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power2.out' },
+        scrollTrigger: { trigger: root, start: 'top top', end: 'bottom bottom', scrub: 0.5 },
+      });
+      words.forEach((word, i) => {
+        const offset = i - middle;
+        // Mobile keeps only the vertical spread, so the longest word never has to fit a narrow screen.
+        const from = mobile
+          ? { y: `${offset * 30}vh`, opacity: 0.2 }
+          : { x: `${offset * 18}vw`, y: `${offset * 40}vh`, opacity: 0.2 };
+        timeline.fromTo(word, from, { x: 0, y: 0, opacity: 1, duration: travel }, i * STAGGER);
+      });
+      // A zero-length tween at 1 stretches the timeline over the whole track, so the words hold after CONVERGE_END.
+      timeline.to({}, { duration: 0 }, 1);
+    }, root);
+
+    const dispose = () => ctx.revert();
+    window.addEventListener('pagehide', dispose);
   }
 </script>

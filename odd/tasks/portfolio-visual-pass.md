@@ -23,8 +23,8 @@ Raise the visual quality of four areas the user rejected or asked for on 2026-11
 ## Tasks
 - [x] V1 Teardown look: camera elevation 0.52 -> 1.15 (trial applied, readback good); tame rain/cloud dominance, lift layer contrast. Route: inline (parent, iterating with screenshots).
 - [ ] V2 Globe: continuous spin of the particle globe + rotating SVG textPath ring ("Available everywhere" and a second phrase) in sync, reduced-motion static. Route: delegated writer (particles + Globe.astro).
-- [ ] V3 Projects words: render AI, words converge from outside to inside on scroll (scrubbed), much longer sticky hold so the section lasts longer; reduced-motion static. Route: delegated writer.
-- [ ] V4 Transitions: remove the colour friction around the Projects section (token-based gradient edges, veil from tokens, words colour from tokens, theme-aware). Route: same writer as V3 (same files).
+- [ ] V3 (implemented and committed; readback of mobile/reduced motion pending) Projects words: render AI, words converge from outside to inside on scroll (scrubbed), much longer sticky hold so the section lasts longer; reduced-motion static. Route: delegated writer.
+- [ ] V4 (implemented and committed; entry edge verified dark+light, exit edge pending) Transitions: remove the colour friction around the Projects section (token-based gradient edges, veil from tokens, words colour from tokens, theme-aware). Route: same writer as V3 (same files).
 
 ## Acceptance criteria
 - `pnpm check` 0 errors, `pnpm build` passes.
@@ -34,7 +34,7 @@ Raise the visual quality of four areas the user rejected or asked for on 2026-11
 - 2026-11-02: reference measured (ring rotation ~10 deg/s, `textPath` in an SVG `ring`); our code mapped by a Haiku read-only pass (cites above). V1 ELEVATION 1.15 applied, uncommitted; screenshot shows map readable from above.
 
 - V1 (2026-11-02, inline): `ELEVATION` 0.52 -> 1.15 (`framing.ts`), rain opacity x0.5 (`RAIN_GAIN` in `weather.ts`), receded layer gain 0.40 -> 0.58 and dark recede 0.36 -> 0.52 (`layers/base.ts`), canvas darken 0.18 -> 0.08 (`atmosphere.ts`). `pnpm check` 0 errors. Dev-server readback at 1440x900 (cover step: real satellite terrain readable from above; access step: roads and schools clear, rain subtle), `pinTop: 0` still sticky. Not re-checked: mobile and light theme with the new values; `pnpm build` not re-run for V1 alone (a writer is editing other files).
-- V3+V4 delegated to a Haiku writer (disjoint files: Projects.astro, ui.ts, boundary CSS).
+- V3+V4 (2026-11-02, delegated Haiku writer; parent corrected V4): `work.mask` now has 5 words incl. AI (es/en); GSAP scrub timeline converges the words from outside (`CONVERGE_END` 0.7, `--hold: 300` svh so the section is ~4 screens, 3602px at 900px). Parent readback (dev server, desktop 1440x900): word centres go from y -452..1353 (outside) at 0% to a centred stack at 70%, held after; no horizontal scroll; `pnpm check` 0 errors. Parent found the writer's veil did not fix the seam (words cut at the section edge, 1px hairline) and changed it: veil is flat 60% `--bg`; opaque `--bg` gradients as `.section::before/::after` (35svh) travel with the section; video inset 2px (GPU layer snaps to whole pixels while the section edge is fractional). Verified entry edge in dark and light themes: smooth melt, no hairline. NOT verified: exit (bottom) edge, mobile 390px word offsets (page kept reloading from HMR while the V2 writer edited), reduced motion on this section, legibility over bright footage frames.
 
 ## Next step
-V3+V4 result, then V2.
+V2 result, then mobile + exit-edge + reduced-motion readback for Projects, `pnpm build`, commit.
