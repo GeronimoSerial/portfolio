@@ -86,8 +86,10 @@ function mountPinnedSequence(
   state: TeardownState,
   hooks: ChoreographyHooks,
 ): () => void {
-  const pin = root.querySelector<HTMLElement>('[data-pin]');
-  if (!pin) return () => {};
+  // The stage is the CSS sticky child [data-pin]; the root is the tall scroll track. The track's
+  // height reads --pin-vh, so PIN_VH stays the one source of truth for the scroll length.
+  if (!root.querySelector('[data-pin]')) return () => {};
+  root.style.setProperty('--pin-vh', String(PIN_VH));
 
   const ctx = gsap.context(() => {
     gsap.set(steps, { autoAlpha: 0 });
@@ -99,13 +101,10 @@ function mountPinnedSequence(
       scrollTrigger: {
         trigger: root,
         start: 'top top',
-        end: () => `+=${window.innerHeight * PIN_VH}`,
-        pin,
+        end: 'bottom bottom',
         scrub: true,
         invalidateOnRefresh: true,
-        // The pin's spacer must exist before any trigger below it is measured, so it refreshes first.
-        id: 'teardown-pin',
-        refreshPriority: 4,
+        id: 'teardown-sticky',
         // Refresh runs on load, resize and remount. Jump to the trigger's current progress at once
         // so a restored scroll position shows its step without scrubbing in from step 0.
         onRefresh: (self) => {
@@ -140,5 +139,6 @@ function mountPinnedSequence(
 
   return () => {
     ctx.revert();
+    root.style.removeProperty('--pin-vh');
   };
 }

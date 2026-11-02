@@ -215,7 +215,7 @@ export function mountTeardown(root: HTMLElement): () => void {
     attributeFilter: ['data-theme'],
   });
 
-  // Built only after the data resolves; the pin and timeline already exist by then.
+  // Built only after the data resolves; the scroll timeline already exists by then.
   loadGeoData({ mobile }).then((data: GeoData) => {
     if (disposed) return;
     const built = createModel(data);
@@ -252,7 +252,7 @@ export function mountTeardown(root: HTMLElement): () => void {
     requestRender();
   });
 
-  // Choreography is mounted synchronously so pin spacing exists before the fetch resolves.
+  // Choreography is mounted synchronously so the scroll track's height (--pin-vh) exists before the fetch resolves.
   const stopChoreography = mountChoreography(root, state, { requestRender });
   requestRender();
 

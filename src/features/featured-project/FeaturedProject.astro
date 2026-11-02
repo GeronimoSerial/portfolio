@@ -171,8 +171,15 @@ const readoutCopy = {
     display: none;
   }
 
-  /* Pinned sequence (desktop, motion allowed): one pinned stage, copy left (~36%), scene right. */
+  /* Pinned sequence (desktop, motion allowed): the section is a scroll track one viewport taller than
+     the scroll length (--pin-vh, set by the choreography from PIN_VH); the stage sticks to its top.
+     Copy left (~36%), scene right. */
+  .teardown.is-pinned {
+    height: calc(100vh + var(--pin-vh, 0) * 100vh);
+  }
   .is-pinned .pin {
+    position: sticky;
+    top: 0;
     height: 100vh;
     grid-template-columns: 36% 64%;
     grid-template-rows: 100%;
@@ -276,6 +283,9 @@ const readoutCopy = {
     }
     /* The stack is centred in the space under the header. The canvas takes up to 60svh and gives
        way to the content when the viewport is short; the slot is as tall as the tallest step. */
+    .teardown.is-pinned {
+      height: calc(100svh + var(--pin-vh, 0) * 100svh);
+    }
     .is-pinned .pin {
       height: 100svh;
       grid-template-columns: 1fr;
@@ -346,8 +356,8 @@ const readoutCopy = {
   };
 
   // A tier change (mobile <-> desktop) rebuilds each teardown: the old cleanup disposes its
-  // renderer and pin, then the new mount reads the tier again. Runs on the next frame, then refreshes
-  // ScrollTrigger so the pins are measured for the new layout.
+  // renderer and scroll timeline, then the new mount reads the tier again. Runs on the next frame, then
+  // refreshes ScrollTrigger so the scroll track is measured for the new layout.
   const remount = (): void => {
     for (const el of roots) cleanups.get(el)?.();
     cleanups.clear();
