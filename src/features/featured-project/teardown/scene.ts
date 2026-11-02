@@ -120,6 +120,12 @@ export function mountTeardown(root: HTMLElement): () => void {
     handles.forEach((handle, k) => {
       const layer = state.layers[k];
       handle.group.position.y = layer.slot * SEPARATION;
+      if (handle.overlay) {
+        handle.overlay.position.y = handle.group.position.y;
+        // Overlays (the satellites) belong to the layer's own step: only while it is on top of the stack.
+        // Without this they float beside the stack once another layer has taken the top slot.
+        handle.overlay.visible = layer.slot > handles.length - 1.5;
+      }
       handle.setFocus(layer.focus);
     });
   }
@@ -227,6 +233,7 @@ export function mountTeardown(root: HTMLElement): () => void {
     handles.forEach((h) => {
       h.paint(palette);
       scene.add(h.group);
+      if (h.overlay) scene.add(h.overlay);
     });
     stack = measureStack(handles);
     frame = solveFrame(stack.box, camera.aspect, marginX);
@@ -265,6 +272,7 @@ export function mountTeardown(root: HTMLElement): () => void {
     themeObserver.disconnect();
     for (const h of handles) {
       scene.remove(h.group);
+      if (h.overlay) scene.remove(h.overlay);
       h.dispose();
     }
     // Shared textures go last: every layer that referenced them is already gone.

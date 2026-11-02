@@ -1,7 +1,8 @@
 import { FOCUS_GLSL } from './base';
+import { SCAN_FADE_S, SCAN_MIX, SCAN_RAMP_STOPS, SCAN_RESIDUAL } from './satellites';
 
 // Territory shaders: one displaced DEM mesh. The fragment stage carries the satellite base, the
-// rain and wetness response, and the flood water painted into the same opaque surface.
+// rain and wetness response, the flood water and the satellite scan paint in the same opaque surface.
 
 export const territoryVertex = /* glsl */ `
   uniform sampler2D uHeight;
@@ -37,9 +38,24 @@ export const territoryFragment = /* glsl */ `
   uniform float uLevel;
   uniform float uTime;
   uniform float uDetail;
+  uniform sampler2D uScan; // R: paint clock per texel, -1 = never painted
+  uniform vec3 uRamp[${SCAN_RAMP_STOPS}];
+  uniform float uScanAll;
+  uniform float uScanClock;
   varying vec2 vUv;
   varying float vH;
   ${FOCUS_GLSL}
+  // Precipitation ramp, t in 0..1, piecewise linear over the stops.
+  vec3 scanRamp(float t) {
+    float x = clamp(t, 0.0, 0.9999) * ${(SCAN_RAMP_STOPS - 1).toFixed(1)};
+    float f = fract(x);
+    vec3 a = uRamp[0];
+    vec3 b = uRamp[1];
+    if (x >= 1.0) { a = uRamp[1]; b = uRamp[2]; }
+    if (x >= 2.0) { a = uRamp[2]; b = uRamp[3]; }
+    if (x >= 3.0) { a = uRamp[3]; b = uRamp[4]; }
+    return mix(a, b, f);
+  }
   void main() {
     float inside = smoothstep(0.4, 0.6, texture2D(uFoot, vUv).r);
     if (inside < 0.003) discard;
@@ -79,6 +95,15 @@ export const territoryFragment = /* glsl */ `
       water += vec3(pow(max(s, 0.0), 14.0) * 0.16);
       col = mix(col, water, cover * 0.6);
     }
+
+    // Scan paint: land under a satellite's swath takes the precipitation ramp, fresh at the
+    // satellite and fading slowly to a residual. Only land is painted, never the flood water.
+    float clock = texture2D(uScan, vUv).r;
+    float age = max(uScanClock - clock, 0.0);
+    float strength = mix(${SCAN_RESIDUAL.toFixed(2)}, 1.0, exp(-age / ${SCAN_FADE_S.toFixed(1)}));
+    strength = mix(strength * step(0.0, clock), 1.0, uScanAll);
+    vec3 paint = scanRamp(smoothstep(0.0, 0.7, texture2D(uPrecip, vUv).r));
+    col = mix(col, paint, ${SCAN_MIX.toFixed(2)} * strength * (1.0 - cover));
 
     gl_FragColor = vec4(applyFocus(col), 1.0);
   }

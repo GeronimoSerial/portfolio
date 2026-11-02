@@ -44,6 +44,7 @@ const readoutCopy = {
               <article class="step" data-step={i + 1}>
                 <h3>{t(layer.labelKey)}</h3>
                 <p>{t(layer.bodyKey)}</p>
+                {layer.id === 'territory' && <p class="source">{t('featured.satellites.credit')}</p>}
               </article>
             ))
           }

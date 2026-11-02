@@ -1,17 +1,22 @@
 import * as THREE from 'three';
 import { toWorld, type GeoData } from '../data';
 import type { Model } from '../model';
-import { createLayer, track } from './base';
+import { prefersReducedMotion } from '../../../../shared/lib/motion';
+import { createLayer, disposeLayer, track } from './base';
 import { encodeField } from './fieldTexture';
 import { createPlateGeometry } from './plateMaterial';
 import { isDarkTheme, terrainTones } from './ramps';
+import { buildScanRig } from './satellites';
 import { RELIEF_HEIGHT, terrainY } from './terrain';
 import { territoryFragment, territoryVertex } from './territoryShaders';
 import type { Env, LayerBuilder, LayerHandle, Palette } from './types';
 
 // Territory: the satellite terrain draped on the Copernicus DEM, with the rain tint, the
 // wetness and the simulated water painted into one opaque displaced mesh. The province outline
-// sits on the terrain edge.
+// sits on the terrain edge. Satellites orbit above it and paint their swaths into the same surface.
+
+// Focus above which the satellites fly and paint. Below it the layer is receded and they are hidden.
+const ACTIVE_FOCUS = 0.02;
 
 function outlineGeometry(data: GeoData): THREE.BufferGeometry | null {
   const fp = data.footprint;
@@ -42,10 +47,14 @@ export const buildTerritory: LayerBuilder = (data, ctx, model: Model): LayerHand
   let disposed = false;
   const n = data.grid;
   const shared = ctx.shared;
+  // Scan satellites: their own group sits beside this one (framing measures this group, so the
+  // satellites must not be inside it). Their paint uniforms join this material below.
+  const scan = buildScanRig(data, ctx.mobile, prefersReducedMotion());
 
   // Satellite, hillshade and footprint come from the scene. The satellite uniforms are the shared
   // objects themselves, so the placeholder-to-file swap reaches this material without a callback.
   const uniforms = {
+    ...scan.uniforms,
     uHeight: { value: encodeField(data.heightmap, n) as THREE.Texture },
     uMask: { value: encodeField(extentField(data, model), n) as THREE.Texture },
     uPrecip: { value: encodeField(data.precipitation, data.precipGrid) as THREE.Texture },
@@ -103,28 +112,44 @@ export const buildTerritory: LayerBuilder = (data, ctx, model: Model): LayerHand
     base.group.add(new THREE.LineLoop(outline, track(base, new THREE.LineBasicMaterial(), 'ink')));
   }
 
+  // Scan materials are disposed with the layer's materials; the paint texture rides in `uScan`.
+  base.materials.push(...scan.materials);
+  let active = false;
+
   const paint = (p: Palette): void => {
     base.paint(p);
-    const t = terrainTones(isDarkTheme(p));
+    const dark = isDarkTheme(p);
+    const t = terrainTones(dark);
     uniforms.uLow.value.set(...t.low);
     uniforms.uHigh.value.set(...t.high);
     uniforms.uShallow.value.set(...t.shallow);
     uniforms.uDeep.value.set(...t.deep);
+    scan.setPalette(dark);
   };
   paint(ctx.palette);
 
   return {
     ...base,
+    overlay: scan.group,
     paint,
+    setFocus: (f: number) => {
+      base.setFocus(f);
+      active = f > ACTIVE_FOCUS;
+      scan.setActive(active);
+    },
     tick: (env: Env) => {
       uniforms.uStorm.value = env.storm;
       uniforms.uWet.value = env.wet;
       uniforms.uLevel.value = env.water;
       uniforms.uTime.value = env.time;
+      uniforms.uScanClock.value = env.time;
+      // Satellites move and paint only while the layer is focused; a receded layer keeps its paint.
+      if (active) scan.update(env.time);
     },
     dispose: () => {
       disposed = true;
       base.dispose();
+      disposeLayer(scan.group, []);
     },
   };
 };

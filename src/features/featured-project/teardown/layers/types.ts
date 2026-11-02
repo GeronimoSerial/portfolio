@@ -34,6 +34,9 @@ export interface LayerContext {
 
 export interface LayerHandle {
   group: THREE.Group;
+  // Optional objects drawn with the layer but kept out of `group`, so the stack framing (which
+  // measures `group`) does not change. The scene adds them to the scene and follows group.position.y.
+  overlay?: THREE.Object3D;
   // Every material is tracked here. `userData.role` selects the palette colour; `userData.tone`
   // keeps that colour so setFocus can recede it without drifting.
   materials: THREE.Material[];
