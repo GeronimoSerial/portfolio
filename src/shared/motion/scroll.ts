@@ -9,8 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 let lenis: Lenis | null = null;
 
-// Touch scrolling and its momentum run with ScrollTrigger so pinned text and the scroll position
-// update together. Desktop wheel scrolling uses Lenis; reduced motion keeps native scrolling.
 // Dev-only probe for trigger order: [id or className, start, end] for every live ScrollTrigger.
 function dumpTriggers(): [string, number, number][] {
   return ScrollTrigger.getAll().map((s) => [
@@ -35,14 +33,19 @@ export function initScroll(): Lenis | null {
   if (lenis) return lenis;
   if (reduced.matches) return null;
 
-  if (ScrollTrigger.isTouch === 1) {
-    if (!ScrollTrigger.normalizeScroll()) {
-      ScrollTrigger.normalizeScroll({ type: 'touch', allowNestedScroll: true, momentum: 0.8 });
-    }
-    return null;
-  }
-
-  const instance = new Lenis({ autoRaf: false });
+  // One scroll driver keeps touch, wheel and programmatic moves on the same animation clock.
+  // normalizeScroll skips alternate touch moves on iOS, making slow drags visibly stop and start.
+  const instance = new Lenis({
+    autoRaf: false,
+    syncTouch: true,
+    touchMultiplier: 0.8,
+    touchInertiaExponent: 1.6,
+    syncTouchLerp: 0.1,
+    allowNestedScroll: true,
+    // Pinch zoom and panning a zoomed page belong to the browser.
+    virtualScroll: ({ event }) =>
+      !('touches' in event) || (event.touches.length < 2 && (window.visualViewport?.scale ?? 1) <= 1),
+  });
   instance.on('scroll', ScrollTrigger.update);
 
   gsap.ticker.add((time) => {
