@@ -8,7 +8,7 @@
     -27.16039
   ],
   "projection": "Square plate, longitude scaled by cos(mid-latitude); u = west to east, v = north to south",
-  "source": "Copernicus DEM (heightmap, hillshade), OpenStreetMap via Geofabrik (roads), JRC Global Flood Hazard 100-year (flood), Natural Earth 10m admin-1 (outline)",
+  "source": "Copernicus DEM (heightmap, hillshade), OpenStreetMap via Geofabrik (roads, facilities, places), JRC Global Flood Hazard 100-year (flood), Natural Earth 10m admin-1 (outline)",
   "elevation": {
     "minM": 16,
     "maxM": 364
@@ -20,6 +20,8 @@
     "flood": "flood.f32",
     "floodmask": "floodmask.png",
     "satellite": "satellite.webp",
-    "footprint": "footprint.json"
+    "footprint": "footprint.json",
+    "facilities": "facilities.json",
+    "places": "places.json"
   }
 }

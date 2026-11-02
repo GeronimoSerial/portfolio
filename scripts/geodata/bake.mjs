@@ -7,7 +7,9 @@
 //   public/data/geo/corrientes.json        province outline (WGS84 FeatureCollection)
 //   public/data/featured/manifest.json     contract read by teardown/data.ts
 //   public/data/featured/heightmap.f32     Float32 LE, grid x grid, 0..1
-//   public/data/featured/roads.json        {lines: [[[u, v], ...]], classes: [0|1|2]} in plate coordinates
+//   public/data/featured/roads.json        {lines: [[[u, v], ...]], classes: [0|1|2|3]} in plate coordinates
+//   public/data/featured/facilities.json   {schools, hospitals}: [u, v] points of OSM schools and hospitals in the footprint
+//   public/data/featured/places.json       [{name, u, v, kind}]: OSM cities, towns and largest villages in the footprint
 //   public/data/featured/footprint.json    province ring in plate coordinates
 //   public/data/featured/hillshade.webp    1024 px hillshade from the DEM (PNG when no WebP encoder)
 //   public/data/featured/floodmask.png     512 px JRC flood hazard, R = G = B = hazard 0..255
@@ -35,8 +37,14 @@ const GRID = 129;
 const PROVINCE_ISO = 'AR-W'; // Corrientes in ISO 3166-2
 const PROVINCE_TOLERANCE_DEG = 0.01;
 const FOOTPRINT_MAX_POINTS = 300;
-// OSM highway value -> road class: 0 national (motorway, trunk), 1 provincial (primary, secondary), 2 tertiary.
-const ROAD_CLASS = { motorway: 0, trunk: 0, primary: 1, secondary: 1, tertiary: 2 };
+// OSM highway value -> road class: 0 national (motorway, trunk), 1 provincial (primary, secondary),
+// 2 tertiary, 3 minor (unclassified, residential, track). The _link ramps join their parent class.
+const ROAD_CLASS = {
+  motorway: 0, trunk: 0, motorway_link: 0, trunk_link: 0,
+  primary: 1, secondary: 1, primary_link: 1, secondary_link: 1,
+  tertiary: 2, tertiary_link: 2,
+  unclassified: 3, residential: 3, track: 3,
+};
 const HILLSHADE_SIZE = 1024;
 const HILLSHADE_AZIMUTH_DEG = 315; // clockwise from north: light from the north-west
 const HILLSHADE_ALTITUDE_DEG = 45;
@@ -46,9 +54,11 @@ const FLOOD_MASK_SIZE = 512;
 // Documented scale: JRC depth in metres maps linearly to hazard 0..1, saturating at this depth.
 // The scene's exposure threshold (0.5) therefore means 0.5 m of modelled flood depth.
 const FLOOD_FULL_HAZARD_DEPTH_M = 1;
-const ROAD_VERTEX_BUDGET = 6000;
-const ROAD_TOLERANCE = 0.0012; // plate units, about 0.5 km on the ground
-const ROAD_MIN_LENGTH = 0.01; // plate units, about 4 km; shorter fragments are dropped
+const ROAD_VERTEX_BUDGET = 40000;
+const ROAD_TOLERANCE = 0.0004; // plate units, about 190 m on the ground
+const ROAD_MIN_LENGTH = 0.003; // plate units, about 1.3 km; shorter fragments are dropped
+const FACILITY_MAX_PER_KIND = 4000; // above this, every n-th point is kept (deterministic)
+const PLACE_VILLAGE_MAX = 40; // largest villages by population tag, the rest are dropped
 const BBOX_MARGIN = 0.05; // extra degrees around the plate for road extraction
 const SATELLITE_SCRIPT = join(here, 'satellite.py');
 
@@ -61,7 +71,7 @@ const URLS = {
   jrcRp100: 'https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/FLOODS/GlobalMaps/floodMapGL_rp100y.zip',
 };
 
-const stages = (process.argv.find((a) => a.startsWith('--stage='))?.slice(8) ?? 'province,dem,roads,flood,satellite').split(',');
+const stages = (process.argv.find((a) => a.startsWith('--stage='))?.slice(8) ?? 'province,dem,roads,facilities,places,flood,satellite').split(',');
 
 // ---------------------------------------------------------------- utilities
 
@@ -653,19 +663,23 @@ function packedVarints(buf, signed) {
   return out;
 }
 
-async function bakeRoads(frame) {
+// One sequential pass over the extract, shared by the roads, facilities and places stages.
+// Nodes inside the padded bbox are kept by id; tagged points, highway ways and facility ways are kept with their refs.
+let osmExtract = null;
+
+async function loadOsmExtract(frame) {
+  if (osmExtract) return osmExtract;
   const pbfFile = join(CACHE, 'argentina-latest.osm.pbf');
   if (!existsSync(pbfFile)) throw new Error(`Missing ${pbfFile}; run the download first (see README)`);
   const bytes = await readFile(pbfFile);
   const b = frame.bbox;
-  const minLon = b.w - BBOX_MARGIN;
-  const maxLon = b.e + BBOX_MARGIN;
-  const minLat = b.s - BBOX_MARGIN;
-  const maxLat = b.n + BBOX_MARGIN;
-
-  // Node coordinates inside the padded bbox, keyed by OSM id.
-  const nodes = new Map();
-  const waysRaw = [];
+  const box = {
+    minLon: b.w - BBOX_MARGIN,
+    maxLon: b.e + BBOX_MARGIN,
+    minLat: b.s - BBOX_MARGIN,
+    maxLat: b.n + BBOX_MARGIN,
+  };
+  const extract = { nodes: new Map(), roadWays: [], facilityWays: [], facilityPoints: [], placePoints: [], plainNodes: 0 };
   let pos = 0;
   while (pos < bytes.length) {
     const headerLen = bytes.readUInt32BE(pos);
@@ -689,16 +703,96 @@ async function bakeRoads(frame) {
       if (field === 3) zlibData = sub;
     }
     const block = raw ?? inflateSync(zlibData);
-    readPrimitiveBlock(block, nodes, waysRaw, { minLon, maxLon, minLat, maxLat });
+    readPrimitiveBlock(block, extract, box);
   }
-  log(`pbf: ${nodes.size} nodes in bbox, ${waysRaw.length} highway ways`);
+  log(
+    `pbf: ${extract.nodes.size} nodes in bbox (${extract.plainNodes} plain), ${extract.roadWays.length} road ways, ` +
+      `${extract.facilityWays.length} facility ways, ${extract.facilityPoints.length} facility nodes, ` +
+      `${extract.placePoints.length} place nodes`,
+  );
+  osmExtract = extract;
+  return extract;
+}
 
-  // Resolve ways into polylines, splitting where a node falls outside the bbox.
+function polylineLength(line) {
+  let total = 0;
+  for (let k = 1; k < line.length; k++) total += Math.hypot(line[k][0] - line[k - 1][0], line[k][1] - line[k - 1][1]);
+  return total;
+}
+
+const dropRepeats = (pts) => pts.filter((p, i) => i === 0 || p[0] !== pts[i - 1][0] || p[1] !== pts[i - 1][1]);
+
+// Ray casting on plate coordinates. The ring is a list of [u, v] points.
+function insideRing(x, y, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if ((yi > y) !== (yj > y) && x <((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
+// Liang-Barsky clip of one segment to the unit plate. Returns the clipped ends (exact where unclipped), or null.
+function clipSegment([x0, y0], [x1, y1]) {
+  const dx = x1 - x0;
+  const dy = y1 - y0;
+  let t0 = 0;
+  let t1 = 1;
+  for (const [p, q] of [[-dx, x0], [dx, 1 - x0], [-dy, y0], [dy, 1 - y0]]) {
+    if (p === 0) {
+      if (q < 0) return null;
+      continue;
+    }
+    const r = q / p;
+    if (p < 0) {
+      if (r > t1) return null;
+      if (r > t0) t0 = r;
+    } else {
+      if (r < t0) return null;
+      if (r < t1) t1 = r;
+    }
+  }
+  return {
+    a: t0 === 0 ? [x0, y0] : [x0 + t0 * dx, y0 + t0 * dy],
+    b: t1 === 1 ? [x1, y1] : [x0 + t1 * dx, y0 + t1 * dy],
+    exits: t1 < 1,
+  };
+}
+
+// Keeps only the parts of a polyline inside the unit plate, as separate polylines.
+function clipToPlate(pts) {
+  const out = [];
+  let current = [];
+  for (let k = 1; k < pts.length; k++) {
+    const seg = clipSegment(pts[k - 1], pts[k]);
+    if (seg === null) {
+      if (current.length >= 2) out.push(current);
+      current = [];
+      continue;
+    }
+    const last = current[current.length - 1];
+    if (last === undefined || last[0] !== seg.a[0] || last[1] !== seg.a[1]) {
+      if (current.length >= 2) out.push(current);
+      current = [seg.a];
+    }
+    current.push(seg.b);
+    if (seg.exits) {
+      if (current.length >= 2) out.push(current);
+      current = [];
+    }
+  }
+  if (current.length >= 2) out.push(current);
+  return out;
+}
+
+async function bakeRoads(frame) {
+  const extract = await loadOsmExtract(frame);
   const lines = [];
-  for (const way of waysRaw) {
+  for (const way of extract.roadWays) {
     let current = [];
     for (const ref of way.refs) {
-      const p = nodes.get(ref);
+      const p = extract.nodes.get(ref);
       if (!p) {
         if (current.length >= 2) lines.push({ pts: current, cls: way.cls });
         current = [];
@@ -709,43 +803,124 @@ async function bakeRoads(frame) {
     if (current.length >= 2) lines.push({ pts: current, cls: way.cls });
   }
 
-  // Project to plate coordinates, thin at a fixed tolerance, drop short fragments, then
-  // keep the longest lines that fit the vertex budget (main roads first).
-  const thinned = lines
-    .map(({ pts, cls }) => ({
-      pts: simplifyLine(pts.map(([lon, lat]) => frame.toPlate(lon, lat)), ROAD_TOLERANCE),
-      cls,
-    }))
-    .filter((l) => l.pts.length >= 2 && polylineLength(l.pts) >= ROAD_MIN_LENGTH)
-    .sort((a, b) => polylineLength(b.pts) - polylineLength(a.pts));
+  // Project, cut at the plate edge (the padded bbox reaches past it), thin, round to 4 decimals,
+  // drop short fragments.
+  const prepared = lines
+    .flatMap(({ pts, cls }) =>
+      clipToPlate(pts.map(([lon, lat]) => frame.toPlate(lon, lat))).map((piece) => ({ pts: piece, cls })),
+    )
+    .map(({ pts, cls }) => {
+      const plate = simplifyLine(pts, ROAD_TOLERANCE);
+      const rounded = dropRepeats(plate.map(([u, v]) => [round(u, 4), round(v, 4)]));
+      return { pts: rounded, cls, length: polylineLength(rounded) };
+    })
+    .filter((l) => l.pts.length >= 2 && l.length >= ROAD_MIN_LENGTH);
+
+  // Over budget: lower class first (0 national ... 3 minor), then longer lines.
+  prepared.sort((a, b) => a.cls - b.cls || b.length - a.length);
   const kept = [];
   let vertices = 0;
-  for (const l of thinned) {
+  for (const l of prepared) {
     if (vertices + l.pts.length > ROAD_VERTEX_BUDGET) continue;
     kept.push(l);
     vertices += l.pts.length;
   }
   const out = {
-    lines: kept.map((l) => l.pts.map(([u, v]) => [round(u, 4), round(v, 4)])),
+    lines: kept.map((l) => l.pts),
     classes: kept.map((l) => l.cls),
   };
   const text = JSON.stringify(out);
   await writeFile(join(FEATURED, 'roads.json'), text + '\n');
-  const perClass = [0, 1, 2].map((c) => out.classes.filter((k) => k === c).length);
+  const perClass = [0, 1, 2, 3].map((c) => {
+    const ls = kept.filter((l) => l.cls === c);
+    return `${ls.length} lines/${ls.reduce((s, l) => s + l.pts.length, 0)} vertices`;
+  });
   log(
-    `roads.json ${out.lines.length} of ${lines.length} lines (class 0/1/2: ${perClass.join('/')}), ` +
-      `${vertices} vertices, ${(text.length / 1024).toFixed(0)} KB`,
+    `roads.json ${out.lines.length} of ${lines.length} lines, ${vertices} vertices, ` +
+      `${(text.length / 1024).toFixed(0)} KB; class 0..3: ${perClass.join(' | ')}; ` +
+      `${prepared.length - kept.length} over budget`,
   );
   return out.lines.length;
 }
 
-function polylineLength(line) {
-  let total = 0;
-  for (let k = 1; k < line.length; k++) total += Math.hypot(line[k][0] - line[k - 1][0], line[k][1] - line[k - 1][1]);
-  return total;
+// Schools and hospitals: tagged nodes, and ways reduced to the centroid of their node coordinates.
+async function bakeFacilities(frame, ring) {
+  const extract = await loadOsmExtract(frame);
+  const points = { schools: [], hospitals: [] };
+  for (const p of extract.facilityPoints) points[p.kind].push(frame.toPlate(p.lon, p.lat));
+  let partialWays = 0;
+  for (const w of extract.facilityWays) {
+    const pts = w.refs.map((r) => extract.nodes.get(r));
+    const found = pts.filter((p) => p !== undefined);
+    if (found.length === 0) continue; // outside the padded bbox
+    if (found.length < pts.length) {
+      partialWays += 1; // straddles the padded bbox edge: centroid would be biased, so skipped
+      continue;
+    }
+    const lon = found.reduce((s, p) => s + p[0], 0) / found.length;
+    const lat = found.reduce((s, p) => s + p[1], 0) / found.length;
+    points[w.kind].push(frame.toPlate(lon, lat));
+  }
+  if (partialWays > 0) log(`facilities: ${partialWays} ways skipped (straddle the padded bbox edge)`);
+
+  const out = {};
+  for (const kind of ['schools', 'hospitals']) {
+    const inside = points[kind].filter(([u, v]) => insideRing(u, v, ring));
+    const stride = Math.max(1, Math.ceil(inside.length / FACILITY_MAX_PER_KIND));
+    out[kind] = inside.filter((_, i) => i % stride === 0).map(([u, v]) => [round(u, 4), round(v, 4)]);
+    log(`facilities ${kind}: ${inside.length} inside the footprint, kept ${out[kind].length}${stride > 1 ? ` (every ${stride}th)` : ''}`);
+  }
+  await writeFile(join(FEATURED, 'facilities.json'), JSON.stringify(out) + '\n');
+  return out;
 }
 
-function readPrimitiveBlock(block, nodes, waysRaw, box) {
+const PLACE_ORDER = { city: 0, town: 1, village: 2 };
+const byName = (a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+
+// Named places for map labels: every city and town, the largest villages (population tag, unknown last).
+async function bakePlaces(frame, ring) {
+  const extract = await loadOsmExtract(frame);
+  const inside = extract.placePoints
+    .map((p) => ({ name: p.name, kind: p.kind, population: p.population, plate: frame.toPlate(p.lon, p.lat) }))
+    .filter((p) => insideRing(p.plate[0], p.plate[1], ring));
+  const villages = inside.filter((p) => p.kind === 'village');
+  villages.sort((a, b) => (b.population ?? -1) - (a.population ?? -1) || byName(a, b));
+  const keptVillages = villages.slice(0, PLACE_VILLAGE_MAX);
+  const kept = inside
+    .filter((p) => p.kind !== 'village')
+    .concat(keptVillages)
+    .sort((a, b) => PLACE_ORDER[a.kind] - PLACE_ORDER[b.kind] || byName(a, b));
+  const out = kept.map((p) => ({ name: p.name, u: round(p.plate[0], 4), v: round(p.plate[1], 4), kind: p.kind }));
+  await writeFile(join(FEATURED, 'places.json'), JSON.stringify(out) + '\n');
+  const count = (k) => out.filter((p) => p.kind === k).length;
+  log(
+    `places.json ${out.length}: ${count('city')} cities, ${count('town')} towns, ` +
+      `${keptVillages.length} of ${villages.length} villages`,
+  );
+  return out.length;
+}
+
+const parsePopulation = (value) => {
+  const m = value === undefined ? null : /\d[\d.,]*/.exec(value);
+  const n = m ? Number(m[0].replace(/\D/g, '')) : NaN;
+  return Number.isFinite(n) ? n : null;
+};
+
+const roadClass = (highway) =>
+  highway !== undefined && Object.hasOwn(ROAD_CLASS, highway) ? ROAD_CLASS[highway] : undefined;
+
+// OSM tags -> facility bucket, or null. Schools: amenity=school. Hospitals: amenity=hospital|clinic, healthcare=hospital.
+function facilityKind(tags) {
+  if (tags.amenity === 'school') return 'schools';
+  if (tags.amenity === 'hospital' || tags.amenity === 'clinic' || tags.healthcare === 'hospital') return 'hospitals';
+  return null;
+}
+
+const OSM_TAG_KEYS = ['highway', 'amenity', 'healthcare', 'place', 'name', 'population'];
+const PLACE_KINDS = ['city', 'town', 'village'];
+const zigzag = (n) => (n % 2 === 0 ? n / 2 : -(n + 1) / 2);
+
+function readPrimitiveBlock(block, extract, box) {
   let strings = [];
   let granularity = 100;
   let latOffset = 0;
@@ -758,37 +933,97 @@ function readPrimitiveBlock(block, nodes, waysRaw, box) {
     else if (field === 19) latOffset = num;
     else if (field === 20) lonOffset = num;
   }
-  const highwayKey = strings.indexOf('highway');
+  // string-table index -> tag key, for the keys this bake reads
+  const wanted = new Map();
+  for (const key of OSM_TAG_KEYS) {
+    const idx = strings.indexOf(key);
+    if (idx >= 0) wanted.set(idx, key);
+  }
+  const tagsOf = (keys, vals) => {
+    const tags = {};
+    for (let k = 0; k < keys.length; k++) {
+      const key = wanted.get(keys[k]);
+      if (key !== undefined) tags[key] = strings[vals[k]];
+    }
+    return tags;
+  };
   const toLat = (v) => (latOffset + granularity * v) * 1e-9;
   const toLon = (v) => (lonOffset + granularity * v) * 1e-9;
   const inBox = (lon, lat) =>
     lon >= box.minLon && lon <= box.maxLon && lat >= box.minLat && lat <= box.maxLat;
+  const keepNode = (id, lon, lat, tags) => {
+    if (!inBox(lon, lat)) return;
+    extract.nodes.set(id, [lon, lat]);
+    if (!tags) return;
+    const kind = facilityKind(tags);
+    if (kind !== null) extract.facilityPoints.push({ kind, lon, lat });
+    else if (PLACE_KINDS.includes(tags.place) && tags.name) {
+      extract.placePoints.push({
+        kind: tags.place,
+        name: tags.name,
+        population: parsePopulation(tags.population),
+        lon,
+        lat,
+      });
+    }
+  };
 
   for (const group of groups) {
     for (const [field, , , sub] of protoFields(group)) {
-      if (field === 2) {
-        // DenseNodes: delta-coded id, lat and lon arrays.
+      if (field === 1) {
+        // Plain Node: absolute id, zigzag lat and lon, own key/value arrays. Not produced by Geofabrik, counted.
+        extract.plainNodes += 1;
+        let id = 0;
+        let lat = 0;
+        let lon = 0;
+        let keys = [];
+        let vals = [];
+        for (const [f, , num, s] of protoFields(sub)) {
+          if (f === 1) id = num;
+          else if (f === 2) keys = packedVarints(s, false);
+          else if (f === 3) vals = packedVarints(s, false);
+          else if (f === 8) lat = zigzag(num);
+          else if (f === 9) lon = zigzag(num);
+        }
+        keepNode(id, toLon(lon), toLat(lat), keys.length ? tagsOf(keys, vals) : null);
+      } else if (field === 2) {
+        // DenseNodes: delta-coded id, lat and lon; keys_vals holds each node's tags as key/value
+        // string ids, closed by a 0 per node (the array is empty when no node in the block has tags).
         let ids = [];
         let lats = [];
         let lons = [];
+        let kv = [];
         for (const [f, , , s] of protoFields(sub)) {
           if (f === 1) ids = packedVarints(s, true);
           else if (f === 8) lats = packedVarints(s, true);
           else if (f === 9) lons = packedVarints(s, true);
+          else if (f === 10) kv = packedVarints(s, false);
         }
         let id = 0;
         let lat = 0;
         let lon = 0;
+        let kvPos = 0;
         for (let k = 0; k < ids.length; k++) {
           id += ids[k];
           lat += lats[k];
           lon += lons[k];
           const la = toLat(lat);
           const lo = toLon(lon);
-          if (inBox(lo, la)) nodes.set(id, [lo, la]);
+          let tags = null;
+          if (kv.length > 0) {
+            tags = inBox(lo, la) ? {} : null;
+            while (kvPos < kv.length && kv[kvPos] !== 0) {
+              if (tags) {
+                const key = wanted.get(kv[kvPos]);
+                if (key !== undefined) tags[key] = strings[kv[kvPos + 1]];
+              }
+              kvPos += 2;
+            }
+            kvPos += 1; // the 0 that closes this node's tags
+          }
+          keepNode(id, lo, la, tags);
         }
       } else if (field === 3) {
-        if (highwayKey < 0) continue;
         let keys = [];
         let vals = [];
         let refs = [];
@@ -797,14 +1032,14 @@ function readPrimitiveBlock(block, nodes, waysRaw, box) {
           else if (f === 3) vals = packedVarints(s, false);
           else if (f === 8) refs = packedVarints(s, true);
         }
-        let highway = null;
-        for (let k = 0; k < keys.length; k++) {
-          if (keys[k] === highwayKey) highway = strings[vals[k]];
-        }
-        const cls = highway !== null && Object.hasOwn(ROAD_CLASS, highway) ? ROAD_CLASS[highway] : undefined;
-        if (cls === undefined) continue;
+        const tags = tagsOf(keys, vals);
+        const cls = roadClass(tags.highway);
+        const kind = facilityKind(tags);
+        if (cls === undefined && kind === null) continue;
         let acc = 0;
-        waysRaw.push({ refs: refs.map((d) => (acc += d)), cls });
+        const ids = refs.map((d) => (acc += d));
+        if (cls !== undefined) extract.roadWays.push({ refs: ids, cls });
+        if (kind !== null) extract.facilityWays.push({ refs: ids, kind });
       }
     }
   }
@@ -834,6 +1069,14 @@ function bakeSatellite(bbox) {
 
 // ---------------------------------------------------------------- manifest
 
+async function readPreviousManifest() {
+  try {
+    return JSON.parse(await readFile(join(FEATURED, 'manifest.json'), 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
 async function main() {
   await mkdir(GEO, { recursive: true });
   await mkdir(FEATURED, { recursive: true });
@@ -855,8 +1098,13 @@ async function main() {
   await writeFile(join(FEATURED, 'footprint.json'), JSON.stringify({ ring: footprint }) + '\n');
   log(`footprint.json ${footprint.length} points`);
 
+  // Points of the footprint in plate units (unrounded), for the OSM point filters.
+  const plateRing = ring.map(([lon, lat]) => frame.toPlate(lon, lat));
+
+  // A subset run keeps the manifest entries of the stages it did not run.
+  const previous = await readPreviousManifest();
   const files = {};
-  const meta = {};
+  const meta = previous.elevation ? { elevation: previous.elevation } : {};
   if (stages.includes('dem')) {
     const terrain = await bakeTerrain(frame);
     meta.elevation = terrain.elevation;
@@ -866,6 +1114,14 @@ async function main() {
   if (stages.includes('roads')) {
     await bakeRoads(frame);
     files.roads = 'roads.json';
+  }
+  if (stages.includes('facilities')) {
+    await bakeFacilities(frame, plateRing);
+    files.facilities = 'facilities.json';
+  }
+  if (stages.includes('places')) {
+    await bakePlaces(frame, plateRing);
+    files.places = 'places.json';
   }
   if (stages.includes('flood')) {
     Object.assign(files, await bakeFlood(frame));
@@ -881,10 +1137,10 @@ async function main() {
     bbox,
     projection: 'Square plate, longitude scaled by cos(mid-latitude); u = west to east, v = north to south',
     source:
-      'Copernicus DEM (heightmap, hillshade), OpenStreetMap via Geofabrik (roads), ' +
+      'Copernicus DEM (heightmap, hillshade), OpenStreetMap via Geofabrik (roads, facilities, places), ' +
       'JRC Global Flood Hazard 100-year (flood), Natural Earth 10m admin-1 (outline)',
     ...meta,
-    files,
+    files: { ...previous.files, ...files },
   };
   await writeFile(join(FEATURED, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   log('manifest.json written with files:', Object.keys(files).join(', '));

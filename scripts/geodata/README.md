@@ -15,7 +15,9 @@ Delete a cached file to force a re-download.
 | ---------- | ---------------------------------------------------------------------- | ----------------------------------------------- |
 | `province` | Natural Earth 10m admin-1 (Corrientes, `iso_3166_2 = AR-W`)            | `public/data/geo/corrientes.json`, footprint    |
 | `dem`      | Copernicus DEM GLO-90 tiles on the AWS open-data bucket (no login)     | `heightmap.f32`, `hillshade.webp` (PNG fallback), elevation range in manifest |
-| `roads`    | OpenStreetMap extract from Geofabrik (`argentina-latest.osm.pbf`)      | `roads.json` as `{lines, classes}` (0 national, 1 provincial, 2 tertiary) |
+| `roads`    | OpenStreetMap extract from Geofabrik (`argentina-latest.osm.pbf`)      | `roads.json` as `{lines, classes}` (0 national, 1 provincial, 2 tertiary, 3 minor), clipped to the plate |
+| `facilities` | Same OSM extract: `amenity=school`, `amenity=hospital\|clinic`, `healthcare=hospital` inside the footprint | `facilities.json` as `{schools, hospitals}` of `[u, v]` points |
+| `places`   | Same OSM extract: `place=city\|town\|village` with a name, inside the footprint | `places.json` as `[{name, u, v, kind}]`: all cities and towns, 40 largest villages |
 | `flood`    | JRC Global Flood Hazard, 100-year (`floodMapGL_rp100y.zip`, public)    | `floodmask.png` (512 px), `flood.f32` (heightmap grid)                    |
 | `satellite` | Copernicus Sentinel-2 L2A, AWS open data (Element84 STAC, `sentinel-cogs` COGs, no login) | `satellite.webp` (2048 px true colour, alpha = province mask) |
 
@@ -37,10 +39,11 @@ curl -fL -o scripts/geodata/.cache/argentina-latest.osm.pbf \
   https://download.geofabrik.de/south-america/argentina-latest.osm.pbf
 ```
 
-`manifest.json` is rewritten on every run and lists only the files that were baked.
+`manifest.json` is rewritten on every run. A subset run (`--stage=...`) keeps the `files` entries
+and `elevation` of the stages it did not run, read from the previous `manifest.json`.
 The JRC zip (49 MB) is downloaded on the first `flood` run and cached under `.cache/jrc-rp100/`.
-Each stage writes only its own files; `manifest.json` lists exactly what was baked in that run,
-so a subset run (`--stage=...`) drops the other entries. Run all stages before publishing.
+`roads`, `facilities` and `places` share one pass over the extract (about 25 s, about 2 GB peak memory).
+Run all stages before publishing.
 
 Plate projection: a square centred on the province, longitude scaled by cos(mid-latitude).
 Grid: 129 cells per side, values normalised to 0..1.
