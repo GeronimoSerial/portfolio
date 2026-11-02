@@ -9,8 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 let lenis: Lenis | null = null;
 
-// Lenis drives scroll; ScrollTrigger and the GSAP ticker stay in sync with it.
-// Under reduced motion no Lenis is created and scrolling stays native.
+// Touch scrolling and its momentum run with ScrollTrigger so pinned text and the scroll position
+// update together. Desktop wheel scrolling uses Lenis; reduced motion keeps native scrolling.
 // Dev-only probe for trigger order: [id or className, start, end] for every live ScrollTrigger.
 function dumpTriggers(): [string, number, number][] {
   return ScrollTrigger.getAll().map((s) => [
@@ -34,6 +34,13 @@ if (import.meta.env.DEV) {
 export function initScroll(): Lenis | null {
   if (lenis) return lenis;
   if (reduced.matches) return null;
+
+  if (ScrollTrigger.isTouch === 1) {
+    if (!ScrollTrigger.normalizeScroll()) {
+      ScrollTrigger.normalizeScroll({ type: 'touch', allowNestedScroll: true });
+    }
+    return null;
+  }
 
   const instance = new Lenis({ autoRaf: false });
   instance.on('scroll', ScrollTrigger.update);
