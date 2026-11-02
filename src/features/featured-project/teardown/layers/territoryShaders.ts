@@ -1,5 +1,5 @@
 import { FOCUS_GLSL } from './base';
-import { SCAN_FADE_S, SCAN_MIX, SCAN_RAMP_STOPS, SCAN_RESIDUAL } from './satellites';
+import { SCAN_FADE_S, SCAN_HUE_RATE, SCAN_MIX, SCAN_RAMP_STOPS, SCAN_RESIDUAL } from './satellites';
 
 // Territory shaders: one displaced DEM mesh. The fragment stage carries the satellite base, the
 // rain and wetness response, the flood water and the satellite scan paint in the same opaque surface.
@@ -102,7 +102,12 @@ export const territoryFragment = /* glsl */ `
     float age = max(uScanClock - clock, 0.0);
     float strength = mix(${SCAN_RESIDUAL.toFixed(2)}, 1.0, exp(-age / ${SCAN_FADE_S.toFixed(1)}));
     strength = mix(strength * step(0.0, clock), 1.0, uScanAll);
-    vec3 paint = scanRamp(smoothstep(0.0, 0.7, texture2D(uPrecip, vUv).r));
+    // The colour follows the precipitation field, then drifts along the ramp (a triangle wave, so it
+    // swings back instead of jumping) with the time since a satellite last passed: the map keeps
+    // changing colour as the satellites move.
+    float rampBase = smoothstep(0.0, 0.7, texture2D(uPrecip, vUv).r);
+    float rampDrift = abs(fract((rampBase + age * ${SCAN_HUE_RATE.toFixed(3)}) * 0.5) * 2.0 - 1.0);
+    vec3 paint = scanRamp(mix(rampBase, rampDrift, 0.55));
     col = mix(col, paint, ${SCAN_MIX.toFixed(2)} * strength * (1.0 - cover));
 
     gl_FragColor = vec4(applyFocus(col), 1.0);

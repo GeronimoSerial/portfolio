@@ -71,37 +71,23 @@ const { lang } = Astro.props;
 
 <script>
   const SCROLL_TOP = 80;
-  // Large enough that the small scroll shifts from the mobile URL bar do not flip the header back and forth.
-  const THRESHOLD = 14;
 
   const header = document.querySelector<HTMLElement>('.site-header');
 
   if (header) {
-    let lastY = window.scrollY;
-    let scrolledDown = false;
     let focusInside = false;
     let ticking = false;
 
+    // The header is only shown at the top of the page. It does not come back on scroll up, so it never
+    // covers a pinned stage; keyboard focus inside it still reveals it.
     const render = () => {
       const atTop = window.scrollY < SCROLL_TOP;
       header.classList.toggle('site-header--solid', !atTop);
-      header.classList.toggle('site-header--hidden', scrolledDown && !atTop && !focusInside);
+      header.classList.toggle('site-header--hidden', !atTop && !focusInside);
     };
 
     const update = () => {
       ticking = false;
-      const y = window.scrollY;
-
-      if (y < SCROLL_TOP) {
-        lastY = y;
-        scrolledDown = false;
-      } else {
-        const delta = y - lastY;
-        if (Math.abs(delta) < THRESHOLD) return;
-        lastY = y;
-        scrolledDown = delta > 0;
-      }
-
       render();
     };
 

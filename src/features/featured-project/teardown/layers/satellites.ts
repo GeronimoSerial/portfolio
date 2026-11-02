@@ -9,11 +9,12 @@ import { terrainY } from './terrain';
 // texel; the territory shader colours painted land by the precipitation field and fades it slowly.
 // Flat basic materials only: the scene has no lights. Nothing here is an external asset.
 
-export const SCAN_HALF_WIDTH = 0.32; // world units: half the swath under each satellite
+export const SCAN_HALF_WIDTH = 1.3; // world units: half the swath under each satellite (a wide pass covers the map in about one orbit)
 export const SCAN_TEXELS = 128; // paint texture side on desktop
 export const SCAN_TEXELS_MOBILE = 64; // lower resolution on phones
-export const SCAN_FADE_S = 30; // seconds for a fresh swath to relax to its residual
-export const SCAN_RESIDUAL = 0.3; // strength a swath keeps once it has faded
+export const SCAN_FADE_S = 12; // seconds for a fresh swath to relax to its residual
+export const SCAN_RESIDUAL = 0.85; // strength a swath keeps once it has faded: the map stays painted
+export const SCAN_HUE_RATE = 0.05; // ramp positions per second that a painted area drifts after a pass
 export const SCAN_MIX = 0.55; // share of the paint colour over the satellite imagery
 export const SCAN_RAMP_STOPS = 5;
 // Altitude above the territory plate. The layer above tops out at SEPARATION + relief = 1.15, and
@@ -22,10 +23,10 @@ export const ORBIT_ALTITUDE = 1.35;
 const ORBIT_WOBBLE = 0.08; // altitude swing, so each track reads as inclined
 // Half-axes of the ground track in world units (the plate is 10 wide). The province covers only the
 // middle of the plate, so the track stays inside it: a wider one puts the beam over empty space.
-const ORBIT_RX = 2.9;
-const ORBIT_RZ = 1.9;
+const ORBIT_RX = 2.4;
+const ORBIT_RZ = 1.0;
 const HEADING_DT = 0.05; // seconds ahead, to read the direction of travel
-const BEAM_OPACITY = 0.14;
+const BEAM_OPACITY = 0.09;
 
 interface OrbitSpec {
   period: number; // seconds per revolution
@@ -35,8 +36,8 @@ interface OrbitSpec {
 
 // Two passes at different speeds and phases: the second satellite covers the far side of the plate.
 const ORBITS: readonly OrbitSpec[] = [
-  { period: 28, phase: 0, yaw: 0.5 },
-  { period: 36, phase: Math.PI, yaw: -0.7 },
+  { period: 15, phase: 0, yaw: 0.5 },
+  { period: 19, phase: Math.PI, yaw: -0.7 },
 ];
 
 interface Craft {

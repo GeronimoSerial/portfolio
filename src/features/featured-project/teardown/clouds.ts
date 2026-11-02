@@ -19,7 +19,7 @@ const DRIFT: [number, number] = [-0.035, 0.03]; // from the north-east (wind tow
 // The deck starts this far above the stack top, and sits behind the stack (away from the camera):
 // seen from above, it rises over the plates instead of covering them.
 const DECK_LIFT = 0.6;
-const DECK_BACK = 4.5;
+const DECK_BACK = 1.7; // behind the stack, in half-widths: the camera looks down steeply, so a far deck leaves the frame
 const DECK_SPREAD = 0.6; // height gap between the lowest and the highest slab
 // Highest point of the deck above the stack top. The framing includes it, so the deck is never cropped.
 export const DECK_TOP_OFFSET = DECK_LIFT + DECK_SPREAD + 0.15;
