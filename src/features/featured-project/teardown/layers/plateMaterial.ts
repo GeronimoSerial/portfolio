@@ -29,7 +29,7 @@ const fragmentShader = /* glsl */ `
   }
 `;
 
-// The footprint and map textures belong to this material alone: disposeLayer frees them.
+// The map and footprint textures are passed in and stay owned by the caller (SharedResources).
 export function createPlateMaterial(map: THREE.Texture, foot: THREE.Texture): THREE.ShaderMaterial {
   return new THREE.ShaderMaterial({
     uniforms: {

@@ -2,8 +2,7 @@ import * as THREE from 'three';
 import { toWorld, type GeoData } from '../data';
 import type { Model } from '../model';
 import { createLayer, track } from './base';
-import { buildHillshade } from './hillshade';
-import { encodeField, footprintTexture } from './fieldTexture';
+import { encodeField } from './fieldTexture';
 import { createPlateGeometry } from './plateMaterial';
 import { isDarkTheme, terrainTones } from './ramps';
 import { RELIEF_HEIGHT, terrainY } from './terrain';
@@ -39,22 +38,21 @@ function extentField(data: GeoData, model: Model): Float32Array {
 }
 
 export const buildTerritory: LayerBuilder = (data, ctx, model: Model): LayerHandle => {
-  const base = createLayer();
+  const base = createLayer(ctx.shared);
   let disposed = false;
   const n = data.grid;
+  const shared = ctx.shared;
 
-  // 1x1 white stands in for the satellite until it loads; uHasSat keeps the terrain tones.
-  const placeholder = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
-  placeholder.needsUpdate = true;
-
+  // Satellite, hillshade and footprint come from the scene. The satellite uniforms are the shared
+  // objects themselves, so the placeholder-to-file swap reaches this material without a callback.
   const uniforms = {
     uHeight: { value: encodeField(data.heightmap, n) as THREE.Texture },
     uMask: { value: encodeField(extentField(data, model), n) as THREE.Texture },
     uPrecip: { value: encodeField(data.precipitation, data.precipGrid) as THREE.Texture },
-    uHillshade: { value: buildHillshade(data).texture as THREE.Texture },
-    uSat: { value: placeholder as THREE.Texture },
-    uHasSat: { value: 0 },
-    uFoot: { value: footprintTexture(data.footprint, ctx.mobile ? 256 : 512) as THREE.Texture },
+    uHillshade: { value: shared.hillshade },
+    uSat: shared.satellite,
+    uHasSat: shared.satelliteReady,
+    uFoot: { value: shared.footprint },
     uGrid: { value: n },
     uHeightScale: { value: RELIEF_HEIGHT },
     uLow: { value: new THREE.Vector3() },
@@ -79,9 +77,9 @@ export const buildTerritory: LayerBuilder = (data, ctx, model: Model): LayerHand
     }),
   );
 
-  // Texture swaps: the baked files replace the generated fallbacks once they arrive. Satellite
-  // stays in the file's raw sRGB bytes, the same convention as the palette colours in the shader.
-  const swap = (key: 'uSat' | 'uHillshade' | 'uMask', url: string, onLoad?: () => void): void => {
+  // Texture swaps: the baked files replace the generated fallbacks once they arrive. A swapped-out
+  // texture owned by the scene (the shared hillshade) is left for the scene to free.
+  const swap = (key: 'uHillshade' | 'uMask', url: string): void => {
     new THREE.TextureLoader().load(url, (tex) => {
       tex.flipY = false;
       tex.colorSpace = THREE.NoColorSpace;
@@ -91,11 +89,9 @@ export const buildTerritory: LayerBuilder = (data, ctx, model: Model): LayerHand
       }
       const previous = uniforms[key].value;
       uniforms[key].value = tex;
-      previous.dispose();
-      onLoad?.();
+      if (!shared.owns(previous)) previous.dispose();
     });
   };
-  if (data.satelliteUrl) swap('uSat', data.satelliteUrl, () => (uniforms.uHasSat.value = 1));
   if (data.hillshadeUrl) swap('uHillshade', data.hillshadeUrl);
   if (data.floodMaskUrl) swap('uMask', data.floodMaskUrl);
 

@@ -2,9 +2,8 @@ import * as THREE from 'three';
 import type { GeoData } from '../data';
 import { DEFAULT_RAIN_INDEX, type Model, type ModelResult } from '../model';
 import { createLayer } from './base';
-import { buildHillshade } from './hillshade';
-import { footprintTexture } from './fieldTexture';
 import { addPlate } from './plateMaterial';
+import { MARKER_RIM, MARKER_Y, MOBILE_SCALE } from './markers';
 import { createMarkers } from './schools';
 import { isDarkTheme, LUT_MAX, makeLut, riskTones } from './ramps';
 import { riskFragment, riskVertex } from './riskShaders';
@@ -20,16 +19,14 @@ const CELLS = 128; // exposure grid: bilinear on the GPU, so 128 is smooth at pl
 const SMOOTH_PASSES = 1; // one 3x3 box blur removes sampling streaks without flattening the field
 
 // Markers: unexposed schools neutral grey, exposed ones warm. The light stops are deeper so the
-// dots read on the pale page; the dark stops keep the bright sand. The rim gain is per theme too.
+// dots read on the pale page; the dark stops keep the bright sand. The rim gain is per theme too
+// (MARKER_RIM, shared with the access layer).
 const MARKER_LUT = {
   dark: makeLut(['#8d8c86', '#f2d6a6']),
   light: makeLut(['#8a8990', '#b5735c']),
 };
-const MARKER_RIM = { dark: 0.45, light: 1.2 };
 const MARKER_MIN_PX = 3; // diameter of a school with no exposure
 const MARKER_SPAN_PX = 5; // extra diameter at full exposure: 8 px on desktop
-const MOBILE_SCALE = 0.7;
-const MARKER_Y = 0.02;
 
 // One 3x3 box blur pass with clamped edges, from `src` into `dst`.
 function blur(src: Float32Array, dst: Float32Array): void {
@@ -49,8 +46,7 @@ function blur(src: Float32Array, dst: Float32Array): void {
 }
 
 export const buildRisk: LayerBuilder = (data: GeoData, ctx, model: Model): LayerHandle => {
-  const base = createLayer();
-  let disposed = false;
+  const base = createLayer(ctx.shared);
 
   // The exposure field lives in one RGBA texture, rewritten in place on every rain step.
   const bytes = new Uint8Array(CELLS * CELLS * 4);
@@ -63,15 +59,13 @@ export const buildRisk: LayerBuilder = (data: GeoData, ctx, model: Model): Layer
   const field = new Float32Array(CELLS * CELLS);
   const scratch = new Float32Array(CELLS * CELLS);
 
-  // 1x1 mid grey until the satellite loads; uHasSat keeps the neutral base.
-  const placeholder = new THREE.DataTexture(new Uint8Array([128, 128, 128, 255]), 1, 1);
-  placeholder.needsUpdate = true;
+  // Satellite (placeholder until the file loads), hillshade and footprint come from the scene.
   const uniforms = {
-    uSat: { value: placeholder as THREE.Texture },
-    uHasSat: { value: 0 },
-    uHillshade: { value: buildHillshade(data).texture as THREE.Texture },
+    uSat: ctx.shared.satellite,
+    uHasSat: ctx.shared.satelliteReady,
+    uHillshade: { value: ctx.shared.hillshade },
     uExpo: { value: exposure as THREE.Texture },
-    uFoot: { value: footprintTexture(data.footprint, ctx.mobile ? 256 : 512) as THREE.Texture },
+    uFoot: { value: ctx.shared.footprint },
     uBase: { value: new THREE.Vector3() },
     uUnderlay: { value: 0.55 },
     uSand: { value: new THREE.Vector3() },
@@ -85,20 +79,6 @@ export const buildRisk: LayerBuilder = (data: GeoData, ctx, model: Model): Layer
     side: THREE.DoubleSide, // the plate normal points down, so draw both faces
   });
   addPlate(base, material, 1, 1);
-
-  if (data.satelliteUrl) {
-    new THREE.TextureLoader().load(data.satelliteUrl, (tex) => {
-      tex.flipY = false;
-      tex.colorSpace = THREE.NoColorSpace;
-      if (disposed) {
-        tex.dispose();
-        return;
-      }
-      placeholder.dispose();
-      uniforms.uSat.value = tex;
-      uniforms.uHasSat.value = 1;
-    });
-  }
 
   const draw = (rainIndex: number): void => {
     for (let j = 0; j < CELLS; j++) {
@@ -169,9 +149,6 @@ export const buildRisk: LayerBuilder = (data: GeoData, ctx, model: Model): Layer
       writeMarkers(r);
     },
     tick: (_env: Env) => markers.sync(),
-    dispose: () => {
-      disposed = true;
-      base.dispose();
-    },
+    dispose: () => base.dispose(),
   };
 };

@@ -3,9 +3,8 @@ import type { GeoData } from '../data';
 import type { Model, ModelResult } from '../model';
 import { DEFAULT_RAIN_INDEX } from '../model';
 import { createLayer } from './base';
-import { buildHillshade } from './hillshade';
-import { footprintTexture } from './fieldTexture';
 import { addRoads } from './roads';
+import { MARKER_RIM, MARKER_Y, MOBILE_SCALE } from './markers';
 import { createMarkers } from './schools';
 import { addPlate, createPlateMaterial } from './plateMaterial';
 import { isDarkTheme, terrainTones } from './ramps';
@@ -15,30 +14,25 @@ import type { LayerBuilder, LayerHandle, Palette } from './types';
 // larger and warm muted; the rest are small and neutral. Sizes are CSS pixels. The light theme
 // uses a pale plate with a faint hillshade and a mid-grey marker with a lighter rim.
 
-const MARKER_Y = 0.02;
 const SIZE_OTHER_PX = 5;
 const SIZE_EXPOSED_PX = 7;
-const MOBILE_SCALE = 0.7; // 3.5 px and 5 px on phones
 const DARK = {
   other: [0xd8 / 255, 0xd8 / 255, 0xd4 / 255] as const,
   exposed: [0xb9 / 255, 0x82 / 255, 0x6b / 255] as const,
-  rim: 0.45, // darker rim
+  rim: MARKER_RIM.dark, // darker rim
   shade: 1, // full hillshade detail
 };
 const LIGHT = {
   other: [0x8a / 255, 0x89 / 255, 0x90 / 255] as const,
   exposed: [0xb5 / 255, 0x73 / 255, 0x5c / 255] as const,
-  rim: 1.2, // lighter rim, so the mid-grey dot separates from the pale plate
+  rim: MARKER_RIM.light, // lighter rim, so the mid-grey dot separates from the pale plate
   shade: 0.35, // faint hillshade on the pale plate
 };
 
 export const buildAccess: LayerBuilder = (data: GeoData, ctx, model: Model): LayerHandle => {
-  const base = createLayer();
+  const base = createLayer(ctx.shared);
   // The plate is the hillshade multiplied by a neutral tint: a quiet, desaturated base.
-  const plate = createPlateMaterial(
-    buildHillshade(data).texture,
-    footprintTexture(data.footprint, ctx.mobile ? 256 : 512),
-  );
+  const plate = createPlateMaterial(ctx.shared.hillshade, ctx.shared.footprint);
   const tint = plate.uniforms.uTint.value as THREE.Vector3;
   addPlate(base, plate, 1, 1);
   addRoads(base, data);

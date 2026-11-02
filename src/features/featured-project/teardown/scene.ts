@@ -22,6 +22,7 @@ import { LAYERS, type LayerId } from './layers';
 import { buildAccess } from './layers/access';
 import { buildRisk } from './layers/risk';
 import { buildTerritory } from './layers/territory';
+import { createSharedResources, type SharedResources } from './layers/shared';
 import type { Env, LayerBuilder, LayerHandle, Palette } from './layers/types';
 import { createMist, type Mist } from './mist';
 import {
@@ -221,6 +222,7 @@ export function mountTeardown(root: HTMLElement): () => void {
   let palette = readPalette();
   let model: Model | null = null;
   let handles: LayerHandle[] = [];
+  let shared: SharedResources | null = null;
   let stack: Stack = defaultStack();
   let frame: Frame = solveFrame(stack.box, 1, marginX);
   const weather: Weather = createWeather(mobile, weatherTones(palette));
@@ -440,7 +442,9 @@ export function mountTeardown(root: HTMLElement): () => void {
     const built = createModel(data);
     if (import.meta.env.DEV) assertReadoutsStable(built);
     model = built;
-    handles = LAYERS.map((layer) => BUILDERS[layer.id](data, { mobile, palette, env }, built));
+    shared = createSharedResources(data, mobile);
+    const ctx = { mobile, palette, env, shared };
+    handles = LAYERS.map((layer) => BUILDERS[layer.id](data, ctx, built));
     handles.forEach((h) => {
       h.paint(palette);
       scene.add(h.group);
@@ -486,6 +490,8 @@ export function mountTeardown(root: HTMLElement): () => void {
       scene.remove(h.group);
       h.dispose();
     }
+    // Shared textures go last: every layer that referenced them is already gone.
+    shared?.dispose();
     if (clouds) {
       scene.remove(clouds.group);
       clouds.dispose();

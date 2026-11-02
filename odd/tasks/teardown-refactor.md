@@ -1,0 +1,37 @@
+# Feature: Teardown structural refactor
+
+## Objective
+Restructure `src/features/featured-project/teardown/` so it is modular, de-duplicated and lifecycle-safe, with NO visual or behavioral change.
+
+## Problem / why
+Mapping (2026-11-02, Haiku read-only) found: `scene.ts` is a 501-line god file; hillshade, footprint and satellite textures are built 2-3x across layers; marker/rim constants are duplicated; hex colors are hardcoded in `ramps.ts`, `risk.ts`, `scene.ts` against the "tokens only" constraint; disposal and listener cleanup gaps. A clean base is required before the visual pass (lighting, fog, annotations).
+
+## Scope
+- In: `src/features/featured-project/**`. Pure refactor, same rendered output.
+- Out: visual redesign, annotation UI, real-data bake, `bake.mjs` split, perf work on `extentField`/risk field (follow-up).
+
+## Constraints
+- Behavior-preserving. Do not fix the missing `[data-readout]` markup here (visual phase).
+- Code, comments, identifiers in English.
+- About 400 authored changed lines per task is a planning heuristic only, not a cap.
+- TDD: off (source: no project/session config; no test runner). Checks: `pnpm check`, `pnpm build`, browser readback at the end.
+- Delivery strategy: ask-on-risk.
+
+## Tasks
+- [x] R1 Shared resources: build hillshade, footprint and satellite once and share via `LayerContext`; extract duplicated marker/rim constants into one shared module. Route: delegated writer (2+ non-trivial files).
+- [ ] R2 Split `scene.ts` into focused modules (framing solver, readouts, atmosphere wiring, resize/theme/data-load); `scene.ts` stays a thin orchestrator. Route: delegated writer.
+- [ ] R3 Centralize palette: one module owns every hardcoded hex and the sRGB/linear conversions; layers consume it. Route: delegated writer.
+- [ ] R4 Lifecycle: dispose placeholder satellite always, remove media-query listener, avoid mounting before data resolves. Route: delegated writer.
+
+## Acceptance criteria
+- `pnpm check` 0 errors; `pnpm build` passes.
+- No duplicate `buildHillshade`/`footprintTexture`/satellite loads per mount.
+- `scene.ts` under ~250 lines; no hex literals outside the palette module.
+- Browser readback: section renders and scrolls as before, console clean.
+
+## Progress / evidence
+- Branch `refactor/teardown-structure` created from main 2026-11-02.
+- R1 (2026-11-02, delegated Haiku writer, trigger: 2+ non-trivial files): `pnpm check` 0 errors, `pnpm build` Complete (parent re-ran both). Shared hillshade/footprint/satellite via `layers/shared.ts`; constants in `layers/markers.ts`. Not yet browser-verified (deferred to final readback). Build logs "file not created, response body was empty" for /proyectos and /en/projects routes: outside this feature, not confirmed pre-existing. Risk noted: satellite placeholder colour now white (never sampled while uHasSat=0).
+
+## Next step
+R2.

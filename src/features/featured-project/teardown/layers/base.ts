@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { isDarkTheme, srgb, type Rgb } from './ramps';
+import type { SharedResources } from './shared';
 import type { LayerHandle, Palette, Role } from './types';
 
 // Shared scaffolding for layer builders: material tracking, palette roles, focus and disposal.
@@ -51,7 +52,8 @@ const receded = (c: number, lum: number, page: number, light: boolean): number =
   return light ? desat + (page - desat) * RECEDE_TO_PAGE : desat * RECEDED_GAIN;
 };
 
-export function createLayer(): LayerHandle {
+// `shared` names the textures the scene owns, so dispose() leaves them alone.
+export function createLayer(shared?: SharedResources): LayerHandle {
   const group = new THREE.Group();
   const materials: THREE.Material[] = [];
   let focus = 1;
@@ -68,7 +70,7 @@ export function createLayer(): LayerHandle {
       focus = Math.min(1, Math.max(0, f));
       applyFocus(materials, focus, theme);
     },
-    dispose: () => disposeLayer(group, materials),
+    dispose: () => disposeLayer(group, materials, (t) => shared?.owns(t) ?? false),
   };
 }
 
@@ -120,15 +122,20 @@ export function applyFocus(materials: THREE.Material[], f: number, theme: Theme 
   }
 }
 
-// Frees everything a layer owns: geometries, materials and every texture a material references.
-export function disposeLayer(group: THREE.Group, materials: THREE.Material[]): void {
+// Frees everything a layer owns: geometries, materials and every texture a material references,
+// except textures that `isShared` reports as owned by the scene.
+export function disposeLayer(
+  group: THREE.Group,
+  materials: THREE.Material[],
+  isShared: (texture: THREE.Texture) => boolean = () => false,
+): void {
   group.traverse((obj) => {
     const mesh = obj as THREE.Mesh;
     mesh.geometry?.dispose();
   });
   for (const m of materials) {
     for (const value of Object.values((m as THREE.ShaderMaterial).uniforms ?? {})) {
-      if (value.value instanceof THREE.Texture) value.value.dispose();
+      if (value.value instanceof THREE.Texture && !isShared(value.value)) value.value.dispose();
     }
     (m as THREE.MeshBasicMaterial).map?.dispose();
     m.dispose();

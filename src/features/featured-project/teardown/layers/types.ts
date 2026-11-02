@@ -1,6 +1,7 @@
 import type * as THREE from 'three';
 import type { GeoData } from '../data';
 import type { Model, ModelResult } from '../model';
+import type { SharedResources } from './shared';
 
 export type Role = 'base' | 'ink' | 'accent' | 'muted' | 'white';
 
@@ -27,6 +28,8 @@ export interface LayerContext {
   mobile: boolean;
   palette: Palette;
   env: Env;
+  // Built once per mount by the scene; layers read these and never dispose them.
+  shared: SharedResources;
 }
 
 export interface LayerHandle {
