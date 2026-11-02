@@ -131,6 +131,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   let turnTween: gsap.core.Tween | null = null;
   let raf = 0;
   let last = performance.now();
+  let drewEmpty = false; // true once the canvas has been cleared at zero opacity; skip rendering until it is visible again
 
   function layoutFit() {
     fitLayout(layout, tierOf());
@@ -201,7 +202,14 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     uniforms.uOpacity.value = view.opacity;
     arc.uniforms.uReveal.value = arcState.reveal;
     arc.uniforms.uAlpha.value = view.arc * view.opacity;
-    renderer.render(scene, camera);
+    // Fully transparent frames draw nothing, so render one of them to clear the canvas and then skip the GPU work.
+    if (view.opacity > 0.001) {
+      drewEmpty = false;
+      renderer.render(scene, camera);
+    } else if (!drewEmpty) {
+      renderer.render(scene, camera);
+      drewEmpty = true;
+    }
   }
 
   function start() {

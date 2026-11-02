@@ -1,10 +1,12 @@
 import * as THREE from 'three';
-
-const MAX_PIXEL_RATIO = 2;
+import { MOBILE_BREAKPOINT } from '../motion/policy';
 
 export function createRenderer(canvas: HTMLCanvasElement): THREE.WebGLRenderer {
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, MAX_PIXEL_RATIO));
+  // MSAA does not smooth point sprites and costs fill on a full-screen canvas, so it stays off.
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
+  // Phones get a lower pixel-ratio cap to bound fill cost; fitRig applies the same tier cap on resize.
+  const maxRatio = window.innerWidth < MOBILE_BREAKPOINT ? 1.5 : 2;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxRatio));
   return renderer;
 }
 

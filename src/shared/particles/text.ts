@@ -5,19 +5,18 @@ import { viewSize } from './rig';
 
 // Text reveal, as shares of the incoming and outgoing morph progress. A linear crossfade keeps
 // max(incoming, outgoing) at or above one half across the whole boundary.
-const TEXT = { blur: 12, inFrom: 0, inTo: 1, outSpan: 1 };
+const TEXT = { inFrom: 0, inTo: 1, outSpan: 1 };
 // Title block over the logo's dispersal (progress 0 to 1). Each line starts a beat after the previous one, and all
 // three have settled by progress 0.9, so the globe can start forming as the dust clears.
 const ICVM_TEXT = { from: 0.1, span: 0.6, stagger: 0.1 };
 
-// A per-frame blur on text makes mobile browsers re-rasterise the glyphs every scroll tick (they shimmer), so
-// phones fade with opacity only. Near the end the blur snaps to none instead of lingering as blur(0.0x px).
-function blurFor(ctx: ParticleContext, t: number): string {
-  if (ctx.state.mobile || t >= 0.98) return 'none';
-  return `blur(${((1 - t) * TEXT.blur).toFixed(1)}px)`;
+// Text fades with opacity only. A blur filter re-rasterises large text on every scroll tick, which shimmers on
+// mobile and costs frame time on desktop. The write is skipped once the filter is already cleared.
+function clearFilter(el: HTMLElement) {
+  if (el.style.filter !== 'none') el.style.filter = 'none';
 }
 
-// Text reveal bound to the morphs: blur and opacity in over the incoming progress, out over the next one.
+// Text reveal bound to the morphs: opacity in over the incoming progress, out over the next one.
 export function applyText(ctx: ParticleContext) {
   if (!ctx.reduced) {
     ctx.sections.forEach((s, i) => {
@@ -27,7 +26,7 @@ export function applyText(ctx: ParticleContext) {
       const inT = clamp01((inP - TEXT.inFrom) / (TEXT.inTo - TEXT.inFrom));
       const outT = 1 - clamp01(outP / TEXT.outSpan);
       s.text.style.opacity = String(inT * outT);
-      s.text.style.filter = blurFor(ctx, inT);
+      clearFilter(s.text);
     });
   }
   // The ICVM title block reveals over the logo's dispersal, line by line; the stage itself stays opaque.
@@ -37,7 +36,7 @@ export function applyText(ctx: ParticleContext) {
     ctx.icvmLines.forEach((el, k) => {
       const t = smoothstep(clamp01((p - ICVM_TEXT.from - k * ICVM_TEXT.stagger) / ICVM_TEXT.span));
       el.style.opacity = String(t * (ctx.icvmMax[k] ?? 1));
-      el.style.filter = blurFor(ctx, t);
+      clearFilter(el);
     });
   }
 }

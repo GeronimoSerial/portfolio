@@ -11,6 +11,8 @@ const SCALE = { desktop: 1.35, mobile: 1.15 };
 const POINT_SIZE = { desktop: 2.5, mobile: 1.95 };
 const MOCKUP_VIEW_H = { desktop: 0.85, mobile: 0.7 };
 const HEADROOM = { desktop: 0.05, mobile: 0.15 }; // space above the head, in view heights
+// Pixel-ratio cap per tier: phones trade a little sharpness for fill rate on the full-screen canvas.
+const MAX_DPR = { desktop: 2, mobile: 1.5 };
 export const HEAD_Y = PORTRAIT_H * 0.7; // pivot height for the head turn
 const LOOK = { y: 0.08, x: 0.05 }; // pointer nudge, rad
 const FOV = 35;
@@ -54,7 +56,7 @@ export function fitRig(rig: Rig, renderer: THREE.WebGLRenderer, ctx: ParticleCon
   const { layout, uniforms, state } = ctx;
   const { w, h } = viewSize();
   const t = tierOf();
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR[t]);
   const visH = PORTRAIT_H / (MOCKUP_VIEW_H[t] * SCALE[t]);
   const visW = visH * (w / h);
 
