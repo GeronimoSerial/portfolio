@@ -6,6 +6,8 @@ import type { LayerHandle } from './types';
 // School markers: one THREE.Points per layer with a fixed screen size. Sizes are CSS pixels; the
 // shader scales them by the device pixel ratio, so a marker is the same size on every zoom level.
 // Each dot is a soft round disc with a one-pixel darker rim, so it separates from any surface.
+// An optional halo is a soft ring of the same hue just outside the disc. Receded, the alpha drops
+// to `recedeAlpha`, so markers do not float as noise over the layer above.
 // Positions are fixed at build time; each update rewrites only the size and colour attributes.
 
 export interface Markers {
@@ -18,37 +20,58 @@ export interface Markers {
   sync(): void;
 }
 
+export interface MarkerStyle {
+  haloPx: number; // halo width outside the disc, CSS px; 0 = no halo
+  recedeAlpha: number; // alpha at focus 0; 1 = no fade
+}
+
+// The default keeps the marker output of every layer that does not opt in.
+const PLAIN_STYLE: MarkerStyle = { haloPx: 0, recedeAlpha: 1 };
+
 const vertexShader = /* glsl */ `
   attribute float aSize;
   attribute vec3 aColor;
   uniform float uPixelRatio;
-  varying float vSize;
+  uniform float uHalo; // CSS px
+  varying float vSize; // disc diameter, device px
+  varying float vPoint; // sprite diameter, device px: disc plus halo
   varying vec3 vColor;
   void main() {
     vSize = aSize * uPixelRatio;
+    vPoint = (aSize + 2.0 * uHalo) * uPixelRatio;
     vColor = aColor;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = vSize;
+    gl_PointSize = vPoint;
   }
 `;
 
 const fragmentShader = /* glsl */ `
   varying float vSize;
+  varying float vPoint;
   varying vec3 vColor;
   uniform float uRimGain; // rim colour = colour * uRimGain, clamped to white
+  uniform float uHalo;
+  uniform float uRecedeAlpha;
   ${FOCUS_GLSL}
   void main() {
     float r = vSize * 0.5;
-    float d = length(gl_PointCoord - 0.5) * vSize; // distance from the centre, in device px
-    float alpha = 1.0 - smoothstep(r - 0.5, r + 0.5, d); // one-pixel soft edge
+    float d = length(gl_PointCoord - 0.5) * vPoint; // distance from the centre, in device px
+    float disc = 1.0 - smoothstep(r - 0.5, r + 0.5, d); // one-pixel soft edge
+    float halo = uHalo > 0.0 ? 0.3 * (1.0 - smoothstep(r, vPoint * 0.5, d)) : 0.0;
+    float alpha = max(disc, halo);
     if (alpha <= 0.0) discard;
     float rim = smoothstep(r - 1.0, r - 0.25, d); // the outer device pixel takes the rim colour
     vec3 c = mix(vColor, min(vColor * uRimGain, vec3(1.0)), rim);
-    gl_FragColor = vec4(applyFocus(c), alpha);
+    gl_FragColor = vec4(applyFocus(c), alpha * mix(uRecedeAlpha, 1.0, uFocus));
   }
 `;
 
-export function createMarkers(base: LayerHandle, data: GeoData, y: number): Markers {
+export function createMarkers(
+  base: LayerHandle,
+  data: GeoData,
+  y: number,
+  style: MarkerStyle = PLAIN_STYLE,
+): Markers {
   const count = data.schools.length;
   const positions = new Float32Array(count * 3);
   data.schools.forEach((s, i) => {
@@ -69,6 +92,8 @@ export function createMarkers(base: LayerHandle, data: GeoData, y: number): Mark
       uniforms: {
         uPixelRatio: { value: window.devicePixelRatio || 1 },
         uRimGain: { value: 0.45 },
+        uHalo: { value: style.haloPx },
+        uRecedeAlpha: { value: style.recedeAlpha },
         uFocus: { value: 1 },
       },
       vertexShader,

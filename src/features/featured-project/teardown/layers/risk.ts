@@ -104,7 +104,9 @@ export const buildRisk: LayerBuilder = (data: GeoData, ctx, model: Model): Layer
   };
 
   const count = data.schools.length;
-  const markers = createMarkers(base, data, MARKER_Y);
+  // Hidden while the layer is receded: a lower layer's markers would otherwise float in the empty space
+  // beside the plates above it.
+  const markers = createMarkers(base, data, MARKER_Y, { haloPx: 0, recedeAlpha: 0 });
   const sizes = new Float32Array(count);
   const colours = new Float32Array(count * 3);
   const scale = ctx.mobile ? MOBILE_SCALE : 1;

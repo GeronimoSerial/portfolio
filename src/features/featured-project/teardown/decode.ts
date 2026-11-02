@@ -150,6 +150,17 @@ function resample(field: Float32Array, n: number, target: number): Float32Array 
   return out;
 }
 
+// Point in polygon by ray casting. The ring is in plate coordinates, like the schools.
+function insideRing(ring: Array<[number, number]>, u: number, v: number): boolean {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if (yi > v !== yj > v && u < ((xj - xi) * (v - yi)) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
 // Merges real layers over the placeholder. Heightmap and flood always share one grid:
 // a missing real layer is resampled from the placeholder at that same size, never mixed.
 // isPlaceholder stays true because schools and precipitation are still example values.
@@ -179,7 +190,11 @@ export function composeGeo(placeholder: GeoData, real: DecodedGeo, _opts: LoadOp
     roads: real.roads ?? placeholder.roads,
     // Classes only describe the real roads; the placeholder roads keep the default class.
     roadClasses: real.roads === undefined ? undefined : real.roadClasses,
-    schools: placeholder.schools,
+    // The example schools are scattered over the whole square plate: keep only those inside the province,
+    // so none float in the empty space around the map.
+    schools: real.footprint
+      ? placeholder.schools.filter((s) => insideRing(real.footprint as Array<[number, number]>, s.x, s.y))
+      : placeholder.schools,
     footprint: real.footprint,
     elevationRangeM: real.elevationRangeM,
     hillshadeUrl: real.hillshadeUrl,

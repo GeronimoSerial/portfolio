@@ -66,3 +66,61 @@ export function addPlate(
   handle.group.add(mesh);
   return mesh;
 }
+
+// Translucent wash over the flooded cells, lifted just above the plate and clipped to the footprint.
+// The flood field is a 0..1 hazard texture; the wash starts at the 0.5 contour, so it matches the
+// cut-off test in roads.ts. Returns the colour uniform (sRGB) so the caller can repaint it per theme.
+const WASH_ALPHA = 0.55;
+
+const washFragment = /* glsl */ `
+  uniform sampler2D uFlood;
+  uniform sampler2D uFoot;
+  uniform vec3 uColor;
+  uniform float uAlpha;
+  uniform float uRecede; // alpha when the layer is receded (focus 0)
+  varying vec2 vUv;
+  ${FOCUS_GLSL}
+  void main() {
+    float inside = smoothstep(0.4, 0.6, texture2D(uFoot, vUv).r);
+    float wet = smoothstep(0.42, 0.58, texture2D(uFlood, vUv).r);
+    float a = uAlpha * inside * wet;
+    if (a < 0.003) discard;
+    gl_FragColor = vec4(applyFocus(uColor), a * mix(uRecede, 1.0, uFocus));
+  }
+`;
+
+export function addFloodWash(
+  handle: LayerHandle,
+  flood: THREE.Texture,
+  foot: THREE.Texture,
+  recede: number,
+  lift: number,
+): THREE.Vector3 {
+  const colour = new THREE.Vector3();
+  const material = track(
+    handle,
+    new THREE.ShaderMaterial({
+      uniforms: {
+        uFlood: { value: flood },
+        uFoot: { value: foot },
+        uColor: { value: colour },
+        uAlpha: { value: WASH_ALPHA },
+        uRecede: { value: recede },
+        uFocus: { value: 1 },
+      },
+      vertexShader,
+      fragmentShader: washFragment,
+      transparent: true,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      polygonOffset: true,
+      polygonOffsetFactor: -1,
+      polygonOffsetUnits: -1,
+    }),
+  );
+  const mesh = new THREE.Mesh(createPlateGeometry(1), material);
+  mesh.position.y = lift;
+  mesh.renderOrder = 2;
+  handle.group.add(mesh);
+  return colour;
+}
