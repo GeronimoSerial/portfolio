@@ -38,7 +38,12 @@ export function revealOnEnter(
         duration: DURATION.reveal,
         ease: EASE.reveal,
         delay: baseDelay + Number(el.dataset.revealDelay ?? 0),
-        // No clearProps: clearing the inline filter would fall back to the CSS pre-hide blur.
+        // Ends on an inline `filter: none`, not blur(0px): a lingering filter keeps the text on its own
+        // compositing layer, which mobile browsers re-rasterise while scrolling and the glyphs shimmer.
+        // Inline none (not clearProps) so the CSS pre-hide blur cannot come back.
+        onComplete: () => {
+          el.style.filter = 'none';
+        },
         scrollTrigger: when === 'enter' ? { trigger: el, start: 'top 85%', once: true } : undefined,
       },
     );
