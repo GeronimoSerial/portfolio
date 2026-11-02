@@ -50,6 +50,24 @@ const t = useTranslations(Astro.props.lang);
     letter-spacing: -0.03em;
   }
 
+  /* Desktop: the map is centred and about 0.4 viewport heights wide (0.82 of the height, aspect ~0.48), so its
+     left edge sits ~0.2 of the viewport height left of centre. The title hugs that edge and overlaps it slightly. */
+  @media (min-width: 768px) {
+    .stage {
+      display: block;
+      padding: 0;
+    }
+
+    .copy {
+      position: absolute;
+      top: 50%;
+      right: calc(50% + 0.16 * 100svh);
+      transform: translateY(-50%);
+      max-width: 26vw;
+      text-align: right;
+    }
+  }
+
   @media (max-width: 767px) {
     .stage {
       align-items: flex-start;

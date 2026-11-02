@@ -36,8 +36,8 @@ const LOOK_EASE = 0.08;
 const ARC_COUNT = { desktop: 600, mobile: 300 };
 const MOBILE_TURN = { x: 0.2, y: 0.12 }; // mobile-only extra shift in the turned state: view widths right, view heights down
 // SVG ring in GlobeRing.astro: a 200 unit box with its text on arcs of radius 80. gap is the share of the sphere's
-// radius between its edge and the arc; fontPx is the text size in CSS px at any ring size.
-const RING = { box: 200, pathR: 80, gap: 0.2, fontPx: 14 };
+// radius between its edge and the arc; the text size in CSS px follows the viewport width within [fontMin, fontMax].
+const RING = { box: 200, pathR: 80, gap: 0.2, fontMin: 18, fontMax: 32, fontPerWidth: 0.022 };
 
 // The sampler and colour are tuned in raw sRGB, matching the mockup.
 THREE.ColorManagement.enabled = false;
@@ -202,7 +202,8 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     const radius = ((ringEdge.x - ringCentre.x) / 2) * w * (1 + RING.gap);
     const k = radius / RING.pathR; // CSS px per SVG unit
     ringEl.style.opacity = String(alpha);
-    ringEl.style.fontSize = `${RING.fontPx / k}px`;
+    const fontPx = Math.min(RING.fontMax, Math.max(RING.fontMin, w * RING.fontPerWidth));
+    ringEl.style.fontSize = `${fontPx / k}px`;
     ringEl.style.transform = `translate(${cx - RING.box / 2}px, ${cy - RING.box / 2}px) scale(${k}) rotate(${spin.angle}rad)`;
     ringShown = true;
   }

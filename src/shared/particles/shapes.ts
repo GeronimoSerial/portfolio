@@ -9,11 +9,13 @@ const FIELD_SEED = 17.3;
 // the controller scales it to the view.
 export const GLOBE_CENTER_Y = PORTRAIT_H / 2;
 export const GLOBE_RADIUS = 0.42 * PORTRAIT_H;
-const GLOBE_LAND_SHARE = 0.92;
+// Land is about 29% of the surface, so 0.92 of the points on land left the ocean side of a spinning globe
+// almost empty. At 0.6 land is still about 4x denser than ocean, but every face of the sphere reads.
+const GLOBE_LAND_SHARE = 0.6;
 const GLOBE_RADIAL_JITTER = 0.01;
 export const GLOBE_CENTRE_LON = -60; // longitude that faces the camera at rest (South America)
 const LAND_BRIGHT = 0.9;
-const OCEAN_BRIGHT = 0.25;
+const OCEAN_BRIGHT = 0.4;
 const LAND_W = 1024;
 const LAND_H = 512;
 

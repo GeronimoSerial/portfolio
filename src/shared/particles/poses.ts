@@ -72,7 +72,8 @@ export const FIELD_OFFSET_Y = -0.22; // in view heights
 
 // Globe and map poses. The figure sits right of centre on desktop and centres on mobile, where
 // it drops below the heading. The cloud's centre is at PORTRAIT_H / 2 in portrait space.
-const GLOBE_X = { desktop: 0.18, mobile: 0 }; // view widths
+const GLOBE_X = { desktop: 0, mobile: 0 }; // view widths: the globe and the Argentina map sit on the centre line
+const GLOBE_NORTH_X = { desktop: 0.18, mobile: 0 }; // view widths: shares the screen with the Experience accordion
 const GLOBE_OY = { desktop: 0, mobile: -0.1 }; // view heights
 export const CLOUD_CENTER_Y = PORTRAIT_H / 2;
 export const CENTERED_Y = -PORTRAIT_H / 2; // grp y that puts the cloud centre on the view centre
@@ -160,7 +161,7 @@ export function frameOf(pose: Framed, t: Tier, layout: Layout): Frame {
       return {
         ...base,
         c: 1,
-        x: GLOBE_X[t],
+        x: GLOBE_NORTH_X[t],
         oy: GLOBE_OY[t],
         s: layout.fitGlobe,
         turnOut: 0,
