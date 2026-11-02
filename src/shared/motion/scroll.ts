@@ -37,7 +37,7 @@ export function initScroll(): Lenis | null {
 
   if (ScrollTrigger.isTouch === 1) {
     if (!ScrollTrigger.normalizeScroll()) {
-      ScrollTrigger.normalizeScroll({ type: 'touch', allowNestedScroll: true });
+      ScrollTrigger.normalizeScroll({ type: 'touch', allowNestedScroll: true, momentum: 0.8 });
     }
     return null;
   }
