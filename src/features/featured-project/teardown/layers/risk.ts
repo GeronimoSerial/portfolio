@@ -5,6 +5,7 @@ import { createLayer } from './base';
 import { addPlate } from './plateMaterial';
 import { MARKER_RIM, MARKER_Y, MOBILE_SCALE } from './markers';
 import { createMarkers } from './schools';
+import { MARKER_RAMP_DARK, MARKER_RAMP_LIGHT } from '../palette';
 import { isDarkTheme, LUT_MAX, makeLut, riskTones } from './ramps';
 import { riskFragment, riskVertex } from './riskShaders';
 import type { Env, LayerBuilder, LayerHandle, Palette } from './types';
@@ -22,8 +23,8 @@ const SMOOTH_PASSES = 1; // one 3x3 box blur removes sampling streaks without fl
 // dots read on the pale page; the dark stops keep the bright sand. The rim gain is per theme too
 // (MARKER_RIM, shared with the access layer).
 const MARKER_LUT = {
-  dark: makeLut(['#8d8c86', '#f2d6a6']),
-  light: makeLut(['#8a8990', '#b5735c']),
+  dark: makeLut(MARKER_RAMP_DARK),
+  light: makeLut(MARKER_RAMP_LIGHT),
 };
 const MARKER_MIN_PX = 3; // diameter of a school with no exposure
 const MARKER_SPAN_PX = 5; // extra diameter at full exposure: 8 px on desktop

@@ -1,26 +1,21 @@
-import * as THREE from 'three';
+import {
+  RISK_DARK,
+  RISK_LIGHT,
+  srgbArray,
+  srgbArrayOf,
+  TERRAIN_DARK,
+  TERRAIN_LIGHT,
+  type Rgb,
+} from '../palette';
 import type { Palette } from './types';
 
-// Map colours are fixed, restrained hexes, with a darker set for the dark theme so the plates sit
-// on the page background. UI colours still come from the palette tokens.
-
-export type Rgb = [number, number, number]; // 0..1, sRGB values (raw, for ShaderMaterial uniforms)
+// Map tones are chosen per theme from palette.ts. The dark theme uses darker plates so they sit on
+// the page background. UI colours still come from the palette tokens.
 
 const LUT_SIZE = 256;
 
-export function hex(value: string): Rgb {
-  const n = parseInt(value.slice(1), 16);
-  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
-}
-
-// Palette token to raw sRGB. THREE stores colours in linear space; shaders need the sRGB values.
-export function srgb(c: THREE.Color): Rgb {
-  const n = c.getHex(THREE.SRGBColorSpace);
-  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
-}
-
 export const isDarkTheme = (p: Palette): boolean => {
-  const [r, g, b] = srgb(p.base);
+  const [r, g, b] = srgbArrayOf(p.base);
   return r + g + b < 1.2;
 };
 
@@ -32,22 +27,16 @@ export interface Tones {
   plate: Rgb; // neutral plate under the access layer
 }
 
-export const terrainTones = (dark: boolean): Tones =>
-  dark
-    ? {
-        low: hex('#5f6349'),
-        high: hex('#9c9274'),
-        shallow: hex('#6b7b82'),
-        deep: hex('#414f56'),
-        plate: hex('#3a3c3b'),
-      }
-    : {
-        low: hex('#c5c7a2'),
-        high: hex('#e9dfc2'),
-        shallow: hex('#5d7681'),
-        deep: hex('#2c4049'),
-        plate: hex('#e3e0d8'),
-      };
+export const terrainTones = (dark: boolean): Tones => {
+  const c = dark ? TERRAIN_DARK : TERRAIN_LIGHT;
+  return {
+    low: srgbArray(c.low),
+    high: srgbArray(c.high),
+    shallow: srgbArray(c.shallow),
+    deep: srgbArray(c.deep),
+    plate: srgbArray(c.plate),
+  };
+};
 
 export interface RiskTones {
   plate: Rgb; // underlay with no imagery
@@ -59,12 +48,22 @@ export interface RiskTones {
 // Light stops sit a little brighter so the overlay still reads on the light page background.
 export const riskTones = (dark: boolean): RiskTones =>
   dark
-    ? { plate: terrainTones(true).plate, underlay: 0.55, sand: hex('#8f8068'), brick: hex('#a66f5c') }
-    : { plate: terrainTones(false).plate, underlay: 0.82, sand: hex('#c2ab84'), brick: hex('#c08a72') };
+    ? {
+        plate: terrainTones(true).plate,
+        underlay: 0.55,
+        sand: srgbArray(RISK_DARK.sand),
+        brick: srgbArray(RISK_DARK.brick),
+      }
+    : {
+        plate: terrainTones(false).plate,
+        underlay: 0.82,
+        sand: srgbArray(RISK_LIGHT.sand),
+        brick: srgbArray(RISK_LIGHT.brick),
+      };
 
 // Returns LUT_SIZE * 3 bytes (r, g, b) for t in 0..1, linearly interpolated between the stops.
-export function makeLut(stops: string[]): Uint8ClampedArray {
-  const colours = stops.map(hex);
+export function makeLut(stops: readonly string[]): Uint8ClampedArray {
+  const colours = stops.map((stop) => srgbArray(stop));
   const lut = new Uint8ClampedArray(LUT_SIZE * 3);
   for (let i = 0; i < LUT_SIZE; i++) {
     const f = (i / (LUT_SIZE - 1)) * (colours.length - 1);

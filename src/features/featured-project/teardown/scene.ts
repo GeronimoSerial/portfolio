@@ -31,6 +31,7 @@ import { createSharedResources, type SharedResources } from './layers/shared';
 import type { Env, LayerBuilder, LayerHandle, Palette } from './layers/types';
 import { createModel, RAIN_STEPS, rainIndexForStorm, type Model } from './model';
 import { assertReadoutsStable } from './readout.check';
+import { linearRgbColor, WHITE_LINEAR } from './palette';
 import { createReadouts, type ReadoutCopy } from './readouts';
 
 const BUILDERS: Record<LayerId, LayerBuilder> = {
@@ -50,7 +51,7 @@ function readPalette(): Palette {
     ink,
     accent: new THREE.Color(css.accent),
     muted: new THREE.Color(css.muted),
-    white: new THREE.Color(1, 1, 1),
+    white: linearRgbColor(WHITE_LINEAR),
     cssInk: css.ink,
   };
 }

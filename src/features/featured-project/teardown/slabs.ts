@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { linearRgbColor, SLAB_LIT_LINEAR, SLAB_SHADOW_LINEAR } from './palette';
 
 // Small seeded PRNG, so every climate layout is the same on each load.
 export function mulberry32(seed: number): () => number {
@@ -185,8 +186,8 @@ export function createSlabMaterial(init: {
     uDrift: { value: new THREE.Vector2(init.drift[0], init.drift[1]) },
     uScale: { value: init.scale },
     uSoft: { value: init.soft },
-    uLit: { value: new THREE.Color(1, 1, 1) },
-    uShadow: { value: new THREE.Color(0.5, 0.5, 0.5) },
+    uLit: { value: linearRgbColor(SLAB_LIT_LINEAR) },
+    uShadow: { value: linearRgbColor(SLAB_SHADOW_LINEAR) },
     uCenter: { value: new THREE.Vector2(near.center[0], near.center[1]) },
     uView: { value: new THREE.Vector2(near.view[0], near.view[1]) },
     uHalf: { value: near.half },

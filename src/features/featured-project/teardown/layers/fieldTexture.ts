@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { MASK_INSIDE, MASK_OUTSIDE } from '../palette';
 
 // Textures that carry plate-aligned data into shaders.
 // Rows follow plate v (row 0 at v = 0), and flipY stays off so row 0 is texture t = 0.
@@ -54,7 +55,7 @@ export function footprintTexture(
   size: number,
 ): THREE.CanvasTexture {
   const { ctx, texture } = createCanvas2D(size, size);
-  ctx.fillStyle = footprint ? '#000' : '#fff';
+  ctx.fillStyle = footprint ? MASK_OUTSIDE : MASK_INSIDE;
   ctx.fillRect(0, 0, size, size);
   if (footprint && footprint.length > 2) {
     ctx.beginPath();
@@ -63,7 +64,7 @@ export function footprintTexture(
       else ctx.lineTo(u * size, v * size);
     });
     ctx.closePath();
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = MASK_INSIDE;
     ctx.fill();
   }
   texture.needsUpdate = true;

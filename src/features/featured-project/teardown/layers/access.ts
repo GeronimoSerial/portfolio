@@ -7,6 +7,7 @@ import { addRoads } from './roads';
 import { MARKER_RIM, MARKER_Y, MOBILE_SCALE } from './markers';
 import { createMarkers } from './schools';
 import { addPlate, createPlateMaterial } from './plateMaterial';
+import { ACCESS_DARK, ACCESS_LIGHT, srgbArray } from '../palette';
 import { isDarkTheme, terrainTones } from './ramps';
 import type { LayerBuilder, LayerHandle, Palette } from './types';
 
@@ -17,14 +18,14 @@ import type { LayerBuilder, LayerHandle, Palette } from './types';
 const SIZE_OTHER_PX = 5;
 const SIZE_EXPOSED_PX = 7;
 const DARK = {
-  other: [0xd8 / 255, 0xd8 / 255, 0xd4 / 255] as const,
-  exposed: [0xb9 / 255, 0x82 / 255, 0x6b / 255] as const,
+  other: srgbArray(ACCESS_DARK.other),
+  exposed: srgbArray(ACCESS_DARK.exposed),
   rim: MARKER_RIM.dark, // darker rim
   shade: 1, // full hillshade detail
 };
 const LIGHT = {
-  other: [0x8a / 255, 0x89 / 255, 0x90 / 255] as const,
-  exposed: [0xb5 / 255, 0x73 / 255, 0x5c / 255] as const,
+  other: srgbArray(ACCESS_LIGHT.other),
+  exposed: srgbArray(ACCESS_LIGHT.exposed),
   rim: MARKER_RIM.light, // lighter rim, so the mid-grey dot separates from the pale plate
   shade: 0.35, // faint hillshade on the pale plate
 };

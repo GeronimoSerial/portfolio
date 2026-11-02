@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { createClouds, type Clouds, type CloudRegion, type CloudTones } from './clouds';
+import { CLOUD_LIGHT, linearColor } from './palette';
 import type { Env, Palette } from './layers/types';
 import { createMist, type Mist, type MistRegion } from './mist';
 import type { Model } from './model';
@@ -20,11 +21,10 @@ const weatherTones = (p: Palette): WeatherTones => ({
 });
 
 // Clouds are neutral greys: a lit top and a darker underside. On a dark theme the top is lifted
-// towards ink. On the light theme the deck is a light grey (body near #B9B8BE): a lighter top and
-// a soft darker underside.
+// towards ink. On the light theme the deck is a light grey (see CLOUD_LIGHT in palette.ts).
 const cloudTones = (p: Palette): CloudTones =>
   isLight(p)
-    ? { lit: new THREE.Color('#CFCED4'), shadow: new THREE.Color('#A4A3AA') }
+    ? { lit: linearColor(CLOUD_LIGHT.lit), shadow: linearColor(CLOUD_LIGHT.shadow) }
     : { lit: p.base.clone().lerp(p.ink, 0.5), shadow: p.base.clone().lerp(p.ink, 0.18) };
 
 export interface Atmosphere {

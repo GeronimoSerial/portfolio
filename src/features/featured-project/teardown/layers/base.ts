@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { isDarkTheme, srgb, type Rgb } from './ramps';
+import { srgbArrayOf, type Rgb } from '../palette';
+import { isDarkTheme } from './ramps';
 import type { SharedResources } from './shared';
 import type { LayerHandle, Palette, Role } from './types';
 
@@ -43,7 +44,7 @@ const DARK_THEME: Theme = { light: false, page: new THREE.Color(), pageRgb: [0, 
 export const themeOf = (p: Palette): Theme => ({
   light: !isDarkTheme(p),
   page: p.base,
-  pageRgb: srgb(p.base),
+  pageRgb: srgbArrayOf(p.base),
 });
 
 // Receded channel. Dark: today's darkening. Light: desaturate, then move toward the page.
