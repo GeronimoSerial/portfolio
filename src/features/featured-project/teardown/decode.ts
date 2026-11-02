@@ -1,4 +1,4 @@
-import { sampleBilinear, type GeoData, type LoadOptions } from './data';
+import { sampleBilinear, type GeoData, type LoadOptions, type Place, type PlaceKind, type School } from './data';
 
 // Province outline in plate coordinates, [u, v] per point.
 export type Footprint = Array<[number, number]>;
@@ -17,6 +17,8 @@ export interface RealManifest {
     satellite?: string;
     roads?: string;
     footprint?: string;
+    facilities?: string;
+    places?: string;
   };
 }
 
@@ -29,6 +31,9 @@ export interface DecodedGeo {
   roads?: GeoData['roads'] | undefined;
   roadClasses?: number[] | undefined;
   footprint?: Footprint | undefined;
+  schools?: School[] | undefined;
+  hospitals?: School[] | undefined;
+  places?: Place[] | undefined;
   elevationRangeM?: [number, number] | undefined;
   hillshadeUrl?: string | undefined;
   floodMaskUrl?: string | undefined;
@@ -76,8 +81,8 @@ function parsePoint(value: unknown, label: string): [number, number] {
   return [value[0] as number, value[1] as number];
 }
 
-// roads.json: { lines: [[[u, v], ...], ...], classes: [0 | 1 | 2, ...] }, classes parallel to lines.
-const ROAD_CLASS_VALUES = new Set([0, 1, 2]);
+// roads.json: { lines: [[[u, v], ...], ...], classes: [0 | 1 | 2 | 3, ...] }, classes parallel to lines.
+const ROAD_CLASS_VALUES = new Set([0, 1, 2, 3]);
 
 function decodeRoads(json: unknown): { roads: GeoData['roads']; roadClasses: number[] } {
   const lines = (json as { lines?: unknown } | null)?.lines;
@@ -91,7 +96,7 @@ function decodeRoads(json: unknown): { roads: GeoData['roads']; roadClasses: num
     return line.map((p, k) => parsePoint(p, `roads.lines[${i}][${k}]`));
   });
   const roadClasses = classes.map((c, i) => {
-    if (typeof c !== 'number' || !ROAD_CLASS_VALUES.has(c)) throw new Error(`roads.classes[${i}]: expected 0, 1 or 2`);
+    if (typeof c !== 'number' || !ROAD_CLASS_VALUES.has(c)) throw new Error(`roads.classes[${i}]: expected 0 to 3`);
     return c;
   });
   return { roads, roadClasses };
@@ -101,6 +106,41 @@ function decodeFootprint(json: unknown): Footprint {
   const ring = (json as { ring?: unknown } | null)?.ring;
   if (!Array.isArray(ring) || ring.length < 3) throw new Error('footprint: expected { ring } with 3+ points');
   return ring.map((p, k) => parsePoint(p, `footprint.ring[${k}]`));
+}
+
+// facilities.json: { schools: [[u, v], ...], hospitals: [[u, v], ...] }, plate coords.
+function decodePoints(list: unknown, label: string): School[] {
+  if (!Array.isArray(list)) throw new Error(`${label}: expected an array of [u, v] pairs`);
+  return list.map((p, k) => {
+    const [x, y] = parsePoint(p, `${label}[${k}]`);
+    return { x, y };
+  });
+}
+
+function decodeFacilities(json: unknown): { schools: School[]; hospitals: School[] } {
+  const obj = json as { schools?: unknown; hospitals?: unknown } | null;
+  if (!obj || typeof obj !== 'object') throw new Error('facilities: expected { schools, hospitals }');
+  return {
+    schools: decodePoints(obj.schools, 'facilities.schools'),
+    hospitals: decodePoints(obj.hospitals, 'facilities.hospitals'),
+  };
+}
+
+// places.json: [{ name, u, v, kind }], kind one of city, town, village.
+const PLACE_KINDS: ReadonlySet<string> = new Set<PlaceKind>(['city', 'town', 'village']);
+
+function decodePlaces(json: unknown): Place[] {
+  if (!Array.isArray(json)) throw new Error('places: expected an array');
+  return json.map((p, k) => {
+    const item = p as { name?: unknown; u?: unknown; v?: unknown; kind?: unknown } | null;
+    if (typeof item !== 'object' || item === null) throw new Error(`places[${k}]: expected an object`);
+    if (typeof item.name !== 'string') throw new Error(`places[${k}].name: expected a string`);
+    if (typeof item.kind !== 'string' || !PLACE_KINDS.has(item.kind)) {
+      throw new Error(`places[${k}].kind: expected city, town or village`);
+    }
+    const [x, y] = parsePoint([item.u, item.v], `places[${k}]`);
+    return { name: item.name, x, y, kind: item.kind as PlaceKind };
+  });
 }
 
 // Fetches and validates the files the manifest lists. Throws on any inconsistency;
@@ -113,11 +153,13 @@ export async function decodeReal(manifest: RealManifest, baseUrl: string): Promi
     name === undefined ? undefined : read(await fetchBytes(resolveFile(baseUrl, name)));
   const parseJson = (bytes: ArrayBuffer): unknown => JSON.parse(new TextDecoder().decode(bytes));
 
-  const [heightmap, flood, roads, footprint] = await Promise.all([
+  const [heightmap, flood, roads, footprint, facilities, places] = await Promise.all([
     load(files.heightmap, (b) => decodeFloat32(b, grid, 'heightmap')),
     load(files.flood, (b) => decodeFloat32(b, grid, 'flood')),
     load(files.roads, (b) => decodeRoads(parseJson(b))),
     load(files.footprint, (b) => decodeFootprint(parseJson(b))),
+    load(files.facilities, (b) => decodeFacilities(parseJson(b))),
+    load(files.places, (b) => decodePlaces(parseJson(b))),
   ]);
   const elevation = manifest.elevation;
   if (elevation !== undefined && !(Number.isFinite(elevation.minM) && Number.isFinite(elevation.maxM))) {
@@ -131,6 +173,9 @@ export async function decodeReal(manifest: RealManifest, baseUrl: string): Promi
     roads: roads?.roads,
     roadClasses: roads?.roadClasses,
     footprint,
+    schools: facilities?.schools,
+    hospitals: facilities?.hospitals,
+    places,
     elevationRangeM: elevation ? [elevation.minM, elevation.maxM] : undefined,
     hillshadeUrl: files.hillshade === undefined ? undefined : resolveFile(baseUrl, files.hillshade),
     floodMaskUrl: files.floodmask === undefined ? undefined : resolveFile(baseUrl, files.floodmask),
@@ -163,12 +208,15 @@ function insideRing(ring: Array<[number, number]>, u: number, v: number): boolea
 
 // Merges real layers over the placeholder. Heightmap and flood always share one grid:
 // a missing real layer is resampled from the placeholder at that same size, never mixed.
-// isPlaceholder stays true because schools and precipitation are still example values.
+// isPlaceholder stays true because precipitation and indicators are still example values.
 export function composeGeo(placeholder: GeoData, real: DecodedGeo, _opts: LoadOptions): GeoData {
   const anyRealGrid = real.heightmap !== undefined || real.flood !== undefined;
   const anyRealImage =
     real.hillshadeUrl !== undefined || real.floodMaskUrl !== undefined || real.satelliteUrl !== undefined;
-  if (!anyRealGrid && real.roads === undefined && real.footprint === undefined && !anyRealImage) return placeholder;
+  const anyRealPoints = real.schools !== undefined || real.hospitals !== undefined || real.places !== undefined;
+  if (!anyRealGrid && real.roads === undefined && real.footprint === undefined && !anyRealImage && !anyRealPoints) {
+    return placeholder;
+  }
 
   const sourceGrid = anyRealGrid ? real.grid : placeholder.grid;
   // Same grid on every viewport so the model yields identical numbers; only meshes are reduced on mobile.
@@ -180,6 +228,10 @@ export function composeGeo(placeholder: GeoData, real: DecodedGeo, _opts: LoadOp
     ? resample(real.flood, real.grid, grid)
     : resample(placeholder.flood, placeholder.grid, grid);
 
+  // Points must sit on the map: drop any that fall outside the province outline, real or example.
+  const ring = real.footprint;
+  const inProvince = (p: School): boolean => ring === undefined || insideRing(ring, p.x, p.y);
+
   return {
     isPlaceholder: true,
     grid,
@@ -190,11 +242,11 @@ export function composeGeo(placeholder: GeoData, real: DecodedGeo, _opts: LoadOp
     roads: real.roads ?? placeholder.roads,
     // Classes only describe the real roads; the placeholder roads keep the default class.
     roadClasses: real.roads === undefined ? undefined : real.roadClasses,
-    // The example schools are scattered over the whole square plate: keep only those inside the province,
-    // so none float in the empty space around the map.
-    schools: real.footprint
-      ? placeholder.schools.filter((s) => insideRing(real.footprint as Array<[number, number]>, s.x, s.y))
-      : placeholder.schools,
+    // OSM schools replace the example schools when baked. The example ones are scattered over the whole
+    // square plate, so they are filtered to the province as well.
+    schools: (real.schools ?? placeholder.schools).filter(inProvince),
+    hospitals: real.hospitals?.filter(inProvince),
+    places: real.places,
     footprint: real.footprint,
     elevationRangeM: real.elevationRangeM,
     hillshadeUrl: real.hillshadeUrl,

@@ -45,6 +45,13 @@ const readoutCopy = {
                 <h3>{t(layer.labelKey)}</h3>
                 <p>{t(layer.bodyKey)}</p>
                 {layer.id === 'territory' && <p class="source">{t('featured.satellites.credit')}</p>}
+                {(layer.id === 'access' || layer.id === 'risk') && (
+                  <p class="source">
+                    <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">
+                      {t('featured.osm.credit')}
+                    </a>
+                  </p>
+                )}
               </article>
             ))
           }
@@ -255,6 +262,9 @@ const readoutCopy = {
     margin: 8px 0 0;
     font-size: 14px;
     color: var(--soft);
+  }
+  .step .source a {
+    color: inherit;
   }
 
   /* Mobile: the same pinned model as desktop, laid out vertically in a 100svh stage: the closing

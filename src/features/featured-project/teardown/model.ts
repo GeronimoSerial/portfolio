@@ -1,10 +1,4 @@
-import {
-  FLOOD_LEVEL,
-  nearestRoadDistance,
-  sampleBilinear,
-  type GeoData,
-  type IndicatorKey,
-} from './data';
+import { FLOOD_LEVEL, sampleBilinear, type GeoData, type IndicatorKey } from './data';
 
 // Rain steps in mm/h that the scroll-driven storm walks through. The top step is the normalisation scale.
 export const RAIN_STEPS: readonly number[] = [10, 20, 40, 60, 80, 100];
@@ -93,14 +87,68 @@ export const rainIndexForStorm = (storm: number): number =>
 const exposureOf = (rain: number, hazard: number, access: number): number =>
   clamp01(Math.pow(rain, RAIN_EXPONENT) * (0.55 * hazard + 0.45 * (1 - access)) * GAIN);
 
-// Access depends only on the roads, so it is computed once per model.
+// Access depends only on the roads, so it is computed once per model. A road farther than ACCESS_RANGE
+// contributes 0, so each cell only tests the segments in the buckets around it. The segments are bucketed
+// once; the result equals the brute-force nearest distance, at a fraction of its cost. Measured in Node on
+// the baked Corrientes roads (8.7k polylines, 20k segments): about 0.17 s, against about 3.8 s for the scan.
+const BUCKET_SIZE = 0.04; // plate units
+
 function buildAccessGrid(roads: GeoData['roads']): Float32Array {
   const n = ACCESS_GRID;
   const out = new Float32Array(n * n);
+
+  // Flat segment store: start u, start v, end u, end v.
+  let count = 0;
+  for (const line of roads) count += Math.max(0, line.length - 1);
+  const seg = new Float64Array(count * 4);
+  let s = 0;
+  for (const line of roads) {
+    for (let k = 0; k + 1 < line.length; k++, s++) {
+      seg[s * 4] = line[k][0];
+      seg[s * 4 + 1] = line[k][1];
+      seg[s * 4 + 2] = line[k + 1][0];
+      seg[s * 4 + 3] = line[k + 1][1];
+    }
+  }
+
+  // Each segment is listed in every bucket its bounding box touches.
+  const cells = Math.ceil(1 / BUCKET_SIZE) + 1;
+  const cellOf = (p: number): number => Math.min(cells - 1, Math.max(0, Math.floor(p / BUCKET_SIZE)));
+  const buckets: number[][] = Array.from({ length: cells * cells }, () => []);
+  for (let k = 0; k < count; k++) {
+    const b = k * 4;
+    const i0 = cellOf(Math.min(seg[b], seg[b + 2]));
+    const i1 = cellOf(Math.max(seg[b], seg[b + 2]));
+    const j0 = cellOf(Math.min(seg[b + 1], seg[b + 3]));
+    const j1 = cellOf(Math.max(seg[b + 1], seg[b + 3]));
+    for (let j = j0; j <= j1; j++) for (let i = i0; i <= i1; i++) buckets[j * cells + i].push(k);
+  }
+
+  // A segment within ACCESS_RANGE of a point overlaps a bucket within this many cells of the point's bucket.
+  const reach = Math.ceil(ACCESS_RANGE / BUCKET_SIZE);
   for (let j = 0; j < n; j++) {
     for (let i = 0; i < n; i++) {
-      const d = nearestRoadDistance(i / (n - 1), j / (n - 1), roads);
-      out[j * n + i] = clamp01(1 - d / ACCESS_RANGE);
+      const u = i / (n - 1);
+      const v = j / (n - 1);
+      const ci = cellOf(u);
+      const cj = cellOf(v);
+      let best = Infinity;
+      for (let nj = Math.max(0, cj - reach); nj <= Math.min(cells - 1, cj + reach); nj++) {
+        for (let ni = Math.max(0, ci - reach); ni <= Math.min(cells - 1, ci + reach); ni++) {
+          for (const k of buckets[nj * cells + ni]) {
+            const b = k * 4;
+            const dx = seg[b + 2] - seg[b];
+            const dy = seg[b + 3] - seg[b + 1];
+            const len2 = dx * dx + dy * dy;
+            const t = len2 === 0 ? 0 : Math.min(1, Math.max(0, ((u - seg[b]) * dx + (v - seg[b + 1]) * dy) / len2));
+            const ex = u - (seg[b] + dx * t);
+            const ey = v - (seg[b + 1] + dy * t);
+            const d2 = ex * ex + ey * ey;
+            if (d2 < best) best = d2;
+          }
+        }
+      }
+      out[j * n + i] = clamp01(1 - Math.sqrt(best) / ACCESS_RANGE);
     }
   }
   return out;

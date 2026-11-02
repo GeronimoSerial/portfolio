@@ -26,8 +26,8 @@ const MARKER_LUT = {
   dark: makeLut(MARKER_RAMP_DARK),
   light: makeLut(MARKER_RAMP_LIGHT),
 };
-const MARKER_MIN_PX = 3; // diameter of a school with no exposure
-const MARKER_SPAN_PX = 5; // extra diameter at full exposure: 8 px on desktop
+const MARKER_MIN_PX = 2.5; // diameter of a school with no exposure
+const MARKER_SPAN_PX = 3.5; // extra diameter at full exposure: 6 px on desktop, about 1.3k schools on the plate
 
 // One 3x3 box blur pass with clamped edges, from `src` into `dst`.
 function blur(src: Float32Array, dst: Float32Array): void {

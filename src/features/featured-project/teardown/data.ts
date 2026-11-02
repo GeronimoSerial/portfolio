@@ -16,6 +16,16 @@ export interface School {
   y: number;
 }
 
+export type PlaceKind = 'city' | 'town' | 'village';
+
+// A named settlement in plate coordinates, from OSM place nodes.
+export interface Place {
+  name: string;
+  x: number;
+  y: number;
+  kind: PlaceKind;
+}
+
 /**
  * Scene input. Grids are row-major: index = row * size + col, where row follows
  * plate z (v) and col follows plate x (u). Plate coordinates are in [0, 1]; the
@@ -29,7 +39,7 @@ export interface GeoData {
   precipGrid: number;
   flood: Float32Array; // 0..1 hazard, grid x grid
   roads: Array<Array<[number, number]>>; // polylines in plate coordinates
-  schools: School[];
+  schools: School[]; // OSM schools when baked, example values otherwise
   // Optional province outline, plate coords [0, 1], y down. Layers clip their surfaces to it.
   footprint?: Array<[number, number]>;
   // Optional real-data extras. The placeholder leaves them all unset.
@@ -37,7 +47,9 @@ export interface GeoData {
   satelliteUrl?: string; // Sentinel-2 true colour WebP with alpha = province mask, plate-aligned; absent = no imagery
   floodMaskUrl?: string; // JRC flood extent (red channel = hazard); the flood field is used when absent
   elevationRangeM?: [number, number]; // metres spanned by heightmap 0..1; informational only
-  roadClasses?: number[]; // parallel to `roads`: 0 national, 1 provincial, 2 tertiary; default 1
+  roadClasses?: number[]; // parallel to `roads`: 0 national, 1 provincial, 2 tertiary, 3 minor; default 1
+  hospitals?: School[]; // OSM hospitals when baked; absent on the placeholder
+  places?: Place[]; // OSM settlements when baked; absent on the placeholder
 }
 
 export interface LoadOptions {
@@ -92,12 +104,14 @@ export function nearestRoadDistance(u: number, v: number, roads: GeoData['roads'
 //     "files": {
 //       "heightmap": "heightmap.f32",   // Float32 LE, 0..1, optional
 //       "flood": "flood.f32",           // Float32 LE, 0..1 hazard, optional (absent until baked)
-//       "roads": "roads.json",          // polylines in plate coords [u, v], optional
-//       "footprint": "footprint.json"   // { "ring": [[u, v], ...] }, optional
+//       "roads": "roads.json",          // { "lines": [[[u, v], ...]], "classes": [0-3] }, optional
+//       "footprint": "footprint.json",  // { "ring": [[u, v], ...] }, optional
+//       "facilities": "facilities.json",// { "schools": [[u, v], ...], "hospitals": [[u, v], ...] }, optional
+//       "places": "places.json"         // [{ "name", "u", "v", "kind": "city" | "town" | "village" }], optional
 //     }
 //   }
-// Schools, precipitation and indicators are not in the manifest: they stay example
-// values from the placeholder and the model derives indicators from the layers above.
+// Schools and hospitals come from OSM when baked. Precipitation and indicators stay example
+// values from the placeholder, and the model derives indicators from the layers above.
 // Files resolve next to the manifest. Any inconsistency falls back to the placeholder.
 const MANIFEST_URL = '/data/featured/manifest.json';
 const MANIFEST_BASE = '/data/featured';

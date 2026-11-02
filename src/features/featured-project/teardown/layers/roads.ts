@@ -4,20 +4,22 @@ import type { Rgb } from '../palette';
 import { FOCUS_GLSL, track } from './base';
 import type { LayerHandle } from './types';
 
-// Roads: the OSM network on the plate, in three tiers. Class 0 (national) is the widest strip and
+// Roads: the OSM network on the plate, in four tiers. Class 0 (national) is the widest strip and
 // gets a darker or paler casing under it; class 1 (provincial) is a narrower strip; class 2
-// (tertiary) is a hairline. A segment that touches the flood extent is a cut-off link: it is drawn
-// in the accent colour on top of its tier, so the links the water cuts stand out. The cut test runs
-// once on the CPU at build time, never per frame.
+// (tertiary) is a hairline; class 3 (unclassified, residential, track) is the dimmest hairline, at
+// low alpha. A segment that touches the flood extent is a cut-off link: it is drawn in the accent
+// colour on top of its tier, so the links the water cuts stand out. The cut test runs once on the
+// CPU at build time, never per frame.
 
 const ROAD_Y = 0.012; // just above the plate
 const FLOOD_SAMPLES = 8; // points tested along each segment, both endpoints included
-const HALF_WIDTH = [0.022, 0.013, 0] as const; // world units by class; 0 draws a hairline
+const HALF_WIDTH = [0.022, 0.013, 0, 0] as const; // world units by class; 0 draws a hairline
 const CASING_HALF_WIDTH = 0.031; // world units; the casing shows as an edge around national roads
+const MINOR_ALPHA = 0.55; // class 3 hairlines, and their cut-off links, are drawn at this alpha
 
 // One road segment in plate coordinates, with its class and its cut-off status.
 export interface RoadSegment {
-  cls: number; // 0 national, 1 provincial, 2 tertiary
+  cls: number; // 0 national, 1 provincial, 2 tertiary, 3 minor
   cut: boolean; // touches the flood extent
   u0: number;
   v0: number;
@@ -30,6 +32,7 @@ export interface RoadTones {
   primary: Rgb; // class 0
   secondary: Rgb; // class 1
   tertiary: Rgb; // class 2
+  minor: Rgb; // class 3
   cut: Rgb; // cut-off links, any class
 }
 
@@ -42,15 +45,16 @@ const vertexShader = /* glsl */ `
 const fragmentShader = /* glsl */ `
   uniform vec3 uColor; // sRGB
   uniform float uRecede; // alpha when the layer is receded (focus 0)
+  uniform float uAlpha; // tier alpha; 1 for every tier but the minor one
   ${FOCUS_GLSL}
   void main() {
-    gl_FragColor = vec4(applyFocus(uColor), mix(uRecede, 1.0, uFocus));
+    gl_FragColor = vec4(applyFocus(uColor), mix(uRecede, 1.0, uFocus) * uAlpha);
   }
 `;
 
 const roadClass = (data: GeoData, index: number): number => {
   const c = data.roadClasses?.[index] ?? 1;
-  return c === 0 || c === 2 ? c : 1;
+  return c === 0 || c === 2 || c === 3 ? c : 1;
 };
 
 // True when any sampled point along the segment lies in the flood extent (hazard at the 0.5 level).
@@ -162,6 +166,7 @@ export function addRoads(
     primary: new THREE.Vector3(),
     secondary: new THREE.Vector3(),
     tertiary: new THREE.Vector3(),
+    minor: new THREE.Vector3(),
     cut: new THREE.Vector3(),
   };
 
@@ -170,11 +175,17 @@ export function addRoads(
     halfWidth: number,
     picked: readonly RoadSegment[],
     renderOrder: number,
+    alpha = 1,
   ): void => {
     const material = track(
       base,
       new THREE.ShaderMaterial({
-        uniforms: { uColor: { value: colour }, uRecede: { value: recede }, uFocus: { value: 1 } },
+        uniforms: {
+          uColor: { value: colour },
+          uRecede: { value: recede },
+          uAlpha: { value: alpha },
+          uFocus: { value: 1 },
+        },
         vertexShader,
         fragmentShader,
         transparent: true,
@@ -197,15 +208,18 @@ export function addRoads(
   add(colours.primary, HALF_WIDTH[0], pick((s) => s.cls === 0 && !s.cut), 3.1);
   add(colours.secondary, HALF_WIDTH[1], pick((s) => s.cls === 1 && !s.cut), 3.1);
   add(colours.tertiary, HALF_WIDTH[2], pick((s) => s.cls === 2 && !s.cut), 3.1);
+  add(colours.minor, HALF_WIDTH[3], pick((s) => s.cls === 3 && !s.cut), 3.1, MINOR_ALPHA);
   add(colours.cut, HALF_WIDTH[0], pick((s) => s.cls === 0 && s.cut), 3.2);
   add(colours.cut, HALF_WIDTH[1], pick((s) => s.cls === 1 && s.cut), 3.2);
   add(colours.cut, HALF_WIDTH[2], pick((s) => s.cls === 2 && s.cut), 3.2);
+  add(colours.cut, HALF_WIDTH[3], pick((s) => s.cls === 3 && s.cut), 3.2, MINOR_ALPHA);
 
   return (tones) => {
     colours.casing.set(...tones.casing);
     colours.primary.set(...tones.primary);
     colours.secondary.set(...tones.secondary);
     colours.tertiary.set(...tones.tertiary);
+    colours.minor.set(...tones.minor);
     colours.cut.set(...tones.cut);
   };
 }

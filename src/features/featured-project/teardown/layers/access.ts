@@ -12,16 +12,16 @@ import { ACCESS_DARK, ACCESS_LIGHT, srgbArray, type Rgb } from '../palette';
 import { isDarkTheme } from './ramps';
 import type { LayerBuilder, LayerHandle, Palette } from './types';
 
-// Access: a cool slate plate with the flooded extent as a translucent blue wash. Roads sit in three
+// Access: a cool slate plate with the flooded extent as a translucent blue wash. Roads sit in four
 // tiers, and the links the water cuts are terracotta. Schools are one of two sizes with a soft
 // halo: exposed ones are larger and warm, the rest small and neutral. A school is exposed when it
 // stands on flooded ground, sits on a cut-off road, or the model exposes it at the current rain.
 // Receded, the roads, wash and markers fade with the layer, so they never float over the layer above.
-// Sizes are CSS pixels.
+// Sizes are CSS pixels, kept small: the OSM set has about 1.3k schools.
 
-const SIZE_OTHER_PX = 5;
-const SIZE_EXPOSED_PX = 7;
-const HALO_PX = 3;
+const SIZE_OTHER_PX = 3.5;
+const SIZE_EXPOSED_PX = 5;
+const HALO_PX = 2;
 const RECEDED_ALPHA = 0.3;
 const WASH_LIFT = 0.004; // plate units, above the plate and below the roads
 const ROAD_TOUCH = 0.006; // plate units: a school this close to a cut-off road sits on it
@@ -50,6 +50,7 @@ const toneSet = (c: AccessColours, rim: number, shade: number): Tones => ({
     primary: srgbArray(c.primary),
     secondary: srgbArray(c.secondary),
     tertiary: srgbArray(c.tertiary),
+    minor: srgbArray(c.minor),
     cut: srgbArray(c.exposed),
   },
   rim,

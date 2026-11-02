@@ -57,7 +57,8 @@ export const ACCESS_DARK = {
   wash: '#5f93ad', // flooded extent, translucent cool blue
   primary: '#dfe3e6', // national road
   secondary: '#9aa4ae', // provincial road
-  tertiary: '#7d8793', // tertiary road, dimmest
+  tertiary: '#7d8793', // tertiary road
+  minor: '#8c97a3', // minor road (class 3), drawn at low alpha so it sits under the tertiary tier
   casing: '#2a3138', // dark edge under national roads
 } as const;
 
@@ -68,7 +69,8 @@ export const ACCESS_LIGHT = {
   wash: '#6f9bb3', // flooded extent, translucent cool blue
   primary: '#3f4852', // national road, darkest on the pale plate
   secondary: '#6f7985', // provincial road
-  tertiary: '#9aa3ad', // tertiary road, dimmest
+  tertiary: '#9aa3ad', // tertiary road
+  minor: '#8b95a0', // minor road (class 3), drawn at low alpha so it sits under the tertiary tier
   casing: '#f4f6f7', // pale edge under national roads
 } as const;
 
