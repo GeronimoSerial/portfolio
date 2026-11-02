@@ -6,9 +6,17 @@ export default defineConfig({
   site: 'https://geroserial.com',
   output: 'static',
   adapter: vercel(),
+  // English moved to the root and Spanish under /es; the previous URLs keep working.
+  redirects: {
+    '/en': '/',
+    '/en/projects': '/projects',
+    '/en/projects/climate': '/projects/climate',
+    '/proyectos': '/es/proyectos',
+    '/proyectos/clima': '/es/proyectos/clima',
+  },
   i18n: {
-    locales: ['es', 'en'],
-    defaultLocale: 'es',
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
     routing: { prefixDefaultLocale: false },
   },
   env: {

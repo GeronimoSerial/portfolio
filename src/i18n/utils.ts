@@ -3,13 +3,13 @@ import { languages, ui, type Lang } from './ui';
 export { languages, type Lang };
 export type UIKey = keyof (typeof ui)['es'];
 
-export const defaultLang: Lang = 'es';
+export const defaultLang: Lang = 'en';
 
 // Equivalent paths per locale. Keep both sides in sync when adding a page.
 export const routeMap: Record<Lang, string>[] = [
-  { es: '/', en: '/en/' },
-  { es: '/proyectos', en: '/en/projects' },
-  { es: '/proyectos/clima', en: '/en/projects/climate' },
+  { en: '/', es: '/es/' },
+  { en: '/projects', es: '/es/proyectos' },
+  { en: '/projects/climate', es: '/es/proyectos/clima' },
 ];
 
 function normalize(path: string): string {
@@ -18,7 +18,7 @@ function normalize(path: string): string {
 
 export function getLangFromUrl(url: URL): Lang {
   const [, first] = url.pathname.split('/');
-  return first === 'en' ? 'en' : defaultLang;
+  return first === 'es' ? 'es' : defaultLang;
 }
 
 export function useTranslations(lang: Lang) {
@@ -33,6 +33,6 @@ export function localizedPath(path: string, lang: Lang): string {
     Object.values(pair).some((p) => normalize(p) === target),
   );
   if (match) return match[lang];
-  const bare = target.replace(/^\/en(?=\/|$)/, '') || '/';
-  return lang === defaultLang ? bare : `/en${bare === '/' ? '/' : bare}`;
+  const bare = target.replace(/^\/es(?=\/|$)/, '') || '/';
+  return lang === defaultLang ? bare : `/es${bare === '/' ? '/' : bare}`;
 }

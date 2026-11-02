@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import SiteHeader from '../../shared/components/SiteHeader.astro';
-import { useTranslations } from '../../i18n/utils';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SiteHeader from '../../../shared/components/SiteHeader.astro';
+import { useTranslations } from '../../../i18n/utils';
 
 const lang = 'es';
 const t = useTranslations(lang);
 const githubHref = 'https://github.com/GeronimoSerial';
-const homeHref = '/';
+const homeHref = '/es/';
 ---
 
 <BaseLayout lang={lang} title={`${t('projects.page.title')} | Geronimo Serial`}>
