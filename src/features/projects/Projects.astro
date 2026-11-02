@@ -45,11 +45,12 @@ const words = t('work.mask').split('|');
 </section>
 
 <style>
-  /* The sticky stage plus a short hold before the section scrolls away. */
+  /* The sticky stage plus a 30svh hold before the section scrolls away. Halved from 60svh so the
+     next section arrives sooner. */
   .section {
     position: relative;
     isolation: isolate;
-    height: calc(100svh + 60svh);
+    height: calc(100svh + 30svh);
     /* Clips the sticky stage at the section's bottom edge. overflow: clip, unlike hidden, keeps sticky working. */
     overflow: clip;
     color: var(--ink);

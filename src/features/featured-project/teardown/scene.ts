@@ -393,8 +393,11 @@ export function mountTeardown(root: HTMLElement): () => void {
   // Darkening follows the storm through a CSS filter on the canvas wrapper; written only on change.
   // Light theme: no filter. On a light page the filter greys the whole canvas rectangle, so the
   // storm there is carried by the weather tones alone.
+  // Quantized to 0.02 steps: a 3-decimal value changes on almost every scroll frame, and each write
+  // repaints the large masked canvas. The filter now changes only when the visible step does.
   function applyDarkening(storm: number): void {
-    const value = isLight(palette) ? 'none' : `brightness(${(1 - DARKEN * storm).toFixed(3)})`;
+    const level = Math.round((1 - DARKEN * storm) / 0.02) * 0.02;
+    const value = isLight(palette) ? 'none' : `brightness(${level.toFixed(2)})`;
     if (value === filterShown) return;
     filterShown = value;
     canvasWrap.style.filter = value;

@@ -111,12 +111,11 @@ function mountPinnedSequence(
       if (prev >= 0 && steps[prev]) {
         gsap.to(steps[prev], { autoAlpha: 0, y: -8, duration: 0.25, overwrite: true });
       }
+      // Starts from the current values, so reversing mid-fade does not snap the text to 0.
       if (next >= 0 && steps[next]) {
-        gsap.fromTo(
-          steps[next],
-          { autoAlpha: 0, y: 8 },
-          { autoAlpha: 1, y: 0, duration: 0.35, delay: 0.1, overwrite: true },
-        );
+        // A fully hidden step re-enters from below; one caught mid-fade continues from where it is.
+        if (Number(gsap.getProperty(steps[next], 'autoAlpha')) === 0) gsap.set(steps[next], { y: 8 });
+        gsap.to(steps[next], { autoAlpha: 1, y: 0, duration: 0.35, delay: 0.1, overwrite: true });
       }
     };
 
@@ -159,6 +158,8 @@ function mountPinnedSequence(
     // The finale keeps the risk layer on top and brings all three into full colour.
     tl.to(state.layers, { focus: 1, duration: EXPLODE }, FINALE);
 
+    // Every step starts hidden and offset, so the first show still enters from below.
+    gsap.set(steps, { autoAlpha: 0, y: 8 });
     syncStep(0);
   }, root);
 

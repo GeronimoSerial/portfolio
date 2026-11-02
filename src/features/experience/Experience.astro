@@ -209,6 +209,8 @@ const items = [
     height: calc(100svh + 225vh);
   }
 
+  /* The list is top-aligned: centring it moved the whole list while a panel closed and the next one opened.
+     The top padding keeps it roughly where the centred list sat on a typical screen. */
   .figure-stage {
     box-sizing: border-box;
     position: sticky;
@@ -216,8 +218,8 @@ const items = [
     height: 100vh;
     height: 100svh;
     display: flex;
-    align-items: center;
-    padding: 0 32px;
+    align-items: flex-start;
+    padding: 28svh 32px 0;
   }
 
   /* The list sits in the left column; the figure is drawn by the particle layer on the right. */
@@ -273,7 +275,7 @@ const items = [
   .panel {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.45s ease;
+    transition: grid-template-rows 0.3s ease;
   }
 
   .item[data-open] .panel {
