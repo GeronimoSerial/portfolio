@@ -16,7 +16,7 @@ export function exitProgress(ctx: ParticleContext): number | null {
 
 // The rocket's last frame, fading out with q across the exit. Uses the rocket's own slots, so no other pose shows.
 export function setFigureExit(ctx: ParticleContext, q: number) {
-  const { attrs, shapes, uniforms, state, view, layout } = ctx;
+  const { attrs, shapes, uniforms, view, layout } = ctx;
   if (!attrs) return;
   const shape = shapes[ROCKET_KEY];
   if (!shape) return;
@@ -24,8 +24,6 @@ export function setFigureExit(ctx: ParticleContext, q: number) {
   uniforms.uProgress.value = 0;
   uniforms.uFlame.value = 1;
   uniforms.uFlicker.value = 1;
-  state.ignitedAt = -1;
-  state.spinTarget = 0;
   // The rocket keeps flying along its diagonal and leaves the view; it fades only near the end.
   const qq = clamp01(q * 1.6);
   const frame = figureFrame(ROCKET_KEY, shape, tierOf(), layout, 0, 1 + 3 * qq * qq);

@@ -1,6 +1,5 @@
 import gsap from 'gsap';
 import { prefersReducedMotion } from '../../../shared/lib/motion';
-import { SMOOTH } from '../../../shared/motion/policy';
 import { LAYERS } from './layers';
 
 export interface LayerState {
@@ -68,12 +67,6 @@ export function initialLayers(finale: boolean): LayerState[] {
   );
 }
 
-// Timeline time to step index. Past the last layer the risk step stays current.
-const stepForTime = (time: number): number => {
-  if (time < STEP_SPAN) return 0;
-  return Math.min(LAYERS.length, 1 + Math.floor(time / STEP_SPAN - 1 + 1e-6));
-};
-
 // Entry point. Motion allowed gets the pinned sequence (desktop and mobile); reduced motion does nothing.
 export function mountChoreography(
   root: HTMLElement,
@@ -97,42 +90,18 @@ function mountPinnedSequence(
   if (!pin) return () => {};
 
   const ctx = gsap.context(() => {
-    // Crossfading texts overlap mid-scrub, so the active step animates one at a time.
-    let active = -2;
-    const syncStep = (time: number): void => {
-      const next = stepForTime(time);
-      if (next === active) return;
-      const prev = active;
-      active = next;
-      steps.forEach((el, i) => {
-        gsap.killTweensOf(el);
-        if (i !== next && i !== prev) gsap.set(el, { autoAlpha: 0 });
-      });
-      if (prev >= 0 && steps[prev]) {
-        gsap.to(steps[prev], { autoAlpha: 0, y: -8, duration: 0.25, overwrite: true });
-      }
-      // Starts from the current values, so reversing mid-fade does not snap the text to 0.
-      if (next >= 0 && steps[next]) {
-        // A fully hidden step re-enters from below; one caught mid-fade continues from where it is.
-        if (Number(gsap.getProperty(steps[next], 'autoAlpha')) === 0) gsap.set(steps[next], { y: 8 });
-        gsap.to(steps[next], { autoAlpha: 1, y: 0, duration: 0.35, delay: 0.1, overwrite: true });
-      }
-    };
+    gsap.set(steps, { autoAlpha: 0 });
+    gsap.set(steps[0], { autoAlpha: 1 });
 
-    // The step follows the timeline's own time: a scrub tween keeps moving after the last scroll
-    // event, so the step must not be read from the ScrollTrigger callback.
     const tl = gsap.timeline({
       defaults: { ease: 'power2.inOut' },
-      onUpdate: () => {
-        syncStep(tl.time());
-        hooks.requestRender();
-      },
+      onUpdate: hooks.requestRender,
       scrollTrigger: {
         trigger: root,
         start: 'top top',
         end: () => `+=${window.innerHeight * PIN_VH}`,
         pin,
-        scrub: SMOOTH.choreography,
+        scrub: true,
         invalidateOnRefresh: true,
         // The pin's spacer must exist before any trigger below it is measured, so it refreshes first.
         id: 'teardown-pin',
@@ -140,8 +109,7 @@ function mountPinnedSequence(
         // Refresh runs on load, resize and remount. Jump to the trigger's current progress at once
         // so a restored scroll position shows its step without scrubbing in from step 0.
         onRefresh: (self) => {
-          tl.progress(self.progress, true);
-          syncStep(tl.time());
+          self.animation?.progress(self.progress, true);
           hooks.requestRender();
         },
       },
@@ -158,13 +126,19 @@ function mountPinnedSequence(
     // The finale keeps the risk layer on top and brings all three into full colour.
     tl.to(state.layers, { focus: 1, duration: EXPLODE }, FINALE);
 
-    // Every step starts hidden and offset, so the first show still enters from below.
-    gsap.set(steps, { autoAlpha: 0, y: 8 });
-    syncStep(0);
+    // Text shares the layers' playhead: the same scroll position renders the same crossfade
+    // in either direction. Keep glyphs stationary instead of translating them through subpixels.
+    const crossfade = 0.24;
+    steps.slice(1).forEach((step, i) => {
+      const at = STEP_SPAN * (i + 1) - crossfade / 2;
+      const timing = { duration: crossfade, ease: 'none', immediateRender: false };
+      tl.fromTo(steps[i], { autoAlpha: 1 }, { autoAlpha: 0, ...timing }, at);
+      tl.fromTo(step, { autoAlpha: 0 }, { autoAlpha: 1, ...timing }, at);
+    });
+    tl.progress(tl.scrollTrigger?.progress ?? 0, true);
   }, root);
 
   return () => {
     ctx.revert();
-    steps.forEach((el) => gsap.killTweensOf(el));
   };
 }

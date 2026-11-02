@@ -12,7 +12,7 @@ export interface RevealOptions {
   baseDelay?: number;
 }
 
-// Fades and un-blurs the matching targets in. The `.motion [data-reveal]` rule in global.css hides
+// Fades the matching targets in. The `.motion [data-reveal]` rule in global.css hides
 // them before this runs, so every target this is meant to reveal must be passed to it, or it stays hidden.
 // Under reduced motion nothing animates: targets are set visible at once.
 export function revealOnEnter(
@@ -24,26 +24,19 @@ export function revealOnEnter(
   const targets = root.querySelectorAll<HTMLElement>(selector);
 
   if (reduced.matches) {
-    gsap.set(targets, { opacity: 1, filter: 'none' });
+    gsap.set(targets, { opacity: 1 });
     return;
   }
 
   targets.forEach((el) => {
     gsap.fromTo(
       el,
-      { opacity: 0, filter: 'blur(12px)' },
+      { opacity: 0 },
       {
         opacity: 1,
-        filter: 'blur(0px)',
         duration: DURATION.reveal,
         ease: EASE.reveal,
         delay: baseDelay + Number(el.dataset.revealDelay ?? 0),
-        // Ends on an inline `filter: none`, not blur(0px): a lingering filter keeps the text on its own
-        // compositing layer, which mobile browsers re-rasterise while scrolling and the glyphs shimmer.
-        // Inline none (not clearProps) so the CSS pre-hide blur cannot come back.
-        onComplete: () => {
-          el.style.filter = 'none';
-        },
         scrollTrigger: when === 'enter' ? { trigger: el, start: 'top 85%', once: true } : undefined,
       },
     );

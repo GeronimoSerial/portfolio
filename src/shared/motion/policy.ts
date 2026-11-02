@@ -36,15 +36,6 @@ if (typeof window !== 'undefined') {
 export const MOBILE_BREAKPOINT = 768;
 export const MOBILE_QUERY = '(max-width: 767px)';
 
-// Scrub catch-up times in seconds (morph, turn, choreography); logo is a per-second smoothing rate.
-// Lenis already smooths the scroll, so these stay short: long catch-ups stack on top of it and make motion trail the scroll.
-export const SMOOTH = {
-  morph: 0.3,
-  turn: 0.4,
-  choreography: 0.35,
-  logo: 8,
-} as const;
-
 export const EASE = {
   reveal: 'power2.out',
   intro: 'power3.inOut',

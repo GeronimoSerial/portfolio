@@ -40,7 +40,7 @@ export function useSlots(ctx: ParticleContext, fromKey: ShapeKey, toKey: ShapeKe
 // A shape disperses with the scroll (p 0 to 1): points leave downwind and fade out. Used for the Argentina map
 // (into Featured) and the ICVM logo (over the title).
 export function setDisperse(ctx: ParticleContext, pose: DispersePose, p: number) {
-  const { attrs, shapes, uniforms, layout, state, view } = ctx;
+  const { attrs, shapes, uniforms, layout, view } = ctx;
   if (!attrs) return;
   const shape = shapes[SHAPE_OF[pose]];
   if (!shape) return;
@@ -52,13 +52,12 @@ export function setDisperse(ctx: ParticleContext, pose: DispersePose, p: number)
   const d = DISPERSE[pose];
   const span = pose === 'argentina' ? layout.mapH : layout.logoH;
   uniforms.uWind.value.set(d.x, d.y).multiplyScalar(d.reach * span);
-  state.spinTarget = 0;
   Object.assign(view, { ...frameOf(pose, tierOf(), layout), opacity: 1 - e });
 }
 
 // Sets the visual state for the morph from pose a to pose b at progress p. Pure function of scroll.
 export function setState(ctx: ParticleContext, a: Pose, b: Pose, p: number) {
-  const { attrs, loaded, shapes, uniforms, layout, view, state, reduced } = ctx;
+  const { attrs, loaded, shapes, uniforms, layout, view, reduced } = ctx;
   if (!attrs) return;
   const fromKey = shapeKeyOf(a, b) ?? loaded.from ?? 'portrait';
   const toKey = shapeKeyOf(b, a) ?? loaded.to ?? fromKey;
@@ -70,15 +69,11 @@ export function setState(ctx: ParticleContext, a: Pose, b: Pose, p: number) {
 
   const t = tierOf();
   const vals = lerpFrame(frameFor(a, b, t, layout), frameFor(b, a, t, layout), p);
-  // The idle spin runs only once the globe is fully formed, so a morph never spins.
-  const formed = p <= 0 ? a : p >= 1 ? b : null;
-  state.spinTarget = !reduced && formed === 'globe' ? 1 : 0;
   if (reduced) gsap.set(view, vals);
   else Object.assign(view, vals);
 }
 
-// Scroll progress of pair i; the logo's pair uses its smoothed value once the first frame has snapped it.
+// Every pair reads the same scroll clock, including the logo on a reverse handoff.
 export function progressOf(ctx: ParticleContext, i: number): number {
-  if (i === ctx.logoIdx && ctx.state.logoSmooth >= 0) return ctx.state.logoSmooth;
   return clamp01(ctx.pairSt[i]?.progress ?? 0);
 }

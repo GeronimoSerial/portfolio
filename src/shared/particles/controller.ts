@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createRenderer } from '../lib/three';
-import { DURATION, EASE, MOBILE_BREAKPOINT, reduced as reducedPolicy, SMOOTH } from '../motion/policy';
+import { DURATION, EASE, MOBILE_BREAKPOINT, reduced as reducedPolicy } from '../motion/policy';
 import { createParticleMaterial, createParticleUniforms } from './material';
 import { createArcMaterial, ARC_REVEAL_END } from './arc';
 import { createClouds } from './clouds';
@@ -12,13 +12,11 @@ import { FIGURE_EVENT } from './events';
 import { setDisperse, setState } from './morph';
 import {
   CENTERED_Y,
-  clamp01,
   CLOUD_CENTER_Y,
   createLayout,
   fitLayout,
   FIGURE_X,
   POSE_KEYS,
-  ROCKET,
   tierOf,
   type Frame,
   type Pose,
@@ -33,9 +31,6 @@ import { arcReveal, createArcTrigger, createPairTriggers, createReducedTriggers,
 const COUNT = { desktop: 14000, mobile: 6000 };
 const TURN = { y: -0.6, x: 0.06, shiftX: 0.14 }; // scroll turn: rad, rad, view widths
 const LOOK_EASE = 0.08;
-const TAU = Math.PI * 2;
-const SPIN_RATE = 0.08; // rad/s around Y, fully formed globe only
-const SPIN_EASE = 0.04; // per-frame easing of the spin weight in and out
 const ARC_COUNT = { desktop: 600, mobile: 300 };
 const MOBILE_TURN = { x: 0.2, y: 0.12 }; // mobile-only extra shift in the turned state: view widths right, view heights down
 
@@ -78,13 +73,9 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     arc: 0, // arc visibility, 1 only in the north-facing globe pose
   };
   const state: ParticleState = {
-    logoSmooth: -1,
     figureMode: false,
     figureRedraw: () => {},
     mobile: false,
-    ignitedAt: -1,
-    spinWeight: 0,
-    spinTarget: 0,
     reducedIndex: -1,
     disposed: false,
   };
@@ -121,10 +112,25 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   const { layout, shapes } = ctx;
 
   const arcState = { reveal: reduced ? ARC_REVEAL_END : 0 }; // arc draw progress, scrubbed by the ICVM block that carries data-particles-arc
-  const spinState = { angle: 0 }; // idle spin, accumulates only while the globe is fully formed
   const turn = { p: 0 };
   const look = { x: 0, y: 0 };
   const lookTarget = { x: 0, y: 0 };
+
+  if (import.meta.env.DEV) {
+    (window as Window & { __particles?: unknown }).__particles = {
+      snapshot: () => ({
+        from: ctx.loaded.from,
+        to: ctx.loaded.to,
+        morph: uniforms.uProgress.value,
+        disperse: uniforms.uDisperse.value,
+        figure: state.figureMode,
+        turn: turn.p,
+        frame: { ...view },
+        rotation: { x: spinGroup.rotation.x, y: spinGroup.rotation.y, z: spinGroup.rotation.z },
+        position: { x: grp.position.x, y: grp.position.y },
+      }),
+    };
+  }
 
   let geometry: THREE.BufferGeometry | null = null;
   let arcGeometry: THREE.BufferGeometry | null = null;
@@ -166,25 +172,13 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     uniforms.uTime.value += dt;
     last = now;
 
-    // Wheel steps move the scroll in jumps; the logo's progress catches up per frame so the dispersal and title glide.
-    if (ctx.logoIdx >= 0 && !reduced) {
-      const before = state.logoSmooth;
-      const raw = clamp01(ctx.pairSt[ctx.logoIdx]?.progress ?? 0);
-      state.logoSmooth =
-        state.logoSmooth < 0 ? raw : state.logoSmooth + (raw - state.logoSmooth) * (1 - Math.exp(-dt * SMOOTH.logo));
-      if (Math.abs(raw - state.logoSmooth) < 1e-4) state.logoSmooth = raw;
-      if (state.logoSmooth !== before) apply();
-    }
-
     look.x += (lookTarget.x - look.x) * LOOK_EASE;
     look.y += (lookTarget.y - look.y) * LOOK_EASE;
-    state.spinWeight += (state.spinTarget - state.spinWeight) * SPIN_EASE;
-    spinState.angle = (spinState.angle + dt * SPIN_RATE * state.spinWeight) % TAU;
 
     // The scroll turn fades out with turnOut, so the framed poses end facing front.
     const k = view.turnOut;
     pivot.rotation.set(turn.p * TURN.x * k + look.y, turn.p * TURN.y * k + look.x, 0);
-    spinGroup.rotation.set(view.tilt, view.yaw + spinState.angle, view.roll);
+    spinGroup.rotation.set(view.tilt, view.yaw, view.roll);
     spinGroup.scale.setScalar(view.s);
     spinGroup.position.set(0, CLOUD_CENTER_Y - HEAD_Y, 0);
     // Mobile only: the turned head moves right and down, clear of the statement text.
@@ -195,9 +189,6 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
       layout.baseY + (CENTERED_Y - layout.baseY) * view.c + view.oy * layout.visH - extraY * layout.visH,
       0,
     );
-    const since = state.ignitedAt < 0 ? Infinity : uniforms.uTime.value - state.ignitedAt;
-    const shake = since < 0.8 ? ROCKET.shake * Math.exp(-since * 5) * Math.sin(since * 50) : 0;
-    grp.position.y += shake * layout.visH;
     uniforms.uScale.value = Math.max(1, view.s);
     uniforms.uOpacity.value = view.opacity;
     arc.uniforms.uReveal.value = arcState.reveal;
@@ -248,7 +239,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
         start: 'top top',
         endTrigger: statement,
         end: 'center center',
-        scrub: SMOOTH.turn,
+        scrub: true,
       },
     });
   }
@@ -327,8 +318,6 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     if (state.figureMode) state.figureRedraw();
     if (layout.logoH) placeLogo(ctx);
     readRevealMax(ctx);
-    const logoRaw = ctx.logoIdx >= 0 ? clamp01(ctx.pairSt[ctx.logoIdx]?.progress ?? 0) : 0;
-    if (Math.abs(logoRaw - state.logoSmooth) > 0.5) state.logoSmooth = -1; // re-measured positions snap rather than glide
     apply();
   };
   window.addEventListener('resize', onResize);
@@ -342,6 +331,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   const dispose = () => {
     if (state.disposed) return;
     state.disposed = true;
+    if (import.meta.env.DEV) delete (window as Window & { __particles?: unknown }).__particles;
     window.removeEventListener('pagehide', dispose);
     stop();
     window.removeEventListener('resize', onResize);
@@ -353,7 +343,7 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
     triggers.forEach((t) => t.kill());
     turnTween?.scrollTrigger?.kill();
     turnTween?.kill();
-    gsap.killTweensOf([view, turn, look, spinState, uniforms.uIntro]);
+    gsap.killTweensOf([view, turn, look, uniforms.uIntro]);
     geometry?.dispose();
     arcGeometry?.dispose();
     material.dispose();

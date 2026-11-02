@@ -9,3 +9,5 @@ scripts/geodata/.cache/
 .vercel/
 .codegraph/
 assets-src/
+test-results/
+playwright-report/

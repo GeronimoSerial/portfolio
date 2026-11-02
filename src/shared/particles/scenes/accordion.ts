@@ -18,7 +18,7 @@ import type { ParticleContext } from '../state';
 // Accordion figure at scroll progress p (0 to 1 across the pinned scene). Slot i shows figure i; its first
 // MORPH_SHARE of scroll morphs from the previous figure (slot 0 from the usa map), then it holds.
 export function setFigureState(ctx: ParticleContext, p: number) {
-  const { attrs, shapes, uniforms, state, view, layout, reduced } = ctx;
+  const { attrs, shapes, uniforms, view, layout, reduced } = ctx;
   if (!attrs) return;
   const f = clamp01(p) * FIGURE_NAMES.length;
   const i = Math.min(FIGURE_NAMES.length - 1, Math.floor(f));
@@ -35,8 +35,6 @@ export function setFigureState(ctx: ParticleContext, p: number) {
   const rocket = toKey === ROCKET_KEY;
   const ignite = rocket ? clamp01(h / ROCKET.ignite) : 0;
   const flame = 1 - (1 - ignite) * (1 - ignite); // quick ease-out ignition
-  if (flame > 0 && state.ignitedAt < 0) state.ignitedAt = uniforms.uTime.value;
-  if (flame === 0) state.ignitedAt = -1;
   uniforms.uFlame.value = flame;
   uniforms.uFlicker.value = 1;
   const tier = tierOf();
@@ -45,14 +43,15 @@ export function setFigureState(ctx: ParticleContext, p: number) {
   // The rocket straightens as its flame ignites, then travels up its nose axis with an ease-in.
   const turn = rocket ? yaw * (1 - ignite) : yaw;
   const vals = lerpFrame(fromFrame, figureFrame(toKey, toShape, tier, layout, turn, h * h), t);
-  state.spinTarget = 0;
+  // Ignition follows the same scroll progress on the return trip, rather than a wall-clock timer.
+  vals.oy += ROCKET.shake * (1 - ignite) ** 2 * Math.sin(ignite * Math.PI * 8);
   if (reduced) gsap.set(view, vals);
   else Object.assign(view, vals);
 }
 
 // Reduced motion: the figure snaps to item i with no morph. names is the scene's figure list.
 export function setFigureIndex(ctx: ParticleContext, i: number, names: readonly ShapeKey[] = FIGURE_NAMES) {
-  const { attrs, shapes, uniforms, state, view, layout } = ctx;
+  const { attrs, shapes, uniforms, view, layout } = ctx;
   if (!attrs) return;
   const key = names[i];
   const shape = shapes[key];
@@ -60,11 +59,9 @@ export function setFigureIndex(ctx: ParticleContext, i: number, names: readonly 
   useSlots(ctx, key, key, shape, shape);
   uniforms.uProgress.value = 0;
   uniforms.uFlow.value = 0;
-  state.spinTarget = 0;
   // Reduced motion: the rocket's flame is lit and still, and the rocket holds at the centre of its travel.
   uniforms.uFlame.value = key === ROCKET_KEY ? 0.6 : 0;
   uniforms.uFlicker.value = 0;
-  state.ignitedAt = -1;
   gsap.set(view, figureFrame(key, shape, tierOf(), layout, 0, key === ROCKET_KEY ? 0.5 : 0));
 }
 
@@ -73,7 +70,6 @@ export function leaveFigure(ctx: ParticleContext) {
   ctx.state.figureMode = false;
   ctx.uniforms.uFlame.value = 0;
   ctx.uniforms.uFlicker.value = 1;
-  ctx.state.ignitedAt = -1;
   ctx.apply();
 }
 

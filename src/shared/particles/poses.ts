@@ -109,7 +109,7 @@ export const ROCKET = {
   roll: -0.65, // rad about the view axis (negative is clockwise): the nose points about 37 degrees right of up
   travel: { desktop: 0.32, mobile: 0.2 }, // view heights from the start of the hold to its end, along the nose axis
   ignite: 0.15, // share of the hold for the flame to reach full brightness
-  shake: 0.008, // view heights; decays over about 0.8s after ignition
+  shake: 0.008, // view heights; decays across ignition progress
 };
 const ROCKET_NOSE = { x: -Math.sin(ROCKET.roll), y: Math.cos(ROCKET.roll) }; // unit nose direction, x right, y up
 

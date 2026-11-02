@@ -88,19 +88,29 @@ export function defineScene({
     }
   };
 
+  let active: boolean | undefined;
+  const sync = (self: ScrollTrigger) => {
+    // ScrollTrigger runs onUpdate before onToggle. Assign the scene first so an entry from
+    // either direction renders its current figure instead of reusing the last one seen.
+    if (self.isActive !== active) {
+      active = self.isActive;
+      onToggle?.(active);
+    }
+    apply(self.progress);
+  };
+
   const trigger = ScrollTrigger.create({
     id,
     refreshPriority,
     trigger: el,
     start: 'top top',
     end: 'bottom bottom',
-    onToggle: (self) => onToggle?.(self.isActive),
-    onUpdate: (self) => apply(self.progress),
+    onUpdate: sync,
     // Re-applies the current slot after every refresh, so a reload or a jump inside the scene shows
     // the right copy and figure at once instead of replaying from the first slot.
-    onRefresh: (self) => apply(self.progress),
+    onRefresh: sync,
   });
-  apply(trigger.progress);
+  sync(trigger);
 
   // Lands at `at` of the slot (0.85 by default): earlier, the figure still shows the previous slot.
   const scrollToSlot = (index: number, at = 0.85) => {

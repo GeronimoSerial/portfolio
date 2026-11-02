@@ -20,16 +20,10 @@ export interface MorphAttrs {
 
 // Mutable controller state that used to live in closure variables.
 export interface ParticleState {
-  // Logo progress, lerped toward the scroll progress per frame; -1 until the first frame snaps it.
-  logoSmooth: number;
   // While the accordion block is on screen, the scroll morphs pause and the open item's figure shows.
   figureMode: boolean;
   figureRedraw: () => void;
   mobile: boolean;
-  // uTime when the rocket's flame ignited, for the shake; -1 when off.
-  ignitedAt: number;
-  spinWeight: number;
-  spinTarget: number;
   reducedIndex: number;
   disposed: boolean;
 }

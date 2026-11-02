@@ -34,7 +34,6 @@ h3 {
 /* Reveal targets start hidden only when JS runs with motion allowed (see BaseLayout). */
 .motion [data-reveal] {
   opacity: 0;
-  filter: blur(12px);
 }
 
 :focus-visible {

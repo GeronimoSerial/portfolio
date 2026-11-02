@@ -1,5 +1,4 @@
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SMOOTH } from '../../motion/policy';
 import { setDisperse, setState, progressOf } from '../morph';
 import { clamp01, isDispersePose } from '../poses';
 import { ARC_REVEAL_END } from '../arc';
@@ -43,7 +42,6 @@ export function setScrollState(ctx: ParticleContext) {
   const { sections, pairSt } = ctx;
   let active = -1;
   let passed = -1;
-  // Smoothed progress decides the active pair too, so the logo's lerp never hands over to the next pair early.
   pairSt.forEach((_, i) => {
     if (isNoopPair(ctx, i)) return;
     const p = progressOf(ctx, i);
@@ -66,7 +64,6 @@ export function createPairTriggers(ctx: ParticleContext): ScrollTrigger[] {
       trigger: s.el,
       start: range.start,
       end: range.end,
-      scrub: SMOOTH.morph,
       onUpdate: ctx.apply,
     });
     ctx.pairSt.push(st);
