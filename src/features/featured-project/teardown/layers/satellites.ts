@@ -15,7 +15,7 @@ export const SCAN_TEXELS_MOBILE = 64; // lower resolution on phones
 export const SCAN_FADE_S = 12; // seconds for a fresh swath to relax to its residual
 export const SCAN_RESIDUAL = 0.85; // strength a swath keeps once it has faded: the map stays painted
 export const SCAN_HUE_RATE = 0.05; // ramp positions per second that a painted area drifts after a pass
-export const SCAN_MIX = 0.55; // share of the paint colour over the satellite imagery
+export const SCAN_MIX = 0.78; // share of the paint colour over the satellite imagery
 export const SCAN_RAMP_STOPS = 5;
 // Altitude above the territory plate. The layer above tops out at SEPARATION + relief = 1.15, and
 // a satellite is only drawn while territory is the top layer, so nothing sits between them.

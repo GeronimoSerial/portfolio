@@ -122,5 +122,6 @@ export const SATELLITE_LIGHT = {
 } as const;
 
 // Precipitation ramp for the scan paint, cool to warm, low to high, modest saturation.
-export const SCAN_RAMP_DARK: readonly string[] = ['#2c4f7c', '#3a8c9c', '#6fa67a', '#d6c066', '#d2844f'];
-export const SCAN_RAMP_LIGHT: readonly string[] = ['#2f5a8a', '#2f7f8f', '#5c8f5f', '#b9a045', '#b8693a'];
+// The risk gamut of the real platform: low (green) through yellow and orange to high (red).
+export const SCAN_RAMP_DARK: readonly string[] = ['#1f9d4c', '#8cc63f', '#f0df4b', '#f29b1d', '#c62828'];
+export const SCAN_RAMP_LIGHT: readonly string[] = ['#188a40', '#7ab22f', '#e0cd34', '#e08a0c', '#b71f1f'];
