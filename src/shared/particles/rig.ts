@@ -37,12 +37,22 @@ export function createRig(): Rig {
   return { scene, camera, grp, pivot, spinGroup };
 }
 
-// Sizes the renderer and camera to the window and refits the poses; relayout runs once the layout has its new size.
+// The canvas's own CSS box, not window.innerWidth/innerHeight. On mobile, innerHeight is the height with the URL bar
+// shown while the fixed canvas box can be taller; sizing the buffer from innerHeight stretched the portrait vertically
+// (it looked narrow) until the bar hid. Matching the box keeps the drawing buffer's aspect equal to what is displayed.
+export function viewSize(): { w: number; h: number } {
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-particles-canvas]');
+  return {
+    w: canvas?.clientWidth || window.innerWidth,
+    h: canvas?.clientHeight || window.innerHeight,
+  };
+}
+
+// Sizes the renderer and camera to the canvas box and refits the poses; relayout runs once the layout has its new size.
 export function fitRig(rig: Rig, renderer: THREE.WebGLRenderer, ctx: ParticleContext, relayout: () => void) {
   const { camera } = rig;
   const { layout, uniforms, state } = ctx;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
+  const { w, h } = viewSize();
   const t = tierOf();
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const visH = PORTRAIT_H / (MOCKUP_VIEW_H[t] * SCALE[t]);

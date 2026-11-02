@@ -300,7 +300,19 @@ export function mountParticles(canvas: HTMLCanvasElement): () => void {
   build();
 
   // Single resize path: ScrollTrigger.refresh() fires onRefresh synchronously, which fits and applies once.
-  const onResize = () => ScrollTrigger.refresh();
+  // A height-only change under 25% is the mobile URL bar showing or hiding: the canvas (100lvh) and the triggers keep
+  // their measures, so no refresh, which would re-measure every pin mid-scroll and jolt the page.
+  let lastW = window.innerWidth;
+  let lastH = window.innerHeight;
+  const onResize = () => {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const barOnly = w === lastW && Math.abs(h - lastH) < 0.25 * Math.max(h, lastH);
+    lastW = w;
+    if (barOnly) return;
+    lastH = h;
+    ScrollTrigger.refresh();
+  };
   // Refresh follows resize and font loading; re-measure the rig, the title block and the logo's position then.
   const onRefresh = () => {
     fit();
