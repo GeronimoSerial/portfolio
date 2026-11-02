@@ -26,24 +26,29 @@ const ORBIT_WOBBLE = 0.08; // altitude swing, so each track reads as inclined
 const ORBIT_RX = 2.4;
 const ORBIT_RZ = 1.0;
 const HEADING_DT = 0.05; // seconds ahead, to read the direction of travel
-const BEAM_OPACITY = 0.09;
+const BEAM_OPACITY = 0.5; // the hairline from the spacecraft to the ground
+const BEAM_RADIUS = 0.01;
+const RING_OPACITY = 0.4; // outline of the footprint
+const CRAFT_SCALE = 0.7;
 
 interface OrbitSpec {
   period: number; // seconds per revolution
   phase: number; // radians
   yaw: number; // turn of the ground track around the stack's vertical axis
+  precession: number; // rad per second the track keeps turning, so successive passes sweep the whole province
 }
 
 // Two passes at different speeds and phases: the second satellite covers the far side of the plate.
 const ORBITS: readonly OrbitSpec[] = [
-  { period: 15, phase: 0, yaw: 0.5 },
-  { period: 19, phase: Math.PI, yaw: -0.7 },
+  { period: 15, phase: 0, yaw: 0.5, precession: 0.13 },
+  { period: 19, phase: Math.PI, yaw: -0.7, precession: -0.1 },
 ];
 
 interface Craft {
   spec: OrbitSpec;
   root: THREE.Group;
-  beam: THREE.Mesh;
+  beam: THREE.Mesh; // thin line from the spacecraft to the ground
+  ring: THREE.Mesh; // outline of the scanned footprint on the ground
   prev: { i: number; j: number } | null; // last paint position, to sweep the swath without gaps
 }
 
@@ -52,6 +57,7 @@ export interface ScanUniforms {
   uRamp: { value: THREE.Vector3[] }; // precipitation ramp, low to high, sRGB
   uScanAll: { value: number }; // 1 paints all land at once (reduced motion)
   uScanClock: { value: number }; // current clock, the same units as the paint clock
+  uScanTexel: { value: number }; // size of one paint texel in uv, for the soft edge of the swath
 }
 
 export interface ScanRig {
@@ -68,8 +74,9 @@ const orbitAt = (spec: OrbitSpec, t: number, out: THREE.Vector3): void => {
   const a = (t / spec.period) * Math.PI * 2 + spec.phase;
   const x = Math.cos(a) * ORBIT_RX;
   const z = Math.sin(a) * ORBIT_RZ;
-  const c = Math.cos(spec.yaw);
-  const s = Math.sin(spec.yaw);
+  const yaw = spec.yaw + spec.precession * t;
+  const c = Math.cos(yaw);
+  const s = Math.sin(yaw);
   out.set(x * c - z * s, ORBIT_ALTITUDE + ORBIT_WOBBLE * Math.sin(2 * a), x * s + z * c);
 };
 
@@ -88,6 +95,7 @@ export function buildScanRig(data: GeoData, mobile: boolean, reduce: boolean): S
     uRamp: { value: Array.from({ length: SCAN_RAMP_STOPS }, () => new THREE.Vector3()) },
     uScanAll: { value: reduce ? 1 : 0 },
     uScanClock: { value: 0 },
+    uScanTexel: { value: 1 / n },
   };
 
   const group = new THREE.Group();
@@ -102,13 +110,23 @@ export function buildScanRig(data: GeoData, mobile: boolean, reduce: boolean): S
     side: THREE.DoubleSide,
     blending: THREE.AdditiveBlending,
   });
+  const ringMat = new THREE.MeshBasicMaterial({
+    transparent: true,
+    opacity: RING_OPACITY,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending,
+  });
   // Body along local Z (flight direction), solar wings along X, dish pointing down at the ground.
   const bodyGeo = new THREE.BoxGeometry(0.14, 0.12, 0.18);
   const wingGeo = new THREE.BoxGeometry(0.36, 0.012, 0.12);
   const dishGeo = new THREE.ConeGeometry(0.05, 0.07, seg);
   dishGeo.rotateX(Math.PI);
-  // Apex at the top: narrow at the satellite, wide on the ground. Unit size, scaled per frame.
-  const beamGeo = new THREE.ConeGeometry(1, 1, seg, 1, true);
+  // A hairline from the spacecraft to the ground (unit height, stretched per frame), and a flat ring that
+  // outlines the footprint. A solid cone read like a toy flashlight.
+  const beamGeo = new THREE.CylinderGeometry(1, 1, 1, 6, 1, true);
+  const ringGeo = new THREE.RingGeometry(0.97, 1, mobile ? 32 : 72);
+  ringGeo.rotateX(-Math.PI / 2);
 
   const specs = mobile ? ORBITS.slice(0, 1) : ORBITS;
   const crafts: Craft[] = specs.map((spec) => {
@@ -121,12 +139,14 @@ export function buildScanRig(data: GeoData, mobile: boolean, reduce: boolean): S
     const dish = new THREE.Mesh(dishGeo, dishMat);
     dish.position.y = -0.095;
     root.add(body, wingL, wingR, dish);
+    root.scale.setScalar(CRAFT_SCALE);
     const beam = new THREE.Mesh(beamGeo, beamMat);
-    group.add(root, beam);
-    return { spec, root, beam, prev: null };
+    const ring = new THREE.Mesh(ringGeo, ringMat);
+    group.add(root, beam, ring);
+    return { spec, root, beam, ring, prev: null };
   });
 
-  const materials: THREE.Material[] = [foilMat, wingMat, dishMat, beamMat];
+  const materials: THREE.Material[] = [foilMat, wingMat, dishMat, beamMat, ringMat];
   const pos = new THREE.Vector3();
   const ahead = new THREE.Vector3();
 
@@ -141,7 +161,9 @@ export function buildScanRig(data: GeoData, mobile: boolean, reduce: boolean): S
     const ground = terrainY(data, Math.min(1, Math.max(0, u)), Math.min(1, Math.max(0, v)));
     const len = Math.max(0.05, pos.y - ground);
     craft.beam.position.set(pos.x, (pos.y + ground) / 2, pos.z);
-    craft.beam.scale.set(SCAN_HALF_WIDTH, len, SCAN_HALF_WIDTH);
+    craft.beam.scale.set(BEAM_RADIUS, len, BEAM_RADIUS);
+    craft.ring.position.set(pos.x, ground + 0.015, pos.z);
+    craft.ring.scale.set(SCAN_HALF_WIDTH, 1, SCAN_HALF_WIDTH);
     return { u, v };
   };
 
@@ -186,8 +208,9 @@ export function buildScanRig(data: GeoData, mobile: boolean, reduce: boolean): S
       wingMat.color.set(c.wing);
       dishMat.color.set(c.dish);
       beamMat.color.set(c.beam);
-      beamMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
-      beamMat.needsUpdate = true;
+      ringMat.color.set(c.beam);
+      beamMat.blending = ringMat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending;
+      beamMat.needsUpdate = ringMat.needsUpdate = true;
       const stops = dark ? SCAN_RAMP_DARK : SCAN_RAMP_LIGHT;
       stops.forEach((hex, k) => uniforms.uRamp.value[k]?.set(...srgbArray(hex)));
     },

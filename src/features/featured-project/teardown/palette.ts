@@ -107,18 +107,19 @@ export const MASK_INSIDE = '#fff';
 // --- satellites ---
 // Satellite materials and the scan paint ramp (sRGB hex). The light variants are deeper so the
 // spacecraft and the paint read on the pale page.
+// Sober instrument colours: a graphite body, dark panels, a light antenna. Gold foil read like a toy.
 export const SATELLITE_DARK = {
-  foil: '#c9a24a', // gold foil body
-  wing: '#24406e', // dark-blue solar wings
-  dish: '#c9ccd2', // antenna
-  beam: '#9fd6e6', // scan beam
+  foil: '#aab0b9', // body
+  wing: '#25344f', // solar wings
+  dish: '#e3e6eb', // antenna
+  beam: '#cfe3ea', // scan line and footprint ring
 } as const;
 
 export const SATELLITE_LIGHT = {
-  foil: '#b08a3c',
-  wing: '#1d3561',
-  dish: '#8e939b',
-  beam: '#3c6f86',
+  foil: '#6c7480',
+  wing: '#1b2a47',
+  dish: '#99a0aa',
+  beam: '#33566b',
 } as const;
 
 // Precipitation ramp for the scan paint, cool to warm, low to high, modest saturation.
