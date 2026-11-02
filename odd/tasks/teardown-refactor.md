@@ -21,7 +21,7 @@ Mapping (2026-11-02, Haiku read-only) found: `scene.ts` is a 501-line god file; 
 - [x] R1 Shared resources: build hillshade, footprint and satellite once and share via `LayerContext`; extract duplicated marker/rim constants into one shared module. Route: delegated writer (2+ non-trivial files).
 - [x] R2 Split `scene.ts` into focused modules (framing solver, readouts, atmosphere wiring, resize/theme/data-load); `scene.ts` stays a thin orchestrator. Route: delegated writer.
 - [x] R3 Centralize palette: one module owns every hardcoded hex and the sRGB/linear conversions; layers consume it. Route: delegated writer.
-- [ ] R4 Lifecycle: dispose placeholder satellite always, remove media-query listener, avoid mounting before data resolves. Route: delegated writer.
+- [x] R4 Lifecycle: dispose placeholder satellite always, remove media-query listener, avoid mounting before data resolves. Route: delegated writer.
 
 - [ ] R5 Scroll feel: replace the ScrollTrigger `pin` (JS fixed pin) in `choreography.ts` with a CSS `position: sticky` stage inside a tall wrapper, scrub the same timeline over the wrapper (`start: 'top top'`, `end: 'bottom bottom'`), as `@bsmnt/scrollytelling` does and as Stack/Projects already do. Keep GSAP and Lenis, no React. Route: delegated writer (`choreography.ts` + `FeaturedProject.astro` markup/CSS). Verify in browser with Lenis on, desktop and touch. Hypothesis, not yet proven to be the cause.
 
@@ -37,7 +37,8 @@ Mapping (2026-11-02, Haiku read-only) found: `scene.ts` is a 501-line god file; 
 
 - R2 (2026-11-02, delegated Haiku writer): `scene.ts` 507 -> 274 lines (target ~250 missed; palette and render loop kept in the orchestrator by brief). New `framing.ts`, `readouts.ts`, `atmosphere.ts`. Parent re-ran `pnpm check` (0 errors) and `pnpm build` (Complete). Browser readback still pending.
 - R3 (2026-11-02, delegated Haiku writer): new `teardown/palette.ts` owns map colours + sRGB/linear helpers; parent re-ran `pnpm check` (0 errors) and `pnpm build` (Complete) and verified the access-layer hex values equal the old literals. Remaining hex-like literals are CSS selector and PRNG constants. GLSL luminance weights and a 0.16 water highlight stay in shaders. Browser readback pending.
+- R4 (2026-11-02, delegated Haiku writer): one real fix in the `FeaturedProject.astro` client script (media-query listener removed, pending remount frame cancelled, cleanups run on non-bfcache `pagehide`); parent re-read the diff, re-ran `pnpm check` (0 errors) and `pnpm build` (Complete). Audit found no other leaks: data-load race already guarded by `disposed`, shared textures disposed once. Open, not changed: no `.catch` on the geo data load; extra fetch on remount (no promise cache); `renderer.dispose()` without `forceContextLoss()` on remount, not confirmed in a browser.
 - User request (2026-11-02): replace plain GSAP with `@bsmnt/scrollytelling` because it "works much better". Verified from the published package (0.3.3, `dist/index.mjs`): React-only (peer react>=18), a thin wrapper over the SAME GSAP ScrollTrigger with `scrub: true` default (same as ours), and its `Pin` is CSS `position: sticky` (spacer + sticky child), not a ScrollTrigger pin. Our teardown uses `scrollTrigger.pin` under Lenis. User decision: keep GSAP, no React. Likely cause of the worse feel: JS pin vs sticky. Captured as R5.
 
 ## Next step
-R4 in progress, then R5.
+R5 in progress, then browser readback.

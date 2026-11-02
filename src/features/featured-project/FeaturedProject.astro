@@ -356,13 +356,30 @@ const readoutCopy = {
   };
 
   let remountFrame = 0;
-  window.matchMedia(MOBILE_QUERY).addEventListener('change', () => {
+  const tier = window.matchMedia(MOBILE_QUERY);
+  const onTierChange = (): void => {
     if (remountFrame) return;
     remountFrame = requestAnimationFrame(() => {
       remountFrame = 0;
       remount();
     });
-  });
+  };
+  tier.addEventListener('change', onTierChange);
+
+  // Removes the listeners and frees every mount. Runs only on a real unload: a page restored from
+  // the back/forward cache (persisted) keeps its mounts and listeners.
+  const stop = (): void => {
+    tier.removeEventListener('change', onTierChange);
+    window.removeEventListener('pagehide', onPageHide);
+    cancelAnimationFrame(remountFrame);
+    remountFrame = 0;
+    for (const cleanup of cleanups.values()) cleanup();
+    cleanups.clear();
+  };
+  const onPageHide = (event: PageTransitionEvent): void => {
+    if (!event.persisted) stop();
+  };
+  window.addEventListener('pagehide', onPageHide);
 
   mountAll();
 </script>
