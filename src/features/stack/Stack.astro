@@ -218,7 +218,9 @@ const t = useTranslations(Astro.props.lang);
         trigger: section,
         start: 'top top',
         end: 'bottom bottom',
-        scrub: true,
+        // Smoothed: a raw scrub writes the text transform on main-thread scroll events, a frame behind the
+        // compositor on touch scrolling, which reads as tremble on phones.
+        scrub: 0.5,
       },
     });
     rows.forEach((row) => {

@@ -71,7 +71,8 @@ const { lang } = Astro.props;
 
 <script>
   const SCROLL_TOP = 80;
-  const THRESHOLD = 6;
+  // Large enough that the small scroll shifts from the mobile URL bar do not flip the header back and forth.
+  const THRESHOLD = 14;
 
   const header = document.querySelector<HTMLElement>('.site-header');
 
