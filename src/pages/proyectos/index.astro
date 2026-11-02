@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../shared/components/SiteHeader.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+const githubHref = 'https://github.com/GeronimoSerial';
+const homeHref = '/';
+---
+
+<BaseLayout lang={lang} title={`${t('projects.page.title')} | Geronimo Serial`}>
+  <SiteHeader lang={lang} />
+  <main class="page">
+    <h1 class="title">{t('projects.page.title')}</h1>
+    <p class="lead">{t('projects.page.lead')}</p>
+    <nav class="links" aria-label={t('projects.page.title')}>
+      <a href={githubHref} target="_blank" rel="noopener">GitHub</a>
+      <a href={homeHref}>{t('projects.page.back')}</a>
+    </nav>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    padding: clamp(140px, 22vh, 200px) var(--gutter) clamp(96px, 16vh, 180px);
+    background: transparent;
+    color: var(--ink);
+  }
+  .title {
+    margin: 0;
+    font-weight: 300;
+    font-size: clamp(36px, 4.1vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+  .lead {
+    margin: 24px 0 0;
+    max-width: 36em;
+    font-size: clamp(18px, 1.6vw, 20px);
+    line-height: 1.5;
+    color: var(--soft);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    margin-top: clamp(56px, 9vh, 88px);
+    font-size: 18px;
+  }
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .links a:hover,
+  .links a:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  .links a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+</style>

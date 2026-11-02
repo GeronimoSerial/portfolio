@@ -1,0 +1,332 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+const email = 'contact@geroserial.com';
+---
+
+<section id="contact" aria-labelledby="contact-title" class="section">
+  <h2 id="contact-title" class="statement" data-reveal>{t('contact.statement')}</h2>
+
+  <form id="contact-form" class="form"
+    data-sending={t('contact.form.sending')}
+    data-sent={t('contact.form.sent')}
+    data-error={t('contact.form.error')}
+    data-invalid={t('contact.form.invalid')}>
+    <div class="field">
+      <label for="contact-name">{t('contact.form.name')}</label>
+      <input id="contact-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for="contact-email">{t('contact.form.email')}</label>
+      <input id="contact-email" name="email" type="email" autocomplete="email" required />
+    </div>
+    <div class="field">
+      <label for="contact-message">{t('contact.form.message')}</label>
+      <textarea id="contact-message" name="message" rows="6" minlength="10" maxlength="5000" required></textarea>
+    </div>
+    <div class="trap" hidden aria-hidden="true">
+      <label for="contact-website">Website</label>
+      <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="submit">{t('contact.form.send')}</button>
+      <span class="form-status" id="form-status" aria-live="polite"></span>
+    </div>
+  </form>
+
+  <div class="mail">
+    <a class="email" href={`mailto:${email}`}>{email}</a>
+    <div class="copy-group">
+      <button type="button" class="copy" id="copy-email" data-email={email} data-copied={t('contact.copied')} data-copy-error={t('contact.copyError')}>
+        {t('contact.copy')}
+      </button>
+      <span class="status" id="copy-status" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <a class="site" href="https://geroserial.com/" target="_blank" rel="noopener">geroserial.com</a>
+
+  <div class="meta">
+    <a href="https://github.com/GeronimoSerial" target="_blank" rel="noopener">GitHub</a>
+    <span>Corrientes, Argentina</span>
+    <span>{t('contact.meta.languages')}</span>
+  </div>
+  <p class="copyright">© 2026 Geronimo Serial</p>
+</section>
+
+<style>
+  .section {
+    padding: clamp(96px, 16vh, 180px) var(--gutter) clamp(48px, 8vh, 80px);
+    background: transparent;
+    color: var(--ink);
+    /* Centred like the "What I do" stage above, so the page closes on the same axis. */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .statement {
+    margin: 0;
+    font-weight: 300;
+    /* Same scale as the Stack headline above. */
+    font-size: clamp(56px, 8vw, 128px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .form {
+    display: grid;
+    gap: 28px;
+    width: 100%;
+    max-width: 36rem;
+    margin-top: clamp(40px, 7vh, 64px);
+    text-align: left;
+  }
+  .field {
+    display: grid;
+    gap: 8px;
+  }
+  .field label {
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--soft);
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    border: 0;
+    border-bottom: 1px solid var(--soft);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .field textarea {
+    min-height: 9rem;
+    resize: vertical;
+  }
+  .field input:focus-visible,
+  .field textarea:focus-visible,
+  .submit:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .submit {
+    min-height: 44px;
+    padding: 0 22px;
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .submit:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .submit:disabled {
+    border-color: var(--soft);
+    color: var(--soft);
+    background: transparent;
+    cursor: progress;
+  }
+  .form-status {
+    min-height: 1.4em;
+    font-size: 15px;
+    color: var(--soft);
+  }
+  @media (max-width: 767px) {
+    .form {
+      max-width: none;
+    }
+  }
+  .mail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: clamp(72px, 12vh, 120px);
+  }
+  .email {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 300;
+    font-size: clamp(26px, 3.6vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+  .email:hover,
+  .email:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.12em;
+  }
+  .copy-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  /* 44px hit area; the negative margin keeps the visual row height unchanged. */
+  .copy {
+    min-height: 44px;
+    margin: -12px 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.3em;
+    cursor: pointer;
+  }
+  .copy:hover {
+    color: var(--soft);
+  }
+  .copy:focus-visible,
+  .site:focus-visible,
+  .meta a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+  .status {
+    font-size: 15px;
+    color: var(--soft);
+  }
+  .site {
+    display: inline-block;
+    margin-top: 16px;
+    color: var(--soft);
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.25s ease;
+  }
+  .site:hover {
+    color: var(--ink);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 32px;
+    margin-top: clamp(80px, 14vh, 120px);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--soft);
+  }
+  .meta a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .meta a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .meta > * {
+    text-wrap: balance;
+  }
+  .copyright {
+    margin: 24px 0 0;
+    font-size: 14px;
+    color: var(--soft);
+  }
+</style>
+
+<script>
+  import { revealOnEnter } from '../../shared/motion/reveal';
+
+  const root = document.getElementById('contact');
+  const copyButton = document.getElementById('copy-email') as HTMLButtonElement | null;
+  const status = document.getElementById('copy-status');
+
+  if (copyButton && status) {
+    let timer: number | undefined;
+    copyButton.addEventListener('click', async () => {
+      const email = copyButton.dataset.email ?? '';
+      let message = copyButton.dataset.copyError ?? '';
+      try {
+        await navigator.clipboard.writeText(email);
+        message = copyButton.dataset.copied ?? '';
+      } catch {
+        // Clipboard access is denied or unavailable; the error text above stays.
+      }
+      window.clearTimeout(timer);
+      status.textContent = message;
+      timer = window.setTimeout(() => {
+        status.textContent = '';
+      }, 2000);
+    });
+  }
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const formStatus = document.getElementById('form-status');
+  const submitButton = form?.querySelector<HTMLButtonElement>('button[type="submit"]') ?? null;
+
+  if (form && formStatus && submitButton) {
+    const sendLabel = submitButton.textContent ?? '';
+
+    form.addEventListener(
+      'invalid',
+      () => {
+        formStatus.textContent = form.dataset.invalid ?? '';
+      },
+      true,
+    );
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      submitButton.disabled = true;
+      submitButton.textContent = form.dataset.sending ?? sendLabel;
+      formStatus.textContent = form.dataset.sending ?? '';
+
+      let message = form.dataset.error ?? '';
+      let sent = false;
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        });
+        sent = response.ok;
+        if (sent) {
+          message = form.dataset.sent ?? '';
+        } else if (response.status === 400) {
+          message = form.dataset.invalid ?? '';
+        }
+      } catch {
+        // Network failure: the generic error text stays.
+      }
+
+      if (sent) {
+        form.reset();
+      }
+      submitButton.disabled = false;
+      submitButton.textContent = sendLabel;
+      formStatus.textContent = message;
+    });
+  }
+
+  revealOnEnter(root);
+</script>

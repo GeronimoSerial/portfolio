@@ -1,0 +1,67 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section id="argentina" data-particles="argentina" aria-labelledby="argentina-title" class="scene">
+  <div class="stage" data-particles-text>
+    <div class="copy">
+      <h2 id="argentina-title" class="title">{t('argentina.title')}</h2>
+    </div>
+  </div>
+</section>
+<!-- Zero-height marker: the map disperses over the 80vh to 5vh above the Featured section (see the controller). -->
+<div data-particles="none" data-morph-start="-80" data-morph-end="-5" aria-hidden="true"></div>
+
+<style>
+  .scene {
+    position: relative;
+    height: 130vh;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  .copy {
+    max-width: 34vw;
+  }
+
+  .title {
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .title {
+    font-size: clamp(32px, 3.6vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  @media (max-width: 767px) {
+    .stage {
+      align-items: flex-start;
+      padding: 96px 16px 0;
+    }
+
+    .copy {
+      max-width: none;
+    }
+
+    .title {
+      font-size: 36px;
+    }
+  }
+</style>

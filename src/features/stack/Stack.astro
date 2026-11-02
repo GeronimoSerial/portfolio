@@ -1,0 +1,290 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+import { stackRows } from './marquee';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section id="stack" aria-labelledby="stack-title" class="section">
+  <div class="stage">
+    <div class="intro">
+      <h2 id="stack-title" class="headline" data-reveal>{t('stack')}</h2>
+    </div>
+
+    <div class="rows">
+      {
+        stackRows.map((row) => (
+          <div
+            class="row"
+            role="group"
+            tabindex="0"
+            aria-label={row.labelKeys.map((key) => t(key)).join(' · ')}
+            data-direction={row.direction}
+            style={`--duration:${row.duration}s`}
+          >
+            <div class="shift">
+              <div class="track">
+                <ul class="group">
+                  {row.items.map((item) => (
+                    <li class:list={['item', { soft: !item.icon }]} style={item.icon ? `--brand-dark:${item.icon.dark};--brand-light:${item.icon.light}` : undefined}>
+                      {item.icon && <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={item.icon.path} /></svg>}
+                      <span>{item.name}</span>
+                    </li>
+                  ))}
+                </ul>
+                <ul class="group" aria-hidden="true">
+                  {row.items.map((item) => (
+                    <li class:list={['item', { soft: !item.icon }]} style={item.icon ? `--brand-dark:${item.icon.dark};--brand-light:${item.icon.light}` : undefined}>
+                      {item.icon && <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d={item.icon.path} /></svg>}
+                      <span>{item.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    --size: clamp(28px, 3.4vw, 48px);
+    --gap: clamp(32px, 4.5vw, 64px);
+    background: transparent;
+    color: var(--ink);
+    /* clip, not hidden: hidden would make the section a scroll container and break the sticky stage. */
+    overflow-x: clip;
+  }
+  .stage {
+    box-sizing: border-box;
+    padding-block: clamp(96px, 16vh, 180px);
+  }
+  .intro {
+    padding-inline: var(--gutter);
+  }
+  .headline {
+    margin: 0;
+    font-weight: 300;
+    font-size: clamp(56px, 8vw, 128px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    /* Centred: the closing sections (What I do, Stack, Contact) share one axis. */
+    text-align: center;
+  }
+  .rows {
+    margin-top: clamp(64px, 10vh, 112px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 4vw, 56px);
+  }
+  .row {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%);
+  }
+  .row:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 8px;
+  }
+  .track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: stack-marquee var(--duration) linear infinite;
+  }
+  .row[data-direction='right'] .track {
+    animation-name: stack-marquee-reverse;
+  }
+  .group {
+    display: flex;
+    flex: none;
+    gap: var(--gap);
+    margin: 0;
+    padding: 0 var(--gap) 0 0;
+    list-style: none;
+  }
+  .item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    white-space: nowrap;
+    color: var(--ink);
+    font-weight: 300;
+    font-size: var(--size);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  .item.soft {
+    color: var(--soft);
+  }
+  .icon {
+    flex: none;
+    width: 0.9em;
+    height: 0.9em;
+    fill: currentColor;
+    color: var(--brand-dark, var(--ink));
+  }
+  html[data-theme='light'] .icon {
+    color: var(--brand-light, var(--ink));
+  }
+  @keyframes stack-marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+  @keyframes stack-marquee-reverse {
+    from {
+      transform: translate3d(-50%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    /* Hold: 80vh of scroll while the stage stays pinned. Only the rows move horizontally. */
+    .section {
+      height: calc(100svh + 80vh);
+    }
+    .stage {
+      position: sticky;
+      top: 0;
+      height: 100svh;
+    }
+    .shift {
+      will-change: transform;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .section {
+      --size: 22px;
+      --gap: 28px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rows {
+      padding-inline: var(--gutter);
+    }
+    .row {
+      overflow: visible;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .track {
+      width: 100%;
+      animation: none;
+    }
+    .group {
+      width: 100%;
+      flex-wrap: wrap;
+      padding-right: 0;
+      row-gap: 0.4em;
+    }
+    .group[aria-hidden='true'] {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { reduced } from '../../shared/motion/policy';
+  import { revealOnEnter } from '../../shared/motion/reveal';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const section = document.getElementById('stack');
+  revealOnEnter(section);
+
+  // Reduced motion: no hold, no scrub, no drift. The rows stay static and wrapped as in the CSS.
+  if (section && !reduced.matches) {
+    const rows = Array.from(section.querySelectorAll<HTMLElement>('.row'));
+
+    // Scrubbed offset over the hold, as a share of each row's width. The auto-drift covers one full
+    // group per cycle and each group is wider than a row, so the offset never exposes an empty edge.
+    const TRAVEL = 20;
+    const hold = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        id: 'stack-hold',
+        refreshPriority: 0,
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+      },
+    });
+    rows.forEach((row) => {
+      const shift = row.querySelector<HTMLElement>('.shift');
+      if (!shift) return;
+      // Rows 1 and 3 travel left, row 2 travels right, against their auto-drift.
+      const fromTo = row.dataset.direction === 'left' ? [0, -TRAVEL] : [-TRAVEL, 0];
+      hold.fromTo(shift, { xPercent: fromTo[0] }, { xPercent: fromTo[1], duration: 1 }, 0);
+    });
+
+    // Auto-drift pauses off-screen and while a row is hovered or keyboard-focused. The change eases
+    // through playbackRate so the drift slows down and speeds up instead of stopping dead.
+    const EASE_SECONDS = 0.6;
+    let onScreen = true;
+
+    const marquees = rows.map((row) => ({
+      row,
+      animation: row.querySelector<HTMLElement>('.track')?.getAnimations()[0] ?? null,
+      hovered: false,
+      focused: false,
+      running: true,
+    }));
+
+    const sync = (marquee: (typeof marquees)[number]) => {
+      const { animation } = marquee;
+      if (!animation) return;
+      const running = onScreen && !marquee.hovered && !marquee.focused;
+      if (running === marquee.running) return;
+      marquee.running = running;
+      gsap.killTweensOf(animation);
+      if (running) {
+        animation.play();
+        gsap.to(animation, { playbackRate: 1, duration: EASE_SECONDS, ease: 'power1.out' });
+      } else {
+        gsap.to(animation, {
+          playbackRate: 0,
+          duration: EASE_SECONDS,
+          ease: 'power1.out',
+          onComplete: () => animation.pause(),
+        });
+      }
+    };
+
+    marquees.forEach((marquee) => {
+      const { row } = marquee;
+      row.addEventListener('pointerenter', () => {
+        marquee.hovered = true;
+        sync(marquee);
+      });
+      row.addEventListener('pointerleave', () => {
+        marquee.hovered = false;
+        sync(marquee);
+      });
+      row.addEventListener('focusin', () => {
+        marquee.focused = row.matches(':focus-visible');
+        sync(marquee);
+      });
+      row.addEventListener('focusout', () => {
+        marquee.focused = false;
+        sync(marquee);
+      });
+    });
+
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      marquees.forEach(sync);
+    }).observe(section);
+  }
+</script>

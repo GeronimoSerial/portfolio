@@ -1,0 +1,368 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+import { LAYERS } from './teardown/layers';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// The closing line links the bank's acronym to its site.
+const idb = lang === 'en' ? { name: 'IDB', href: 'https://www.iadb.org/en' } : { name: 'BID', href: 'https://www.iadb.org/es' };
+const [closingBefore, closingAfter = ''] = t('featured.closing').split(idb.name);
+
+// Readout templates are passed to the scene as text; the scene fills the numbers from the model.
+const readoutCopy = {
+  rain: t('featured.readout.rain'),
+  territory: t('featured.readout.territory'),
+  access: t('featured.readout.access'),
+  risk: t('featured.readout.risk'),
+};
+---
+
+<section id="featured" class="featured" aria-labelledby="featured-title">
+  <div class="intro">
+    <h2 id="featured-title">{t('featured')}</h2>
+  </div>
+
+  <div class="teardown" data-teardown data-lang={lang} data-strings={JSON.stringify(readoutCopy)}>
+    <div class="pin" data-pin>
+      <div class="canvas-wrap" data-canvas-wrap>
+        <canvas data-viz role="img" aria-label={t('featured.canvasLabel')}></canvas>
+      </div>
+      <div class="copy">
+        <p class="closing">{closingBefore}<a href={idb.href} target="_blank" rel="noopener">{idb.name}</a>{closingAfter}</p>
+        <div class="steps">
+          <article class="step cover" data-step="0">
+            <h3>{t('featured.title')}</h3>
+            <p>{t('featured.cover.body')}</p>
+          </article>
+          {
+            LAYERS.map((layer, i) => (
+              <article class="step" data-step={i + 1}>
+                <h3>{t(layer.labelKey)}</h3>
+                <p>{t(layer.bodyKey)}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured {
+    color: var(--ink);
+    padding-top: 16vh;
+    padding-bottom: 12vh;
+    /* Set by the scene from the measured site header; the pinned stage starts below it. */
+    --sticky-top: 80px;
+  }
+
+  /* Closing line: lives in the copy column, so it pins and unpins with the steps. */
+  .closing {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    max-width: 18ch;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(28px, 3.4vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .closing a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.14em;
+  }
+
+  .intro {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vh var(--gutter) 6vh;
+  }
+  .intro h2 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(32px, 4.4vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 22em;
+    margin: 0;
+  }
+  .teardown {
+    position: relative;
+  }
+
+  /* Static layout (reduced motion or no JS): canvas on top, then every step. */
+  .pin {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--bg);
+    overflow: clip;
+  }
+  .canvas-wrap {
+    position: relative;
+    grid-row: 1;
+    grid-column: 1;
+    height: 70vh;
+    min-height: 360px;
+  }
+  /* Static desktop (reduced motion): the canvas also starts below the transparent header. */
+  @media (min-width: 768px) {
+    .teardown:not(.is-pinned) .canvas-wrap {
+      box-sizing: border-box;
+      padding-top: var(--sticky-top);
+    }
+  }
+  .copy {
+    grid-row: 2;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    padding: 24px var(--gutter) 56px;
+  }
+  /* Static layout: a flex column, canvas first. */
+  .teardown:not(.is-pinned) .pin {
+    display: flex;
+    flex-direction: column;
+  }
+  .teardown:not(.is-pinned) .canvas-wrap {
+    order: -1;
+  }
+  /* The canvas edge is a straight line the weather runs into (rain and clouds are cut there).
+     Each axis fades to transparent at its own edge, so no side of the box reads as a hard line.
+     A radial mask does not do this: its edge midpoints stay almost opaque. */
+  .canvas-wrap canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* Narrow fades: the stack keeps its side margin (scene MARGIN_X), and the bottom fade stays
+       below the stack's bottom margin. The top fade ends above the header clearance. */
+    --edge-x: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
+    --edge-y: linear-gradient(to bottom, transparent, #000 6%, #000 97%, transparent);
+    -webkit-mask-image: var(--edge-x), var(--edge-y);
+    -webkit-mask-composite: source-in;
+    mask-image: var(--edge-x), var(--edge-y);
+    mask-composite: intersect;
+  }
+  .sample-note {
+    margin: 0;
+    font: 400 14px/1.3 var(--font-sans);
+    color: var(--soft);
+  }
+  .sample-note .sep {
+    margin: 0 0.5em;
+  }
+  /* Real data: the sample note goes, the simulation note stays (the water is always simulated). */
+  .teardown[data-placeholder='false'] .sample-note .sample,
+  .teardown[data-placeholder='false'] .sample-note .sep {
+    display: none;
+  }
+
+  /* Pinned sequence (desktop, motion allowed): one pinned stage, copy left (~36%), scene right. */
+  .is-pinned .pin {
+    height: 100vh;
+    grid-template-columns: 36% 64%;
+    grid-template-rows: 100%;
+  }
+  /* The stage starts below the fixed header: the cloud deck is softly faded at this top edge
+     (see the canvas mask), never cut by the header band. */
+  .is-pinned .canvas-wrap {
+    grid-row: 1;
+    grid-column: 2;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+    padding-top: var(--sticky-top);
+  }
+  /* The closing line sits at the top of the column, below the header; the steps follow it. */
+  .is-pinned .copy {
+    grid-row: 1;
+    grid-column: 1;
+    justify-content: flex-start;
+    padding: calc(var(--sticky-top) + 10vh) 3vw 0 var(--gutter);
+    gap: 20px;
+  }
+
+  .steps {
+    position: relative;
+  }
+  /* Sized to the tallest step. The slot sits a fixed distance under the closing line, and steps
+     are top-aligned in it, so every step starts at the same height whatever its length. */
+  .is-pinned .steps {
+    min-height: 19rem;
+    margin-top: 6vh;
+  }
+  .step {
+    margin-bottom: 32px;
+  }
+  .is-pinned .step {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0;
+  }
+  .step h3 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(24px, 2.1vw, 34px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
+  }
+  .step.cover h3 {
+    font-size: clamp(26px, 2.6vw, 40px);
+    line-height: 1.15;
+    max-width: 20ch;
+  }
+  .step p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--soft);
+    max-width: 42ch;
+    margin: 0 0 12px;
+  }
+  /* Numbers are ink, not soft: the .step p rule above would otherwise win on specificity. */
+  .step .readout {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .step .source {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: var(--soft);
+  }
+
+  /* Mobile: the same pinned model as desktop, laid out vertically in a 100svh stage: the closing
+     line, the canvas, then one fixed slot where the active step crossfades. .copy dissolves so its
+     children become rows of the pin grid. */
+  @media (max-width: 767px) {
+    .featured {
+      padding-bottom: 4vh;
+    }
+    .copy {
+      display: contents;
+    }
+    .closing {
+      grid-row: 1;
+      grid-column: 1;
+      max-width: none;
+      padding: 0 var(--gutter);
+      font-size: 28px;
+    }
+    .canvas-wrap {
+      grid-row: 2;
+      grid-column: 1;
+    }
+    .steps {
+      grid-row: 3;
+      grid-column: 1;
+    }
+    /* The stack is centred in the space under the header. The canvas takes up to 60svh and gives
+       way to the content when the viewport is short; the slot is as tall as the tallest step. */
+    .is-pinned .pin {
+      height: 100svh;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto minmax(0, 60svh) auto;
+      align-content: center;
+      row-gap: 2svh;
+      box-sizing: border-box;
+      padding: var(--sticky-top) 0 3svh;
+    }
+    .is-pinned .canvas-wrap {
+      grid-row: 2;
+      grid-column: 1;
+      padding-top: 0;
+    }
+    .is-pinned .steps {
+      display: grid;
+      grid-row: 3;
+      grid-column: 1;
+      min-height: 0;
+      margin-top: 0;
+    }
+    .is-pinned .step {
+      position: relative;
+      grid-area: 1 / 1;
+      top: auto;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      margin: 0 var(--gutter);
+    }
+    .step.cover h3 {
+      font-size: 26px;
+    }
+    .step h3 {
+      font-size: 24px;
+    }
+    /* Static (reduced motion): line, canvas, steps in flow. */
+    .teardown:not(.is-pinned) .closing {
+      order: -2;
+      margin-bottom: 16px;
+    }
+    .teardown:not(.is-pinned) .canvas-wrap {
+      height: 52svh;
+      min-height: 0;
+    }
+    .teardown:not(.is-pinned) .steps {
+      order: 0;
+      padding: 24px var(--gutter) 0;
+    }
+    /* The sample label is the note under the canvas (.sample-note); the source line drops its copy. */
+    .step .source .sep,
+    .step .source .sample-src {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { MOBILE_QUERY } from '../../shared/motion/policy';
+  import { mountTeardown } from './teardown/scene';
+
+  const roots = [...document.querySelectorAll<HTMLElement>('[data-teardown]')];
+  const cleanups = new Map<HTMLElement, () => void>();
+
+  const mountAll = (): void => {
+    for (const el of roots) cleanups.set(el, mountTeardown(el));
+  };
+
+  // A tier change (mobile <-> desktop) rebuilds each teardown: the old cleanup disposes its
+  // renderer and pin, then the new mount reads the tier again. Runs on the next frame, then refreshes
+  // ScrollTrigger so the pins are measured for the new layout.
+  const remount = (): void => {
+    for (const el of roots) cleanups.get(el)?.();
+    cleanups.clear();
+    mountAll();
+    ScrollTrigger.refresh();
+  };
+
+  let remountFrame = 0;
+  window.matchMedia(MOBILE_QUERY).addEventListener('change', () => {
+    if (remountFrame) return;
+    remountFrame = requestAnimationFrame(() => {
+      remountFrame = 0;
+      remount();
+    });
+  });
+
+  mountAll();
+</script>

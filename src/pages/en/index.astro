@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../shared/components/SiteHeader.astro';
+import Hero from '../../features/hero/Hero.astro';
+import Statement from '../../features/hero/Statement.astro';
+import Globe from '../../features/hero/Globe.astro';
+import Argentina from '../../features/hero/Argentina.astro';
+import Experience from '../../features/experience/Experience.astro';
+import FeaturedProject from '../../features/featured-project/FeaturedProject.astro';
+import Projects from '../../features/projects/Projects.astro';
+import Stack from '../../features/stack/Stack.astro';
+import Contact from '../../features/contact/Contact.astro';
+
+const lang = 'en';
+---
+
+<BaseLayout lang={lang} title="Geronimo Serial">
+  <SiteHeader lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Statement lang={lang} />
+    <Globe lang={lang} />
+    <Argentina lang={lang} />
+    <div data-particles="none"><FeaturedProject lang={lang} /></div>
+    <Experience lang={lang} />
+    <div data-particles="none"><Projects lang={lang} /></div>
+    <div data-particles="none"><Stack lang={lang} /></div>
+    <div data-particles="none"><Contact lang={lang} /></div>
+  </main>
+</BaseLayout>

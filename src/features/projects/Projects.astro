@@ -1,0 +1,404 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const githubHref = 'https://github.com/GeronimoSerial';
+const words = t('work.mask').split('|');
+const disciplines = [
+  { title: t('work.legacy.title'), body: t('work.legacy.body') },
+  { title: t('work.edge.title'), body: t('work.edge.body') },
+  { title: t('work.security.title'), body: t('work.security.body') },
+  { title: t('work.data.title'), body: t('work.data.body') },
+];
+---
+
+<section id="projects" aria-labelledby="projects-title" class="section">
+  <!--
+    One pinned stage (sticky, 100svh). The video fills the screen and the area words sit centred over it for the whole
+    pin, blended with difference. Four cards fly in pairs toward the words and out again. Everything is scrubbed by the script's single timeline. The particle layer stays off here
+    through the page wrapper's data-particles="none".
+  -->
+  <h2 id="projects-title" class="sr-only">{t('work.title')}: {words.join(', ')}</h2>
+
+  <div class="stage">
+    <div class="screen">
+      <video
+        class="bg"
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="metadata"
+        poster="/video/projects-coast-poster.jpg"
+        aria-hidden="true"
+        data-project-video
+      >
+        <source src="/video/projects-coast-720.webm" type="video/webm" media="(max-width: 767px)" />
+        <source src="/video/projects-coast-1080.webm" type="video/webm" />
+        <source src="/video/projects-coast-720.mp4" type="video/mp4" media="(max-width: 767px)" />
+        <source src="/video/projects-coast-1080.mp4" type="video/mp4" />
+      </video>
+      <div class="veil" aria-hidden="true"></div>
+    </div>
+
+    <!-- Inverts whatever footage passes behind it (mix-blend-mode: difference), so it reads over sky and rock alike. -->
+    <p class="words" aria-hidden="true" data-work-words>
+      {words.map((word) => <span>{word}</span>)}
+    </p>
+
+    <div class="cards">
+      {
+        disciplines.map((item) => (
+          <article class="card" data-work-card>
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-body">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <nav class="more" aria-label={t('work.projects')}>
+      <a href={githubHref} target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  /* Scroll length: the sticky stage (100svh) and two card pairs (~90vh each). */
+  .section {
+    position: relative;
+    isolation: isolate;
+    height: calc(100svh + 190vh);
+    /* Clips the sticky stage at the section's bottom edge. overflow: clip, unlike hidden, keeps sticky working. */
+    overflow: clip;
+    color: var(--ink);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .screen {
+    position: absolute;
+    inset: 0;
+  }
+  .bg {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Softens the footage so the cards and the words keep their contrast. */
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.45);
+    pointer-events: none;
+  }
+  /* The persistent centre of the stage: white text with difference blending inverts the footage behind each letter. */
+  .words {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: min(6.4svh, 5.2vw);
+    line-height: 0.92;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    will-change: transform;
+  }
+  .cards {
+    position: absolute;
+    inset: 0 var(--gutter);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(30vw, 480px);
+    min-height: 280px;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    /* Light tint plus a backdrop blur: the footage reads through the card instead of a dark block over it. */
+    background: rgb(10 10 12 / 0.32);
+    -webkit-backdrop-filter: blur(18px) saturate(1.1);
+    backdrop-filter: blur(18px) saturate(1.1);
+    border-radius: 8px;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .card-title {
+    margin: 0;
+    font-weight: 300;
+    font-size: clamp(24px, 2.2vw, 34px);
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .card-body {
+    margin: 0;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--soft);
+  }
+  .more a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+  .more {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4svh;
+    z-index: 3;
+    text-align: center;
+    font-weight: 300;
+    font-size: 18px;
+  }
+  .more a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .more a:hover,
+  .more a:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+
+  @media (max-width: 767px) {
+    .section {
+      height: calc(100svh + 300vh);
+    }
+    /* The words hold the upper half; the cards rise into the lower half. */
+    .words {
+      inset: 0 0 50% 0;
+      padding-top: 64px;
+      font-size: 8.4vw;
+    }
+    .cards {
+      inset: 0;
+    }
+    .card {
+      left: 16px;
+      right: 16px;
+      top: auto;
+      bottom: 12svh;
+      width: auto;
+      min-height: 220px;
+      padding: 28px;
+    }
+    .more {
+      bottom: 3svh;
+    }
+  }
+
+  /* No pin and no scrub: the words over the poster, then the cards in a static grid. */
+  @media (prefers-reduced-motion: reduce) {
+    .section {
+      height: auto;
+      overflow: visible;
+    }
+    .stage {
+      position: relative;
+      height: auto;
+      overflow: visible;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding-bottom: 96px;
+    }
+    .screen {
+      position: relative;
+      height: 100svh;
+    }
+    .words {
+      inset: 0 0 auto 0;
+      height: 100svh;
+    }
+    .cards,
+    .more {
+      position: relative;
+      inset: auto;
+      bottom: auto;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      padding: 0 var(--gutter);
+      pointer-events: auto;
+    }
+    .card {
+      position: relative;
+      left: auto;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      width: auto;
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) and (max-width: 767px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { MOBILE_BREAKPOINT, MOBILE_QUERY, reduced } from '../../shared/motion/policy';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const root = document.getElementById('projects');
+  const video = document.querySelector<HTMLVideoElement>('[data-project-video]');
+  const words = document.querySelector<HTMLElement>('[data-work-words]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-work-card]'));
+
+  function trigger(): ScrollTrigger.Vars {
+    return { id: 'work-cards', refreshPriority: 1, trigger: root!, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true };
+  }
+
+  // The words stay put for the whole pin; a slow settle (scale 1 -> 0.94) keeps them alive while the cards come in.
+  function settle(tl: gsap.core.Timeline, total: number) {
+    if (words) tl.fromTo(words, { scale: 1 }, { scale: 0.94, duration: total }, 0);
+  }
+
+  // Each pair or card owns a window of one unit: approach, hold, exit. The exit has faded out before the next
+  // approach is half visible, so only one set is readable at a time.
+  const START = 0.1;
+  const WINDOW = 0.95;
+  const APPROACH = 0.35;
+  const EXIT_AT = 0.65;
+  const EXIT = 0.28;
+
+  // Desktop: the left card rises from the lower left, the right one drops from the upper right. Both close in on
+  // the words, hold, then leave on the opposite diagonal.
+  function desktop() {
+    if (!root) return;
+    const W = () => window.innerWidth;
+    const H = () => window.innerHeight;
+    const cw = () => Math.min(0.3 * W(), 480);
+    const gutter = () => document.querySelector<HTMLElement>('.cards')?.getBoundingClientRect().left ?? 32;
+    // Rest beside the words: each card overlaps the widest word's edge by 6% of its own width, clamped to the gutter.
+    const wordsHalf = () => Math.max(0, ...Array.from(words?.children ?? []).map((el) => el.getBoundingClientRect().width)) / 2;
+    const restX = () => Math.min(wordsHalf() + cw() * 0.44, W() / 2 - cw() / 2 - Math.max(gutter(), 32));
+    const restY = () => 0.15 * H();
+    const farX = () => W() / 2 + cw();
+    const farY = () => 0.7 * H();
+    gsap.set(cards, { xPercent: -50, yPercent: -50 });
+    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: trigger() });
+    const pairs = [[0, 1], [2, 3]];
+    pairs.forEach(([l, r], p) => {
+      const t0 = START + p * WINDOW;
+      const last = p === pairs.length - 1;
+      const left = cards[l];
+      const right = cards[r];
+      if (!left || !right) return;
+      const enter = (el: HTMLElement, sx: () => number, sy: () => number, rx: () => number, ry: () => number) => {
+        tl.fromTo(el, { opacity: 0, scale: 0.7, x: sx, y: sy }, { opacity: 1, scale: 1, x: rx, y: ry, duration: APPROACH }, t0);
+        // Blur only in the first 30% of the approach, and zero while resting.
+        tl.fromTo(el, { filter: 'blur(4px)' }, { filter: 'blur(0px)', duration: APPROACH * 0.3 }, t0);
+      };
+      enter(left, () => -farX(), () => farY(), () => -restX(), restY);
+      enter(right, () => farX(), () => -farY(), () => restX(), () => -restY());
+      if (!last) {
+        tl.to(left, { opacity: 0, scale: 1.05, x: () => -farX(), y: () => -farY(), duration: EXIT }, t0 + EXIT_AT);
+        tl.to(right, { opacity: 0, scale: 1.05, x: () => farX(), y: () => farY(), duration: EXIT }, t0 + EXIT_AT);
+      }
+    });
+    settle(tl, START + WINDOW + 1);
+    tl.to({}, { duration: 0.01 }, START + WINDOW + 1);
+  }
+
+  // Mobile: one card at a time rises into the lower half, rests, and fades out as it lifts. No blur.
+  function mobile() {
+    if (!root) return;
+    const H = () => window.innerHeight;
+    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: trigger() });
+    cards.forEach((card, i) => {
+      const t0 = START + i * WINDOW;
+      const last = i === cards.length - 1;
+      tl.fromTo(card, { opacity: 0, scale: 0.9, y: () => 0.5 * H() }, { opacity: 1, scale: 1, y: 0, duration: APPROACH }, t0);
+      if (!last) {
+        tl.to(card, { opacity: 0, scale: 1.02, y: () => -0.1 * H(), duration: EXIT }, t0 + EXIT_AT);
+      }
+    });
+    settle(tl, START + (cards.length - 1) * WINDOW + 1);
+    tl.to({}, { duration: 0.01 }, START + (cards.length - 1) * WINDOW + 1);
+  }
+
+  // gsap.matchMedia owns each branch: it reverts the scroll link and refreshes ScrollTrigger when the
+  // breakpoint or the reduced-motion preference changes.
+  const mm = gsap.matchMedia();
+  const motionOk = '(prefers-reduced-motion: no-preference)';
+  mm.add(`${motionOk} and (min-width: ${MOBILE_BREAKPOINT}px)`, desktop);
+  mm.add(`${motionOk} and ${MOBILE_QUERY}`, mobile);
+  mm.add('(prefers-reduced-motion: reduce)', () => {
+    gsap.set(cards, { clearProps: 'all' });
+  });
+
+  // The video plays only while the section is on screen, and never under reduced motion, where the poster stays.
+  if (video && root) {
+    let visible = false;
+    const sync = () => {
+      if (visible && !reduced.matches) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    };
+    if (reduced.matches) {
+      video.removeAttribute('autoplay');
+      video.pause();
+      video.load();
+    }
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(root);
+    reduced.onChange(() => {
+      if (reduced.matches) video.pause();
+      sync();
+    });
+  }
+</script>

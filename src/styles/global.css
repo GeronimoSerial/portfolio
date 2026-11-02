@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The particle layer sits behind the page; content stacks above it. */
+main {
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+/* Reveal targets start hidden only when JS runs with motion allowed (see BaseLayout). */
+.motion [data-reveal] {
+  opacity: 0;
+  filter: blur(12px);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 2px;
+}

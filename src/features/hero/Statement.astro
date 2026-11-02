@@ -1,0 +1,43 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section id="statement" data-particles="portrait" aria-labelledby="statement-title" class="scene">
+  <div class="stage" data-particles-text>
+    <h2 id="statement-title" class="statement">{t('statement.body')}</h2>
+  </div>
+</section>
+
+<style>
+  .scene {
+    position: relative;
+    height: 130vh;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 30vh var(--gutter) 0;
+  }
+
+  .statement {
+    margin: 0;
+    font-size: clamp(26px, 3vw, 44px);
+    font-weight: 300;
+    line-height: 1.2;
+    max-width: 19em;
+  }
+</style>

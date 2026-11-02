@@ -1,0 +1,69 @@
+---
+import '@fontsource/inter-tight/300.css';
+import '@fontsource/inter-tight/400.css';
+import '../styles/global.css';
+import { localizedPath, languages, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  title: string;
+}
+
+const { lang, title } = Astro.props;
+const { pathname } = Astro.url;
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="canonical" href={new URL(localizedPath(pathname, lang), Astro.site)} />
+    {
+      languages.map((l) => (
+        <link
+          rel="alternate"
+          hreflang={l}
+          href={new URL(localizedPath(pathname, l), Astro.site)}
+        />
+      ))
+    }
+    <script is:inline>
+      // Mirrors REDUCED_QUERY in src/shared/motion/policy.ts. Inline scripts cannot import, so keep the
+      // query string in step with that file by hand.
+      (function () {
+        // Light mode is hidden: the site always renders dark, whatever localStorage holds.
+        document.documentElement.dataset.theme = 'dark';
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          document.documentElement.classList.add('motion');
+        }
+      })();
+    </script>
+    <noscript><style>.motion [data-reveal]{opacity:1;filter:none}</style></noscript>
+  </head>
+  <body>
+    <canvas data-particles-canvas aria-hidden="true"></canvas>
+    <slot />
+    <script>
+      import { initScroll } from '../shared/motion/scroll';
+      import { mountParticles } from '../shared/particles/controller';
+
+      initScroll();
+
+      const canvas = document.querySelector<HTMLCanvasElement>('canvas[data-particles-canvas]');
+      if (canvas) mountParticles(canvas);
+    </script>
+  </body>
+</html>
+
+<style>
+  [data-particles-canvas] {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>

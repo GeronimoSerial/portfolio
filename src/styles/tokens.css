@@ -1,0 +1,44 @@
+/* Shared left gutter: every section starts its content here, matching the header and hero. */
+:root {
+  --gutter: 32px;
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+/* Dark is the default; html[data-theme] selects the palette. */
+:root,
+html[data-theme='dark'] {
+  --bg: #1f1e21;
+  --ink: #ecebee;
+  --soft: #a3a2a8;
+  --accent: var(--ink);
+  --muted: var(--soft);
+  --rule: rgb(236 235 238 / 0.12);
+  color-scheme: dark;
+}
+
+html[data-theme='light'] {
+  --bg: #ecebee;
+  --ink: #1f1e21;
+  --soft: #5f5e64;
+  --rule: rgb(31 30 33 / 0.12);
+  color-scheme: light;
+}
+
+/* `static` keeps font tokens emitted as CSS variables even when unused by utilities. */
+@theme static {
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+
+  --font-sans: 'Inter Tight', system-ui, sans-serif;
+  --font-display: 'Inter Tight', system-ui, sans-serif;
+  --font-body: 'Inter Tight', system-ui, sans-serif;
+  --font-mono: 'Inter Tight', system-ui, sans-serif;
+}

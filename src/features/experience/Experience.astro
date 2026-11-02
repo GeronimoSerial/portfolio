@@ -1,0 +1,338 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+// Each item maps to the figure that reads closest to its content. Item 0 is open on entry.
+const items = [
+  { name: 'icvm.r1.name', body: 'icvm.r1.body', figure: 'architecture' },
+  { name: 'icvm.r2.name', body: 'icvm.r2.body', figure: 'lifecycle' },
+  { name: 'icvm.r3.name', body: 'icvm.r3.body', figure: 'cloud' },
+  { name: 'icvm.r4.name', body: 'icvm.r4.body', figure: 'flow' },
+  { name: 'icvm.r5.name', body: 'icvm.r5.body', figure: 'performance' },
+] as const;
+---
+
+<section id="experience" class="experience" aria-labelledby="experience-title">
+  <div class="scene">
+    <!--
+      Invisible pose markers at the top of the pinned scene. The logo forms on entry and disperses over 0 to 34vh,
+      which reveals the title. The globe morphs in from 34vh to 90vh with the arc drawing after it, and the usa map
+      morphs in from 110vh to 170vh (see the controller).
+    -->
+    <div class="pose" data-particles="icvm-logo" aria-hidden="true"></div>
+    <div class="pose" data-particles="none" data-morph-start="0" data-morph-end="34" aria-hidden="true"></div>
+    <div class="pose" data-particles="globe-north" data-particles-arc data-morph-start="34" data-morph-end="90" aria-hidden="true"></div>
+    <div class="pose" data-particles="usa" data-morph-start="110" data-morph-end="170" aria-hidden="true"></div>
+    <div class="stage" data-particles-text>
+      <div class="copy">
+        <h2 id="experience-title" class="title">{t('icvm.title')}</h2>
+        <p class="meta">{t('icvm.meta')}</p>
+        <p class="lead">{t('icvm.lead')}</p>
+      </div>
+    </div>
+  </div>
+  <!-- Accordion scene: a 100vh stage over 5 x 45vh of scroll. Scroll advances the open item and its figure. -->
+  <div class="figure-scene" data-figure-scene>
+    <div class="figure-stage">
+      <ul class="list">
+        {
+          items.map((item, i) => (
+            <li class="item" data-figure={item.figure} data-open={i === 0 ? '' : undefined}>
+              <button
+                class="item-btn"
+                type="button"
+                id={`resp-btn-${i}`}
+                aria-expanded={i === 0 ? 'true' : 'false'}
+                aria-controls={`resp-${i}`}
+              >
+                <span class="name">{t(item.name)}</span>
+                <span class="glyph" aria-hidden="true"></span>
+              </button>
+              <div
+                class="panel"
+                id={`resp-${i}`}
+                role="region"
+                aria-labelledby={`resp-btn-${i}`}
+                inert={i !== 0}
+              >
+                <div class="panel-inner">
+                  <p>{t(item.body)}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { prefersReducedMotion } from '../../shared/lib/motion';
+  import { defineScene } from '../../shared/motion/scene';
+  import { emitFigure } from '../../shared/particles/events';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // The ICVM title block is revealed by the particle controller, scrubbed with the logo's dispersal (one writer only).
+
+  // Accordion. The pinned scene runs 100vh + 5 x 45vh, so each item owns a 45vh slot of scroll.
+  const figureScene = document.querySelector<HTMLElement>('[data-figure-scene]');
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.experience .item-btn'));
+  const reduced = prefersReducedMotion();
+  const SLOT_VH = 45;
+  let active = -1;
+
+  // Opens one item: aria-expanded, the panel height (through the grid rows) and inert stay in sync.
+  function setActive(index: number) {
+    if (index === active) return;
+    active = index;
+    buttons.forEach((btn, i) => {
+      const open = i === index;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.closest('.item')?.toggleAttribute('data-open', open);
+      document.getElementById(btn.getAttribute('aria-controls') ?? '')?.toggleAttribute('inert', !open);
+    });
+  }
+
+  // defineScene clamps progress past the scene to the last slot and before it to the first, so load,
+  // refresh and jumps need no separate leave handlers. The particle layer only hears the figure while
+  // the scene is active: progress scrubs it, and index snaps it (reduced motion).
+  let figureActive = false;
+  let lastIndex = -1;
+  if (figureScene && buttons.length) {
+    const scene = defineScene({
+      el: figureScene,
+      slots: buttons.length,
+      slotVh: SLOT_VH,
+      id: 'experience-accordion',
+      refreshPriority: 2,
+      // The copy switches at the morph midpoint, the same point where the figure is half formed.
+      onSlot: (index) => setActive(index),
+      onToggle: (on) => {
+        figureActive = on;
+        lastIndex = -1;
+        emitFigure({ scene: 'accordion', kind: 'active', active: on });
+      },
+      onProgress: (state) => {
+        if (!figureActive) return;
+        if (reduced) {
+          if (state.index !== lastIndex) emitFigure({ scene: 'accordion', kind: 'index', index: state.index });
+          lastIndex = state.index;
+        } else {
+          emitFigure({ scene: 'accordion', kind: 'progress', progress: state.f / buttons.length });
+        }
+      },
+    });
+
+    // Clicking an item lands it at 85% of its slot (see scrollToSlot), so the scene opens it the same way scrolling does.
+    buttons.forEach((btn, i) => {
+      btn.addEventListener('click', () => scene.scrollToSlot(i));
+    });
+  }
+
+  setActive(0);
+</script>
+
+<style>
+  /*
+   * ICVM scene, 310vh. The stage pins for the first 210vh of the scene (the scene is 100vh + 210vh of scroll).
+   * Logo disperses 0 to 34vh (the title reveals over it), the globe morph 34vh to 90vh, the arc draws from 34vh, the usa morph 110vh to 170vh, then a short hold.
+   * The formation morph from the previous scene runs on entry (see the controller).
+   */
+  .scene {
+    position: relative;
+    height: 310vh;
+  }
+
+  .pose {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .stage {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .copy {
+    max-width: 36vw;
+  }
+
+  .title,
+  .meta,
+  .lead {
+    margin: 0;
+    font-family: 'Inter Tight', sans-serif;
+  }
+
+  .title {
+    font-size: clamp(32px, 3.6vw, 56px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+
+  .meta {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    --reveal-max: 0.7;
+  }
+
+  .lead {
+    margin-top: 24px;
+    font-size: clamp(18px, 1.6vw, 24px);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  /* Accordion scene: 100svh stage + 5 x 45vh of scroll. defineScene sets the same height in JS; this is the no-JS fallback. */
+  .figure-scene {
+    position: relative;
+    height: calc(100svh + 225vh);
+  }
+
+  .figure-stage {
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+
+  /* The list sits in the left column; the figure is drawn by the particle layer on the right. */
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: min(520px, 40vw);
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .item-btn {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 22px;
+    font-weight: 300;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .item-btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  /* A typographic plus and minus, not drawn rules. */
+  .glyph {
+    flex: none;
+    width: 0.6em;
+    text-align: center;
+    font-weight: 300;
+  }
+
+  .glyph::before {
+    content: '+';
+  }
+
+  .item-btn[aria-expanded='true'] .glyph::before {
+    content: '\2212';
+  }
+
+  /* Panels expand by animating the grid row from 0fr to 1fr, so the height transitions without measuring. */
+  .panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s ease;
+  }
+
+  .item[data-open] .panel {
+    grid-template-rows: 1fr;
+  }
+
+  .panel-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .panel p {
+    margin: 0 0 20px;
+    max-width: 52ch;
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .stage {
+      align-items: flex-start;
+      padding: 12vh 16px 0;
+    }
+
+    .copy {
+      max-width: 100%;
+    }
+
+    .title {
+      font-size: 32px;
+    }
+
+    .lead {
+      font-size: 18px;
+    }
+
+    /* On mobile the figure takes the top of the stage and the list scrolls in the rest. */
+    .figure-stage {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 46svh 16px 16px;
+    }
+
+    .list {
+      width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .item-btn {
+      font-size: 19px;
+    }
+  }
+</style>

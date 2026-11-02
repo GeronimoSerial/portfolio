@@ -1,0 +1,68 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  data-label-to-dark={t('header.theme.toDark')}
+  data-label-to-light={t('header.theme.toLight')}
+>
+  <span data-theme-label>{t('header.theme.toLight')}</span>
+</button>
+
+<script>
+  const root = document.documentElement;
+  const KEY = 'theme';
+
+  const currentTheme = (): 'dark' | 'light' => (root.dataset.theme === 'light' ? 'light' : 'dark');
+  const nextTheme = () => (currentTheme() === 'dark' ? 'light' : 'dark');
+
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+    const label = button.querySelector<HTMLElement>('[data-theme-label]');
+
+    // The button names the theme it will switch to.
+    const render = () => {
+      const target = nextTheme();
+      if (label) label.textContent = button.dataset[target === 'dark' ? 'labelToDark' : 'labelToLight'] ?? '';
+    };
+
+    button.addEventListener('click', () => {
+      const target = nextTheme();
+      root.dataset.theme = target;
+      try {
+        localStorage.setItem(KEY, target);
+      } catch {
+        // Storage can be blocked; the choice then lasts for this page only.
+      }
+      render();
+      document.dispatchEvent(new CustomEvent('themechange', { detail: { theme: target } }));
+    });
+
+    render();
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    font: inherit;
+    color: var(--soft);
+    background: none;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 4px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    color: var(--ink);
+  }
+</style>

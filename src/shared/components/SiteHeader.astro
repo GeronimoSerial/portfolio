@@ -1,0 +1,127 @@
+---
+import type { Lang } from '../../i18n/utils';
+import LangSwitch from './LangSwitch.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="wordmark" href={lang === 'en' ? '/en/' : '/'}>Geronimo Serial</a>
+  <div class="site-header__controls">
+    <LangSwitch lang={lang} />
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    pointer-events: none;
+    transition: transform 0.35s ease;
+  }
+
+  .site-header > * {
+    pointer-events: auto;
+  }
+
+  .site-header--solid {
+    background: var(--bg);
+  }
+
+  .site-header--hidden {
+    transform: translateY(-100%);
+  }
+
+  .wordmark {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .site-header__controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  @media (max-width: 767px) {
+    .site-header {
+      padding: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const SCROLL_TOP = 80;
+  const THRESHOLD = 6;
+
+  const header = document.querySelector<HTMLElement>('.site-header');
+
+  if (header) {
+    let lastY = window.scrollY;
+    let scrolledDown = false;
+    let focusInside = false;
+    let ticking = false;
+
+    const render = () => {
+      const atTop = window.scrollY < SCROLL_TOP;
+      header.classList.toggle('site-header--solid', !atTop);
+      header.classList.toggle('site-header--hidden', scrolledDown && !atTop && !focusInside);
+    };
+
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+
+      if (y < SCROLL_TOP) {
+        lastY = y;
+        scrolledDown = false;
+      } else {
+        const delta = y - lastY;
+        if (Math.abs(delta) < THRESHOLD) return;
+        lastY = y;
+        scrolledDown = delta > 0;
+      }
+
+      render();
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    header.addEventListener('focusin', () => {
+      focusInside = true;
+      render();
+    });
+
+    header.addEventListener('focusout', (event) => {
+      focusInside = event.relatedTarget instanceof Node && header.contains(event.relatedTarget);
+      render();
+    });
+
+    render();
+  }
+</script>

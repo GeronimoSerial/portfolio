@@ -1,0 +1,38 @@
+[
+  {
+    "name": "architecture",
+    "src": "/images/figures/architecture.bin",
+    "item": 1,
+    "format": "f32xyzb"
+  },
+  {
+    "name": "platform",
+    "src": "/images/figures/platform.bin",
+    "item": 2,
+    "format": "f32xyzb"
+  },
+  {
+    "name": "cloud",
+    "src": "/images/figures/cloud.bin",
+    "item": 3,
+    "format": "f32xyzb"
+  },
+  {
+    "name": "security",
+    "src": "/images/figures/security.bin",
+    "item": 4,
+    "format": "f32xyzb"
+  },
+  {
+    "name": "performance",
+    "src": "/images/figures/performance.bin",
+    "item": 5,
+    "format": "f32xyzb"
+  },
+  {
+    "name": "icvm-logo",
+    "src": "/images/figures/icvm-logo.bin",
+    "key": "icvm-logo",
+    "format": "f32xyzb"
+  }
+]

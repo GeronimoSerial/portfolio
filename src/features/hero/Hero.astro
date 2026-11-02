@@ -1,0 +1,88 @@
+---
+import { useTranslations, type Lang } from '../../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section id="hero" data-particles="portrait" aria-labelledby="hero-title" class="hero">
+  <h1 id="hero-title" data-reveal>Geronimo Serial</h1>
+  <p class="role" data-reveal data-reveal-delay="0.15">{t('hero.role')}</p>
+  <p class="lede" data-reveal data-reveal-delay="0.3">{t('hero.lede')}</p>
+</section>
+
+<script>
+  import { revealOnEnter } from '../../shared/motion/reveal';
+
+  // The intro waits 1s for the page to settle before the hero lines reveal.
+  revealOnEnter(document.getElementById('hero'), '[data-reveal]', { when: 'load', baseDelay: 1 });
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2em;
+    padding: 0 32px;
+  }
+
+  h1,
+  .role {
+    margin: 0;
+    font-size: clamp(36px, 4.1vw, 72px);
+    font-weight: 300;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    max-width: 9em;
+  }
+
+  .lede {
+    position: absolute;
+    left: 32px;
+    bottom: 48px;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+    max-width: 28em;
+  }
+
+  @media (min-width: 768px) {
+    .role {
+      max-width: none;
+      white-space: nowrap;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 96px 16px 0;
+    }
+
+    h1,
+    .role {
+      font-size: 40px;
+      max-width: none;
+    }
+
+    .role {
+      text-align: left;
+    }
+
+    .lede {
+      left: 16px;
+      right: 16px;
+      bottom: 24px;
+    }
+  }
+</style>
